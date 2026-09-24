@@ -7,8 +7,8 @@ keep few -- retrieve 20, keep 8 -- is the shape every production pipeline has
 settled on, because the candidate set is where the signal is and the reranker
 is where the precision is.
 
-llama-3.2-nv-rerankqa-1b-v2 is a cross-encoder trained for retrieval in the
-same 26 languages as the embedder, so a Tamil question is scored against an
+The NeMo Retriever reranker is a cross-encoder trained for retrieval in the
+same languages as the embedder, so a Tamil question is scored against an
 English passage directly. It runs as a NIM container on-premises too.
 
 The reranker is advisory: it reorders and trims what retrieval returned, it
@@ -25,9 +25,13 @@ from typing import Any
 
 log = logging.getLogger("deepecho")
 
-DEFAULT_MODEL = "nvidia/llama-3.2-nv-rerankqa-1b-v2"
+# The hosted catalogue retires models every few months (llama-3.2-nv-rerankqa
+# went end-of-life in 2026-05, llama-nemotron-rerank-1b-v2 in 2026-08), so the
+# model and its endpoint are both overridable from .env. The "vl" model scores
+# a text query against text passages exactly like the text-only one did.
+DEFAULT_MODEL = "nvidia/llama-nemotron-rerank-vl-1b-v2"
 # The NIM reranking endpoint is not OpenAI-shaped; it has its own path.
-DEFAULT_URL = "https://ai.api.nvidia.com/v1/retrieval/nvidia/llama-3_2-nv-rerankqa-1b-v2/reranking"
+DEFAULT_URL = "https://ai.api.nvidia.com/v1/retrieval/nvidia/llama-nemotron-rerank-vl-1b-v2/reranking"
 
 
 class NvidiaReranker:

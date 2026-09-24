@@ -409,7 +409,7 @@ class GeminiEmbedder:
 class NvidiaEmbedder:
     """NVIDIA NeMo Retriever embeddings over NIM (build.nvidia.com).
 
-    llama-3.2-nv-embedqa-1b-v2 is trained for retrieval in 26 languages, so a
+    The NeMo Retriever embedder is trained for multilingual retrieval, so a
     question typed in Hindi or Tamil lands next to the English passage that
     answers it without a translation step first. Passages and queries are
     embedded with different input types, as the model expects. Every query is
@@ -422,11 +422,13 @@ class NvidiaEmbedder:
     kind = "nvidia"
     BATCH = 32
 
-    def __init__(self, model: str = "nvidia/llama-3.2-nv-embedqa-1b-v2", dim: int = 2048,
-                 center: bool = False):
+    # Overridable: the hosted catalogue retires models every few months.
+    DEFAULT_MODEL = os.environ.get("DEEPECHO_NVIDIA_EMBED_MODEL", "nvidia/nemotron-3-embed-1b")
+
+    def __init__(self, model: str | None = None, dim: int = 2048, center: bool = False):
         import numpy as np
         self.np = np
-        self.model = model
+        self.model = model or self.DEFAULT_MODEL
         self.dim = dim
         self.center = center
         self._client = None
@@ -1234,9 +1236,14 @@ class NvidiaProvider:
 
     name = "nvidia"
     # Override with DEEPECHO_NVIDIA_MODEL. The catalogue at
-    # https://build.nvidia.com moves; whatever it lists under "nemotron" is the
-    # current family. The literal below is a long-lived one.
-    default_model = os.environ.get("DEEPECHO_NVIDIA_MODEL", "nvidia/llama-3.1-nemotron-70b-instruct")
+    # https://build.nvidia.com retires models every few months (the
+    # llama-3.1-nemotron line went in 2026-08); `client.models.list()` says
+    # what an account can reach today. Nemotron 3 Super is a reasoning model;
+    # thinking is switched off below because grounded extraction from quoted
+    # sources gains nothing from a hidden scratchpad and pays for it in latency.
+    default_model = os.environ.get("DEEPECHO_NVIDIA_MODEL", "nvidia/nemotron-3-super-120b-a12b")
+    # Ignored by models that do not take it.
+    EXTRA_BODY = {"chat_template_kwargs": {"enable_thinking": False}}
     key_hint = "NVIDIA_API_KEY. Free key: https://build.nvidia.com (API Keys)"
     base_url = os.environ.get("NVIDIA_BASE_URL", "https://integrate.api.nvidia.com/v1")
 
@@ -1272,6 +1279,7 @@ class NvidiaProvider:
                 max_tokens=max_tokens,
                 messages=[{"role": "system", "content": system},
                           {"role": "user", "content": user}],
+                extra_body=self.EXTRA_BODY,
             )
         except Exception as exc:
             raise self._translate(exc) from exc
@@ -1288,6 +1296,7 @@ class NvidiaProvider:
                 stream=True,
                 messages=[{"role": "system", "content": system},
                           {"role": "user", "content": user}],
+                extra_body=self.EXTRA_BODY,
             )
             for chunk in response:
                 if not chunk.choices:
@@ -1311,6 +1320,7 @@ class NvidiaProvider:
                           {"role": "user", "content": user}],
                 tools=[{"type": "function", "function": t} for t in tools],
                 tool_choice="required",
+                extra_body=self.EXTRA_BODY,
             )
         except Exception as exc:
             raise self._translate(exc) from exc

@@ -70,7 +70,7 @@ allowed to say.
 |---|---|---|
 | `gemini` (default) | `gemini-3.8-flash` | `GEMINI_API_KEY` |
 | `groq` | `openai/gpt-oss-120b` | `GROQ_API_KEY` |
-| `nvidia` | `nvidia/llama-3.1-nemotron-70b-instruct` (`DEEPECHO_NVIDIA_MODEL`) | `NVIDIA_API_KEY` |
+| `nvidia` | `nvidia/nemotron-3-super-120b-a12b` (`DEEPECHO_NVIDIA_MODEL`) | `NVIDIA_API_KEY` |
 
 ```bash
 python -m rag_assistant.rag ask "..." --provider groq
@@ -108,7 +108,7 @@ Five embedders, and the index layer does not care which you use.
 | `tfidf-dense` (default) | free, local, offline | no fidelity loss, dimension is the vocabulary size |
 | `sentence-transformers` | free, local, offline | 384-d semantic vectors, used automatically when installed |
 | `gemini` | free tier, network | `gemini-embedding-001` at 768-d, a call per query |
-| `nvidia` | free credits, network; on-prem NIM | `llama-3.2-nv-embedqa-1b-v2`, 2048-d, retrieval-trained in 26 languages |
+| `nvidia` | free credits, network; on-prem NIM | `nemotron-3-embed-1b`, 2048-d, multilingual retrieval (`DEEPECHO_NVIDIA_EMBED_MODEL`) |
 | `random-projection` | free, local, offline | fixed dimensions, lossy, measured below |
 
 `--embedder gemini` uses the retrieval task types the model expects, embedding
@@ -128,7 +128,7 @@ answers it, so retrieval no longer depends on the translation step. It needs
 Retrieval answers "which chunks are near this query". A reranker reads query and
 passage together and answers "does this passage answer it", for a handful of
 candidates. `rag_assistant/rerank.py` fetches 20, reranks with
-`llama-3.2-nv-rerankqa-1b-v2`, keeps `TOP_K`. It is on automatically when
+`llama-nemotron-rerank-vl-1b-v2` (`DEEPECHO_RERANK_MODEL`, `NVIDIA_RERANK_URL`), keeps `TOP_K`. It is on automatically when
 `NVIDIA_API_KEY` is set (`DEEPECHO_RERANK=on|off|auto`), and advisory: any
 failure returns retrieval's order untouched, so an answer never depends on a
 second network call.
