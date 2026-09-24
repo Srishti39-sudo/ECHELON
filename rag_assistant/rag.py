@@ -1269,9 +1269,16 @@ class NvidiaProvider:
             return SystemExit("Network error reaching the NVIDIA API.")
         return SystemExit(f"NVIDIA API error: {exc}")
 
+    # A throttled free tier answered one eval case after 416 s of SDK retries,
+    # during which the failover to another provider could not fire. Give up
+    # early instead: one retry, a short timeout, and let provider_order move on.
+    TIMEOUT_S = float(os.environ.get("DEEPECHO_NVIDIA_TIMEOUT", "45"))
+    RETRIES = int(os.environ.get("DEEPECHO_NVIDIA_RETRIES", "1"))
+
     def complete(self, system: str, user: str, model: str, *, max_tokens: int = 4096,
                  attempts: int = 3, timeout_s: float = 120.0) -> str:
-        client = self._client(max_retries=max(0, attempts - 1), timeout=timeout_s)
+        client = self._client(max_retries=min(self.RETRIES, max(0, attempts - 1)),
+                              timeout=min(timeout_s, self.TIMEOUT_S))
         try:
             response = client.chat.completions.create(
                 model=model,
@@ -1287,7 +1294,7 @@ class NvidiaProvider:
 
     def stream(self, system: str, user: str, model: str):
         """Same call, same config, delivered incrementally."""
-        client = self._client()
+        client = self._client(max_retries=self.RETRIES, timeout=self.TIMEOUT_S)
         try:
             response = client.chat.completions.create(
                 model=model,
@@ -1310,7 +1317,7 @@ class NvidiaProvider:
     def plan(self, system: str, user: str, tools: list[dict], model: str, *,
              timeout_s: float = 20.0) -> list[dict]:
         """OpenAI-style tool calls. The calls are returned, not run."""
-        client = self._client(max_retries=1, timeout=timeout_s)
+        client = self._client(max_retries=min(self.RETRIES, 1), timeout=min(timeout_s, self.TIMEOUT_S))
         try:
             response = client.chat.completions.create(
                 model=model,
