@@ -62,7 +62,7 @@ const menuItems = [
     icon: History,
   },
   {
-    name: "Assistant",
+    name: "Beacon",
     path: "/assistant",
     icon: MessageSquareText,
   },
