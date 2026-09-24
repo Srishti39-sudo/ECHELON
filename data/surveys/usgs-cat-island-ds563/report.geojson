@@ -1,0 +1,176 @@
+{
+  "type": "FeatureCollection",
+  "properties": {
+    "survey_id": "usgs-cat-island-ds563",
+    "title": "USGS DS-563 Cat Island MS, Klein 3900 mosaic (1 m/px)",
+    "processed_at": "2026-09-15T16:11:58+00:00",
+    "demo": false,
+    "coordinate_mode": "Geo-referenced",
+    "detections_total": 5,
+    "detections_located": 5,
+    "detections_unlocated": 0,
+    "disclaimer": "Severity weights, tier boundaries and recommended actions are a configurable heuristic chosen for this project. They are not Navy, Coast Guard, NOAA or IMO procedure and carry no authority. Review them against your own operating rules before acting on them."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.025885,
+          30.281302
+        ]
+      },
+      "properties": {
+        "detection_id": "10cct01_v2_ss_1m_b_waterfall_g3",
+        "object_class": "shipwreck",
+        "confidence_pct": 55.0,
+        "suppressed": true,
+        "suppression_reasons": "shadow_check.py (teammate) verdict 'no-shadow' (shadow_score 0.305): no acoustic shadow behind the box, vetoed as a likely false positive",
+        "position_basis": "Geo-referenced",
+        "length_m": 535.7,
+        "width_m": 597.6,
+        "height_m": null,
+        "dimension_basis": "geotag.py (edge ground-range difference; windowed along-track spacing); as supplied in hazards.json, not cross-checked: no navigation table was available; not measured: hazards.json carries no height (shadow_check.py did not run, or had no altitude / resolution)",
+        "width_px": 597.6,
+        "height_px": 535.7,
+        "severity_tier": "critical",
+        "recommended_action": "Flag navigation hazard",
+        "strip": "10cct01_v2_ss_1m_b_waterfall",
+        "global_x": 6971.9,
+        "global_y": 370.35,
+        "detector_confidence": 0.55,
+        "confidence_basis": "sonar_pipeline.py confidence_pct: calibrated detector probability x (0.6 + 0.4 x shadow_score) from shadow_check.py (teammate); copied, not recomputed",
+        "policy_basis": "configurable heuristic; not an official procedure"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.025888,
+          30.277145
+        ]
+      },
+      "properties": {
+        "detection_id": "10cct01_v2_ss_1m_b_waterfall_g2",
+        "object_class": "shipwreck",
+        "confidence_pct": 55.4,
+        "suppressed": true,
+        "suppression_reasons": "shadow_check.py (teammate) verdict 'no-shadow' (shadow_score 0.313): no acoustic shadow behind the box, vetoed as a likely false positive",
+        "position_basis": "Geo-referenced",
+        "length_m": 638.4,
+        "width_m": 614.8,
+        "height_m": null,
+        "dimension_basis": "geotag.py (edge ground-range difference; windowed along-track spacing); as supplied in hazards.json, not cross-checked: no navigation table was available; not measured: hazards.json carries no height (shadow_check.py did not run, or had no altitude / resolution)",
+        "width_px": 614.8,
+        "height_px": 638.4,
+        "severity_tier": "critical",
+        "recommended_action": "Flag navigation hazard",
+        "strip": "10cct01_v2_ss_1m_b_waterfall",
+        "global_x": 6963.4,
+        "global_y": 831.2,
+        "detector_confidence": 0.554,
+        "confidence_basis": "sonar_pipeline.py confidence_pct: calibrated detector probability x (0.6 + 0.4 x shadow_score) from shadow_check.py (teammate); copied, not recomputed",
+        "policy_basis": "configurable heuristic; not an official procedure"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.033134,
+          30.242741
+        ]
+      },
+      "properties": {
+        "detection_id": "10cct01_v2_ss_1m_b_waterfall_g5",
+        "object_class": "fishing_gear",
+        "confidence_pct": 52.1,
+        "suppressed": false,
+        "suppression_reasons": "",
+        "position_basis": "Geo-referenced",
+        "length_m": 22.3,
+        "width_m": 21.9,
+        "height_m": null,
+        "dimension_basis": "geotag.py (edge ground-range difference; windowed along-track spacing); as supplied in hazards.json, not cross-checked: no navigation table was available; not measured: hazards.json carries no height (shadow_check.py did not run, or had no altitude / resolution)",
+        "width_px": 21.9,
+        "height_px": 22.3,
+        "severity_tier": "low",
+        "recommended_action": "Schedule ghost-gear recovery",
+        "strip": "10cct01_v2_ss_1m_b_waterfall",
+        "global_x": 6198.05,
+        "global_y": 4632.25,
+        "detector_confidence": 0.521,
+        "confidence_basis": "sonar_pipeline.py confidence_pct: calibrated detector probability x (0.6 + 0.4 x shadow_score) from shadow_check.py (teammate); copied, not recomputed",
+        "policy_basis": "configurable heuristic; not an official procedure"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.989934,
+          30.230845
+        ]
+      },
+      "properties": {
+        "detection_id": "10cct01_v2_ss_1m_b_waterfall_g1",
+        "object_class": "shipwreck",
+        "confidence_pct": 59.9,
+        "suppressed": true,
+        "suppression_reasons": "shadow_check.py (teammate) verdict 'no-shadow' (shadow_score 0.332): no acoustic shadow behind the box, vetoed as a likely false positive",
+        "position_basis": "Geo-referenced",
+        "length_m": 261.6,
+        "width_m": 185.3,
+        "height_m": null,
+        "dimension_basis": "geotag.py (edge ground-range difference; windowed along-track spacing); as supplied in hazards.json, not cross-checked: no navigation table was available; not measured: hazards.json carries no height (shadow_check.py did not run, or had no altitude / resolution)",
+        "width_px": 185.3,
+        "height_px": 261.6,
+        "severity_tier": "critical",
+        "recommended_action": "Flag navigation hazard",
+        "strip": "10cct01_v2_ss_1m_b_waterfall",
+        "global_x": 10332.65,
+        "global_y": 6024.5,
+        "detector_confidence": 0.599,
+        "confidence_basis": "sonar_pipeline.py confidence_pct: calibrated detector probability x (0.6 + 0.4 x shadow_score) from shadow_check.py (teammate); copied, not recomputed",
+        "policy_basis": "configurable heuristic; not an official procedure"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.996801,
+          30.219932
+        ]
+      },
+      "properties": {
+        "detection_id": "10cct01_v2_ss_1m_b_waterfall_g4",
+        "object_class": "shipwreck",
+        "confidence_pct": 42.2,
+        "suppressed": true,
+        "suppression_reasons": "shadow_check.py (teammate) verdict 'no-shadow' (shadow_score 0.000): no acoustic shadow behind the box, vetoed as a likely false positive",
+        "position_basis": "Geo-referenced",
+        "length_m": 109.1,
+        "width_m": 101.2,
+        "height_m": null,
+        "dimension_basis": "geotag.py (edge ground-range difference; windowed along-track spacing); as supplied in hazards.json, not cross-checked: no navigation table was available; not measured: hazards.json carries no height (shadow_check.py did not run, or had no altitude / resolution)",
+        "width_px": 101.2,
+        "height_px": 109.1,
+        "severity_tier": "critical",
+        "recommended_action": "Flag navigation hazard",
+        "strip": "10cct01_v2_ss_1m_b_waterfall",
+        "global_x": 9650.4,
+        "global_y": 7222.55,
+        "detector_confidence": 0.422,
+        "confidence_basis": "sonar_pipeline.py confidence_pct: calibrated detector probability x (0.6 + 0.4 x shadow_score) from shadow_check.py (teammate); copied, not recomputed",
+        "policy_basis": "configurable heuristic; not an official procedure"
+      }
+    }
+  ]
+}

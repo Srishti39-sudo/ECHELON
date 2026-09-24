@@ -19,6 +19,23 @@
   border: 1px solid var(--dq-color-border);
   border-radius: var(--dq-radius-md);
   overflow: hidden;
+  /* Header, scrolling thread, composer dock, top to bottom. The thread is the
+     only part that scrolls; the dock stays in view however long the thread
+     gets, so the input is never clipped below the panel's edge. */
+  display: flex;
+  flex-direction: column;
+}
+
+.dq-assistant .thread {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.dq-assistant .dock {
+  flex: 0 0 auto;
+  border-top: 1px solid var(--dq-color-border);
+  background: var(--dq-color-background);
 }
 
 .dq-assistant {
@@ -208,6 +225,9 @@
 }
 
 .dq-assistant .notice {
+  /* The dashboard's global .notice is a flex row, which squeezes the title
+     into a column beside the body. A notice here reads top to bottom. */
+  display: block;
   border: 1px solid;
   border-left-width: 3px;
   border-radius: var(--dq-radius-sm);
@@ -792,4 +812,294 @@
   text-transform: uppercase;
   letter-spacing: var(--dq-letter-spacing-label);
   font-size: var(--dq-font-size-xs);
+}
+
+
+/* --- Handover from the GhostTrace rescue queue --------------------------- */
+
+.dq-assistant .ghosttrace-synthetic {
+  display: inline-block;
+  margin-left: var(--dq-space-sm);
+  padding: 0 var(--dq-space-xs);
+  border: 1px solid var(--dq-color-caution-border);
+  border-radius: var(--dq-radius-sm);
+  background: var(--dq-color-caution-surface);
+  color: var(--dq-color-caution-text);
+  font-weight: var(--dq-font-weight-semibold);
+}
+
+.dq-assistant .ghosttrace-caveats {
+  margin-top: var(--dq-space-sm);
+  font-size: var(--dq-font-size-sm);
+  color: var(--dq-color-text-muted);
+}
+
+.dq-assistant .ghosttrace-caveats summary {
+  cursor: pointer;
+  font-size: var(--dq-font-size-xs);
+  letter-spacing: var(--dq-letter-spacing-label);
+  text-transform: uppercase;
+}
+
+.dq-assistant .ghosttrace-caveats ul {
+  margin: var(--dq-space-xs) 0 0;
+  padding-left: var(--dq-space-lg);
+}
+
+.dq-assistant .offline-why {
+  margin-top: var(--dq-space-xs);
+  color: var(--dq-color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+
+/* --- Button geometry and header status fit -------------------------------
+   The colour rules for .button-primary / .button-secondary / .button-link
+   above never set padding, radius or cursor, so inside the dashboard the
+   composer's Send and Upload buttons rendered as bare browser buttons. The
+   shared geometry lives here, once. The status line in the header also let
+   each detail wrap mid-phrase; a detail now stays on one line and the row
+   wraps between details instead. */
+
+.dq-assistant .button-primary,
+.dq-assistant .button-secondary,
+.dq-assistant .button-link {
+  padding: var(--dq-space-xs) var(--dq-space-md);
+  border-radius: var(--dq-radius-sm);
+  font-weight: var(--dq-font-weight-semibold);
+  line-height: var(--dq-line-height-normal);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.dq-assistant .composer-actions {
+  align-items: center;
+}
+
+.dq-assistant .app-status {
+  flex-wrap: wrap;
+  row-gap: var(--dq-space-xxs);
+}
+
+.dq-assistant .status-detail {
+  white-space: nowrap;
+}
+
+/* --- Mission Copilot ------------------------------------------------------ */
+
+.dq-assistant .dock-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--dq-space-sm) var(--dq-space-lg);
+  margin-bottom: var(--dq-space-sm);
+}
+
+.dq-assistant .dock-control-label {
+  font-size: var(--dq-font-size-xs);
+  letter-spacing: var(--dq-letter-spacing-label);
+  text-transform: uppercase;
+  color: var(--dq-color-text-faint);
+  margin-right: var(--dq-space-xs);
+}
+
+.dq-assistant .mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--dq-space-xxs);
+}
+
+.dq-assistant .mode-option {
+  border: 1px solid var(--dq-color-border);
+  background: var(--dq-color-surface);
+  color: var(--dq-color-text-muted);
+  border-radius: var(--dq-radius-sm);
+  padding: var(--dq-space-xxs) var(--dq-space-sm);
+  font-size: var(--dq-font-size-sm);
+  cursor: pointer;
+}
+
+.dq-assistant .mode-option:hover:not(:disabled) {
+  border-color: var(--dq-color-teal);
+  color: var(--dq-color-teal-deep);
+}
+
+.dq-assistant .mode-option.is-active {
+  border-color: var(--dq-color-teal);
+  background: var(--dq-color-teal-tint);
+  color: var(--dq-color-teal-deep);
+  font-weight: var(--dq-font-weight-semibold);
+}
+
+.dq-assistant .mode-option:focus-visible,
+.dq-assistant .tool-chip:focus-visible,
+.dq-assistant .panel-tab:focus-visible,
+.dq-assistant .language-picker select:focus-visible {
+  outline: 2px solid var(--dq-color-teal);
+  outline-offset: 1px;
+}
+
+.dq-assistant .language-picker {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--dq-space-xs);
+}
+
+.dq-assistant .language-picker select {
+  font: inherit;
+  font-size: var(--dq-font-size-sm);
+  color: var(--dq-color-text);
+  background: var(--dq-color-surface);
+  border: 1px solid var(--dq-color-border);
+  border-radius: var(--dq-radius-sm);
+  padding: var(--dq-space-xxs) var(--dq-space-sm);
+}
+
+.dq-assistant .language-note {
+  font-size: var(--dq-font-size-xs);
+  color: var(--dq-color-text-faint);
+}
+
+.dq-assistant .example-tag {
+  display: inline-block;
+  margin-right: var(--dq-space-sm);
+  font-size: var(--dq-font-size-xs);
+  letter-spacing: var(--dq-letter-spacing-label);
+  text-transform: uppercase;
+  color: var(--dq-color-teal-deep);
+}
+
+.dq-assistant .tool-chips {
+  margin: var(--dq-space-sm) 0 var(--dq-space-md);
+}
+
+.dq-assistant .tool-chips-label {
+  margin: var(--dq-space-sm) 0 var(--dq-space-xs);
+  font-size: var(--dq-font-size-xs);
+  letter-spacing: var(--dq-letter-spacing-label);
+  text-transform: uppercase;
+  color: var(--dq-color-text-faint);
+}
+
+.dq-assistant .tool-chips-planner {
+  text-transform: none;
+  letter-spacing: var(--dq-letter-spacing-normal);
+}
+
+.dq-assistant .tool-chips-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--dq-space-xs);
+}
+
+.dq-assistant .tool-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--dq-space-sm);
+  border: 1px solid var(--dq-color-steady-border);
+  background: var(--dq-color-steady-surface);
+  color: var(--dq-color-steady-text);
+  border-radius: var(--dq-radius-sm);
+  padding: var(--dq-space-xxs) var(--dq-space-sm);
+  font-size: var(--dq-font-size-sm);
+  text-align: left;
+  cursor: pointer;
+  max-width: 100%;
+}
+
+.dq-assistant .tool-chip:disabled {
+  cursor: default;
+}
+
+.dq-assistant .tool-chip.is-error {
+  border-color: var(--dq-color-alert-border);
+  background: var(--dq-color-alert-surface);
+  color: var(--dq-color-alert-text);
+}
+
+.dq-assistant .tool-chip-name {
+  font-size: var(--dq-font-size-xs);
+  opacity: 0.8;
+}
+
+.dq-assistant .cite.cite-data {
+  color: var(--dq-color-steady-text);
+  border-color: var(--dq-color-steady-border);
+  background: var(--dq-color-steady-surface);
+}
+
+.dq-assistant .data-strip {
+  margin-top: var(--dq-space-xs);
+}
+
+.dq-assistant .data-pill .source-pill-index {
+  color: var(--dq-color-steady-text);
+}
+
+.dq-assistant .panel-tabs {
+  display: flex;
+  gap: var(--dq-space-xs);
+  padding: var(--dq-space-sm) var(--dq-space-lg) 0;
+}
+
+.dq-assistant .panel-tab {
+  border: 1px solid var(--dq-color-border);
+  background: var(--dq-color-surface);
+  color: var(--dq-color-text-muted);
+  border-radius: var(--dq-radius-sm);
+  padding: var(--dq-space-xxs) var(--dq-space-md);
+  font-size: var(--dq-font-size-sm);
+  cursor: pointer;
+}
+
+.dq-assistant .panel-tab.is-active {
+  border-color: var(--dq-color-teal);
+  background: var(--dq-color-teal-tint);
+  color: var(--dq-color-teal-deep);
+}
+
+.dq-assistant .data-index {
+  font-size: var(--dq-font-size-sm);
+}
+
+.dq-assistant .data-fields {
+  margin: 0 0 var(--dq-space-md);
+  display: grid;
+  gap: var(--dq-space-xxs);
+  font-size: var(--dq-font-size-sm);
+}
+
+.dq-assistant .data-fields > div {
+  display: grid;
+  grid-template-columns: minmax(8rem, 38%) 1fr;
+  gap: var(--dq-space-sm);
+  border-bottom: 1px solid var(--dq-color-border);
+  padding: var(--dq-space-xxs) 0;
+}
+
+.dq-assistant .data-fields dt {
+  color: var(--dq-color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.dq-assistant .data-fields dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: var(--dq-font-size-xs);
+}
+
+.dq-assistant .prose table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.dq-assistant .empty-examples + .empty-label {
+  margin-top: var(--dq-space-lg);
 }

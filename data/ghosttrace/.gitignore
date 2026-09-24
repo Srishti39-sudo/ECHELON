@@ -1,0 +1,9 @@
+# Written by tools/fetch_ghosttrace_data.py.
+# These files come from sources whose licence forbids redistribution.
+# They are fetched locally and must not be committed.
+# UNEP-WCMC Global Distribution of Seagrasses
+layers/seagrass_wcmc_gulf_of_mannar_palk_bay.geojson
+layers/seagrass_wcmc_odisha_coast.geojson
+# UNEP-WCMC Global Distribution of Warm-water Coral Reefs v4.1
+layers/reef_wcmc_gulf_of_mannar_palk_bay.geojson
+layers/reef_wcmc_odisha_coast.geojson

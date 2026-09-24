@@ -1,0 +1,33 @@
+# Ultralytics dataset template for a DeepEcho side-scan detector.
+# Copy to e.g. training/pipe.yaml and edit the paths.
+#
+# Layout (YOLO convention; label files mirror image files, images/ -> labels/):
+#   datasets/sss/images/train/<line_id>_<x>_<y>.jpg
+#   datasets/sss/labels/train/<line_id>_<x>_<y>.txt   "cls cx cy w h", normalised
+#   datasets/sss/images/val/...
+#   datasets/sss/labels/val/...
+#
+# Tiles are 640 px at stride 512, the same as the survey pipeline.
+# train and val are split BY SURVEY LINE (or whole site), never by tile:
+# overlapping tiles from one line in both splits inflate mAP and calibration.
+# Background-only tiles (empty .txt) belong in train: rock fields, sand waves,
+# nadir boundaries. Pasted / synthetic examples never belong in val.
+
+path: ../datasets/sss          # relative to this file, or absolute
+train: images/train            # or a .txt list of image paths
+val: images/val
+# test: images/test            # optional held-out site
+
+# Class names use the project vocabulary so hazard_config's severity weights,
+# actions and verification expectations apply unchanged. Keep the ids stable
+# once a checkpoint has been trained; calibration.json is keyed by name.
+names:
+  0: pipe
+  1: cylinder
+  2: shipwreck
+  3: net
+  4: cable
+  5: aircraft
+  6: tyre
+  7: drum
+  8: unknown

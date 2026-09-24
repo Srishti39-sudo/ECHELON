@@ -61,6 +61,36 @@ export interface Match {
   status: string
 }
 
+/** Answer path: the corpus alone, or survey data tools plus the corpus. */
+export type AssistantMode = 'auto' | 'copilot' | 'reference'
+
+/** One read-only data lookup the Mission Copilot made. */
+export interface ToolCall {
+  name: string
+  args: Record<string, unknown>
+  /** "Looked up GhostTrace targets across 2 surveys (4 targets)" */
+  summary: string
+  record_count: number
+  /** The [Dn] numbers this call returned. */
+  citations: number[]
+  error?: string | null
+  planned_by: string
+}
+
+/** A survey record cited as [Dn]. Survey data, never a reference source. */
+export interface DataCitation {
+  n: number
+  kind: string
+  survey_id?: string | null
+  label: string
+  source_file: string
+  record_id?: string | null
+  synthetic?: boolean | null
+  /** /ghosttrace/<id> or /map?survey=<id> */
+  link?: string | null
+  summary: Record<string, unknown>
+}
+
 export interface ChatResponse {
   answer: string
   intent: Intent
@@ -77,6 +107,27 @@ export interface ChatResponse {
   query: string
   provider: string
   model: string
+  /**
+   * Who wrote the answer. `retrieval_only` means every provider failed and the
+   * answer is the retrieved passages quoted, with nothing generated. `none`
+   * means retrieval found nothing and no model was asked.
+   */
+  generated_by?: 'model' | 'retrieval_only' | 'data_only' | 'none'
+  /** Why no provider answered, one line each. Set on a retrieval-only answer. */
+  provider_errors?: string[]
+  /** Figures in the answer found in no source, message, record or context. */
+  unsourced_numbers?: string[]
+  /** "GhostTrace output for <survey>/<detection>", when a GhostTrace context rode along. */
+  ghosttrace_citation?: string | null
+  mode?: 'copilot' | 'reference'
+  /** Why the turn took that path. */
+  route_reason?: string
+  language?: string
+  /** The English text the corpus was searched with, for a non-English question. */
+  query_translated?: string | null
+  planned_by?: string | null
+  tool_calls?: ToolCall[]
+  data_citations?: DataCitation[]
 }
 
 export interface Health {
@@ -113,6 +164,7 @@ export interface DetectResult {
 export type StreamFrame =
   | ({ type: 'meta'; matches: Match[] } & Omit<ChatResponse, 'answer' | 'sources' | 'grounded' | 'refusal' | 'matches'>)
   | { type: 'sources'; sources: Source[] }
+  | { type: 'tools'; tool_calls: ToolCall[]; data_citations: DataCitation[]; planned_by?: string | null }
   | { type: 'delta'; text: string }
   | ({ type: 'done' } & ChatResponse)
   | { type: 'error'; detail: string }
@@ -146,6 +198,71 @@ export interface SurveyContext {
   evidence_tile?: string
 }
 
+export interface GhostTraceImpact {
+  name?: string | null
+  kind?: string | null
+  probability?: number | null
+  first_arrival_hours?: number | null
+}
+
+/**
+ * A GhostTrace target handed over from the rescue queue.
+ *
+ * Survey DATA, not a source. The assistant quotes its numbers attributed to
+ * GhostTrace and never as a corpus fact, and its priority is displayed as
+ * given, the same way the hazard map's severity is. Null means unknown.
+ */
+export interface GhostTraceContext {
+  kind: 'ghosttrace_target'
+  survey_id: string | null
+  survey_title?: string | null
+  synthetic: boolean | null
+  detection_id: string | null
+  object_class: string | null
+  latitude: number | null
+  longitude: number | null
+  confidence_pct: number | null
+  priority: {
+    score: number | null
+    tier: string | null
+    rank: number | null
+    formula?: string | null
+    terms?: Record<
+      string,
+      { value: number | null; weight: number | null; contribution: number | null } | null
+    > | null
+  } | null
+  activity: {
+    level: string | null
+    score: number | null
+    enrichment_ratio?: number | null
+    echo_clusters_near?: number | null
+    background_clusters_per_window?: number | null
+    limitations?: string | null
+  } | null
+  habitat_nearest: Array<{
+    name: string | null
+    kind: string | null
+    distance_m: number | null
+    source?: string | Record<string, unknown> | null
+  }> | null
+  drift: {
+    mode: string | null
+    top_impact: GhostTraceImpact | null
+    stranding_probability: number | null
+  } | null
+  refloat_scenario?: { top_impact: GhostTraceImpact | null } | null
+  people: {
+    propeller_hazard_level: string | null
+    diver_recommended_method?: string | null
+    seabed_depth_m?: number | null
+    current_mps_at_depth?: number | null
+  } | null
+  change: { status: string | null; moved_m: number | null } | null
+  authorities: Array<{ name: string | null; role: string | null; situation: string | null }> | null
+  caveats: string[] | null
+}
+
 /** One rendered message. Assistant messages carry the answer metadata with them. */
 export interface Message {
   id: string
@@ -158,4 +275,6 @@ export interface Message {
   detectionIsStub?: boolean
   /** Set when this turn came from the hazard map. Its severity wins. */
   survey?: SurveyContext | null
+  /** Set when this turn carried a GhostTrace target. Its priority is shown as given. */
+  ghosttrace?: GhostTraceContext | null
 }

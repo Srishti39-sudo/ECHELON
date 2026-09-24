@@ -11,3 +11,4 @@ groq>=0.11                # --provider groq, open models, free tier
 # Optional: local embeddings, no API and no network.
 # Picked up automatically by `rag.py index` when installed.
 # sentence-transformers>=3.0
+openai>=1.40               # --provider nvidia, NIM endpoints on build.nvidia.com

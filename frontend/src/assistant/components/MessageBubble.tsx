@@ -1,12 +1,13 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { copy } from '../config/copy'
-import { citationTarget, linkCitations } from '../lib/citations'
-import type { Message, Source, SurveyContext } from '../lib/types'
+import { languageFor } from '../config/languages'
+import { citationTarget, linkCitations, type CitationTarget } from '../lib/citations'
+import type { DataCitation, GhostTraceContext, Message, Source, SurveyContext, ToolCall } from '../lib/types'
 import { StatusBadge } from './StatusBadge'
 interface Props {
   message: Message
-  onCitation: (n: number, sources: Source[]) => void
+  onCitation: (target: CitationTarget, sources: Source[], data: DataCitation[]) => void
 }
 /**
  * One message.
@@ -30,15 +31,41 @@ export function MessageBubble({ message, onCitation }: Props) {
   const sources = meta.sources ?? []
   const ungrounded = meta.grounded === false && !message.streaming
   const showRefusal = meta.refusal === true && meta.grounded !== false
+  const offline = meta.generated_by === 'retrieval_only'
+  const dataOnly = meta.generated_by === 'data_only'
+  const data = meta.data_citations ?? []
+  const toolCalls = meta.tool_calls ?? []
+  const copilot = meta.mode === 'copilot'
+  const labels = languageFor(meta.language).labels
+  const unsourced = !message.streaming ? (meta.unsourced_numbers ?? []) : []
   return (
     <article className="message message-assistant">
       <p className="message-role">{copy.roles.assistant}</p>
       <div className={`bubble bubble-assistant ${ungrounded ? 'is-ungrounded' : ''}`}>
         {!message.streaming && meta.intent && (
-          <StatusBadge meta={meta} survey={message.survey} />
+          <StatusBadge meta={meta} survey={message.survey} ghosttrace={message.ghosttrace} />
         )}
 
         {message.survey && <SurveyHandover survey={message.survey} />}
+        {message.ghosttrace && <GhostTraceHandover context={message.ghosttrace} />}
+        {copilot && (
+          <ToolChips
+            calls={toolCalls}
+            streaming={Boolean(message.streaming)}
+            onOpen={(n) => onCitation({ kind: 'data', n }, sources, data)}
+          />
+        )}
+        {(offline || dataOnly) && !message.streaming && (
+          <div className="notice tone-alert offline-notice" role="status">
+            <p className="notice-title">{dataOnly ? labels.dataOnly : labels.offline}</p>
+            <p className="notice-body">{dataOnly ? copy.copilot.dataOnlyBody : copy.offline.body}</p>
+            {meta.provider_errors && meta.provider_errors.length > 0 && (
+              <p className="notice-body offline-why">
+                {copy.offline.why}: {meta.provider_errors.join('; ')}
+              </p>
+            )}
+          </div>
+        )}
         {meta.coverage_gap && (
           <Notice
             tone="caution"
@@ -54,6 +81,9 @@ export function MessageBubble({ message, onCitation }: Props) {
         )}
         {showRefusal && (
           <Notice tone="caution" title={copy.notice.refusalTitle} body={copy.notice.refusalBody} />
+        )}
+        {unsourced.length > 0 && (
+          <Notice tone="caution" title={copy.numbers.title} body={copy.numbers.body(unsourced)} />
         )}
         <div className="prose">
           <ReactMarkdown
@@ -71,11 +101,15 @@ export function MessageBubble({ message, onCitation }: Props) {
                 return (
                   <button
                     type="button"
-                    className="cite"
-                    title={copy.citations.markerTitle(target)}
-                    onClick={() => onCitation(target, sources)}
+                    className={`cite ${target.kind === 'data' ? 'cite-data' : ''}`}
+                    title={
+                      target.kind === 'data'
+                        ? copy.data.markerTitle(target.n)
+                        : copy.citations.markerTitle(target.n)
+                    }
+                    onClick={() => onCitation(target, sources, data)}
                   >
-                    {target}
+                    {target.kind === 'data' ? `D${target.n}` : target.n}
                   </button>
                 )
               },
@@ -120,10 +154,27 @@ export function MessageBubble({ message, onCitation }: Props) {
                 key={source.id}
                 type="button"
                 className="source-pill"
-                onClick={() => onCitation(source.n, sources)}
+                onClick={() => onCitation({ kind: 'source', n: source.n }, sources, data)}
               >
                 <span className="source-pill-index">{source.n}</span>
                 {source.title}
+              </button>
+            ))}
+          </footer>
+        )}
+        {data.length > 0 && (
+          <footer className="sources-strip data-strip">
+            <span className="sources-count">{copy.copilot.dataCount(data.length)}</span>
+            {data.map((record) => (
+              <button
+                key={record.n}
+                type="button"
+                className="source-pill data-pill"
+                title={record.label}
+                onClick={() => onCitation({ kind: 'data', n: record.n }, sources, data)}
+              >
+                <span className="source-pill-index">D{record.n}</span>
+                {record.record_id ?? record.label}
               </button>
             ))}
           </footer>
@@ -138,6 +189,55 @@ export function MessageBubble({ message, onCitation }: Props) {
     </article>
   )
 }
+/**
+ * Which survey data the copilot consulted, one chip per tool call. Each chip
+ * opens the first record that call returned.
+ */
+function ToolChips({
+  calls,
+  streaming,
+  onOpen,
+}: {
+  calls: ToolCall[]
+  streaming: boolean
+  onOpen: (n: number) => void
+}) {
+  if (calls.length === 0) {
+    return streaming ? (
+      <p className="tool-chips-label" role="status">
+        {copy.copilot.lookingUp}
+      </p>
+    ) : null
+  }
+  const plannedBy = calls[0]?.planned_by
+  return (
+    <div className="tool-chips">
+      <p className="tool-chips-label">
+        {copy.copilot.consulted}
+        {plannedBy && copy.copilot.plannedBy[plannedBy] && (
+          <span className="tool-chips-planner"> · {copy.copilot.plannedBy[plannedBy]}</span>
+        )}
+      </p>
+      <ul className="tool-chips-list">
+        {calls.map((call, index) => (
+          <li key={`${call.name}-${index}`}>
+            <button
+              type="button"
+              className={`tool-chip ${call.error ? 'is-error' : ''}`}
+              title={`${call.name} ${JSON.stringify(call.args)}`}
+              disabled={call.citations.length === 0}
+              onClick={() => call.citations[0] && onOpen(call.citations[0])}
+            >
+              <span className="tool-chip-name mono">{call.name}</span>
+              {call.summary}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 function SurveyHandover({ survey }: { survey: SurveyContext }) {
   const georeferenced = survey.lat !== null && survey.lon !== null
   return (
@@ -171,6 +271,104 @@ function SurveyHandover({ survey }: { survey: SurveyContext }) {
       </dl>
       {!georeferenced && <p className="survey-note">{copy.survey.notGeoreferenced}</p>}
       {survey.demo && <p className="survey-demo">{copy.survey.demo}</p>}
+    </div>
+  )
+}
+
+const given = (value: unknown): string =>
+  value === null || value === undefined || value === '' ? copy.ghosttrace.notAvailable : String(value)
+
+/**
+ * The GhostTrace target as it was handed over. Every value is displayed as
+ * given; the card computes nothing. Synthetic runs say so before anything else.
+ */
+function GhostTraceHandover({ context }: { context: GhostTraceContext }) {
+  const georeferenced = context.latitude !== null && context.longitude !== null
+  const priority = context.priority
+  const habitat = context.habitat_nearest?.[0]
+  return (
+    <div className="survey-handover ghosttrace-handover">
+      <p className="survey-from">
+        {copy.ghosttrace.from}
+        {context.synthetic && (
+          <span className="ghosttrace-synthetic">{copy.ghosttrace.synthetic}</span>
+        )}
+      </p>
+      {context.synthetic && <p className="survey-demo">{copy.ghosttrace.syntheticBody}</p>}
+      <dl className="detection-fields">
+        <div>
+          <dt>{copy.ghosttrace.target}</dt>
+          <dd className="mono">{given(context.detection_id)}</dd>
+        </div>
+        <div>
+          <dt>{copy.ghosttrace.survey}</dt>
+          <dd>{given(context.survey_title ?? context.survey_id)}</dd>
+        </div>
+        <div>
+          <dt>{copy.ghosttrace.objectClass}</dt>
+          <dd>
+            {given(context.object_class)}
+            {typeof context.confidence_pct === 'number' && ` · ${context.confidence_pct}%`}
+          </dd>
+        </div>
+        <div>
+          <dt>{copy.ghosttrace.position}</dt>
+          <dd className="mono">
+            {georeferenced
+              ? `${context.latitude}, ${context.longitude}`
+              : copy.ghosttrace.notGeoreferenced}
+          </dd>
+        </div>
+        <div>
+          <dt>{copy.ghosttrace.priority}</dt>
+          <dd>
+            {priority
+              ? copy.ghosttrace.priorityValue(
+                  given(priority.tier),
+                  given(priority.rank),
+                  given(priority.score),
+                )
+              : copy.ghosttrace.notAvailable}
+          </dd>
+        </div>
+        <div>
+          <dt>{copy.ghosttrace.activity}</dt>
+          <dd>{given(context.activity?.level)}</dd>
+        </div>
+        <div>
+          <dt>{copy.ghosttrace.habitat}</dt>
+          <dd>
+            {habitat
+              ? copy.ghosttrace.habitatValue(habitat.name ?? given(habitat.kind), given(habitat.distance_m))
+              : copy.ghosttrace.notAvailable}
+          </dd>
+        </div>
+        <div>
+          <dt>{copy.ghosttrace.propeller}</dt>
+          <dd>{given(context.people?.propeller_hazard_level)}</dd>
+        </div>
+        <div>
+          <dt>{copy.ghosttrace.change}</dt>
+          <dd>{given(context.change?.status)}</dd>
+        </div>
+        {context.authorities && context.authorities.length > 0 && (
+          <div>
+            <dt>{copy.ghosttrace.authorities}</dt>
+            <dd>{context.authorities.map((a) => given(a.name)).join('; ')}</dd>
+          </div>
+        )}
+      </dl>
+      <p className="survey-note">{copy.ghosttrace.dataNotSource}</p>
+      {context.caveats && context.caveats.length > 0 && (
+        <details className="ghosttrace-caveats">
+          <summary>{copy.ghosttrace.caveats}</summary>
+          <ul>
+            {context.caveats.map((caveat) => (
+              <li key={caveat}>{caveat}</li>
+            ))}
+          </ul>
+        </details>
+      )}
     </div>
   )
 }

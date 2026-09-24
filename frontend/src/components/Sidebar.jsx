@@ -7,11 +7,30 @@ import {
   History,
   Waves,
   MessageSquareText,
+  Radar,
+  LifeBuoy,
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
 
 const menuItems = [
+  // First and styled apart, because it is the one page that does the whole
+  // job the problem statement asks for: upload a raw log, watch the models'
+  // detections land on the map as the run happens, download the reports.
+  {
+    name: "Live survey",
+    path: "/mission",
+    icon: Radar,
+    featured: true,
+  },
+  // Second, because it is what a detection is for: which ghost net is killing
+  // now, what it will reach, and which one to recover first.
+  {
+    name: "GhostTrace",
+    path: "/ghosttrace",
+    icon: LifeBuoy,
+    featured: true,
+  },
   {
     name: "Dashboard",
     path: "/",
@@ -75,7 +94,7 @@ function Sidebar() {
               key={item.name}
               to={item.path}
               className={({ isActive }) =>
-                `nav-item ${isActive ? "active" : ""}`
+                `nav-item ${item.featured ? "nav-item-featured" : ""} ${isActive ? "active" : ""}`
               }
             >
               <Icon size={20} />

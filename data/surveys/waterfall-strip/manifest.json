@@ -1,6 +1,6 @@
 {
   "survey": {
-    "generated_at": "2026-09-11T07:38:44+00:00",
+    "generated_at": "2026-09-13T14:23:18+00:00",
     "engine": "deepecho-survey-hazard",
     "processing_version": "1.0.0",
     "strips": [
@@ -8,7 +8,10 @@
         "strip": "sidescan-waterfall-strip",
         "source_image": "sidescan-waterfall-strip.jpg",
         "width": 3600,
-        "height": 2758
+        "height": 2758,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "resolution_basis": null
       }
     ],
     "tiles_written": 40,
@@ -26,6 +29,7 @@
       "overlap": 128,
       "min_content": 0.02,
       "denoise": false,
+      "denoise_filter": "Lee speckle filter + percentile stretch",
       "content_score": "standard deviation of the tile's grey levels / 255, measured on the tile as written"
     }
   },
@@ -46,7 +50,10 @@
       "center_y": 320.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.051121
+      "content_score": 0.051121,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_512_0.jpg",
@@ -64,7 +71,10 @@
       "center_y": 320.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.072564
+      "content_score": 0.072564,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_1024_0.jpg",
@@ -82,7 +92,10 @@
       "center_y": 320.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.151446
+      "content_score": 0.151446,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_1536_0.jpg",
@@ -100,7 +113,10 @@
       "center_y": 320.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.074864
+      "content_score": 0.074864,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_2048_0.jpg",
@@ -118,7 +134,10 @@
       "center_y": 320.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.176543
+      "content_score": 0.176543,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_2560_0.jpg",
@@ -136,7 +155,10 @@
       "center_y": 320.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.103945
+      "content_score": 0.103945,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_3072_0.jpg",
@@ -154,7 +176,10 @@
       "center_y": 320.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.09722
+      "content_score": 0.09722,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_0_512.jpg",
@@ -172,7 +197,10 @@
       "center_y": 832.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.082961
+      "content_score": 0.082961,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_512_512.jpg",
@@ -190,7 +218,10 @@
       "center_y": 832.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.128202
+      "content_score": 0.128202,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_1024_512.jpg",
@@ -208,7 +239,10 @@
       "center_y": 832.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.161967
+      "content_score": 0.161967,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_2048_512.jpg",
@@ -226,7 +260,10 @@
       "center_y": 832.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.185354
+      "content_score": 0.185354,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_2560_512.jpg",
@@ -244,7 +281,10 @@
       "center_y": 832.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.130737
+      "content_score": 0.130737,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_3072_512.jpg",
@@ -262,7 +302,10 @@
       "center_y": 832.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.044983
+      "content_score": 0.044983,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_0_1024.jpg",
@@ -280,7 +323,10 @@
       "center_y": 1344.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.064575
+      "content_score": 0.064575,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_512_1024.jpg",
@@ -298,7 +344,10 @@
       "center_y": 1344.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.053869
+      "content_score": 0.053869,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_1024_1024.jpg",
@@ -316,7 +365,10 @@
       "center_y": 1344.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.170173
+      "content_score": 0.170173,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_2048_1024.jpg",
@@ -334,7 +386,10 @@
       "center_y": 1344.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.213281
+      "content_score": 0.213281,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_2560_1024.jpg",
@@ -352,7 +407,10 @@
       "center_y": 1344.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.185092
+      "content_score": 0.185092,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_3072_1024.jpg",
@@ -370,7 +428,10 @@
       "center_y": 1344.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.037262
+      "content_score": 0.037262,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_0_1536.jpg",
@@ -388,7 +449,10 @@
       "center_y": 1856.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.070098
+      "content_score": 0.070098,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_512_1536.jpg",
@@ -406,7 +470,10 @@
       "center_y": 1856.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.049383
+      "content_score": 0.049383,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_1024_1536.jpg",
@@ -424,7 +491,10 @@
       "center_y": 1856.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.178073
+      "content_score": 0.178073,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_1536_1536.jpg",
@@ -442,7 +512,10 @@
       "center_y": 1856.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.05194
+      "content_score": 0.05194,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_2048_1536.jpg",
@@ -460,7 +533,10 @@
       "center_y": 1856.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.167736
+      "content_score": 0.167736,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_2560_1536.jpg",
@@ -478,7 +554,10 @@
       "center_y": 1856.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.071563
+      "content_score": 0.071563,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_3072_1536.jpg",
@@ -496,7 +575,10 @@
       "center_y": 1856.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.039215
+      "content_score": 0.039215,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_0_2048.jpg",
@@ -514,7 +596,10 @@
       "center_y": 2368.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.042028
+      "content_score": 0.042028,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_512_2048.jpg",
@@ -532,7 +617,10 @@
       "center_y": 2368.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.066901
+      "content_score": 0.066901,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_1024_2048.jpg",
@@ -550,7 +638,10 @@
       "center_y": 2368.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.158895
+      "content_score": 0.158895,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_1536_2048.jpg",
@@ -568,7 +659,10 @@
       "center_y": 2368.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.087814
+      "content_score": 0.087814,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_2048_2048.jpg",
@@ -586,7 +680,10 @@
       "center_y": 2368.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.110415
+      "content_score": 0.110415,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_2560_2048.jpg",
@@ -604,7 +701,10 @@
       "center_y": 2368.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.030196
+      "content_score": 0.030196,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_3072_2048.jpg",
@@ -622,7 +722,10 @@
       "center_y": 2368.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.038064
+      "content_score": 0.038064,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_0_2560.jpg",
@@ -640,7 +743,10 @@
       "center_y": 2659.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.046513
+      "content_score": 0.046513,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_512_2560.jpg",
@@ -658,7 +764,10 @@
       "center_y": 2659.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.062402
+      "content_score": 0.062402,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_1024_2560.jpg",
@@ -676,7 +785,10 @@
       "center_y": 2659.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.141473
+      "content_score": 0.141473,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_1536_2560.jpg",
@@ -694,7 +806,10 @@
       "center_y": 2659.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.089612
+      "content_score": 0.089612,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_2048_2560.jpg",
@@ -712,7 +827,10 @@
       "center_y": 2659.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.093962
+      "content_score": 0.093962,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_2560_2560.jpg",
@@ -730,7 +848,10 @@
       "center_y": 2659.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.030189
+      "content_score": 0.030189,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-waterfall-strip_3072_2560.jpg",
@@ -748,7 +869,10 @@
       "center_y": 2659.0,
       "source_image": "sidescan-waterfall-strip.jpg",
       "denoised": false,
-      "content_score": 0.043475
+      "content_score": 0.043475,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     }
   ]
 }

@@ -75,3 +75,38 @@ export function mapUrl(surveyId, hotspotId) {
 export function actionsUrl(surveyId) {
   return url(surveyConfig.endpoints.actions(surveyId))
 }
+
+/**
+ * The survey in ping-time order, for the mission replay.
+ *
+ * A survey with no navigation answers { available: false, reason }, which is
+ * returned as it is: the page says why there is nothing to replay.
+ */
+export function fetchReplay(surveyId) {
+  return getJson(surveyConfig.endpoints.replay(surveyId))
+}
+
+/** Imaged seabed, nadir strip, gaps, metrics and re-look lines. Same contract. */
+export function fetchCoverage(surveyId) {
+  return getJson(surveyConfig.endpoints.coverage(surveyId))
+}
+
+/** Absolute URL of the re-look lines as "gpx" or "csv", for download. */
+export function relookUrl(surveyId, format) {
+  return url(surveyConfig.endpoints.relook(surveyId, format))
+}
+
+/**
+ * The survey's GhostTrace document, or null when it has none.
+ *
+ * Most surveys have no GhostTrace run, and a 404 is that answer rather than a
+ * failure. Anything else still throws.
+ */
+export async function fetchGhostTraceOrNull(surveyId) {
+  try {
+    return await getJson(surveyConfig.endpoints.ghosttrace(surveyId))
+  } catch (error) {
+    if (error instanceof SurveyApiError && error.status === 404) return null
+    throw error
+  }
+}

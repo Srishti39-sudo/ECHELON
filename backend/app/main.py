@@ -14,17 +14,29 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from .. import chat, config, detect
-from ..schemas import HealthResponse
-from .routes import stats
-from .routes.detection import router as detection_router
-from .routes.hazard import router as hazard_router
-from .routes.history import router as history_router
-from .routes.rag import router as rag_router
-from .routes.survey import router as survey_router
-from .supabase_client import supabase_status
+from backend import config
+from backend.schemas import HealthResponse
+
+# Each feature is its own package with its own routes; main.py only wires them.
+from rag_assistant import chat
+from rag_assistant.routes.rag import router as rag_router
+from survey_hazard_map import detect
+from survey_hazard_map.routes import stats
+from survey_hazard_map.routes import jobs as survey_jobs
+from survey_hazard_map.routes.detection import router as detection_router
+from survey_hazard_map.routes.hazard import router as hazard_router
+from survey_hazard_map.routes.history import router as history_router
+from survey_hazard_map.routes.survey import router as survey_router
+from survey_hazard_map.store import storage_status
+from ghosttrace.routes.api import router as ghosttrace_router
+from ghosttrace.routes.telemetry import router as telemetry_router
 
 log = logging.getLogger("deepecho")
+
+# The feature groups this process serves; see config.FEATURES.
+ASSISTANT = "assistant" in config.FEATURES
+HAZARD = "hazard" in config.FEATURES
+GHOSTTRACE = "ghosttrace" in config.FEATURES
 
 
 @asynccontextmanager
@@ -35,18 +47,25 @@ async def lifespan(_: FastAPI):
     initialises second aborts the process. Detector inference lives in a
     subprocess for exactly that reason, so the two never share an address space.
     Warming here also moves index and weight loading off the first request.
-    """
-    try:
-        chat.get_retriever()
-        chat.get_catalog()
-    except chat.EngineError as exc:
-        log.warning("index not loaded at startup: %s", exc)
 
-    if config.ENABLE_UPLOAD:
+    Only what this process serves is warmed (config.FEATURES): a GhostTrace
+    container has no use for the index, and should not hold it in memory.
+    """
+    log.info("features: %s", ", ".join(sorted(config.FEATURES)))
+
+    if ASSISTANT:
+        try:
+            chat.get_retriever()
+            chat.get_catalog()
+        except chat.EngineError as exc:
+            log.warning("index not loaded at startup: %s", exc)
+
+    if HAZARD and config.ENABLE_UPLOAD:
         loaded = detect.load_models()
         log.info("detector: %s", ", ".join(sorted(loaded)) or "none, using stub")
 
-    log.info("supabase: %s", supabase_status())
+    if HAZARD:
+        log.info("storage: %s", storage_status())
     yield
 
 
@@ -68,7 +87,7 @@ app.add_middleware(
 # The publications the corpus was written from, served read-only so a citation
 # can open the document behind it. This is what makes a claim checkable rather
 # than merely attributed.
-if config.SOURCES_DIR.is_dir():
+if ASSISTANT and config.SOURCES_DIR.is_dir():
     app.mount(config.SOURCES_MOUNT, StaticFiles(directory=config.SOURCES_DIR), name="sources")
 
 
@@ -76,9 +95,10 @@ if config.SOURCES_DIR.is_dir():
 def home():
     return {
         "message": "deepEcho backend is running",
+        "features": sorted(config.FEATURES),
         "assistant": "/chat, /chat/stream, /rag/query",
         "detection": "/detect",
-        "survey": "/hazard/map, /history, /stats",
+        "survey": "/survey, /hazard/map, /history, /stats, /detections",
         "health": "/health",
     }
 
@@ -86,22 +106,37 @@ def home():
 @app.get("/health", response_model=HealthResponse)
 def health() -> HealthResponse:
     """Is the index loaded, what is behind it, and is storage reachable."""
+    features = sorted(config.FEATURES)
+    upload_enabled = HAZARD and config.ENABLE_UPLOAD
+    # History belongs to the hazard feature, and so does its database. The
+    # other containers never open it: under compose it is one SQLite file on a
+    # shared mount, which is safe with one writer process and not with three.
+    storage = storage_status() if HAZARD else "not served by this process"
     detector = "disabled"
     detector_models: list[str] = []
-    if config.ENABLE_UPLOAD:
+    if upload_enabled:
         loaded = detect.load_models()
         detector_models = sorted(loaded)
         detector = "loaded" if loaded else "stub"
 
-    try:
-        retriever = chat.get_retriever()
-    except chat.EngineError:
+    # A process that does not serve the assistant has no index to report, and
+    # that is not a fault: it is ready for what it does serve. Asking for the
+    # retriever here would also load the index on the first health probe.
+    retriever = None
+    if ASSISTANT:
+        try:
+            retriever = chat.get_retriever()
+        except chat.EngineError:
+            pass
+    if retriever is None:
         return HealthResponse(
-            status="degraded", corpus_loaded=False, documents=0, chunks=0,
+            status="degraded" if ASSISTANT else "ready",
+            corpus_loaded=False, documents=0, chunks=0,
             embedder="none", index="none", catalog_entries=0, catalog_space=None,
             provider=config.PROVIDER, model=config.MODEL or "provider default",
             detector=detector, detector_models=detector_models,
-            upload_enabled=config.ENABLE_UPLOAD, storage=supabase_status(),
+            upload_enabled=upload_enabled, storage=storage,
+            features=features,
         )
 
     catalog = chat.get_catalog()
@@ -118,23 +153,26 @@ def health() -> HealthResponse:
         model=config.MODEL or "provider default",
         detector=detector,
         detector_models=detector_models,
-        upload_enabled=config.ENABLE_UPLOAD,
-        storage=supabase_status(),
+        upload_enabled=upload_enabled,
+        storage=storage,
+        features=features,
     )
 
 
-app.include_router(rag_router)
+if ASSISTANT:
+    app.include_router(rag_router)
 
 # The upload path is behind one flag, and the flag has to gate the route rather
 # than only the model loading. Without this the serve container, which ships no
 # torch, still advertises /detect and answers it from the stub: a synthetic
 # detection, correctly labelled, from a deployment that cannot detect anything.
 # Off means the route does not exist.
-if config.ENABLE_UPLOAD:
-    app.include_router(detection_router)
-app.include_router(history_router)
-app.include_router(hazard_router)
-app.include_router(stats.router)
+if HAZARD:
+    if config.ENABLE_UPLOAD:
+        app.include_router(detection_router)
+    app.include_router(history_router)
+    app.include_router(hazard_router)
+    app.include_router(stats.router)
 
 # The survey hazard map. Reads pre-generated surveys off disk, so it needs no
 # database, no detector and no key, and cannot fail at startup.
@@ -144,4 +182,21 @@ app.include_router(stats.router)
 # router answers it from a processed survey, with severity from class weight
 # times confidence. They are two different models of the same idea and the
 # project should eventually keep one. Nothing here touches the other.
-app.include_router(survey_router)
+#
+# Survey jobs (upload a log, watch it process, download the reports) go first:
+# /survey/jobs/{id} would otherwise be read as /survey/{survey_id}/... by the
+# router below. Gated like /detect -- the route exists only where a detector
+# can really run; see routes/jobs.py for the flag and why.
+if HAZARD:
+    if survey_jobs.ENABLED:
+        app.include_router(survey_jobs.router)
+    app.include_router(survey_router)
+
+# GhostTrace: which detected ghost net to recover first, and why. Reads
+# ghosttrace.json beside a survey's export; its run route has its own flag, see
+# routes/ghosttrace.py. Prefix /ghosttrace, so it cannot shadow /survey.
+if GHOSTTRACE:
+    app.include_router(ghosttrace_router)
+    # Field telemetry: drifter tags and recovery confirmations for GhostTrace
+    # targets. Same feature, since every route is keyed by a survey's targets.
+    app.include_router(telemetry_router)

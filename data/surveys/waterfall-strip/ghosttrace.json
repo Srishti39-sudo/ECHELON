@@ -1,0 +1,194 @@
+{
+  "format": "deepecho-ghosttrace/1",
+  "survey_id": "waterfall-strip",
+  "generated_at": "2026-09-23T04:09:35+00:00",
+  "demo": false,
+  "synthetic_inputs": false,
+  "data_sources": [
+    {
+      "name": "UNEP-WCMC Global Distribution of Seagrasses",
+      "url": "https://data-gis.unep-wcmc.org/server/rest/services/HabitatsAndBiotopes/Global_Distribution_of_Seagrasses/FeatureServer",
+      "licence": "UNEP-WCMC General Data License (excluding WDPA), https://www.unep-wcmc.org/en/general-data-license : no commercial use without permission (clause 2); no redistribution (clause 3); may be published only in non-downloadable form with citation (clauses 4-5)",
+      "snapshot": "2026-09-13",
+      "used_for": "seagrass layer (habitat context, drift impacts)"
+    },
+    {
+      "name": "Curated olive ridley mass-nesting sites (Odisha)",
+      "url": "see per-feature citation",
+      "licence": "geometry derived from OpenStreetMap (ODbL 1.0); extents from the cited publications",
+      "snapshot": "2026-09-13",
+      "used_for": "turtle_nesting layer"
+    },
+    {
+      "name": "Curated dugong habitat (Palk Bay)",
+      "url": "see per-feature citation",
+      "licence": "geometry derived from OpenStreetMap (ODbL 1.0); description from the cited documents",
+      "snapshot": "2026-09-13",
+      "used_for": "dugong layer"
+    },
+    {
+      "name": "OpenStreetMap harbours, ports, fishing ports and named jetties (Overpass API)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "licence": "ODbL 1.0, (c) OpenStreetMap contributors",
+      "snapshot": "2026-09-13",
+      "used_for": "harbour layer: propeller hazard and fishing exposure proxy"
+    },
+    {
+      "name": "NOAA NCEI ETOPO 2022 Global Relief Model, 15 arc-second, surface elevation",
+      "url": "https://www.ngdc.noaa.gov/thredds/dodsC/global/ETOPO2022/15s/15s_surface_elev_netcdf/",
+      "licence": "Public domain (US Government work, NOAA NCEI)",
+      "snapshot": "2026-09-13",
+      "used_for": "seabed depth for the diver brief and propeller hazard when the survey has no depth"
+    },
+    {
+      "name": "OpenStreetMap protected areas (Overpass API)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "licence": "ODbL 1.0, (c) OpenStreetMap contributors",
+      "snapshot": "2026-09-13",
+      "used_for": "protected_area layer (habitat context, drift impacts)"
+    },
+    {
+      "name": "OpenStreetMap natural=reef (Overpass API)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "licence": "ODbL 1.0, (c) OpenStreetMap contributors",
+      "snapshot": "2026-09-13",
+      "used_for": "supplementary reef layer, present even without the UNEP-WCMC fetch"
+    },
+    {
+      "name": "UNEP-WCMC Global Distribution of Warm-water Coral Reefs v4.1",
+      "url": "https://data-gis.unep-wcmc.org/server/rest/services/HabitatsAndBiotopes/Global_Distribution_of_Coral_Reefs/FeatureServer",
+      "licence": "UNEP-WCMC General Data License (excluding WDPA), https://www.unep-wcmc.org/en/general-data-license : no commercial use without permission (clause 2); no redistribution (clause 3); may be published only in non-downloadable form with citation (clauses 4-5)",
+      "snapshot": "2026-09-13",
+      "used_for": "reef layer (habitat context, drift impacts)"
+    },
+    {
+      "name": "Natural Earth 10m land and minor islands (v5)",
+      "url": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_land.zip ; https://naciscdn.org/naturalearth/10m/physical/ne_10m_minor_islands.zip",
+      "licence": "Public domain (Natural Earth terms of use)",
+      "snapshot": "2026-09-13",
+      "used_for": "deciding which side of the OSM coastline is land; fallback land mask"
+    },
+    {
+      "name": "OpenStreetMap natural=coastline (Overpass API)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "licence": "ODbL 1.0, (c) OpenStreetMap contributors",
+      "snapshot": "2026-09-13",
+      "used_for": "land mask for particle stranding and coastline for curated nesting beaches"
+    },
+    {
+      "name": "HYCOM ESPC-D-V02 Global 1/12 deg ocean analysis/forecast (NRL / FNMOC)",
+      "url": "https://ncss.hycom.org/thredds/ncss/grid/FMRC_ESPC-D-V02_uv3z/FMRC_ESPC-D-V02_uv3z_best.ncd",
+      "licence": "Freely available (HYCOM.org THREDDS catalog: 'rights: Freely available'; distribution statement: Approved for public release; distribution unlimited)",
+      "snapshot": "2026-09-15",
+      "used_for": "surface and near-bottom currents for the drift forecast and the diver brief"
+    }
+  ],
+  "caveats": [
+    "GhostTrace priorities, tiers, activity scores and weights are configurable heuristics chosen for this project, not fitted to real ghost-gear recoveries and not an official procedure. Every detection is automated - verify before action.",
+    "Recovery legs are straight lines; routes around land and shoals are not computed.",
+    "Alerts name an authority only where the knowledge base names it for that situation; 'authority not in corpus' marks a gap to fill, and no contact details are invented."
+  ],
+  "targets": [],
+  "removed_since_previous": [],
+  "change_summary": {
+    "compared_with": [],
+    "new": 0,
+    "moved": 0,
+    "persistent": 0,
+    "removed": 0,
+    "confirmed_recovered": 0
+  },
+  "recovery_plan": {
+    "start": null,
+    "order": [],
+    "legs": [],
+    "total_km": 0.0,
+    "method": "tiers in order (urgent, high, routine); within a tier nearest-neighbour from the current position then 2-opt on the open path; geodesic straight-line legs",
+    "notes": [
+      "Legs are straight geodesic lines; sea routes around land, shoals and exclusion zones are not computed.",
+      "The route ends at the last target and does not return to the start.",
+      "No target has a position, so no route was planned."
+    ]
+  },
+  "summary": {
+    "targets": 0,
+    "urgent": 0,
+    "high": 0,
+    "actively_fishing": 0,
+    "near_sensitive_habitat": 0,
+    "propeller_hazards": 0,
+    "suppressed_excluded": 0,
+    "stage_failures": 0
+  },
+  "run": {
+    "core_version": "1.0.0",
+    "horizon_hours": 240,
+    "n_particles": 500,
+    "seed": 0,
+    "drift_dt_minutes": 30.0,
+    "survey_time": "2026-09-13T14:23:30+00:00",
+    "survey_time_basis": "export metadata.processed_at (no ping times recorded; this is when the survey was PROCESSED, not when it was recorded)",
+    "stages": {
+      "habitat": {
+        "available": true,
+        "source": "ghosttrace.habitat",
+        "reason": null
+      },
+      "drift": {
+        "available": true,
+        "source": "ghosttrace.drift",
+        "reason": null
+      },
+      "people": {
+        "available": true,
+        "source": "ghosttrace.safety",
+        "reason": null
+      },
+      "field": {
+        "available": true,
+        "source": "ghosttrace.currents",
+        "reason": null
+      },
+      "layers": {
+        "available": true,
+        "source": "ghosttrace.layers",
+        "reason": null
+      },
+      "bathymetry": {
+        "available": true,
+        "source": "ghosttrace.layers",
+        "reason": null
+      },
+      "harbours": {
+        "available": true,
+        "source": "layers",
+        "reason": null
+      }
+    },
+    "failures": [],
+    "priority_weights": {
+      "activity": 0.25,
+      "habitat": 0.2,
+      "drift_impact": 0.15,
+      "people_risk": 0.15,
+      "size": 0.1,
+      "change": 0.1,
+      "recoverability": 0.05
+    },
+    "priority_neutral": {
+      "activity": 0.4,
+      "habitat": 0.3,
+      "drift_impact": 0.2,
+      "people_risk": 0.3,
+      "size": 0.3,
+      "change": 0.5,
+      "recoverability": 0.5
+    },
+    "priority_tiers": {
+      "urgent": 0.55,
+      "high": 0.35,
+      "routine": 0.0
+    },
+    "heuristic": "configurable heuristic chosen for this project; not fitted to real ghost-gear recovery data and not an official procedure"
+  }
+}

@@ -1,0 +1,383 @@
+# Hydrographic Note, National Hydrographic Office
+
+source_url: https://hydrobharat.gov.in/hydrographic-note
+retrieved: 2026-09-13
+capture: text extracted from the live page (form labels only; the page is an online form)
+
+Hydrographic Note - NHO
+Skip to Main Content
+National Hydrographic Office
+"Har Kaam Desh Ke Naam"
+Home
+INHD
+Brief History
+Vision and Mandate
+Equipment
+Organogram
+Picture Gallery
+Calendar 2026
+Chief Hydrographer
+Joint Chief Hydrographer
+Services
+Navarea Warnings
+Navtex Warnings
+Training in Hydrography
+Hydrographic Surveying
+Hydrographic Updates
+NHO Annual Reports
+The International Hydrographic Review
+IHO Videos
+100 Years Of IHO
+What is Hydrography
+Hydrography Explain to Kids
+Hydrography as a Career
+NHO Videos
+Saga of Hydrographer
+Saga of Hydrographer (Short Movie)
+Hydronaut 2025
+Coordinates
+Compass
+Products
+India WINS
+Online Catalogue
+Chart Agents
+Nautical Publications
+MSP (SindhuNidhi)
+Indian Notices to Mariners
+Search by Chart
+Search by INT
+Search by Notice
+Search by Year
+Contact us
+Contact NHO
+Contact NIH
+Contact Naval Chart Depots
+Hydrographic Note
+International-co-op
+Hydrographic Note
+Hydrographic Note Filling Instructions
+Read the instructions before filling out any hydrographic note.
+Read Instructions
+Hydrographic Note I.H. 102
+Use this form to submit IH.102 hydrographic details.
+Fill Form
+Hydrographic Note I.H. 102a
+Provide port-specific hydrographic notes using this form.
+Fill Form
+Abridged Hydrographic Note
+Fill this form for reporting hydrographic observations.
+Fill Form
+Hydrographic Note Filling Instructions
+×
+Hydrographic Note I.H. 102
+For Forwarding Information for Indian Charts, ENCs and Publications and Reporting of ENC Related Issues
+Expand all
+Collapse all
+1 General information
+Date
+Please enter Date
+Ref. number
+Please enter Ref. Number
+Name of the ship or sender
+Please enter Name of the Ship or Sender
+Tel/fax/e-mail address
+Address
+Please enter Address
+2 Observation details
+Date/time of observation
+Please enter Date/Time of Observation
+Object of changes observed
+Bathymetry
+Nav. Dangers
+Nav. Aids
+Designated Areas
+Others
+Please select at least one option.
+3 Position details
+Geographical position latitude
+Geographical position longitude
+Position method
+DGPS
+GPS
+Radar
+Others
+Datum used
+WGS84
+Everest
+Others
+4 Charts and publications
+Charts affected
+ENCs affected
+Please enter Details
+Latest edition of Indian notices to mariners held
+Tracing/plot/photograph if enclosed
+Latest update disk held
+Publication affected edition
+Page no./light no. etc
+Publication affected
+Details of documents/photos attached
+5 Details and signature
+Details
+Please enter Details
+Limitations if any in reporting the changes above
+Signature of the master/reporter/observer
+Browse
+Only PDF, JPG, JPEG, PNG, GIF, or SVG files are allowed.
+6 Verification
+Captcha
+Enter captcha
+Please enter valid captcha
+Verified successfully
+Submit
+Submitting your form, please wait...
+Abridged Hydrographic Note
+(For Reporting Navigational Dangers/ Changes observed at Sea by Mariners)
+Expand all
+Collapse all
+1 General information
+General locality
+Chart affected
+Edition no
+Please enter Edition Number
+ENC affected
+Latest update held
+Date/time of observation
+Please enter Date/Time of Observation
+2 Details and position
+Details of changes/dangers observed
+Position of danger/changes reported above latitude
+Position of danger/changes reported above longitude
+Datum (specify WGS 84/Everest/local)
+3 Sender details and attachments
+Name and address of sender/ship
+Please enter Name and Address of Sender/Shi
+Fax no
+E-mail
+Please enter E-mail
+Phone number
+Please enter Phone Number
+Accompanying plots/photographs (if any)
+Only PDF files are allowed. Please select a valid PDF file.
+4 Verification
+Captcha
+Enter captcha
+Please enter valid captcha
+Verified successfully
+Submit
+Submitting your form, please wait...
+Hydrographic Note I.H. 102a
+(To accompany Form IH.102)
+Expand all
+Collapse all
+1 General information
+Date
+Please enter date
+Reference number
+Please enter reference number
+Name of the ship or sender
+Please enter name of the ship or sender
+Address
+Please enter address
+Tel/fax/e-mail
+Please enter tel/fax/e-mail
+Name of port
+2 Name of port
+Location
+Latitude
+Longitude
+3 General remarks
+Copy of port handbook (if available)
+Number of ships and tonnage handled per year
+Maximum size of draught of vessel handled
+Principal activities and trade
+4 Anchorages
+Type / purpose
+Minimum depth at anchorage
+Shelter afforded
+Holding ground
+Recommended pilotage to the anchorage
+5 Pilotage
+Authority for request
+Embarkation position
+Remove
++ Add another position
+Regulations
+Documents to be provided
+Recommended pilotage to approach of harbour and berths
+Information on VTMS
+6 Directions
+Entry and berthing information
+Tides (height)
+Tidal stream information
+Wind speed and direction
+Navigational aids (beacons / buoys / lights / etc.)
+7 Pollution control
+Local regulation in force (if any)
+8 Tugs
+Number available / tug type
+Maximum HP / bollard pull
+Remove this tug
++ Add another tug
+Requesting authority
+Availability timing / communication
+Hiring charges
+9 Berthing and wharves
+Type & number of berths available
+Length
+Depth alongside
+Facilities available
+Procedure for requesting berth & hiring charges
+Remove this berth
++ Add another berth
+10 Cargo handling
+Containers
+Lighters & Ro-Ro etc.
+11 Cranes
+Brief details of max. lifting capacity, height of boom at wharf level and outreach
+Container handling facilities
+Remove this crane
++ Add another crane
+12 Bridges
+Vertical clearance
+13 Repairs
+Hull machinery and underwater
+Ship and boat yards
+Docking or slipway facilities (size/dimensions of vessels handled)
+Hards and ramps
+Divers / diving assistance
+14 Services
+Radio / fax / telephone / internet etc.
+Medical
+Quarantine
+Consul
+Ship chandlery and stevedores
+Tank cleaning
+Hull painting
+Police / ambulance / firefighting (fixed and mobile facilities)
+Nav. warning and weather bulletin
+Garbage disposal / waste oil disposal
+Compass adjustment
+Helicopter landing facilities
+15 Rescue & distress
+Salvage, lifeboat, life guards, etc
+16 Supplies
+Fuel (type, quantities & method of delivery)
+Fresh water (method of delivery and rate of supply)
+Provisions
+Chart agents
+17 Communications
+Road, rail and air services available
+Nearest airport or airfield
+Port radio and information service (frequencies and operating hours)
+18 Port authority
+Designation, address, telephone, e-mail address and website
+19 Security
+Security of ports / international ship and port facility security (ISPS) compliance
+Custom and immigration regulations in force
+20 Small craft facilities
+Information and facilities for small craft, yachts visiting the port
+Yacht clubs, berths etc
+21 Short leave
+Short leave details
+22 Clubs recreation
+Information kiosk (location)
+Foreign exchange firms / banks (within / near port area)
+Places of interest near port
+23 Views, additional details & signature
+Photographs (duly annotated) of the approaches, leading marks, the entrance to the harbour etc.
+Please upload only PDF files. Other file types are not allowed.
+View attached file
+Signature
+Only PDF files are accepted for signatures.
+View attached file
+Any other information considered to be useful for the mariners
+24 Verification
+Captcha
+-->
+Enter captcha
+Please enter valid captcha
+Verified successfully
+Submit
+Submitting your form, please wait...
+Registration Form
+Name of the Ship or Sender
+Please enter the name of the ship or sender.
+Address
+Address must be 500 characters or less
+E-mail Address
+Please enter a valid email address.
+Password
+Password must be at least 8 characters long.
+Confirm Password
+Passwords do not match.
+Mobile Number
+Please enter exactly 10 digits
+Captcha
+Invalid captcha
+Register
+Already Registered? Login here
+Back to main page
+Login
+Registered ID
+Please enter your registered ID.
+Registered Email
+Enter registered email
+Password
+Enter password
+Captcha
+Invalid captcha
+Login
+Forgot Password?
+Back to Registration
+Forgot Password
+Registration ID
+Registration ID is required
+Registered Email
+Valid email is required
+New Password
+Password must be at least 8 characters
+Confirm Password
+Passwords do not match
+Captcha
+Invalid captcha
+Reset Password
+Back to Login
+Registration Submitted
+Registration Successful!
+You will be notified once the admin reviews and approves your request. Please keep your ID confidential:
+Close
+Invalid Registration ID
+Registration ID Not Found
+The registration ID you entered does not exist. Please check the ID and try again.
+Close
+Approval Pending
+Your Registration is Under Review
+Your request is still pending admin approval. Please wait until your registration is approved before logging in.
+Close
+Login Successful
+Welcome Aboard!
+You have successfully logged in with Registration ID:
+Proceed
+Login Rejected
+Access Denied!
+Your login attempt with Registration
+has been rejected.
+Reason:
+Close
+National Hydrographic Office
+"Har Kaam Desh Ke Naam"
+Recent Updates
+The SindhuNidhi platform was inaugurated by Admiral Dinesh K. Tripathi, PVSM, AVSM, NM on 28 April 2026. Click to explore.
+Latest Navarea Warnings – Stay updated with the most recent navigational warnings.
+Latest INTM – View the latest Important Notices to Mariners (INTM) for chart updates.
+Latest Navtex Warnings – Access current Navtex messages for safe navigation.
+Quick Links
+Navarea Warnings
+Navtex Warnings
+Training in Hydrography
+Hydrographic Surveying
+Copyright © 2026 NHO. All rights reserved.
+Website Last Updated: 13 September 2026
+Powered by
+GIKS India Pvt. Ltd.
+Hidden

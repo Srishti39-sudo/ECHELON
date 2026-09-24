@@ -1,0 +1,1201 @@
+{
+ "format": "deepecho-ghosttrace-validation/1",
+ "generated_at": "2026-09-15T04:20:18+00:00",
+ "simulated": false,
+ "title": "GhostTrace floating drift vs real NOAA Global Drifter Program drifters",
+ "headline": {
+  "n_segments": 3,
+  "n_drifters": 3,
+  "median_separation_24h_km": 33.88,
+  "coverage90_24h": 0.0,
+  "coverage50_24h": 0.0,
+  "beats_persistence_24h_pct": 43.3,
+  "median_separation_72h_km": 100.7,
+  "coverage90_72h": 0.0,
+  "beats_persistence_72h_pct": 32.1,
+  "skill_72h_median": 0.498
+ },
+ "calibration_verdict": "OVERCONFIDENT: the 90% cone contained the real drifter far less than 90% of the time (between 0% and 0% at 24-72 h). The default diffusivity K = 1 m^2/s makes cones too narrow for real ocean drift; recalibrate K (see calibration) before reading a cone as a 90% region.",
+ "region": "Northern Indian Ocean (0-25 N, 50-100 E: Arabian Sea, Laccadive Sea, Bay of Bengal)",
+ "box": {
+  "south": 0.0,
+  "north": 25.0,
+  "west": 50.0,
+  "east": 100.0
+ },
+ "config": {
+  "mode": "floating",
+  "horizon_hours": 72,
+  "horizons": [
+   6,
+   12,
+   24,
+   48,
+   72
+  ],
+  "n_particles": 500,
+  "dt_minutes": 30,
+  "k_surface_m2s": 1.0,
+  "seed": 0,
+  "integrator": "rk4",
+  "per_drifter": 2,
+  "gap_days": 10.0,
+  "max_segments": 3,
+  "windage": "none (no wind data in GhostTrace)"
+ },
+ "counts": {
+  "segments": 3,
+  "drifters": 3,
+  "by_drogue": {
+   "drogued": 0,
+   "undrogued": 3,
+   "uncertain": 0
+  },
+  "failed_segments": 0
+ },
+ "metrics": {
+  "all": [
+   {
+    "horizon_hours": 6,
+    "n_segments": 3,
+    "separation_km_model": {
+     "median": 5.35,
+     "p25": 3.91,
+     "p75": 7.67,
+     "n": 3
+    },
+    "separation_km_persistence": {
+     "median": 11.97,
+     "p25": 8.23,
+     "p75": 14.24,
+     "n": 3
+    },
+    "separation_km_constant_model_current": {
+     "median": 5.81,
+     "p25": 4.55,
+     "p75": 9.14,
+     "n": 3
+    },
+    "separation_km_constant_observed_velocity": {
+     "median": 0.7,
+     "p25": 0.47,
+     "p75": 0.9,
+     "n": 3
+    },
+    "coverage_50": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "coverage_90": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "liu_weisberg_skill_model": {
+     "median": 0.45,
+     "mean": 0.431,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_model_current": {
+     "median": 0.269,
+     "mean": 0.306,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_observed_velocity": {
+     "median": 0.942,
+     "mean": 0.941,
+     "n": 3
+    },
+    "model_vs_persistence": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 55.3,
+     "basis": "1 - median(model separation) / median(persistence separation), same segments"
+    },
+    "model_vs_constant_model_current": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 7.9
+    },
+    "model_vs_constant_observed_velocity": {
+     "segments_model_closer": 0,
+     "n": 3,
+     "median_separation_reduction_pct": -667.6
+    }
+   },
+   {
+    "horizon_hours": 12,
+    "n_segments": 3,
+    "separation_km_model": {
+     "median": 11.47,
+     "p25": 8.07,
+     "p75": 16.44,
+     "n": 3
+    },
+    "separation_km_persistence": {
+     "median": 27.03,
+     "p25": 17.74,
+     "p75": 29.23,
+     "n": 3
+    },
+    "separation_km_constant_model_current": {
+     "median": 13.25,
+     "p25": 11.42,
+     "p75": 20.27,
+     "n": 3
+    },
+    "separation_km_constant_observed_velocity": {
+     "median": 3.2,
+     "p25": 3.05,
+     "p75": 3.51,
+     "n": 3
+    },
+    "coverage_50": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "coverage_90": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "liu_weisberg_skill_model": {
+     "median": 0.471,
+     "mean": 0.44,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_model_current": {
+     "median": 0.046,
+     "mean": 0.216,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_observed_velocity": {
+     "median": 0.898,
+     "mean": 0.855,
+     "n": 3
+    },
+    "model_vs_persistence": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 57.6,
+     "basis": "1 - median(model separation) / median(persistence separation), same segments"
+    },
+    "model_vs_constant_model_current": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 13.4
+    },
+    "model_vs_constant_observed_velocity": {
+     "segments_model_closer": 0,
+     "n": 3,
+     "median_separation_reduction_pct": -258.5
+    }
+   },
+   {
+    "horizon_hours": 24,
+    "n_segments": 3,
+    "separation_km_model": {
+     "median": 33.88,
+     "p25": 27.86,
+     "p75": 38.67,
+     "n": 3
+    },
+    "separation_km_persistence": {
+     "median": 59.77,
+     "p25": 46.93,
+     "p75": 60.62,
+     "n": 3
+    },
+    "separation_km_constant_model_current": {
+     "median": 45.48,
+     "p25": 37.04,
+     "p75": 52.95,
+     "n": 3
+    },
+    "separation_km_constant_observed_velocity": {
+     "median": 17.45,
+     "p25": 14.07,
+     "p75": 25.13,
+     "n": 3
+    },
+    "coverage_50": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "coverage_90": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "liu_weisberg_skill_model": {
+     "median": 0.357,
+     "mean": 0.423,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_model_current": {
+     "median": 0.013,
+     "mean": 0.192,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_observed_velocity": {
+     "median": 0.785,
+     "mean": 0.69,
+     "n": 3
+    },
+    "model_vs_persistence": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 43.3,
+     "basis": "1 - median(model separation) / median(persistence separation), same segments"
+    },
+    "model_vs_constant_model_current": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 25.5
+    },
+    "model_vs_constant_observed_velocity": {
+     "segments_model_closer": 0,
+     "n": 3,
+     "median_separation_reduction_pct": -94.1
+    }
+   },
+   {
+    "horizon_hours": 48,
+    "n_segments": 3,
+    "separation_km_model": {
+     "median": 50.62,
+     "p25": 41.61,
+     "p75": 66.47,
+     "n": 3
+    },
+    "separation_km_persistence": {
+     "median": 110.79,
+     "p25": 73.31,
+     "p75": 116.71,
+     "n": 3
+    },
+    "separation_km_constant_model_current": {
+     "median": 63.38,
+     "p25": 56.89,
+     "p75": 90.12,
+     "n": 3
+    },
+    "separation_km_constant_observed_velocity": {
+     "median": 31.29,
+     "p25": 27.5,
+     "p75": 41.14,
+     "n": 3
+    },
+    "coverage_50": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "coverage_90": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "liu_weisberg_skill_model": {
+     "median": 0.607,
+     "mean": 0.542,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_model_current": {
+     "median": 0.502,
+     "mean": 0.396,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_observed_velocity": {
+     "median": 0.791,
+     "mean": 0.749,
+     "n": 3
+    },
+    "model_vs_persistence": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 54.3,
+     "basis": "1 - median(model separation) / median(persistence separation), same segments"
+    },
+    "model_vs_constant_model_current": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 20.1
+    },
+    "model_vs_constant_observed_velocity": {
+     "segments_model_closer": 0,
+     "n": 3,
+     "median_separation_reduction_pct": -61.8
+    }
+   },
+   {
+    "horizon_hours": 72,
+    "n_segments": 3,
+    "separation_km_model": {
+     "median": 100.7,
+     "p25": 63.53,
+     "p75": 101.78,
+     "n": 3
+    },
+    "separation_km_persistence": {
+     "median": 148.24,
+     "p25": 107.98,
+     "p75": 162.56,
+     "n": 3
+    },
+    "separation_km_constant_model_current": {
+     "median": 111.66,
+     "p25": 96.3,
+     "p75": 139.5,
+     "n": 3
+    },
+    "separation_km_constant_observed_velocity": {
+     "median": 67.87,
+     "p25": 56.07,
+     "p75": 72.64,
+     "n": 3
+    },
+    "coverage_50": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "coverage_90": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "liu_weisberg_skill_model": {
+     "median": 0.498,
+     "mean": 0.543,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_model_current": {
+     "median": 0.41,
+     "mean": 0.359,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_observed_velocity": {
+     "median": 0.698,
+     "mean": 0.7,
+     "n": 3
+    },
+    "model_vs_persistence": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 32.1,
+     "basis": "1 - median(model separation) / median(persistence separation), same segments"
+    },
+    "model_vs_constant_model_current": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 9.8
+    },
+    "model_vs_constant_observed_velocity": {
+     "segments_model_closer": 1,
+     "n": 3,
+     "median_separation_reduction_pct": -48.4
+    }
+   }
+  ],
+  "undrogued": [
+   {
+    "horizon_hours": 6,
+    "n_segments": 3,
+    "separation_km_model": {
+     "median": 5.35,
+     "p25": 3.91,
+     "p75": 7.67,
+     "n": 3
+    },
+    "separation_km_persistence": {
+     "median": 11.97,
+     "p25": 8.23,
+     "p75": 14.24,
+     "n": 3
+    },
+    "separation_km_constant_model_current": {
+     "median": 5.81,
+     "p25": 4.55,
+     "p75": 9.14,
+     "n": 3
+    },
+    "separation_km_constant_observed_velocity": {
+     "median": 0.7,
+     "p25": 0.47,
+     "p75": 0.9,
+     "n": 3
+    },
+    "coverage_50": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "coverage_90": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "liu_weisberg_skill_model": {
+     "median": 0.45,
+     "mean": 0.431,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_model_current": {
+     "median": 0.269,
+     "mean": 0.306,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_observed_velocity": {
+     "median": 0.942,
+     "mean": 0.941,
+     "n": 3
+    },
+    "model_vs_persistence": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 55.3,
+     "basis": "1 - median(model separation) / median(persistence separation), same segments"
+    },
+    "model_vs_constant_model_current": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 7.9
+    },
+    "model_vs_constant_observed_velocity": {
+     "segments_model_closer": 0,
+     "n": 3,
+     "median_separation_reduction_pct": -667.6
+    }
+   },
+   {
+    "horizon_hours": 12,
+    "n_segments": 3,
+    "separation_km_model": {
+     "median": 11.47,
+     "p25": 8.07,
+     "p75": 16.44,
+     "n": 3
+    },
+    "separation_km_persistence": {
+     "median": 27.03,
+     "p25": 17.74,
+     "p75": 29.23,
+     "n": 3
+    },
+    "separation_km_constant_model_current": {
+     "median": 13.25,
+     "p25": 11.42,
+     "p75": 20.27,
+     "n": 3
+    },
+    "separation_km_constant_observed_velocity": {
+     "median": 3.2,
+     "p25": 3.05,
+     "p75": 3.51,
+     "n": 3
+    },
+    "coverage_50": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "coverage_90": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "liu_weisberg_skill_model": {
+     "median": 0.471,
+     "mean": 0.44,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_model_current": {
+     "median": 0.046,
+     "mean": 0.216,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_observed_velocity": {
+     "median": 0.898,
+     "mean": 0.855,
+     "n": 3
+    },
+    "model_vs_persistence": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 57.6,
+     "basis": "1 - median(model separation) / median(persistence separation), same segments"
+    },
+    "model_vs_constant_model_current": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 13.4
+    },
+    "model_vs_constant_observed_velocity": {
+     "segments_model_closer": 0,
+     "n": 3,
+     "median_separation_reduction_pct": -258.5
+    }
+   },
+   {
+    "horizon_hours": 24,
+    "n_segments": 3,
+    "separation_km_model": {
+     "median": 33.88,
+     "p25": 27.86,
+     "p75": 38.67,
+     "n": 3
+    },
+    "separation_km_persistence": {
+     "median": 59.77,
+     "p25": 46.93,
+     "p75": 60.62,
+     "n": 3
+    },
+    "separation_km_constant_model_current": {
+     "median": 45.48,
+     "p25": 37.04,
+     "p75": 52.95,
+     "n": 3
+    },
+    "separation_km_constant_observed_velocity": {
+     "median": 17.45,
+     "p25": 14.07,
+     "p75": 25.13,
+     "n": 3
+    },
+    "coverage_50": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "coverage_90": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "liu_weisberg_skill_model": {
+     "median": 0.357,
+     "mean": 0.423,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_model_current": {
+     "median": 0.013,
+     "mean": 0.192,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_observed_velocity": {
+     "median": 0.785,
+     "mean": 0.69,
+     "n": 3
+    },
+    "model_vs_persistence": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 43.3,
+     "basis": "1 - median(model separation) / median(persistence separation), same segments"
+    },
+    "model_vs_constant_model_current": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 25.5
+    },
+    "model_vs_constant_observed_velocity": {
+     "segments_model_closer": 0,
+     "n": 3,
+     "median_separation_reduction_pct": -94.1
+    }
+   },
+   {
+    "horizon_hours": 48,
+    "n_segments": 3,
+    "separation_km_model": {
+     "median": 50.62,
+     "p25": 41.61,
+     "p75": 66.47,
+     "n": 3
+    },
+    "separation_km_persistence": {
+     "median": 110.79,
+     "p25": 73.31,
+     "p75": 116.71,
+     "n": 3
+    },
+    "separation_km_constant_model_current": {
+     "median": 63.38,
+     "p25": 56.89,
+     "p75": 90.12,
+     "n": 3
+    },
+    "separation_km_constant_observed_velocity": {
+     "median": 31.29,
+     "p25": 27.5,
+     "p75": 41.14,
+     "n": 3
+    },
+    "coverage_50": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "coverage_90": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "liu_weisberg_skill_model": {
+     "median": 0.607,
+     "mean": 0.542,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_model_current": {
+     "median": 0.502,
+     "mean": 0.396,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_observed_velocity": {
+     "median": 0.791,
+     "mean": 0.749,
+     "n": 3
+    },
+    "model_vs_persistence": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 54.3,
+     "basis": "1 - median(model separation) / median(persistence separation), same segments"
+    },
+    "model_vs_constant_model_current": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 20.1
+    },
+    "model_vs_constant_observed_velocity": {
+     "segments_model_closer": 0,
+     "n": 3,
+     "median_separation_reduction_pct": -61.8
+    }
+   },
+   {
+    "horizon_hours": 72,
+    "n_segments": 3,
+    "separation_km_model": {
+     "median": 100.7,
+     "p25": 63.53,
+     "p75": 101.78,
+     "n": 3
+    },
+    "separation_km_persistence": {
+     "median": 148.24,
+     "p25": 107.98,
+     "p75": 162.56,
+     "n": 3
+    },
+    "separation_km_constant_model_current": {
+     "median": 111.66,
+     "p25": 96.3,
+     "p75": 139.5,
+     "n": 3
+    },
+    "separation_km_constant_observed_velocity": {
+     "median": 67.87,
+     "p25": 56.07,
+     "p75": 72.64,
+     "n": 3
+    },
+    "coverage_50": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "coverage_90": {
+     "fraction": 0.0,
+     "inside": 0,
+     "n": 3,
+     "ci95": [
+      0.0,
+      0.561
+     ]
+    },
+    "liu_weisberg_skill_model": {
+     "median": 0.498,
+     "mean": 0.543,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_model_current": {
+     "median": 0.41,
+     "mean": 0.359,
+     "n": 3
+    },
+    "liu_weisberg_skill_constant_observed_velocity": {
+     "median": 0.698,
+     "mean": 0.7,
+     "n": 3
+    },
+    "model_vs_persistence": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 32.1,
+     "basis": "1 - median(model separation) / median(persistence separation), same segments"
+    },
+    "model_vs_constant_model_current": {
+     "segments_model_closer": 3,
+     "n": 3,
+     "median_separation_reduction_pct": 9.8
+    },
+    "model_vs_constant_observed_velocity": {
+     "segments_model_closer": 1,
+     "n": 3,
+     "median_separation_reduction_pct": -48.4
+    }
+   }
+  ]
+ },
+ "calibration": {
+  "method": "every segment re-run with the same seed for each K on the grid; empirical 90% cone coverage at 24, 48, 72 h; smallest grid K reaching >= 0.90 per horizon; the recommendation is the largest of those (so all listed horizons reach nominal coverage)",
+  "grid_m2s": [
+   1.0,
+   3000.0
+  ],
+  "sweep": [
+   {
+    "k_m2s": 1.0,
+    "24": {
+     "coverage_90": 0.0,
+     "coverage_90_ci95": [
+      0.0,
+      0.561
+     ],
+     "coverage_50": 0.0,
+     "n": 3
+    },
+    "48": {
+     "coverage_90": 0.0,
+     "coverage_90_ci95": [
+      0.0,
+      0.561
+     ],
+     "coverage_50": 0.0,
+     "n": 3
+    },
+    "72": {
+     "coverage_90": 0.0,
+     "coverage_90_ci95": [
+      0.0,
+      0.561
+     ],
+     "coverage_50": 0.0,
+     "n": 3
+    }
+   },
+   {
+    "k_m2s": 3000.0,
+    "24": {
+     "coverage_90": 1.0,
+     "coverage_90_ci95": [
+      0.439,
+      1.0
+     ],
+     "coverage_50": 0.333,
+     "n": 3
+    },
+    "48": {
+     "coverage_90": 1.0,
+     "coverage_90_ci95": [
+      0.439,
+      1.0
+     ],
+     "coverage_50": 0.333,
+     "n": 3
+    },
+    "72": {
+     "coverage_90": 1.0,
+     "coverage_90_ci95": [
+      0.439,
+      1.0
+     ],
+     "coverage_50": 0.333,
+     "n": 3
+    }
+   }
+  ],
+  "smallest_k_reaching_90pct_by_horizon": {
+   "24": 3000.0,
+   "48": 3000.0,
+   "72": 3000.0
+  },
+  "recommended_k_surface_m2s": 3000.0,
+  "current_default_k_surface_m2s": 1.0,
+  "applied": false,
+  "note": "NOT applied: config_geo.DRIFT_K_SURFACE_M2S is unchanged. A random walk grows as sqrt(t) while model-error separation tends to grow faster, so one K cannot be exact at every horizon; set GHOSTTRACE_DRIFT_K_SURFACE_M2S to try it."
+ },
+ "segments": [
+  {
+   "index": 0,
+   "file": "seg_000.json",
+   "drifter_id": "300534062485540",
+   "buoy_type": "SVPB",
+   "drogue": "undrogued",
+   "start_time": "2024-08-10T18:00:00Z",
+   "start_lat": 11.213,
+   "start_lon": 74.678,
+   "horizons": {
+    "6": {
+     "sep_model_km": 9.981,
+     "sep_persistence_km": 11.971,
+     "sep_const_model_km": 12.467,
+     "sep_const_obs_km": 0.697,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.1662,
+     "skill_const_model": 0.0,
+     "skill_const_obs": 0.9418,
+     "observed_path_km": 11.971,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    },
+    "12": {
+     "sep_model_km": 21.415,
+     "sep_persistence_km": 27.028,
+     "sep_const_model_km": 27.297,
+     "sep_const_obs_km": 3.199,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.1986,
+     "skill_const_model": 0.0,
+     "skill_const_obs": 0.9006,
+     "observed_path_km": 27.207,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    },
+    "24": {
+     "sep_model_km": 43.461,
+     "sep_persistence_km": 61.474,
+     "sep_const_model_km": 60.412,
+     "sep_const_obs_km": 17.452,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.2686,
+     "skill_const_model": 0.0131,
+     "skill_const_obs": 0.7855,
+     "observed_path_km": 62.157,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    },
+    "48": {
+     "sep_model_km": 82.316,
+     "sep_persistence_km": 122.63,
+     "sep_const_model_km": 116.869,
+     "sep_const_obs_km": 50.988,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.3109,
+     "skill_const_model": 0.0482,
+     "skill_const_obs": 0.6626,
+     "observed_path_km": 125.302,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    },
+    "72": {
+     "sep_model_km": 100.702,
+     "sep_persistence_km": 176.878,
+     "sep_const_model_km": 167.335,
+     "sep_const_obs_km": 77.406,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.3603,
+     "skill_const_model": 0.0594,
+     "skill_const_obs": 0.6162,
+     "observed_path_km": 179.801,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    }
+   }
+  },
+  {
+   "index": 1,
+   "file": "seg_001.json",
+   "drifter_id": "300534063315110",
+   "buoy_type": "SVPB",
+   "drogue": "undrogued",
+   "start_time": "2024-08-10T18:00:00Z",
+   "start_lat": 3.781,
+   "start_lon": 64.187,
+   "horizons": {
+    "6": {
+     "sep_model_km": 2.475,
+     "sep_persistence_km": 4.497,
+     "sep_const_model_km": 3.286,
+     "sep_const_obs_km": 0.236,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.4496,
+     "skill_const_model": 0.2692,
+     "skill_const_obs": 0.9475,
+     "observed_path_km": 4.497,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    },
+    "12": {
+     "sep_model_km": 4.677,
+     "sep_persistence_km": 8.459,
+     "sep_const_model_km": 9.598,
+     "sep_const_obs_km": 2.902,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.4707,
+     "skill_const_model": 0.0465,
+     "skill_const_obs": 0.7678,
+     "observed_path_km": 9.016,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    },
+    "24": {
+     "sep_model_km": 33.877,
+     "sep_persistence_km": 34.088,
+     "sep_const_model_km": 45.479,
+     "sep_const_obs_km": 32.804,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.357,
+     "skill_const_model": 0.0079,
+     "skill_const_obs": 0.4305,
+     "observed_path_km": 43.387,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    },
+    "48": {
+     "sep_model_km": 32.6,
+     "sep_persistence_km": 35.818,
+     "sep_const_model_km": 50.406,
+     "sep_const_obs_km": 23.704,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.7088,
+     "skill_const_model": 0.6384,
+     "skill_const_obs": 0.7925,
+     "observed_path_km": 145.843,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    },
+    "72": {
+     "sep_model_km": 26.363,
+     "sep_persistence_km": 67.726,
+     "sep_const_model_km": 80.934,
+     "sep_const_obs_km": 44.275,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.7701,
+     "skill_const_model": 0.6068,
+     "skill_const_obs": 0.7862,
+     "observed_path_km": 177.836,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    }
+   }
+  },
+  {
+   "index": 2,
+   "file": "seg_002.json",
+   "drifter_id": "300534061684310",
+   "buoy_type": "SVPB",
+   "drogue": "undrogued",
+   "start_time": "2024-12-17T06:00:00Z",
+   "start_lat": 0.012,
+   "start_lon": 87.294,
+   "horizons": {
+    "6": {
+     "sep_model_km": 5.35,
+     "sep_persistence_km": 16.519,
+     "sep_const_model_km": 5.809,
+     "sep_const_obs_km": 1.093,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.6762,
+     "skill_const_model": 0.6484,
+     "skill_const_obs": 0.9338,
+     "observed_path_km": 16.519,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    },
+    "12": {
+     "sep_model_km": 11.47,
+     "sep_persistence_km": 31.433,
+     "sep_const_model_km": 13.249,
+     "sep_const_obs_km": 3.815,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.6493,
+     "skill_const_model": 0.6026,
+     "skill_const_obs": 0.8976,
+     "observed_path_km": 31.437,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    },
+    "24": {
+     "sep_model_km": 21.848,
+     "sep_persistence_km": 59.771,
+     "sep_const_model_km": 28.596,
+     "sep_const_obs_km": 10.691,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.6442,
+     "skill_const_model": 0.5548,
+     "skill_const_obs": 0.8531,
+     "observed_path_km": 59.795,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    },
+    "48": {
+     "sep_model_km": 50.617,
+     "sep_persistence_km": 110.793,
+     "sep_const_model_km": 63.376,
+     "sep_const_obs_km": 31.293,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.6073,
+     "skill_const_model": 0.5025,
+     "skill_const_obs": 0.7909,
+     "observed_path_km": 111.147,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    },
+    "72": {
+     "sep_model_km": 102.857,
+     "sep_persistence_km": 148.244,
+     "sep_const_model_km": 111.656,
+     "sep_const_obs_km": 67.872,
+     "in50": false,
+     "in90": false,
+     "skill_model": 0.4977,
+     "skill_const_model": 0.4101,
+     "skill_const_obs": 0.6977,
+     "observed_path_km": 149.754,
+     "particles_left_box": 0,
+     "particles_stalled_model_land": 0
+    }
+   }
+  }
+ ],
+ "failures": [],
+ "datasets": [
+  {
+   "role": "truth",
+   "name": "NOAA Global Drifter Program, 6-hour interpolated QC drifter data",
+   "dataset_id": "drifter_6hour_qc",
+   "server": "https://osmc.noaa.gov/erddap/tabledap",
+   "url": "https://osmc.noaa.gov/erddap/tabledap/drifter_6hour_qc.csv?ID,time,latitude,longitude,ve,vn,err_lat,err_lon,drogue_lost_date,typebuoy&latitude%3E=0.0&latitude%3C=25.0&longitude%3E=50.0&longitude%3C=100.0&time%3E=2024-08-10T12%3A00%3A00Z&time%3C=2025-06-18T12%3A00%3A00Z",
+   "licence": "Creative Commons Attribution 4.0 (https://creativecommons.org/licenses/by/4.0/). Attribution requested by the dataset: 'This study used data collected and made freely available by the NOAA Global Drifter Program (https://www.aoml.noaa.gov/phod/gdp/)'",
+   "citation": "Lumpkin, R. and Centurioni, L. (2019). Global Drifter Program quality-controlled 6-hour interpolated data from ocean surface drifting buoys. NOAA National Centers for Environmental Information. doi:10.25921/7ntx-z961. Accessed through NOAA OSMC ERDDAP.",
+   "accessed": "2026-09-15T04:17:01+00:00",
+   "time_coverage_end": "2025-06-18T12:00:00+00:00",
+   "rows_in_box": 17761,
+   "drifters_in_box": 54
+  },
+  {
+   "role": "currents",
+   "name": "HYCOM ESPC-D-V02 Global 1/12 deg analysis archive (NRL / FNMOC), surface u/v",
+   "dataset_id": "ESPC-D-V02 u3z / v3z (yearly aggregations)",
+   "url": "https://tds.hycom.org/thredds/dodsC/ESPC-D-V02/{u,v}3z/{year}",
+   "licence": "Freely available (HYCOM.org THREDDS catalog: 'rights: Freely available'; distribution statement: Approved for public release; distribution unlimited)",
+   "citation": "HYCOM consortium / US Naval Research Laboratory; ESPC-D V02, https://www.hycom.org/dataserver/espc-d-v02",
+   "accessed": "2026-09-15",
+   "note": "per-segment subsets cached in data/ghosttrace/validation/currents/ (git-ignored)"
+  }
+ ],
+ "method": [
+  "Segments: 72 h windows of unbroken 6-hourly GDP positions, <= 2 per drifter, >= 10 days apart, round-robin across drifters, capped at 3.",
+  "Forecast: ghosttrace.drift.drift_forecast(mode='floating') from the drifter's position and time, 500 particles, RK4, dt 30 min, K = 1 m^2/s (the engine default), no land layer (open ocean), seeded.",
+  "Separation: great-circle distance between the ensemble mean position and the observed position.",
+  "Coverage: fraction of segments whose observed position lies inside the 50% / 90% highest-density cone.",
+  "Skill: Liu, Y. and Weisberg, R. H. (2011). Evaluation of trajectory modeling in different dynamic regions using normalized cumulative Lagrangian separation. Journal of Geophysical Research: Oceans 116, C09013. doi:10.1029/2010JC006837 Tolerance n = 1.",
+  "Baselines: persistence (no motion); HYCOM surface current at the start position and time held constant; the drifter's own GDP velocity (ve, vn) at the start held constant.",
+  "Drogue status per segment from GDP drogue_lost_date: drogued (still attached at segment end), undrogued (lost before the start), uncertain (lost during the segment, or uncertain from deployment)."
+ ],
+ "caveats": [
+  "Hindcast: HYCOM archive fields are the model's analysis for those dates, so forecast skill in real time (with forecast currents) will be lower than shown.",
+  "No wind: GhostTrace has no windage term. Undrogued drifters and floating nets feel wind drag, so they are expected to be forecast worse; they are reported separately.",
+  "1/12 deg (~9 km) currents do not resolve small eddies, fronts or nearshore flow; these segments are mostly offshore, so near-coast skill is not measured here.",
+  "Drogued SVP drifters follow the current at ~15 m depth; they are a proxy for floating or midwater gear, not for a net lying on the seabed. The seabed mode is NOT validated by this test.",
+  "Segments from the same drifter or the same weeks are not independent; the Wilson intervals assume independence and so understate the true uncertainty.",
+  "Region and season: Northern Indian Ocean (0-25 N, 50-100 E: Arabian Sea, Laccadive Sea, Bay of Bengal), the dates listed per segment; performance elsewhere is not measured."
+ ]
+}

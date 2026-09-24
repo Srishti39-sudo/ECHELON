@@ -1,6 +1,6 @@
 {
   "survey": {
-    "generated_at": "2026-09-11T07:38:55+00:00",
+    "generated_at": "2026-09-13T14:23:33+00:00",
     "engine": "deepecho-survey-hazard",
     "processing_version": "1.0.0",
     "strips": [
@@ -8,7 +8,10 @@
         "strip": "DEMO_SYNTHETIC_strip",
         "source_image": "DEMO_SYNTHETIC_strip.png",
         "width": 1800,
-        "height": 2600
+        "height": 2600,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "resolution_basis": null
       }
     ],
     "tiles_written": 20,
@@ -26,6 +29,7 @@
       "overlap": 128,
       "min_content": 0.02,
       "denoise": false,
+      "denoise_filter": "Lee speckle filter + percentile stretch",
       "content_score": "standard deviation of the tile's grey levels / 255, measured on the tile as written"
     }
   },
@@ -46,7 +50,10 @@
       "center_y": 320.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.157075
+      "content_score": 0.157075,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_512_0.jpg",
@@ -64,7 +71,10 @@
       "center_y": 320.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.1471
+      "content_score": 0.1471,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_1024_0.jpg",
@@ -82,7 +92,10 @@
       "center_y": 320.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.162036
+      "content_score": 0.162036,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_1536_0.jpg",
@@ -100,7 +113,10 @@
       "center_y": 320.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.161826
+      "content_score": 0.161826,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_0_512.jpg",
@@ -118,7 +134,10 @@
       "center_y": 832.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.160133
+      "content_score": 0.160133,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_512_512.jpg",
@@ -136,7 +155,10 @@
       "center_y": 832.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.148216
+      "content_score": 0.148216,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_1024_512.jpg",
@@ -154,7 +176,10 @@
       "center_y": 832.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.153433
+      "content_score": 0.153433,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_1536_512.jpg",
@@ -172,7 +197,10 @@
       "center_y": 832.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.160818
+      "content_score": 0.160818,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_0_1024.jpg",
@@ -190,7 +218,10 @@
       "center_y": 1344.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.198321
+      "content_score": 0.198321,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_512_1024.jpg",
@@ -208,7 +239,10 @@
       "center_y": 1344.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.191078
+      "content_score": 0.191078,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_1024_1024.jpg",
@@ -226,7 +260,10 @@
       "center_y": 1344.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.156563
+      "content_score": 0.156563,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_1536_1024.jpg",
@@ -244,7 +281,10 @@
       "center_y": 1344.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.163085
+      "content_score": 0.163085,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_0_1536.jpg",
@@ -262,7 +302,10 @@
       "center_y": 1856.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.155948
+      "content_score": 0.155948,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_512_1536.jpg",
@@ -280,7 +323,10 @@
       "center_y": 1856.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.150373
+      "content_score": 0.150373,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_1024_1536.jpg",
@@ -298,7 +344,10 @@
       "center_y": 1856.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.178491
+      "content_score": 0.178491,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_1536_1536.jpg",
@@ -316,7 +365,10 @@
       "center_y": 1856.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.182913
+      "content_score": 0.182913,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_0_2048.jpg",
@@ -334,7 +386,10 @@
       "center_y": 2324.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.169586
+      "content_score": 0.169586,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_512_2048.jpg",
@@ -352,7 +407,10 @@
       "center_y": 2324.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.146647
+      "content_score": 0.146647,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_1024_2048.jpg",
@@ -370,7 +428,10 @@
       "center_y": 2324.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.156692
+      "content_score": 0.156692,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "DEMO_SYNTHETIC_strip_1536_2048.jpg",
@@ -388,7 +449,10 @@
       "center_y": 2324.0,
       "source_image": "DEMO_SYNTHETIC_strip.png",
       "denoised": false,
-      "content_score": 0.169461
+      "content_score": 0.169461,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     }
   ]
 }

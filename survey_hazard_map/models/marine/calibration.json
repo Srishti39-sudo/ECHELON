@@ -1,0 +1,15 @@
+{
+  "A": 1.0277031298768662,
+  "B": 0.946194534448784,
+  "classes": [
+    "shipwreck",
+    "aircraft",
+    "human",
+    "pipeline",
+    "fishing_gear",
+    "mine_like_object"
+  ],
+  "imgsz": 640,
+  "tile": 640,
+  "overlap": 128
+}

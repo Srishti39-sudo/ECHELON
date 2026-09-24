@@ -1,0 +1,15 @@
+{
+  "type": "FeatureCollection",
+  "properties": {
+    "survey_id": "demo-synthetic",
+    "title": "Simulated survey DEMO-2026-09",
+    "processed_at": "2026-09-13T14:23:34+00:00",
+    "demo": true,
+    "coordinate_mode": "Relative Survey Coordinates",
+    "detections_total": 16,
+    "detections_located": 0,
+    "detections_unlocated": 16,
+    "disclaimer": "Severity weights, tier boundaries and recommended actions are a configurable heuristic chosen for this project. They are not Navy, Coast Guard, NOAA or IMO procedure and carry no authority. Review them against your own operating rules before acting on them."
+  },
+  "features": []
+}

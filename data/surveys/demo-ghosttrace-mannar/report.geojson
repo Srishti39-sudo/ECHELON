@@ -1,0 +1,208 @@
+{
+  "type": "FeatureCollection",
+  "properties": {
+    "survey_id": "demo-ghosttrace-mannar",
+    "title": "SYNTHETIC DEMO — Gulf of Mannar line 01 (GhostTrace)",
+    "processed_at": "2026-09-15T04:28:38+00:00",
+    "demo": true,
+    "coordinate_mode": "Geo-referenced",
+    "detections_total": 6,
+    "detections_located": 6,
+    "detections_unlocated": 0,
+    "disclaimer": "Severity weights, tier boundaries and recommended actions are a configurable heuristic chosen for this project. They are not Navy, Coast Guard, NOAA or IMO procedure and carry no authority. Review them against your own operating rules before acting on them."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.05029841,
+          9.11981242
+        ]
+      },
+      "properties": {
+        "detection_id": "SYNTHETIC_mannar_line01_512_0_d0",
+        "object_class": "cylinder",
+        "confidence_pct": 87.9,
+        "suppressed": false,
+        "suppression_reasons": "",
+        "position_basis": "Geo-referenced",
+        "length_m": 2.8,
+        "width_m": 2.8,
+        "height_m": 0.57,
+        "dimension_basis": "bounding box in pixels x the strip's resolution from its navigation sidecar: length_m = height_px * m_per_px_along (along-track), width_m = width_px * m_per_px_across (across-track, slant-range corrected ground range). The box is the detector's, so it may include an acoustic shadow or miss a faint edge.; flat-seabed shadow geometry; pixels ASSUMED ground range (sidecar did not state slant_range_corrected)",
+        "width_px": 28.0,
+        "height_px": 28.0,
+        "severity_tier": "medium",
+        "recommended_action": "Keep clear; send for expert identification as possible ordnance",
+        "strip": "SYNTHETIC_mannar_line01",
+        "global_x": 677.0,
+        "global_y": 344.15,
+        "detector_confidence": 0.82,
+        "confidence_basis": "verified: calibrated detector probability fused with shadow, clutter, nadir and dropout evidence",
+        "policy_basis": "configurable heuristic; not an official procedure"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.05059429,
+          9.11979402
+        ]
+      },
+      "properties": {
+        "detection_id": "SYNTHETIC_mannar_line01_512_512_d0",
+        "object_class": "net",
+        "confidence_pct": 77.3,
+        "suppressed": false,
+        "suppression_reasons": "",
+        "position_basis": "Geo-referenced",
+        "length_m": 8.8,
+        "width_m": 8.8,
+        "height_m": null,
+        "dimension_basis": "bounding box in pixels x the strip's resolution from its navigation sidecar: length_m = height_px * m_per_px_along (along-track), width_m = width_px * m_per_px_across (across-track, slant-range corrected ground range). The box is the detector's, so it may include an acoustic shadow or miss a faint edge.; not computed: no measurable shadow (fewer than 30% of rows show a dark run beyond the object)",
+        "width_px": 88.0,
+        "height_px": 88.0,
+        "severity_tier": "medium",
+        "recommended_action": "Schedule ghost-gear recovery",
+        "strip": "SYNTHETIC_mannar_line01",
+        "global_x": 666.99,
+        "global_y": 675.52,
+        "detector_confidence": 0.82,
+        "confidence_basis": "verified: calibrated detector probability fused with shadow, clutter, nadir and dropout evidence",
+        "policy_basis": "configurable heuristic; not an official procedure"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.05109432,
+          9.11961219
+        ]
+      },
+      "properties": {
+        "detection_id": "SYNTHETIC_mannar_line01_512_1024_d0",
+        "object_class": "shipwreck",
+        "confidence_pct": 89.9,
+        "suppressed": false,
+        "suppression_reasons": "",
+        "position_basis": "Geo-referenced",
+        "length_m": 24.8,
+        "width_m": 24.8,
+        "height_m": 2.74,
+        "dimension_basis": "bounding box in pixels x the strip's resolution from its navigation sidecar: length_m = height_px * m_per_px_along (along-track), width_m = width_px * m_per_px_across (across-track, slant-range corrected ground range). The box is the detector's, so it may include an acoustic shadow or miss a faint edge.; flat-seabed shadow geometry; pixels ASSUMED ground range (sidecar did not state slant_range_corrected)",
+        "width_px": 248.0,
+        "height_px": 248.0,
+        "severity_tier": "medium",
+        "recommended_action": "Flag navigation hazard",
+        "strip": "SYNTHETIC_mannar_line01",
+        "global_x": 757.01,
+        "global_y": 1298.37,
+        "detector_confidence": 0.82,
+        "confidence_basis": "verified: calibrated detector probability fused with shadow, clutter, nadir and dropout evidence",
+        "policy_basis": "configurable heuristic; not an official procedure"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.05182618,
+          9.11972567
+        ]
+      },
+      "properties": {
+        "detection_id": "SYNTHETIC_mannar_line01_0_1536_d0",
+        "object_class": "cylinder",
+        "confidence_pct": 84.9,
+        "suppressed": false,
+        "suppression_reasons": "",
+        "position_basis": "Geo-referenced",
+        "length_m": 2.8,
+        "width_m": 2.8,
+        "height_m": 0.47,
+        "dimension_basis": "bounding box in pixels x the strip's resolution from its navigation sidecar: length_m = height_px * m_per_px_along (along-track), width_m = width_px * m_per_px_across (across-track, slant-range corrected ground range). The box is the detector's, so it may include an acoustic shadow or miss a faint edge.; flat-seabed shadow geometry; pixels ASSUMED ground range (sidecar did not state slant_range_corrected)",
+        "width_px": 28.0,
+        "height_px": 28.0,
+        "severity_tier": "medium",
+        "recommended_action": "Keep clear; send for expert identification as possible ordnance",
+        "strip": "SYNTHETIC_mannar_line01",
+        "global_x": 357.0,
+        "global_y": 2026.88,
+        "detector_confidence": 0.82,
+        "confidence_basis": "verified: calibrated detector probability fused with shadow, clutter, nadir and dropout evidence",
+        "policy_basis": "configurable heuristic; not an official procedure"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.05214306,
+          9.11936621
+        ]
+      },
+      "properties": {
+        "detection_id": "SYNTHETIC_mannar_line01_512_2048_d0",
+        "object_class": "net",
+        "confidence_pct": 76.5,
+        "suppressed": false,
+        "suppression_reasons": "",
+        "position_basis": "Geo-referenced",
+        "length_m": 9.8,
+        "width_m": 9.8,
+        "height_m": null,
+        "dimension_basis": "bounding box in pixels x the strip's resolution from its navigation sidecar: length_m = height_px * m_per_px_along (along-track), width_m = width_px * m_per_px_across (across-track, slant-range corrected ground range). The box is the detector's, so it may include an acoustic shadow or miss a faint edge.; not computed: no measurable shadow (fewer than 30% of rows show a dark run beyond the object)",
+        "width_px": 98.0,
+        "height_px": 98.0,
+        "severity_tier": "medium",
+        "recommended_action": "Schedule ghost-gear recovery",
+        "strip": "SYNTHETIC_mannar_line01",
+        "global_x": 657.0,
+        "global_y": 2461.41,
+        "detector_confidence": 0.82,
+        "confidence_basis": "verified: calibrated detector probability fused with shadow, clutter, nadir and dropout evidence",
+        "policy_basis": "configurable heuristic; not an official procedure"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.05258561,
+          9.11972662
+        ]
+      },
+      "properties": {
+        "detection_id": "SYNTHETIC_mannar_line01_0_2560_d0",
+        "object_class": "pipe",
+        "confidence_pct": 83.2,
+        "suppressed": false,
+        "suppression_reasons": "",
+        "position_basis": "Geo-referenced",
+        "length_m": 34.8,
+        "width_m": 34.8,
+        "height_m": null,
+        "dimension_basis": "bounding box in pixels x the strip's resolution from its navigation sidecar: length_m = height_px * m_per_px_along (along-track), width_m = width_px * m_per_px_across (across-track, slant-range corrected ground range). The box is the detector's, so it may include an acoustic shadow or miss a faint edge.; not computed: no measurable shadow (fewer than 30% of rows show a dark run beyond the object)",
+        "width_px": 348.0,
+        "height_px": 348.0,
+        "severity_tier": "medium",
+        "recommended_action": "Check against charted pipelines; flag if uncharted",
+        "strip": "SYNTHETIC_mannar_line01",
+        "global_x": 197.0,
+        "global_y": 2895.69,
+        "detector_confidence": 0.82,
+        "confidence_basis": "verified: calibrated detector probability fused with shadow, clutter, nadir and dropout evidence",
+        "policy_basis": "configurable heuristic; not an official procedure"
+      }
+    }
+  ]
+}

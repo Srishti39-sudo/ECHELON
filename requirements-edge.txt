@@ -1,0 +1,23 @@
+# Detection with no torch: the YOLOv8 checkpoints exported to ONNX
+# (tools/export_onnx.py) and run by hazard_detect_onnx.OnnxDetector.
+#
+# This is the whole inference stack for an edge box, a vehicle computer or the
+# `edge` Docker target. It replaces requirements-detector.txt there; it does
+# not add to it. ultralytics and torch are only needed on the machine that
+# EXPORTS the .onnx files, never on the one that runs them.
+#
+# Measured on an Apple M1 (docs/edge_benchmark.json): the torch process peaks
+# near 570 MB resident with both models loaded, the onnxruntime CPU process
+# near 290 MB, and the int8 variant under 260 MB.
+#
+# Versions: onnxruntime 1.30 is what the parity check and the benchmark ran
+# on. The floor below is the first release with wheels for Python 3.13 on
+# both x86_64 and aarch64 Linux (Raspberry Pi 5 / Graviton / Jetson CPU).
+onnxruntime>=1.20
+numpy>=1.24
+pillow>=10.0
+
+# On a Jetson, do NOT install the plain `onnxruntime` wheel above: it is CPU
+# only. Use NVIDIA's onnxruntime-gpu build for your JetPack (TensorRT and CUDA
+# execution providers), or skip onnxruntime and run the .onnx through
+# TensorRT directly. docs/EDGE.md has both, marked as untested on hardware.

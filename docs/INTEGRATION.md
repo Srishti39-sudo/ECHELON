@@ -144,4 +144,4 @@ in `backend/config.py` or `frontend/src/assistant/config/`. Change behaviour
 there. `rag.py` holds retrieval, chunking and the grounding prompt, and is the
 safety-critical part; it has one additive change in this whole project.
 
-Run `python3 eval/run.py --workers 1 --delay 3` after any change.
+Run `python rag_assistant/eval/run.py --workers 1 --delay 3` after any change.

@@ -1,0 +1,10 @@
+# GhostTrace geographic stages (ghosttrace/layers.py, habitat.py, currents.py, drift.py,
+# safety.py) and the data fetcher tools/fetch_ghosttrace_data.py.
+# numpy and scipy are already required by the survey pipeline; listed so this file
+# stands on its own. Versions are the ones this was built and tested with.
+numpy>=2.0
+scipy>=1.11           # gaussian_filter for the drift probability cones
+shapely>=2.0          # geometry, STRtree, vectorised point-in-polygon
+pyproj>=3.6           # geodesic distances (Geod) and local azimuthal equidistant projections
+netCDF4>=1.6          # bundled currents and bathymetry (read), fetcher (write, OPeNDAP)
+requests>=2.31        # fetcher only: Overpass, UNEP-WCMC, HYCOM NCSS, Natural Earth

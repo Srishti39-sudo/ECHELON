@@ -2,8 +2,8 @@
   "metadata": {
     "engine": "deepecho-survey-hazard",
     "processing_version": "1.0.0",
-    "processed_at": "2026-09-11T07:38:55+00:00",
-    "processing_seconds": 0.003,
+    "processed_at": "2026-09-13T14:23:34+00:00",
+    "processing_seconds": 0.888,
     "survey_id": "demo-synthetic",
     "title": "Simulated survey DEMO-2026-09",
     "coordinate_mode": "Relative Survey Coordinates",
@@ -33,6 +33,7 @@
     "total_raw_detections": 22,
     "total_deduplicated_detections": 16,
     "duplicates_removed": 6,
+    "suppressed_detections": 1,
     "total_hotspots": 5,
     "total_severity": 5.164,
     "highest_priority_hotspot": {
@@ -106,6 +107,229 @@
       "height_px": 21.0,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 93.9,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 21.0,
+        "width_px": 30.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.88,
+        "detector_model": null,
+        "class_evaluated": "mine",
+        "class_basis": "class",
+        "calibrated_probability": 0.88,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 1.0,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 220.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 277.5,
+              "line_score": 0.0,
+              "range_fraction": 0.3092
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 1.0,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 93.67,
+              "background_p10": 81.22,
+              "background_p95": 177.11,
+              "background_pixels": 4272,
+              "shadow_window_px": 30,
+              "shadow_level": 56.2,
+              "background_shadow_fraction": 0.0323,
+              "far_shadow_fraction": 0.499,
+              "far_excess": 0.4667,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.0323,
+              "near_outside_score": 0.0,
+              "box_p95": 236.02,
+              "highlight_contrast": 1.5196,
+              "highlight_null": 0.8907,
+              "highlight_score": 1.0,
+              "edge_sharpness_score": 0.0,
+              "object_support": 1.0,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 0
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 235.95,
+              "darkness": -1.5189,
+              "dark_score": 0.0,
+              "highlight_score": 1.0,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.4335,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 104.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 12,
+              "coherence": 0.4336,
+              "coherence_score": 0.6672,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.267,
+              "shape_score": 1.0,
+              "regular": 0.4335,
+              "mesh": {
+                "score": 0.0,
+                "texture": 0.0024,
+                "reason": "texture too faint (high-pass std < 5% of background)"
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 23040,
+              "local_median": 91.34,
+              "bright_blobs": 1,
+              "dark_blobs": 0,
+              "highlight_shadow_pairs": 0,
+              "similar_blob_count": 0.5,
+              "blob_area_range_px": [
+                66.0,
+                3300.0
+              ],
+              "density": 0.125,
+              "coherence": 0.2211,
+              "incoherence": 0.7789,
+              "cv_local": 0.0595,
+              "cv_reference": 0.0495,
+              "roughness": 0.1351
+            },
+            "score": 0.0709,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.88,
+            "contribution": 1.9924,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 1.0,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 1.0,
+            "contribution": 0.78
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.4335,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.1335
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.0709,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.1773
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": 2.7287,
+        "confidence_pct": 93.9,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [],
+        "reasons": [],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          1165,
+          419,
+          1195,
+          441
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_1024_0.jpg",
@@ -150,6 +374,238 @@
       "height_px": 21.0,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 55.0,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 21.0,
+        "width_px": 30.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.55,
+        "detector_model": null,
+        "class_evaluated": "debris",
+        "class_basis": "class",
+        "calibrated_probability": 0.55,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 0.6,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 360.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 417.5,
+              "line_score": 0.0,
+              "range_fraction": 0.4652
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 1.0,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 101.66,
+              "background_p10": 14.41,
+              "background_p95": 129.66,
+              "background_pixels": 4272,
+              "shadow_window_px": 30,
+              "shadow_level": 61.0,
+              "background_shadow_fraction": 0.2135,
+              "far_shadow_fraction": 0.5657,
+              "far_excess": 0.3522,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.2135,
+              "near_outside_score": 0.0,
+              "box_p95": 236.0,
+              "highlight_contrast": 1.3215,
+              "highlight_null": 0.2755,
+              "highlight_score": 1.0,
+              "edge_sharpness_score": 0.0,
+              "object_support": 1.0,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 5
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 234.61,
+              "darkness": -1.3078,
+              "dark_score": 0.0,
+              "highlight_score": 1.0,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.4326,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 104.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 12,
+              "coherence": 0.4323,
+              "coherence_score": 0.6646,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.2667,
+              "shape_score": 1.0,
+              "regular": 0.4326,
+              "mesh": {
+                "texture": 0.12,
+                "prominence_first": -0.0363,
+                "prominence_second": -0.0543,
+                "lag_first": [
+                  4,
+                  3
+                ],
+                "lag_second": [
+                  -4,
+                  3
+                ],
+                "score": 0.0
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 23040,
+              "local_median": 103.62,
+              "bright_blobs": 1,
+              "dark_blobs": 1,
+              "highlight_shadow_pairs": 0,
+              "similar_blob_count": 1.0,
+              "blob_area_range_px": [
+                66.0,
+                3300.0
+              ],
+              "density": 0.25,
+              "coherence": 0.0674,
+              "incoherence": 0.9326,
+              "cv_local": 0.231,
+              "cv_reference": 0.0495,
+              "roughness": 1.0
+            },
+            "score": 0.2399,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.55,
+            "contribution": 0.2007,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 1.0,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 0.6,
+            "contribution": 0.468
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.4326,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.1326
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.2399,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.5997
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": 0.2015,
+        "confidence_pct": 55.0,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [],
+        "reasons": [],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          1305,
+          429,
+          1335,
+          451
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_1024_0.jpg",
@@ -194,6 +650,229 @@
       "height_px": 21.0,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 59.4,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 21.0,
+        "width_px": 30.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.71,
+        "detector_model": null,
+        "class_evaluated": "uxo",
+        "class_basis": "class",
+        "calibrated_probability": 0.71,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 1.0,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 280.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 337.5,
+              "line_score": 0.0,
+              "range_fraction": 0.376
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 0.638,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 101.57,
+              "background_p10": 24.4,
+              "background_p95": 222.0,
+              "background_pixels": 4272,
+              "shadow_window_px": 30,
+              "shadow_level": 60.94,
+              "background_shadow_fraction": 0.1599,
+              "far_shadow_fraction": 0.4505,
+              "far_excess": 0.2906,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.1599,
+              "near_outside_score": 0.0,
+              "box_p95": 236.02,
+              "highlight_contrast": 1.3237,
+              "highlight_null": 1.1857,
+              "highlight_score": 0.276,
+              "edge_sharpness_score": 0.0,
+              "object_support": 0.276,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 0
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 236.0,
+              "darkness": -1.3235,
+              "dark_score": 0.0,
+              "highlight_score": 0.276,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.2571,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 104.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 12,
+              "coherence": 0.1815,
+              "coherence_score": 0.163,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.267,
+              "shape_score": 1.0,
+              "regular": 0.2571,
+              "mesh": {
+                "score": 0.0,
+                "texture": 0.002,
+                "reason": "texture too faint (high-pass std < 5% of background)"
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 23040,
+              "local_median": 96.9,
+              "bright_blobs": 2,
+              "dark_blobs": 1,
+              "highlight_shadow_pairs": 1,
+              "similar_blob_count": 1.5,
+              "blob_area_range_px": [
+                66.0,
+                3300.0
+              ],
+              "density": 0.375,
+              "coherence": 0.2119,
+              "incoherence": 0.7881,
+              "cv_local": 0.3555,
+              "cv_reference": 0.0495,
+              "roughness": 1.0
+            },
+            "score": 0.3273,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.71,
+            "contribution": 0.8954,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 0.638,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 1.0,
+            "contribution": 0.3456
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.2571,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": -0.0429
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.3273,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.8183
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": 0.3797,
+        "confidence_pct": 59.4,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [],
+        "reasons": [],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          1225,
+          459,
+          1255,
+          481
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_1024_0.jpg",
@@ -238,6 +917,238 @@
       "height_px": 21.0,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 75.2,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 21.0,
+        "width_px": 30.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.64,
+        "detector_model": null,
+        "class_evaluated": "unknown",
+        "class_basis": "class",
+        "calibrated_probability": 0.64,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 0.5,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 389.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 447.5,
+              "line_score": 0.0,
+              "range_fraction": 0.4986
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 1.0,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 111.65,
+              "background_p10": 102.55,
+              "background_p95": 137.95,
+              "background_pixels": 4272,
+              "shadow_window_px": 30,
+              "shadow_level": 66.99,
+              "background_shadow_fraction": 0.0192,
+              "far_shadow_fraction": 0.5677,
+              "far_excess": 0.5485,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.0192,
+              "near_outside_score": 0.0,
+              "box_p95": 236.01,
+              "highlight_contrast": 1.1138,
+              "highlight_null": 0.2355,
+              "highlight_score": 1.0,
+              "edge_sharpness_score": 0.0,
+              "object_support": 1.0,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 6
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 234.72,
+              "darkness": -1.1023,
+              "dark_score": 0.0,
+              "highlight_score": 1.0,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.4451,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 104.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 12,
+              "coherence": 0.4501,
+              "coherence_score": 0.7002,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.2685,
+              "shape_score": 1.0,
+              "regular": 0.4451,
+              "mesh": {
+                "texture": 0.1163,
+                "prominence_first": -0.0298,
+                "prominence_second": -0.056,
+                "lag_first": [
+                  4,
+                  3
+                ],
+                "lag_second": [
+                  -4,
+                  3
+                ],
+                "score": 0.0
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 23040,
+              "local_median": 106.61,
+              "bright_blobs": 0,
+              "dark_blobs": 0,
+              "highlight_shadow_pairs": 0,
+              "similar_blob_count": 0.0,
+              "blob_area_range_px": [
+                66.0,
+                3300.0
+              ],
+              "density": 0.0,
+              "coherence": 0.0502,
+              "incoherence": 0.9498,
+              "cv_local": 0.0542,
+              "cv_reference": 0.0495,
+              "roughness": 0.0629
+            },
+            "score": 0.0,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.64,
+            "contribution": 0.5754,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 1.0,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 0.5,
+            "contribution": 0.39
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.4451,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.1451
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": 1.1104,
+        "confidence_pct": 75.2,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [],
+        "reasons": [],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          1335,
+          889,
+          1365,
+          911
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_1024_512.jpg",
@@ -282,6 +1193,231 @@
       "height_px": 33.6,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 59.5,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 33.6,
+        "width_px": 48.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.82,
+        "detector_model": null,
+        "class_evaluated": "shipwreck",
+        "class_basis": "class",
+        "calibrated_probability": 0.82,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 1.0,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 315.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 382.5,
+              "line_score": 0.0,
+              "range_fraction": 0.4238
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 0.172,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 236.0,
+              "background_p10": 211.23,
+              "background_p95": 236.0,
+              "background_pixels": 5424,
+              "shadow_window_px": 48,
+              "shadow_level": 141.6,
+              "background_shadow_fraction": 0.0249,
+              "far_shadow_fraction": 0.1164,
+              "far_excess": 0.0915,
+              "far_shadow_score": 0.3661,
+              "near_outside_shadow_fraction": 0.0551,
+              "near_outside_excess": 0.0303,
+              "near_outside_score": 0.121,
+              "box_p95": 236.0,
+              "highlight_contrast": 0.0,
+              "highlight_null": 0.0,
+              "highlight_score": 0.0,
+              "edge_sharpness_score": 0.0,
+              "object_support": 0.0,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 0
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 236.0,
+              "darkness": -0.0,
+              "dark_score": 0.0,
+              "highlight_score": 0.0,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.0,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 164.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 14,
+              "coherence": null,
+              "coherence_score": 0.0,
+              "highlight_solidity": null,
+              "highlight_elongation": null,
+              "shape_score": 0.0,
+              "regular": 0.0,
+              "mesh": {
+                "score": 0.0,
+                "texture": 0.0,
+                "reason": "texture too faint (high-pass std < 5% of background)"
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 26880,
+              "local_median": 103.05,
+              "bright_blobs": 1,
+              "dark_blobs": 1,
+              "highlight_shadow_pairs": 1,
+              "similar_blob_count": 1.0,
+              "blob_area_range_px": [
+                163.2,
+                8160.0
+              ],
+              "density": 0.25,
+              "coherence": 0.0218,
+              "incoherence": 0.9782,
+              "cv_local": 0.4018,
+              "cv_reference": 0.0406,
+              "roughness": 1.0
+            },
+            "score": 0.2467,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.82,
+            "contribution": 1.5163,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 0.172,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 1.0,
+            "contribution": -0.2136
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.0,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": -0.3
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.2467,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.6168
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": 0.3859,
+        "confidence_pct": 59.5,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [],
+        "reasons": [
+          "no clear acoustic shadow on the far-range side, which a proud 'shipwreck' is expected to cast (term -0.21)"
+        ],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          496,
+          1163,
+          544,
+          1197
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_0_1024.jpg",
@@ -329,6 +1465,238 @@
       "height_px": 21.0,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 56.3,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 21.0,
+        "width_px": 30.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.61,
+        "detector_model": null,
+        "class_evaluated": "debris",
+        "class_basis": "class",
+        "calibrated_probability": 0.61,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 0.6,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 224.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 292.5,
+              "line_score": 0.0,
+              "range_fraction": 0.3241
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 1.0,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 91.8,
+              "background_p10": 83.05,
+              "background_p95": 127.85,
+              "background_pixels": 4272,
+              "shadow_window_px": 30,
+              "shadow_level": 55.08,
+              "background_shadow_fraction": 0.0183,
+              "far_shadow_fraction": 0.5697,
+              "far_excess": 0.5514,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.0183,
+              "near_outside_score": 0.0,
+              "box_p95": 236.03,
+              "highlight_contrast": 1.5712,
+              "highlight_null": 0.3928,
+              "highlight_score": 1.0,
+              "edge_sharpness_score": 0.0,
+              "object_support": 1.0,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 6
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 234.64,
+              "darkness": -1.5561,
+              "dark_score": 0.0,
+              "highlight_score": 1.0,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.4633,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 104.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 12,
+              "coherence": 0.4762,
+              "coherence_score": 0.7524,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.2671,
+              "shape_score": 1.0,
+              "regular": 0.4633,
+              "mesh": {
+                "texture": 0.1742,
+                "prominence_first": -0.0367,
+                "prominence_second": -0.0566,
+                "lag_first": [
+                  4,
+                  3
+                ],
+                "lag_second": [
+                  -4,
+                  3
+                ],
+                "score": 0.0
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 23040,
+              "local_median": 93.02,
+              "bright_blobs": 2,
+              "dark_blobs": 1,
+              "highlight_shadow_pairs": 1,
+              "similar_blob_count": 1.5,
+              "blob_area_range_px": [
+                66.0,
+                3300.0
+              ],
+              "density": 0.375,
+              "coherence": 0.1977,
+              "incoherence": 0.8023,
+              "cv_local": 0.2921,
+              "cv_reference": 0.0495,
+              "roughness": 1.0
+            },
+            "score": 0.3305,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.61,
+            "contribution": 0.4473,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 1.0,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 0.6,
+            "contribution": 0.468
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.4633,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.1633
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.3305,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.8263
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": 0.2523,
+        "confidence_pct": 56.3,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [],
+        "reasons": [],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          595,
+          1239,
+          625,
+          1261
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_0_1024.jpg",
@@ -376,6 +1744,233 @@
       "height_px": 33.6,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 25.2,
+      "suppressed": true,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 33.6,
+        "width_px": 48.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.48,
+        "detector_model": null,
+        "class_evaluated": "chain",
+        "class_basis": "class",
+        "calibrated_probability": 0.48,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 0.3,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 235.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 302.5,
+              "line_score": 0.0,
+              "range_fraction": 0.3352
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 0.5462,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 98.23,
+              "background_p10": 85.34,
+              "background_p95": 231.46,
+              "background_pixels": 5424,
+              "shadow_window_px": 48,
+              "shadow_level": 58.94,
+              "background_shadow_fraction": 0.0374,
+              "far_shadow_fraction": 0.4685,
+              "far_excess": 0.4311,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.0374,
+              "near_outside_score": 0.0,
+              "box_p95": 236.0,
+              "highlight_contrast": 1.4024,
+              "highlight_null": 1.3562,
+              "highlight_score": 0.0925,
+              "edge_sharpness_score": 0.0,
+              "object_support": 0.0925,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 0
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 236.0,
+              "darkness": -1.4024,
+              "dark_score": 0.0,
+              "highlight_score": 0.0925,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.4147,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 164.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 14,
+              "coherence": 0.4067,
+              "coherence_score": 0.6134,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.2918,
+              "shape_score": 1.0,
+              "regular": 0.4147,
+              "mesh": {
+                "score": 0.0,
+                "texture": 0.0008,
+                "reason": "texture too faint (high-pass std < 5% of background)"
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 26880,
+              "local_median": 90.43,
+              "bright_blobs": 2,
+              "dark_blobs": 2,
+              "highlight_shadow_pairs": 2,
+              "similar_blob_count": 2.0,
+              "blob_area_range_px": [
+                163.2,
+                8160.0
+              ],
+              "density": 0.5,
+              "coherence": 0.0747,
+              "incoherence": 0.9253,
+              "cv_local": 0.5303,
+              "cv_reference": 0.0406,
+              "roughness": 1.0
+            },
+            "score": 0.4776,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.48,
+            "contribution": -0.08,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 0.5462,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 0.3,
+            "contribution": 0.0706
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.4147,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.1147
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.4776,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -1.194
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": -1.0887,
+        "confidence_pct": 25.2,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [
+          "rock_clutter"
+        ],
+        "reasons": [
+          "2.0 similar-sized highlight/shadow blobs within 3x the box, orientation coherence 0.07: consistent with a rock field or natural clutter"
+        ],
+        "notes": [],
+        "suppressed": true,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          576,
+          1313,
+          624,
+          1347
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_0_1024.jpg",
@@ -409,8 +2004,8 @@
       "severity": 0.275,
       "severity_tier": "low",
       "severity_basis": "exact",
-      "recommended_action": "Send for expert identification",
-      "action_basis": "default:unknown-class",
+      "recommended_action": "Check against charted cables; flag if uncharted",
+      "action_basis": "exact",
       "global_x": 700.0,
       "global_y": 1400.0,
       "bbox_global": [
@@ -423,6 +2018,229 @@
       "height_px": 33.6,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 50.2,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 33.6,
+        "width_px": 48.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.55,
+        "detector_model": null,
+        "class_evaluated": "cable",
+        "class_basis": "class",
+        "calibrated_probability": 0.55,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 0.3,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 137.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 202.5,
+              "line_score": 0.0,
+              "range_fraction": 0.2244
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 0.5103,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 90.08,
+              "background_p10": 74.1,
+              "background_p95": 235.08,
+              "background_pixels": 5424,
+              "shadow_window_px": 48,
+              "shadow_level": 54.05,
+              "background_shadow_fraction": 0.0361,
+              "far_shadow_fraction": 0.4244,
+              "far_excess": 0.3883,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.0361,
+              "near_outside_score": 0.0,
+              "box_p95": 236.0,
+              "highlight_contrast": 1.62,
+              "highlight_null": 1.6097,
+              "highlight_score": 0.0205,
+              "edge_sharpness_score": 0.0,
+              "object_support": 0.0205,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 0
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 236.0,
+              "darkness": -1.62,
+              "dark_score": 0.0,
+              "highlight_score": 0.0205,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.3407,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 164.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 14,
+              "coherence": 0.301,
+              "coherence_score": 0.4019,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.2918,
+              "shape_score": 1.0,
+              "regular": 0.3407,
+              "mesh": {
+                "score": 0.0,
+                "texture": 0.0007,
+                "reason": "texture too faint (high-pass std < 5% of background)"
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 26880,
+              "local_median": 82.11,
+              "bright_blobs": 1,
+              "dark_blobs": 0,
+              "highlight_shadow_pairs": 0,
+              "similar_blob_count": 0.5,
+              "blob_area_range_px": [
+                163.2,
+                8160.0
+              ],
+              "density": 0.125,
+              "coherence": 0.1236,
+              "incoherence": 0.8764,
+              "cv_local": 0.4146,
+              "cv_reference": 0.0406,
+              "roughness": 1.0
+            },
+            "score": 0.1157,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.55,
+            "contribution": 0.2007,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 0.5103,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 0.3,
+            "contribution": 0.0577
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.3407,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.0407
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.1157,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.2893
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": 0.0097,
+        "confidence_pct": 50.2,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [],
+        "reasons": [],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          676,
+          1383,
+          724,
+          1417
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_512_1024.jpg",
@@ -467,6 +2285,229 @@
       "height_px": 21.0,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 81.4,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 21.0,
+        "width_px": 30.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.66,
+        "detector_model": null,
+        "class_evaluated": "drum",
+        "class_basis": "class",
+        "calibrated_probability": 0.66,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 1.0,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 129.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 187.5,
+              "line_score": 0.0,
+              "range_fraction": 0.2089
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 0.9361,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 82.73,
+              "background_p10": 73.63,
+              "background_p95": 199.93,
+              "background_pixels": 4272,
+              "shadow_window_px": 30,
+              "shadow_level": 49.64,
+              "background_shadow_fraction": 0.0382,
+              "far_shadow_fraction": 0.4717,
+              "far_excess": 0.4336,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.0382,
+              "near_outside_score": 0.0,
+              "box_p95": 236.0,
+              "highlight_contrast": 1.8528,
+              "highlight_null": 1.4167,
+              "highlight_score": 0.8722,
+              "edge_sharpness_score": 0.0,
+              "object_support": 0.8722,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 0
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 235.99,
+              "darkness": -1.8527,
+              "dark_score": 0.0,
+              "highlight_score": 0.8722,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.4115,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 104.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 12,
+              "coherence": 0.4021,
+              "coherence_score": 0.6043,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.267,
+              "shape_score": 1.0,
+              "regular": 0.4115,
+              "mesh": {
+                "score": 0.0,
+                "texture": 0.002,
+                "reason": "texture too faint (high-pass std < 5% of background)"
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 23040,
+              "local_median": 78.17,
+              "bright_blobs": 0,
+              "dark_blobs": 0,
+              "highlight_shadow_pairs": 0,
+              "similar_blob_count": 0.0,
+              "blob_area_range_px": [
+                66.0,
+                3300.0
+              ],
+              "density": 0.0,
+              "coherence": 0.1201,
+              "incoherence": 0.8799,
+              "cv_local": 0.0654,
+              "cv_reference": 0.0495,
+              "roughness": 0.2136
+            },
+            "score": 0.0,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.66,
+            "contribution": 0.6633,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 0.9361,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 1.0,
+            "contribution": 0.7033
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.4115,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.1115
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": 1.4781,
+        "confidence_pct": 81.4,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [],
+        "reasons": [],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          1075,
+          1599,
+          1105,
+          1621
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_1024_1024.jpg",
@@ -504,8 +2545,8 @@
       "severity": 0.295,
       "severity_tier": "low",
       "severity_basis": "exact",
-      "recommended_action": "Send for expert identification",
-      "action_basis": "default:unknown-class",
+      "recommended_action": "Schedule ghost-gear recovery",
+      "action_basis": "exact",
       "global_x": 1430.0,
       "global_y": 1980.0,
       "bbox_global": [
@@ -518,6 +2559,229 @@
       "height_px": 33.6,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 58.4,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 33.6,
+        "width_px": 48.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.59,
+        "detector_model": null,
+        "class_evaluated": "net",
+        "class_basis": "class",
+        "calibrated_probability": 0.59,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 0.2,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 475.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 527.5,
+              "line_score": 0.0,
+              "range_fraction": 0.5877
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 0.5009,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 132.38,
+              "background_p10": 109.62,
+              "background_p95": 235.88,
+              "background_pixels": 5424,
+              "shadow_window_px": 48,
+              "shadow_level": 79.43,
+              "background_shadow_fraction": 0.0302,
+              "far_shadow_fraction": 0.3942,
+              "far_excess": 0.364,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.0302,
+              "near_outside_score": 0.0,
+              "box_p95": 236.0,
+              "highlight_contrast": 0.7828,
+              "highlight_null": 0.7819,
+              "highlight_score": 0.0019,
+              "edge_sharpness_score": 0.0,
+              "object_support": 0.0019,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 0
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 236.0,
+              "darkness": -0.7828,
+              "dark_score": 0.0,
+              "highlight_score": 0.0019,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.5134,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 164.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 14,
+              "coherence": 0.5476,
+              "coherence_score": 0.8953,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.2918,
+              "shape_score": 1.0,
+              "regular": 0.5134,
+              "mesh": {
+                "score": 0.0,
+                "texture": 0.0,
+                "reason": "texture too faint (high-pass std < 5% of background)"
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 26880,
+              "local_median": 117.62,
+              "bright_blobs": 1,
+              "dark_blobs": 0,
+              "highlight_shadow_pairs": 0,
+              "similar_blob_count": 0.5,
+              "blob_area_range_px": [
+                163.2,
+                8160.0
+              ],
+              "density": 0.125,
+              "coherence": 0.2042,
+              "incoherence": 0.7958,
+              "cv_local": 0.2892,
+              "cv_reference": 0.0406,
+              "roughness": 1.0
+            },
+            "score": 0.1097,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.59,
+            "contribution": 0.364,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 0.5009,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 0.2,
+            "contribution": 0.0362
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.5134,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.2134
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.1097,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.2742
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": 0.3393,
+        "confidence_pct": 58.4,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [],
+        "reasons": [],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          1406,
+          1963,
+          1454,
+          1997
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_1024_1536.jpg",
@@ -548,8 +2812,8 @@
       "severity": 0.26,
       "severity_tier": "low",
       "severity_basis": "exact",
-      "recommended_action": "Send for expert identification",
-      "action_basis": "default:unknown-class",
+      "recommended_action": "Schedule ghost-gear recovery",
+      "action_basis": "exact",
       "global_x": 1500.0,
       "global_y": 2040.0,
       "bbox_global": [
@@ -562,6 +2826,229 @@
       "height_px": 33.6,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 48.2,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 33.6,
+        "width_px": 48.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.52,
+        "detector_model": null,
+        "class_evaluated": "net",
+        "class_basis": "class",
+        "calibrated_probability": 0.52,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 0.2,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 538.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 597.5,
+              "line_score": 0.0,
+              "range_fraction": 0.6657
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 0.4227,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 133.69,
+              "background_p10": 28.23,
+              "background_p95": 235.87,
+              "background_pixels": 5424,
+              "shadow_window_px": 48,
+              "shadow_level": 80.21,
+              "background_shadow_fraction": 0.1833,
+              "far_shadow_fraction": 0.3942,
+              "far_excess": 0.2109,
+              "far_shadow_score": 0.8438,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.1833,
+              "near_outside_score": 0.0,
+              "box_p95": 236.0,
+              "highlight_contrast": 0.7653,
+              "highlight_null": 0.7643,
+              "highlight_score": 0.0019,
+              "edge_sharpness_score": 0.0,
+              "object_support": 0.0019,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 0
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 236.0,
+              "darkness": -0.7653,
+              "dark_score": 0.0,
+              "highlight_score": 0.0019,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.4378,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 164.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 14,
+              "coherence": 0.4397,
+              "coherence_score": 0.6794,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.2918,
+              "shape_score": 1.0,
+              "regular": 0.4378,
+              "mesh": {
+                "score": 0.0,
+                "texture": 0.0002,
+                "reason": "texture too faint (high-pass std < 5% of background)"
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 26880,
+              "local_median": 115.28,
+              "bright_blobs": 1,
+              "dark_blobs": 0,
+              "highlight_shadow_pairs": 0,
+              "similar_blob_count": 0.5,
+              "blob_area_range_px": [
+                163.2,
+                8160.0
+              ],
+              "density": 0.125,
+              "coherence": 0.0355,
+              "incoherence": 0.9645,
+              "cv_local": 0.3405,
+              "cv_reference": 0.0406,
+              "roughness": 1.0
+            },
+            "score": 0.1223,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.52,
+            "contribution": 0.08,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 0.4227,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 0.2,
+            "contribution": 0.0174
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.4378,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.1378
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.1223,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.3058
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": -0.0706,
+        "confidence_pct": 48.2,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [],
+        "reasons": [],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          1476,
+          2023,
+          1524,
+          2057
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_1024_1536.jpg",
@@ -606,6 +3093,242 @@
       "height_px": 21.0,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 68.5,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 21.0,
+        "width_px": 30.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.74,
+        "detector_model": null,
+        "class_evaluated": "tire",
+        "class_basis": "class",
+        "calibrated_probability": 0.74,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 0.9,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 457.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 522.5,
+              "line_score": 0.0,
+              "range_fraction": 0.5789
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 1.0,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 114.74,
+              "background_p10": 104.25,
+              "background_p95": 146.27,
+              "background_pixels": 4272,
+              "shadow_window_px": 30,
+              "shadow_level": 68.85,
+              "background_shadow_fraction": 0.0187,
+              "far_shadow_fraction": 0.5818,
+              "far_excess": 0.5631,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.0187,
+              "near_outside_score": 0.0,
+              "box_p95": 236.03,
+              "highlight_contrast": 1.057,
+              "highlight_null": 0.2747,
+              "highlight_score": 1.0,
+              "edge_sharpness_score": 0.0,
+              "object_support": 1.0,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 6
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 234.85,
+              "darkness": -1.0468,
+              "dark_score": 0.0,
+              "highlight_score": 1.0,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.4634,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 104.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 12,
+              "coherence": 0.4762,
+              "coherence_score": 0.7525,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.2684,
+              "shape_score": 1.0,
+              "regular": 0.4634,
+              "mesh": {
+                "texture": 0.1045,
+                "prominence_first": -0.0409,
+                "prominence_second": -0.0707,
+                "lag_first": [
+                  4,
+                  3
+                ],
+                "lag_second": [
+                  -4,
+                  3
+                ],
+                "score": 0.0
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 23040,
+              "local_median": 110.38,
+              "bright_blobs": 2,
+              "dark_blobs": 2,
+              "highlight_shadow_pairs": 2,
+              "similar_blob_count": 2.0,
+              "blob_area_range_px": [
+                66.0,
+                3300.0
+              ],
+              "density": 0.5,
+              "coherence": 0.157,
+              "incoherence": 0.843,
+              "cv_local": 0.2495,
+              "cv_reference": 0.0495,
+              "roughness": 1.0
+            },
+            "score": 0.4529,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.74,
+            "contribution": 1.046,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 1.0,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 0.9,
+            "contribution": 0.702
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.4634,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.1634
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.4529,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -1.1323
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": 0.7791,
+        "confidence_pct": 68.5,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [
+          "rock_clutter"
+        ],
+        "reasons": [
+          "2.0 similar-sized highlight/shadow blobs within 3x the box, orientation coherence 0.16: consistent with a rock field or natural clutter"
+        ],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          365,
+          2169,
+          395,
+          2191
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_0_2048.jpg",
@@ -650,6 +3373,238 @@
       "height_px": 21.0,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 58.0,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 21.0,
+        "width_px": 30.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.69,
+        "detector_model": null,
+        "class_evaluated": "bottle",
+        "class_basis": "class",
+        "calibrated_probability": 0.69,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 0.4,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 383.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 452.5,
+              "line_score": 0.0,
+              "range_fraction": 0.5014
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 1.0,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 111.45,
+              "background_p10": 100.8,
+              "background_p95": 144.26,
+              "background_pixels": 4272,
+              "shadow_window_px": 30,
+              "shadow_level": 66.87,
+              "background_shadow_fraction": 0.0215,
+              "far_shadow_fraction": 0.5737,
+              "far_excess": 0.5522,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.0215,
+              "near_outside_score": 0.0,
+              "box_p95": 236.01,
+              "highlight_contrast": 1.1176,
+              "highlight_null": 0.2944,
+              "highlight_score": 1.0,
+              "edge_sharpness_score": 0.0,
+              "object_support": 1.0,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 6
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 234.84,
+              "darkness": -1.1072,
+              "dark_score": 0.0,
+              "highlight_score": 1.0,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.3816,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 104.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 12,
+              "coherence": 0.3594,
+              "coherence_score": 0.5189,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.2669,
+              "shape_score": 1.0,
+              "regular": 0.3816,
+              "mesh": {
+                "texture": 0.1093,
+                "prominence_first": -0.0316,
+                "prominence_second": -0.0477,
+                "lag_first": [
+                  -4,
+                  3
+                ],
+                "lag_second": [
+                  4,
+                  3
+                ],
+                "score": 0.0
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 23040,
+              "local_median": 108.24,
+              "bright_blobs": 2,
+              "dark_blobs": 1,
+              "highlight_shadow_pairs": 1,
+              "similar_blob_count": 1.5,
+              "blob_area_range_px": [
+                66.0,
+                3300.0
+              ],
+              "density": 0.375,
+              "coherence": 0.1184,
+              "incoherence": 0.8816,
+              "cv_local": 0.2588,
+              "cv_reference": 0.0495,
+              "roughness": 1.0
+            },
+            "score": 0.3484,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.69,
+            "contribution": 0.8001,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 1.0,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 0.4,
+            "contribution": 0.312
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.3816,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.0816
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.3484,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.8709
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": 0.3228,
+        "confidence_pct": 58.0,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [],
+        "reasons": [],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          435,
+          2219,
+          465,
+          2241
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_0_2048.jpg",
@@ -694,6 +3649,242 @@
       "height_px": 21.0,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 44.8,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 21.0,
+        "width_px": 30.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.58,
+        "detector_model": null,
+        "class_evaluated": "tire",
+        "class_basis": "class",
+        "calibrated_probability": 0.58,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 0.9,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 483.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 552.5,
+              "line_score": 0.0,
+              "range_fraction": 0.6122
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 1.0,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 113.49,
+              "background_p10": 92.59,
+              "background_p95": 143.63,
+              "background_pixels": 4272,
+              "shadow_window_px": 30,
+              "shadow_level": 68.09,
+              "background_shadow_fraction": 0.0627,
+              "far_shadow_fraction": 0.5768,
+              "far_excess": 0.514,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.0627,
+              "near_outside_score": 0.0,
+              "box_p95": 236.0,
+              "highlight_contrast": 1.0795,
+              "highlight_null": 0.2656,
+              "highlight_score": 1.0,
+              "edge_sharpness_score": 0.0,
+              "object_support": 1.0,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 6
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 234.78,
+              "darkness": -1.0687,
+              "dark_score": 0.0,
+              "highlight_score": 1.0,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.4615,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 104.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 12,
+              "coherence": 0.4735,
+              "coherence_score": 0.747,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.2683,
+              "shape_score": 1.0,
+              "regular": 0.4615,
+              "mesh": {
+                "texture": 0.0964,
+                "prominence_first": -0.0352,
+                "prominence_second": -0.0651,
+                "lag_first": [
+                  4,
+                  3
+                ],
+                "lag_second": [
+                  -4,
+                  3
+                ],
+                "score": 0.0
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 23040,
+              "local_median": 114.58,
+              "bright_blobs": 2,
+              "dark_blobs": 3,
+              "highlight_shadow_pairs": 2,
+              "similar_blob_count": 2.5,
+              "blob_area_range_px": [
+                66.0,
+                3300.0
+              ],
+              "density": 0.625,
+              "coherence": 0.178,
+              "incoherence": 0.822,
+              "cv_local": 0.3572,
+              "cv_reference": 0.0495,
+              "roughness": 1.0
+            },
+            "score": 0.5583,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.58,
+            "contribution": 0.3228,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 1.0,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 0.9,
+            "contribution": 0.702
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.4615,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.1615
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.5583,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -1.3957
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": -0.2094,
+        "confidence_pct": 44.8,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [
+          "rock_clutter"
+        ],
+        "reasons": [
+          "2.5 similar-sized highlight/shadow blobs within 3x the box, orientation coherence 0.18: consistent with a rock field or natural clutter"
+        ],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          335,
+          2249,
+          365,
+          2271
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_0_2048.jpg",
@@ -738,6 +3929,242 @@
       "height_px": 21.0,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 47.7,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 21.0,
+        "width_px": 30.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.63,
+        "detector_model": null,
+        "class_evaluated": "debris",
+        "class_basis": "class",
+        "calibrated_probability": 0.63,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 0.6,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 404.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 472.5,
+              "line_score": 0.0,
+              "range_fraction": 0.5235
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 1.0,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 106.54,
+              "background_p10": 15.59,
+              "background_p95": 131.41,
+              "background_pixels": 4272,
+              "shadow_window_px": 30,
+              "shadow_level": 63.92,
+              "background_shadow_fraction": 0.1987,
+              "far_shadow_fraction": 0.5737,
+              "far_excess": 0.375,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.1803,
+              "near_outside_excess": -0.0184,
+              "near_outside_score": 0.0,
+              "box_p95": 236.01,
+              "highlight_contrast": 1.2153,
+              "highlight_null": 0.2335,
+              "highlight_score": 1.0,
+              "edge_sharpness_score": 0.0,
+              "object_support": 1.0,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 6
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 233.49,
+              "darkness": -1.1917,
+              "dark_score": 0.0,
+              "highlight_score": 1.0,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0106,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.4033,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 104.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 12,
+              "coherence": 0.3904,
+              "coherence_score": 0.5807,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.2823,
+              "shape_score": 1.0,
+              "regular": 0.4033,
+              "mesh": {
+                "texture": 0.2104,
+                "prominence_first": -0.254,
+                "prominence_second": -0.2759,
+                "lag_first": [
+                  -4,
+                  3
+                ],
+                "lag_second": [
+                  3,
+                  3
+                ],
+                "score": 0.0
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 23040,
+              "local_median": 110.58,
+              "bright_blobs": 3,
+              "dark_blobs": 1,
+              "highlight_shadow_pairs": 1,
+              "similar_blob_count": 2.0,
+              "blob_area_range_px": [
+                66.0,
+                3300.0
+              ],
+              "density": 0.5,
+              "coherence": 0.0733,
+              "incoherence": 0.9267,
+              "cv_local": 0.3369,
+              "cv_reference": 0.0495,
+              "roughness": 1.0
+            },
+            "score": 0.478,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.63,
+            "contribution": 0.5322,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 1.0,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 0.6,
+            "contribution": 0.468
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.4033,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.1033
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.478,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -1.1951
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": -0.0916,
+        "confidence_pct": 47.7,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [
+          "rock_clutter"
+        ],
+        "reasons": [
+          "2.0 similar-sized highlight/shadow blobs within 3x the box, orientation coherence 0.07: consistent with a rock field or natural clutter"
+        ],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          415,
+          2289,
+          445,
+          2311
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_0_2048.jpg",
@@ -782,6 +4209,238 @@
       "height_px": 21.0,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 62.0,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 21.0,
+        "width_px": 30.0,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.54,
+        "detector_model": null,
+        "class_evaluated": "bottle",
+        "class_basis": "class",
+        "calibrated_probability": 0.54,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 0.4,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 902.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 334.0,
+              "edge_score": 0.0,
+              "nadir_distance_px": 402.5,
+              "line_score": 0.0,
+              "range_fraction": 0.446
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 1.0,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 106.3,
+              "background_p10": 95.4,
+              "background_p95": 137.15,
+              "background_pixels": 4272,
+              "shadow_window_px": 30,
+              "shadow_level": 63.78,
+              "background_shadow_fraction": 0.0201,
+              "far_shadow_fraction": 0.5747,
+              "far_excess": 0.5546,
+              "far_shadow_score": 1.0,
+              "near_outside_shadow_fraction": 0.0,
+              "near_outside_excess": -0.0201,
+              "near_outside_score": 0.0,
+              "box_p95": 236.0,
+              "highlight_contrast": 1.22,
+              "highlight_null": 0.2902,
+              "highlight_score": 1.0,
+              "edge_sharpness_score": 0.0,
+              "object_support": 1.0,
+              "shadow_length_px": 47.0,
+              "shadow_rows": 7
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0,
+            "measurements": {
+              "box_median": 234.75,
+              "darkness": -1.2082,
+              "dark_score": 0.0,
+              "highlight_score": 1.0,
+              "edge": {
+                "sharpness": null,
+                "score": null,
+                "dark_fraction": 0.0,
+                "reason": "no dark region in the box"
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.4975,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 104.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 12,
+              "coherence": 0.525,
+              "coherence_score": 0.8501,
+              "highlight_solidity": 1.0,
+              "highlight_elongation": 0.2691,
+              "shape_score": 1.0,
+              "regular": 0.4975,
+              "mesh": {
+                "texture": 0.1191,
+                "prominence_first": -0.0299,
+                "prominence_second": -0.0362,
+                "lag_first": [
+                  4,
+                  3
+                ],
+                "lag_second": [
+                  -4,
+                  3
+                ],
+                "score": 0.0
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 23040,
+              "local_median": 104.1,
+              "bright_blobs": 1,
+              "dark_blobs": 0,
+              "highlight_shadow_pairs": 0,
+              "similar_blob_count": 0.5,
+              "blob_area_range_px": [
+                66.0,
+                3300.0
+              ],
+              "density": 0.125,
+              "coherence": 0.1758,
+              "incoherence": 0.8242,
+              "cv_local": 0.0573,
+              "cv_reference": 0.0495,
+              "roughness": 0.1053
+            },
+            "score": 0.0718,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.54,
+            "contribution": 0.1603,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 1.0,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 0.4,
+            "contribution": 0.312
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.4975,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": 0.1975
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.0718,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.1795
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": 0.4904,
+        "confidence_pct": 62.0,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [],
+        "reasons": [],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          485,
+          2309,
+          515,
+          2331
+        ]
+      },
       "provenance": {
         "strip": "DEMO_SYNTHETIC_strip",
         "representative_tile": "DEMO_SYNTHETIC_strip_0_2048.jpg",
@@ -859,56 +4518,6 @@
       "priority_rank": 2,
       "strip": "DEMO_SYNTHETIC_strip",
       "cell": [
-        1,
-        2
-      ],
-      "cell_size_px": 512,
-      "centroid": {
-        "global_x": 607.5,
-        "global_y": 1290.0,
-        "latitude": null,
-        "longitude": null
-      },
-      "detection_count": 4,
-      "total_severity": 1.19,
-      "max_severity": 0.492,
-      "severity_tier": "medium",
-      "dominant_class": "shipwreck",
-      "dominant_class_severity": 0.492,
-      "recommended_action": "Flag navigation hazard",
-      "action_basis": "exact",
-      "risk_score": 0.6665,
-      "detection_density": 15.259,
-      "hazard_diversity": 4,
-      "confidence_mean": 0.615,
-      "confidence_max": 0.82,
-      "severity_per_detection": 0.2975,
-      "spatial_extent": {
-        "width_px": 180.0,
-        "height_px": 220.0,
-        "diagonal_px": 284.25
-      },
-      "detection_ids": [
-        "DEMO_SYNTHETIC_strip_0_1024_d0",
-        "DEMO_SYNTHETIC_strip_0_1024_d1",
-        "DEMO_SYNTHETIC_strip_0_1024_d2",
-        "DEMO_SYNTHETIC_strip_512_1024_d3"
-      ],
-      "top_detection": {
-        "id": "DEMO_SYNTHETIC_strip_0_1024_d0",
-        "class": "shipwreck",
-        "confidence": 0.82,
-        "class_weight": 0.6,
-        "severity": 0.492,
-        "tile": "DEMO_SYNTHETIC_strip_0_1024.jpg"
-      },
-      "rationale": "Ranked 2 on a total severity of 1.19 across 4 detections. The worst is 'shipwreck' at confidence 0.82 and class weight 0.6, giving severity 0.492 and 3 other detections adding 0.698 more severity. Dominant class 'shipwreck' is severity-weighted, so it reflects consequence rather than headcount."
-    },
-    {
-      "hotspot_id": "H003",
-      "priority_rank": 3,
-      "strip": "DEMO_SYNTHETIC_strip",
-      "cell": [
         0,
         4
       ],
@@ -953,7 +4562,56 @@
         "severity": 0.222,
         "tile": "DEMO_SYNTHETIC_strip_0_2048.jpg"
       },
-      "rationale": "Ranked 3 on a total severity of 0.954 across 5 detections. The worst is 'tire' at confidence 0.74 and class weight 0.3, giving severity 0.222 and 4 other detections adding 0.732 more severity. Dominant class 'tire' is severity-weighted, so it reflects consequence rather than headcount."
+      "rationale": "Ranked 2 on a total severity of 0.954 across 5 detections. The worst is 'tire' at confidence 0.74 and class weight 0.3, giving severity 0.222 and 4 other detections adding 0.732 more severity. Dominant class 'tire' is severity-weighted, so it reflects consequence rather than headcount."
+    },
+    {
+      "hotspot_id": "H003",
+      "priority_rank": 3,
+      "strip": "DEMO_SYNTHETIC_strip",
+      "cell": [
+        1,
+        2
+      ],
+      "cell_size_px": 512,
+      "centroid": {
+        "global_x": 610.0,
+        "global_y": 1276.67,
+        "latitude": null,
+        "longitude": null
+      },
+      "detection_count": 3,
+      "total_severity": 0.95,
+      "max_severity": 0.492,
+      "severity_tier": "medium",
+      "dominant_class": "shipwreck",
+      "dominant_class_severity": 0.492,
+      "recommended_action": "Flag navigation hazard",
+      "action_basis": "exact",
+      "risk_score": 0.6065,
+      "detection_density": 11.444,
+      "hazard_diversity": 3,
+      "confidence_mean": 0.66,
+      "confidence_max": 0.82,
+      "severity_per_detection": 0.3167,
+      "spatial_extent": {
+        "width_px": 180.0,
+        "height_px": 220.0,
+        "diagonal_px": 284.25
+      },
+      "detection_ids": [
+        "DEMO_SYNTHETIC_strip_0_1024_d0",
+        "DEMO_SYNTHETIC_strip_0_1024_d1",
+        "DEMO_SYNTHETIC_strip_512_1024_d3"
+      ],
+      "top_detection": {
+        "id": "DEMO_SYNTHETIC_strip_0_1024_d0",
+        "class": "shipwreck",
+        "confidence": 0.82,
+        "class_weight": 0.6,
+        "severity": 0.492,
+        "tile": "DEMO_SYNTHETIC_strip_0_1024.jpg"
+      },
+      "rationale": "Ranked 3 on a total severity of 0.95 across 3 detections. The worst is 'shipwreck' at confidence 0.82 and class weight 0.6, giving severity 0.492 and 2 other detections adding 0.458 more severity. Dominant class 'shipwreck' is severity-weighted, so it reflects consequence rather than headcount."
     },
     {
       "hotspot_id": "H004",
@@ -976,8 +4634,8 @@
       "severity_tier": "low",
       "dominant_class": "net",
       "dominant_class_severity": 0.555,
-      "recommended_action": "Send for expert identification",
-      "action_basis": "default:unknown-class",
+      "recommended_action": "Schedule ghost-gear recovery",
+      "action_basis": "exact",
       "risk_score": 0.4095,
       "detection_density": 11.444,
       "hazard_diversity": 2,
@@ -1097,6 +4755,10 @@
         "cable": 0.5,
         "net": 0.5,
         "ghost-gear": 0.5,
+        "fishing-gear": 0.5,
+        "pipe": 0.5,
+        "pipeline": 0.5,
+        "cylinder": 0.9,
         "tire": 0.3,
         "drum": 0.3,
         "fish": 0.2,
@@ -1130,6 +4792,13 @@
         "tyre": "Schedule cleanup",
         "tire": "Schedule cleanup",
         "drum": "Schedule cleanup",
+        "net": "Schedule ghost-gear recovery",
+        "ghost-gear": "Schedule ghost-gear recovery",
+        "fishing-gear": "Schedule ghost-gear recovery",
+        "pipe": "Check against charted pipelines; flag if uncharted",
+        "pipeline": "Check against charted pipelines; flag if uncharted",
+        "cable": "Check against charted cables; flag if uncharted",
+        "cylinder": "Keep clear; send for expert identification as possible ordnance",
         "unknown": "Send for expert identification",
         "anomaly": "Send for expert identification",
         "fish": "Log only, no action",
@@ -1156,7 +4825,10 @@
         "strip": "DEMO_SYNTHETIC_strip",
         "source_image": "DEMO_SYNTHETIC_strip.png",
         "width": 1800,
-        "height": 2600
+        "height": 2600,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "resolution_basis": null
       }
     ],
     "tile_count": 20,
@@ -1170,6 +4842,7 @@
       "overlap": 128,
       "min_content": 0.02,
       "denoise": false,
+      "denoise_filter": "Lee speckle filter + percentile stretch",
       "content_score": "standard deviation of the tile's grey levels / 255, measured on the tile as written"
     },
     "model": {
@@ -1192,6 +4865,22 @@
     "class_floor_rule": "a detection below its class's floor is relabelled 'unknown' and never dropped; the original call is kept in the detection's downgraded_from. This changes the claim, not the direction of the score: it lowers severity only for classes weighted above UNKNOWN_CLASS_SEVERITY.",
     "class_floors_withheld": 0,
     "ranking_rule": "hotspots sorted by total_severity descending; H001 is the highest priority",
-    "audit_note": "Every hotspot carries a `rationale` naming the detection that set its severity, and every detection carries the tiles it was seen in and how many views were merged into it."
+    "audit_note": "Every hotspot carries a `rationale` naming the detection that set its severity, and every detection carries the tiles it was seen in and how many views were merged into it.",
+    "verification": {
+      "ran": true,
+      "checked": 16,
+      "not_checked": 0,
+      "suppressed": 1,
+      "by_reason": {
+        "rock_clutter": 4
+      },
+      "suppress_below_pct": 35.0,
+      "calibrated": false,
+      "version": "1.0.0",
+      "note": "by_reason counts hard reasons on every checked detection, suppressed or not; every cue is a heuristic, see verification.terms on each detection",
+      "calibration": "none found; confidence_pct starts from the raw detector confidence"
+    },
+    "suppression_rule": "a detection marked suppressed is kept in `detections` with its reasons and excluded from hotspots and the action list; nothing is deleted",
+    "strip_resolutions_m_per_px": {}
   }
 }

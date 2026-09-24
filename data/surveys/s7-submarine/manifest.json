@@ -1,6 +1,6 @@
 {
   "survey": {
-    "generated_at": "2026-09-11T07:38:39+00:00",
+    "generated_at": "2026-09-13T14:23:11+00:00",
     "engine": "deepecho-survey-hazard",
     "processing_version": "1.0.0",
     "strips": [
@@ -8,7 +8,10 @@
         "strip": "sidescan-s7-submarine",
         "source_image": "sidescan-s7-submarine.jpg",
         "width": 1676,
-        "height": 871
+        "height": 871,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "resolution_basis": null
       }
     ],
     "tiles_written": 8,
@@ -26,6 +29,7 @@
       "overlap": 128,
       "min_content": 0.02,
       "denoise": false,
+      "denoise_filter": "Lee speckle filter + percentile stretch",
       "content_score": "standard deviation of the tile's grey levels / 255, measured on the tile as written"
     }
   },
@@ -46,7 +50,10 @@
       "center_y": 320.0,
       "source_image": "sidescan-s7-submarine.jpg",
       "denoised": false,
-      "content_score": 0.151254
+      "content_score": 0.151254,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-s7-submarine_512_0.jpg",
@@ -64,7 +71,10 @@
       "center_y": 320.0,
       "source_image": "sidescan-s7-submarine.jpg",
       "denoised": false,
-      "content_score": 0.136504
+      "content_score": 0.136504,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-s7-submarine_1024_0.jpg",
@@ -82,7 +92,10 @@
       "center_y": 320.0,
       "source_image": "sidescan-s7-submarine.jpg",
       "denoised": false,
-      "content_score": 0.157357
+      "content_score": 0.157357,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-s7-submarine_1536_0.jpg",
@@ -100,7 +113,10 @@
       "center_y": 320.0,
       "source_image": "sidescan-s7-submarine.jpg",
       "denoised": false,
-      "content_score": 0.061562
+      "content_score": 0.061562,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-s7-submarine_0_512.jpg",
@@ -118,7 +134,10 @@
       "center_y": 691.5,
       "source_image": "sidescan-s7-submarine.jpg",
       "denoised": false,
-      "content_score": 0.14877
+      "content_score": 0.14877,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-s7-submarine_512_512.jpg",
@@ -136,7 +155,10 @@
       "center_y": 691.5,
       "source_image": "sidescan-s7-submarine.jpg",
       "denoised": false,
-      "content_score": 0.137804
+      "content_score": 0.137804,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-s7-submarine_1024_512.jpg",
@@ -154,7 +176,10 @@
       "center_y": 691.5,
       "source_image": "sidescan-s7-submarine.jpg",
       "denoised": false,
-      "content_score": 0.159433
+      "content_score": 0.159433,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     },
     {
       "tile": "sidescan-s7-submarine_1536_512.jpg",
@@ -172,7 +197,10 @@
       "center_y": 691.5,
       "source_image": "sidescan-s7-submarine.jpg",
       "denoised": false,
-      "content_score": 0.09388
+      "content_score": 0.09388,
+      "m_per_px_across": null,
+      "m_per_px_along": null,
+      "quality": null
     }
   ]
 }

@@ -7,5 +7,21 @@ __pycache__/
 **/__pycache__/
 *.pyc
 .env
-eval/last-run.json
+rag_assistant/eval/last-run.json
 data/surveys/*/tiles/
+
+# The dashboard has its own image and its own build context (frontend/).
+frontend/
+
+# One developer's local history is not part of the product. The store creates
+# both on first use, and compose mounts ./data over /app/data anyway.
+data/deepecho.db*
+data/uploads/
+data/survey_uploads/
+
+# Built by `python -m rag_assistant.rag index` inside the image.
+rag_assistant/index.*
+rag_assistant/catalog_*
+# ONNX exports are filtered by the checkpoints stage; test suites are not shipped.
+survey_hazard_map/models/**/*.onnx
+*/tests/

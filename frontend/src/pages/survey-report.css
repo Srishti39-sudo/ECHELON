@@ -1,0 +1,457 @@
+/*
+ * The printable survey report (/report/:surveyId).
+ *
+ * On screen the report is an A4 sheet at its real width, so what the operator
+ * sees is what prints: 210 mm wide with 15 mm side margins leaves 180 mm of
+ * content, and @page below uses the same margins, so the Leaflet snapshot is
+ * laid out at the width it prints at. Print hides the dashboard chrome.
+ */
+
+.rp-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.rp-toolbar {
+  width: 210mm;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rp-toolbar-hint {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.rp-doc {
+  --rp-ink: #111c2b;
+  --rp-muted: #5b6878;
+  --rp-rule: #d6dee6;
+  width: 210mm;
+  max-width: 100%;
+  background: #fff;
+  color: var(--rp-ink);
+  padding: 16mm 15mm 18mm;
+  box-shadow: 0 1px 3px rgba(15, 30, 50, 0.12), 0 8px 30px rgba(15, 30, 50, 0.08);
+  border-radius: 4px;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+/* COVER */
+
+.rp-cover {
+  border-bottom: 2px solid var(--rp-ink);
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+
+.rp-brand {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #087f9c;
+}
+
+.rp-cover h1 {
+  margin-top: 8px;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.rp-synthetic {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  background: #fff4e0;
+  border: 1.5px solid #d97706;
+  border-radius: 6px;
+  padding: 9px 12px;
+  color: #7a4a06;
+  font-size: 11.5px;
+}
+
+.rp-synthetic strong {
+  font-size: 13px;
+  letter-spacing: 0.16em;
+}
+
+.rp-cover-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px 14px;
+  margin-top: 14px;
+}
+
+.rp-cover-facts dt,
+.rp-prov dt {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rp-muted);
+}
+
+.rp-cover-facts dd {
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+/* SECTIONS */
+
+.rp-section + .rp-section {
+  margin-top: 20px;
+}
+
+.rp-section h2 {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--rp-rule);
+  break-after: avoid;
+}
+
+.rp-h3 {
+  margin: 14px 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rp-muted);
+}
+
+.rp-kpis {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.rp-kpis > div {
+  border: 1px solid var(--rp-rule);
+  border-radius: 6px;
+  padding: 8px 9px;
+}
+
+.rp-kpis strong {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-kpis span {
+  display: block;
+  font-size: 10px;
+  line-height: 1.3;
+  color: var(--rp-muted);
+}
+
+.rp-kpis .is-critical {
+  border-color: #dc2626;
+  background: #fdeaea;
+}
+
+.rp-lead {
+  margin-top: 10px;
+  font-size: 12.5px;
+}
+
+.rp-note {
+  font-size: 12px;
+  color: var(--rp-ink);
+  background: #f4f7fa;
+  border-left: 3px solid var(--rp-rule);
+  padding: 8px 11px;
+  border-radius: 4px;
+}
+
+.rp-small {
+  margin-top: 6px;
+  font-size: 10.5px;
+  color: var(--rp-muted);
+}
+
+.rp-sub {
+  display: block;
+  font-size: 10px;
+  color: var(--rp-muted);
+  font-weight: 400;
+}
+
+/* MAP */
+
+.rp-map-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rp-map {
+  width: 100%;
+  height: 105mm;
+  border: 1px solid var(--rp-rule);
+  border-radius: 4px;
+  background: #dfe9ef;
+}
+
+.rp-map .leaflet-control-attribution {
+  font-size: 9px;
+}
+
+.rp-map-legend,
+.rp-map-wrap .sv-cov-legend {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 10.5px;
+  color: var(--rp-muted);
+}
+
+.rp-map-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rp-map-num {
+  background: transparent;
+  border: 0;
+}
+
+.rp-map-num span,
+.rp-legend-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+  font-style: normal;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgba(17, 28, 43, 0.4);
+}
+
+.rp-legend-num {
+  width: 16px;
+  height: 16px;
+  font-size: 9px;
+  background: #d97706;
+}
+
+/* TABLES */
+
+.rp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.rp-table th {
+  text-align: left;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rp-muted);
+  padding: 5px 6px;
+  border-bottom: 1.5px solid var(--rp-ink);
+  vertical-align: bottom;
+}
+
+.rp-table td {
+  padding: 5px 6px;
+  border-bottom: 1px solid var(--rp-rule);
+  vertical-align: top;
+}
+
+.rp-table tr {
+  break-inside: avoid;
+}
+
+.rp-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rp-nowrap {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-id {
+  font-size: 9.5px;
+  overflow-wrap: anywhere;
+  max-width: 34mm;
+  color: var(--rp-muted);
+}
+
+.rp-tier {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.rp-metrics th {
+  width: 20%;
+  border-bottom: 1px solid var(--rp-rule);
+  vertical-align: top;
+}
+
+.rp-metrics td {
+  width: 30%;
+}
+
+.rp-doc .sv-inner-table {
+  font-size: 11px;
+}
+
+.rp-doc .sv-inner-table th {
+  font-size: 9px;
+  color: var(--rp-muted);
+  border-bottom: 1.5px solid var(--rp-ink);
+}
+
+.rp-list {
+  margin-top: 8px;
+  padding-left: 16px;
+  font-size: 10.5px;
+  color: var(--rp-muted);
+}
+
+/* PROVENANCE */
+
+.rp-prov {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rp-prov > div {
+  display: grid;
+  grid-template-columns: 28mm minmax(0, 1fr);
+  gap: 10px;
+  break-inside: avoid;
+}
+
+.rp-prov dd {
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.rp-prov dd .rp-sub {
+  margin-top: 2px;
+}
+
+.rp-disclaimers {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--rp-rule);
+  border-radius: 6px;
+  background: #f8fafc;
+  font-size: 10.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  break-inside: avoid;
+}
+
+.rp-footer {
+  margin-top: 12px;
+  font-size: 10px;
+  color: var(--rp-muted);
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .rp-cover-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rp-kpis {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* PRINT */
+
+@page {
+  size: A4 portrait;
+  margin: 13mm 15mm 14mm;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  body:has(.rp-doc) .sidebar,
+  body:has(.rp-doc) .header,
+  .rp-toolbar {
+    display: none !important;
+  }
+
+  body:has(.rp-doc) .main {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  body:has(.rp-doc) .page-content {
+    padding: 0 !important;
+  }
+
+  .rp-page {
+    display: block;
+  }
+
+  .rp-doc {
+    width: auto;
+    max-width: none;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .rp-break {
+    break-before: page;
+  }
+
+  .rp-table thead {
+    display: table-header-group;
+  }
+
+  .rp-map-wrap,
+  .rp-kpis,
+  .rp-cover {
+    break-inside: avoid;
+  }
+
+  .rp-map .leaflet-control-container .leaflet-control-zoom {
+    display: none;
+  }
+}

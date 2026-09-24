@@ -41,6 +41,9 @@ export function hotspotContext(hotspot, survey) {
 
   const centroid = hotspot.centroid || {}
   const top = hotspot.top_detection || {}
+  const byId = new Map((survey?.detections || []).map((d) => [d.id, d]))
+  const members = (hotspot.detection_ids || []).map((id) => byId.get(id)).filter(Boolean)
+  const topRecord = byId.get(top.id) || null
 
   return {
     hotspot_id: hotspot.hotspot_id,
@@ -69,6 +72,32 @@ export function hotspotContext(hotspot, survey) {
     // the engine; never inferred here.
     demo: Boolean(survey?.metadata?.demo),
     evidence_tile: top.tile ?? null,
+
+    // Verification, copied from export.json. Null wherever the export predates
+    // it, never filled in. confidence_pct and dimensions are those of the
+    // detection that sets the hotspot's severity; `detections` lists every
+    // detection in the cell with its own figures and reasons.
+    confidence_pct: topRecord?.confidence_pct ?? null,
+    confidence_pct_basis: topRecord?.confidence_pct_basis ?? null,
+    dimensions: topRecord?.dimensions ?? null,
+    suppressed: topRecord ? topRecord.suppressed ?? null : null,
+    verification_reasons: topRecord?.verification?.reasons ?? [],
+    detections: members.map(detectionSummary),
+    survey_suppressed_detections: survey?.survey_summary?.suppressed_detections ?? null,
+  }
+}
+
+/** One detection as the handoff carries it: identity, figures, and reasons. */
+function detectionSummary(detection) {
+  return {
+    id: detection.id,
+    object_class: detection.object_class,
+    confidence: detection.confidence,
+    confidence_pct: detection.confidence_pct ?? null,
+    dimensions: detection.dimensions ?? null,
+    suppressed: detection.suppressed ?? null,
+    verification_reasons: detection.verification?.reasons ?? [],
+    hard_reasons: detection.verification?.hard_reasons ?? [],
   }
 }
 

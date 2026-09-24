@@ -1,0 +1,410 @@
+{
+  "generated": "2026-09-13T15:54:19+0530",
+  "device": {
+    "platform": "macOS-26.5-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "python": "3.13.3",
+    "logical_cpus": 8,
+    "performance_cores": 4,
+    "efficiency_cores": 4,
+    "cpu": "Apple M1",
+    "physical_cores": 8,
+    "memory_gb": 8.6
+  },
+  "workload": {
+    "models": [
+      "known",
+      "anomaly"
+    ],
+    "tiles": [
+      "sidescan-waterfall-strip_1024_0.jpg",
+      "sidescan-waterfall-strip_1024_1024.jpg",
+      "sidescan-waterfall-strip_1024_1536.jpg",
+      "sidescan-waterfall-strip_1024_2048.jpg",
+      "sidescan-waterfall-strip_1024_512.jpg",
+      "sidescan-waterfall-strip_2048_0.jpg",
+      "sidescan-waterfall-strip_2048_1024.jpg",
+      "sidescan-waterfall-strip_2048_1536.jpg",
+      "sidescan-waterfall-strip_2048_512.jpg",
+      "sidescan-waterfall-strip_2560_1024.jpg"
+    ],
+    "runs": 50,
+    "warmup": 3,
+    "conf": 0.25,
+    "per_tile": "decode + letterbox + every model + NMS"
+  },
+  "survey_assumptions": {
+    "swath_m_per_side": 100.0,
+    "resolution_m_per_px": 0.1,
+    "tile_px": 640,
+    "stride_px": 512,
+    "speed_knots": 4.0,
+    "square_pixels": true
+  },
+  "results": [
+    {
+      "cold_start_s": 1.429,
+      "first_tile_ms": 1425.9,
+      "warm_p50_ms": 234.9,
+      "warm_p95_ms": 303.7,
+      "warm_mean_ms": 242.3,
+      "tiles_per_s": 4.13,
+      "peak_rss_mb": 571.6,
+      "runtime": {
+        "torch": "2.14.0",
+        "threads": 1,
+        "device": "cpu"
+      },
+      "runs": 50,
+      "load_average_before": [
+        2.15,
+        4.48,
+        4.84
+      ],
+      "variant": "torch .pt cpu 1t",
+      "threads_requested": 1,
+      "files": {
+        "known.pt": 22.5,
+        "anomaly.pt": 6.3
+      },
+      "model_mb": 28.8,
+      "survey": {
+        "tiles_across": 4,
+        "tiles_per_km": 78.1,
+        "km_per_hour": 190.3,
+        "required_km_per_hour": 7.41,
+        "real_time_factor": 25.7
+      }
+    },
+    {
+      "cold_start_s": 0.308,
+      "first_tile_ms": 1233.7,
+      "warm_p50_ms": 770.1,
+      "warm_p95_ms": 787.2,
+      "warm_mean_ms": 771.3,
+      "tiles_per_s": 1.3,
+      "peak_rss_mb": 299.0,
+      "runtime": {
+        "onnxruntime": "1.30.0",
+        "threads": 1,
+        "providers": {
+          "known": [
+            "CPUExecutionProvider"
+          ],
+          "anomaly": [
+            "CPUExecutionProvider"
+          ]
+        },
+        "provider": "CPUExecutionProvider"
+      },
+      "runs": 50,
+      "load_average_before": [
+        2.48,
+        4.43,
+        4.82
+      ],
+      "variant": "onnx fp32 cpu 1t",
+      "threads_requested": 1,
+      "files": {
+        "known.onnx": 44.7,
+        "anomaly.onnx": 12.3
+      },
+      "model_mb": 57.0,
+      "survey": {
+        "tiles_across": 4,
+        "tiles_per_km": 78.1,
+        "km_per_hour": 59.9,
+        "required_km_per_hour": 7.41,
+        "real_time_factor": 8.1
+      }
+    },
+    {
+      "cold_start_s": 0.203,
+      "first_tile_ms": 362.1,
+      "warm_p50_ms": 310.3,
+      "warm_p95_ms": 571.4,
+      "warm_mean_ms": 371.2,
+      "tiles_per_s": 2.69,
+      "peak_rss_mb": 254.0,
+      "runtime": {
+        "onnxruntime": "1.30.0",
+        "threads": 1,
+        "providers": {
+          "known.int8": [
+            "CPUExecutionProvider"
+          ],
+          "anomaly.int8": [
+            "CPUExecutionProvider"
+          ]
+        },
+        "provider": "CPUExecutionProvider"
+      },
+      "runs": 50,
+      "load_average_before": [
+        2.66,
+        4.22,
+        4.72
+      ],
+      "variant": "onnx int8 cpu 1t",
+      "threads_requested": 1,
+      "files": {
+        "known.int8.onnx": 11.5,
+        "anomaly.int8.onnx": 3.4
+      },
+      "model_mb": 14.8,
+      "survey": {
+        "tiles_across": 4,
+        "tiles_per_km": 78.1,
+        "km_per_hour": 124.0,
+        "required_km_per_hour": 7.41,
+        "real_time_factor": 16.7
+      }
+    },
+    {
+      "cold_start_s": 0.222,
+      "first_tile_ms": 816.1,
+      "warm_p50_ms": 775.6,
+      "warm_p95_ms": 783.1,
+      "warm_mean_ms": 775.8,
+      "tiles_per_s": 1.29,
+      "peak_rss_mb": 313.2,
+      "runtime": {
+        "onnxruntime": "1.30.0",
+        "threads": 1,
+        "providers": {
+          "known.fp16": [
+            "CPUExecutionProvider"
+          ],
+          "anomaly.fp16": [
+            "CPUExecutionProvider"
+          ]
+        },
+        "provider": "CPUExecutionProvider"
+      },
+      "runs": 50,
+      "load_average_before": [
+        3.24,
+        4.24,
+        4.71
+      ],
+      "variant": "onnx fp16 cpu 1t",
+      "threads_requested": 1,
+      "files": {
+        "known.fp16.onnx": 22.4,
+        "anomaly.fp16.onnx": 6.2
+      },
+      "model_mb": 28.6,
+      "survey": {
+        "tiles_across": 4,
+        "tiles_per_km": 78.1,
+        "km_per_hour": 59.4,
+        "required_km_per_hour": 7.41,
+        "real_time_factor": 8.0
+      }
+    },
+    {
+      "cold_start_s": 1.443,
+      "first_tile_ms": 1428.4,
+      "warm_p50_ms": 251.0,
+      "warm_p95_ms": 432.7,
+      "warm_mean_ms": 274.6,
+      "tiles_per_s": 3.64,
+      "peak_rss_mb": 602.4,
+      "runtime": {
+        "torch": "2.14.0",
+        "threads": 4,
+        "device": "cpu"
+      },
+      "runs": 50,
+      "load_average_before": [
+        2.49,
+        3.9,
+        4.56
+      ],
+      "variant": "torch .pt cpu 4t",
+      "threads_requested": 4,
+      "files": {
+        "known.pt": 22.5,
+        "anomaly.pt": 6.3
+      },
+      "model_mb": 28.8,
+      "survey": {
+        "tiles_across": 4,
+        "tiles_per_km": 78.1,
+        "km_per_hour": 167.7,
+        "required_km_per_hour": 7.41,
+        "real_time_factor": 22.6
+      }
+    },
+    {
+      "cold_start_s": 0.214,
+      "first_tile_ms": 555.6,
+      "warm_p50_ms": 449.2,
+      "warm_p95_ms": 554.1,
+      "warm_mean_ms": 464.9,
+      "tiles_per_s": 2.15,
+      "peak_rss_mb": 308.0,
+      "runtime": {
+        "onnxruntime": "1.30.0",
+        "threads": 4,
+        "providers": {
+          "known": [
+            "CPUExecutionProvider"
+          ],
+          "anomaly": [
+            "CPUExecutionProvider"
+          ]
+        },
+        "provider": "CPUExecutionProvider"
+      },
+      "runs": 50,
+      "load_average_before": [
+        3.56,
+        4.07,
+        4.61
+      ],
+      "variant": "onnx fp32 cpu 4t",
+      "threads_requested": 4,
+      "files": {
+        "known.onnx": 44.7,
+        "anomaly.onnx": 12.3
+      },
+      "model_mb": 57.0,
+      "survey": {
+        "tiles_across": 4,
+        "tiles_per_km": 78.1,
+        "km_per_hour": 99.1,
+        "required_km_per_hour": 7.41,
+        "real_time_factor": 13.4
+      }
+    },
+    {
+      "cold_start_s": 0.237,
+      "first_tile_ms": 322.0,
+      "warm_p50_ms": 230.0,
+      "warm_p95_ms": 307.8,
+      "warm_mean_ms": 251.5,
+      "tiles_per_s": 3.98,
+      "peak_rss_mb": 257.9,
+      "runtime": {
+        "onnxruntime": "1.30.0",
+        "threads": 4,
+        "providers": {
+          "known.int8": [
+            "CPUExecutionProvider"
+          ],
+          "anomaly.int8": [
+            "CPUExecutionProvider"
+          ]
+        },
+        "provider": "CPUExecutionProvider"
+      },
+      "runs": 50,
+      "load_average_before": [
+        5.22,
+        4.41,
+        4.71
+      ],
+      "variant": "onnx int8 cpu 4t",
+      "threads_requested": 4,
+      "files": {
+        "known.int8.onnx": 11.5,
+        "anomaly.int8.onnx": 3.4
+      },
+      "model_mb": 14.8,
+      "survey": {
+        "tiles_across": 4,
+        "tiles_per_km": 78.1,
+        "km_per_hour": 183.4,
+        "required_km_per_hour": 7.41,
+        "real_time_factor": 24.8
+      }
+    },
+    {
+      "cold_start_s": 0.208,
+      "first_tile_ms": 568.0,
+      "warm_p50_ms": 448.8,
+      "warm_p95_ms": 785.8,
+      "warm_mean_ms": 487.0,
+      "tiles_per_s": 2.05,
+      "peak_rss_mb": 276.8,
+      "runtime": {
+        "onnxruntime": "1.30.0",
+        "threads": 4,
+        "providers": {
+          "known.fp16": [
+            "CPUExecutionProvider"
+          ],
+          "anomaly.fp16": [
+            "CPUExecutionProvider"
+          ]
+        },
+        "provider": "CPUExecutionProvider"
+      },
+      "runs": 50,
+      "load_average_before": [
+        5.33,
+        4.46,
+        4.73
+      ],
+      "variant": "onnx fp16 cpu 4t",
+      "threads_requested": 4,
+      "files": {
+        "known.fp16.onnx": 22.4,
+        "anomaly.fp16.onnx": 6.2
+      },
+      "model_mb": 28.6,
+      "survey": {
+        "tiles_across": 4,
+        "tiles_per_km": 78.1,
+        "km_per_hour": 94.5,
+        "required_km_per_hour": 7.41,
+        "real_time_factor": 12.8
+      }
+    },
+    {
+      "cold_start_s": 4.987,
+      "first_tile_ms": 41.4,
+      "warm_p50_ms": 37.4,
+      "warm_p95_ms": 43.8,
+      "warm_mean_ms": 37.6,
+      "tiles_per_s": 26.57,
+      "peak_rss_mb": 381.6,
+      "runtime": {
+        "onnxruntime": "1.30.0",
+        "threads": "onnxruntime default",
+        "providers": {
+          "known": [
+            "CoreMLExecutionProvider",
+            "CPUExecutionProvider"
+          ],
+          "anomaly": [
+            "CoreMLExecutionProvider",
+            "CPUExecutionProvider"
+          ]
+        },
+        "provider": "CoreMLExecutionProvider"
+      },
+      "runs": 50,
+      "load_average_before": [
+        6.66,
+        4.9,
+        4.88
+      ],
+      "variant": "onnx fp32 CoreML",
+      "threads_requested": 0,
+      "files": {
+        "known.onnx": 44.7,
+        "anomaly.onnx": 12.3
+      },
+      "model_mb": 57.0,
+      "survey": {
+        "tiles_across": 4,
+        "tiles_per_km": 78.1,
+        "km_per_hour": 1224.3,
+        "required_km_per_hour": 7.41,
+        "real_time_factor": 165.3
+      }
+    }
+  ]
+}

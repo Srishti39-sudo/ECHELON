@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 /**
  * The generated map.html, embedded.
@@ -9,38 +9,65 @@ import { useEffect, useRef } from "react"
  * project, not two that can disagree.
  *
  * Selecting a hotspot here posts a message into the frame, which is the only
- * channel between them. The frame is served from the backend's origin rather
- * than the dev server's, so a direct DOM reach would be blocked anyway; the
- * message carries a hotspot identifier and nothing else, and the map ignores
- * any id that is not one of its own.
+ * channel between them. The message carries a hotspot identifier and nothing
+ * else, and the map ignores any id that is not one of its own.
+ *
+ * The frame starts inert. A Leaflet map inside an iframe swallows the mouse
+ * wheel, so the page stops scrolling the moment the pointer crosses the map and
+ * appears frozen. One click activates it, clicking anywhere else releases it,
+ * and the wheel belongs to whichever the operator last chose.
  */
 function MapFrame({ src, focusId, title }) {
   const frame = useRef(null)
+  const shell = useRef(null)
   const loaded = useRef(false)
+  const [active, setActive] = useState(false)
+
+  const focus = (id) => {
+    frame.current?.contentWindow?.postMessage(
+      { type: "deepecho:focus", hotspot_id: id },
+      "*",
+    )
+  }
 
   useEffect(() => {
     if (!focusId || !loaded.current) return
-    const target = frame.current?.contentWindow
-    if (!target) return
-    target.postMessage({ type: "deepecho:focus", hotspot_id: focusId }, "*")
+    focus(focusId)
   }, [focusId, src])
 
+  useEffect(() => {
+    if (!active) return
+    const release = (event) => {
+      if (!shell.current?.contains(event.target)) setActive(false)
+    }
+    document.addEventListener("mousedown", release)
+    return () => document.removeEventListener("mousedown", release)
+  }, [active])
+
   return (
-    <iframe
-      ref={frame}
-      className="sv-map-frame"
-      src={src}
-      title={title}
-      onLoad={() => {
-        loaded.current = true
-        if (focusId) {
-          frame.current?.contentWindow?.postMessage(
-            { type: "deepecho:focus", hotspot_id: focusId },
-            "*",
-          )
-        }
-      }}
-    />
+    <div className="sv-map-shell" ref={shell}>
+      <iframe
+        ref={frame}
+        className="sv-map-frame"
+        src={src}
+        title={title}
+        onLoad={() => {
+          loaded.current = true
+          if (focusId) focus(focusId)
+        }}
+      />
+
+      {!active && (
+        <button
+          type="button"
+          className="sv-map-veil"
+          onClick={() => setActive(true)}
+          aria-label="Activate the map"
+        >
+          <span>Click to use the map</span>
+        </button>
+      )}
+    </div>
   )
 }
 

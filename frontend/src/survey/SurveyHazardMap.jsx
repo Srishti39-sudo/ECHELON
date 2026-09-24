@@ -1,15 +1,19 @@
 import { useEffect, useMemo, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { Download } from "lucide-react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Download, FileText } from "lucide-react"
 
 import StatCard from "../components/StatCard"
 import { actionsUrl, fetchExport, listSurveys, mapUrl } from "./api"
 import { copy } from "./config"
+import { filteredDetections, isVerified } from "./detections"
 import { handoffQuestion, hotspotContext } from "./handoff"
+import DetectionTable from "./components/DetectionTable"
 import Filters from "./components/Filters"
 import HotspotDetail from "./components/HotspotDetail"
 import HotspotTable from "./components/HotspotTable"
 import MapFrame from "./components/MapFrame"
+import CoveragePanel from "./components/CoveragePanel"
+import MissionReplay from "./components/MissionReplay"
 import "./survey.css"
 
 const EMPTY_FILTERS = { objectClass: "all", tier: "all", priority: "all" }
@@ -25,12 +29,20 @@ const EMPTY_FILTERS = { objectClass: "all", tier: "all", priority: "all" }
  */
 function SurveyHazardMap() {
   const navigate = useNavigate()
+  // A page that just finished a survey (Live survey) passes its id, and the
+  // operator expects to land on that survey, not on whichever sorts first.
+  // ?survey=<id> does the same for a link that has no router state to carry,
+  // such as the printable report's "back to the map" or a bookmarked URL.
+  const location = useLocation()
+  const requestedId =
+    location.state?.surveyId ?? new URLSearchParams(location.search).get("survey") ?? null
 
   const [surveys, setSurveys] = useState([])
   const [surveyId, setSurveyId] = useState(null)
   const [survey, setSurvey] = useState(null)
   const [selectedId, setSelectedId] = useState(null)
   const [filters, setFilters] = useState(EMPTY_FILTERS)
+  const [showFiltered, setShowFiltered] = useState(false)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -43,7 +55,10 @@ function SurveyHazardMap() {
         // Lead with a real survey where there is one. A demo lands first in
         // the list alphabetically and opening on synthetic data by default
         // would be the wrong first impression.
-        const preferred = found.find((s) => !s.demo) || found[0]
+        const preferred =
+          found.find((s) => s.survey_id === requestedId) ||
+          found.find((s) => !s.demo) ||
+          found[0]
         setSurveyId(preferred ? preferred.survey_id : null)
         setLoading(Boolean(preferred))
       })
@@ -56,7 +71,7 @@ function SurveyHazardMap() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [requestedId])
 
   // Choosing a survey clears what belonged to the previous one. This lives in
   // the handler rather than in the effect below: resetting state synchronously
@@ -67,6 +82,7 @@ function SurveyHazardMap() {
     setSurvey(null)
     setSelectedId(null)
     setFilters(EMPTY_FILTERS)
+    setShowFiltered(false)
     setError(null)
     setLoading(true)
   }
@@ -145,6 +161,13 @@ function SurveyHazardMap() {
     ? selected.detection_ids.map((id) => detectionsById.get(id)).filter(Boolean)
     : []
 
+  // Verification fields exist only in exports written since it was added. An
+  // older export shows no filtered count at all rather than a zero it never
+  // measured.
+  const verified = isVerified(survey)
+  const filtered = useMemo(() => filteredDetections(survey), [survey])
+  const filteredCount = summary?.suppressed_detections ?? filtered.length
+
   const surveyMeta = surveys.find((s) => s.survey_id === surveyId)
   const isDemo = Boolean(survey?.metadata?.demo)
   const georeferenced = Boolean(summary?.georeferenced)
@@ -205,6 +228,13 @@ function SurveyHazardMap() {
               Action list
             </a>
           )}
+
+          {surveyId && survey && (
+            <Link className="sv-btn sv-btn-primary" to={`/report/${encodeURIComponent(surveyId)}`}>
+              <FileText size={15} />
+              {copy.reportButton}
+            </Link>
+          )}
         </div>
       </header>
 
@@ -229,7 +259,15 @@ function SurveyHazardMap() {
               type={summary.detections_by_tier?.critical ? "anomaly" : undefined}
             />
             <StatCard
+              title="Filtered False Positives"
+              value={verified ? filteredCount : "—"}
+              subtitle={
+                verified ? "kept in the export, not in any hotspot" : copy.notVerifiedNote
+              }
+            />
+            <StatCard
               title="Coordinates"
+              type="sv-stat-text"
               value={georeferenced ? copy.geoMode : copy.relativeMode}
               subtitle={summary.coordinate_mode}
             />
@@ -281,6 +319,38 @@ function SurveyHazardMap() {
               />
             </aside>
           </section>
+
+          {/* Replay and coverage read the survey's navigation sidecars through
+              their own routes. Keyed by survey so nothing carries across. */}
+          <MissionReplay key={`replay-${surveyId}`} surveyId={surveyId} />
+          <CoveragePanel key={`coverage-${surveyId}`} surveyId={surveyId} />
+
+          {/* Filtered detections belong to no hotspot, so the hotspot detail
+              can never show them. They get their own section, closed until
+              asked for, so a disagreement with the filter is one click away. */}
+          {verified && (
+            <section className="sv-filtered">
+              <div className="sv-filtered-head">
+                <div>
+                  <h2>
+                    {copy.filteredTitle} <span className="sv-count">{filteredCount}</span>
+                  </h2>
+                  <p>{filteredCount ? copy.filteredNote : copy.filteredNone}</p>
+                </div>
+                {filtered.length > 0 && (
+                  <button
+                    type="button"
+                    className="sv-btn"
+                    aria-expanded={showFiltered}
+                    onClick={() => setShowFiltered((open) => !open)}
+                  >
+                    {showFiltered ? copy.filteredHide : copy.filteredShow(filtered.length)}
+                  </button>
+                )}
+              </div>
+              {showFiltered && <DetectionTable detections={filtered} />}
+            </section>
+          )}
 
           <p className="sv-disclaimer">{copy.disclaimer}</p>
         </>

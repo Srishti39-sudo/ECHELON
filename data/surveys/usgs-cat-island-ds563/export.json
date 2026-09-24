@@ -1,0 +1,878 @@
+{
+  "metadata": {
+    "engine": "deepecho-survey-hazard",
+    "processing_version": "1.0.0",
+    "processed_at": "2026-09-15T16:11:58+00:00",
+    "processing_seconds": 3.558,
+    "survey_id": "usgs-cat-island-ds563",
+    "title": "USGS DS-563 Cat Island MS, Klein 3900 mosaic (1 m/px)",
+    "coordinate_mode": "Geo-referenced",
+    "confidence_threshold": null,
+    "model_name": "marine.pt",
+    "model_path": "marine.pt",
+    "model_count": 1,
+    "detector_classes": [
+      "fishing_gear",
+      "shipwreck"
+    ],
+    "detector": "sonar_detector.py via sonar_pipeline.py and geotag.py (teammate)",
+    "demo": false,
+    "imported_from": "geotag.py hazards.json",
+    "importer": "import_geotag.py 1.0.0",
+    "warnings": []
+  },
+  "survey_summary": {
+    "total_raw_detections": 5,
+    "total_deduplicated_detections": 5,
+    "duplicates_removed": 0,
+    "suppressed_detections": 4,
+    "total_hotspots": 1,
+    "total_severity": 1.5355,
+    "highest_priority_hotspot": {
+      "hotspot_id": "H001",
+      "strip": "10cct01_v2_ss_1m_b_waterfall",
+      "total_severity": 0.2605,
+      "risk_score": 0.2605,
+      "dominant_class": "fishing_gear",
+      "detection_count": 1,
+      "recommended_action": "Schedule ghost-gear recovery"
+    },
+    "highest_severity_class": {
+      "object_class": "shipwreck",
+      "severity": 0.3594,
+      "confidence": 0.599,
+      "detection_id": "10cct01_v2_ss_1m_b_waterfall_g1"
+    },
+    "class_distribution": {
+      "shipwreck": 4,
+      "fishing_gear": 1
+    },
+    "detections_by_tier": {
+      "critical": 4,
+      "medium": 0,
+      "low": 1
+    },
+    "hotspots_by_tier": {
+      "critical": 0,
+      "medium": 0,
+      "low": 1
+    },
+    "georeferenced": true,
+    "coordinate_mode": "Geo-referenced",
+    "strips_processed": 1,
+    "strips": [
+      "10cct01_v2_ss_1m_b_waterfall"
+    ],
+    "tiles_processed": 207,
+    "model_confidence_threshold": null
+  },
+  "detections": [
+    {
+      "id": "10cct01_v2_ss_1m_b_waterfall_g3",
+      "object_class": "shipwreck",
+      "class_normalized": "shipwreck",
+      "confidence": 0.55,
+      "class_weight": 0.6,
+      "severity": 0.33,
+      "severity_tier": "critical",
+      "severity_tier_basis": "class-floor:shipwreck",
+      "severity_basis": "exact",
+      "recommended_action": "Flag navigation hazard",
+      "action_basis": "exact",
+      "global_x": 6971.9,
+      "global_y": 370.35,
+      "bbox_global": [
+        6673.1,
+        102.5,
+        7270.7,
+        638.2
+      ],
+      "width_px": 597.6,
+      "height_px": 535.7,
+      "latitude": 30.281302,
+      "longitude": -89.025885,
+      "confidence_pct": 55.0,
+      "confidence_pct_basis": "sonar_pipeline.py confidence_pct: calibrated detector probability x (0.6 + 0.4 x shadow_score) from shadow_check.py (teammate); copied, not recomputed",
+      "suppressed": true,
+      "dimensions": {
+        "length_m": 535.7,
+        "width_m": 597.6,
+        "height_m": null,
+        "length_px": 535.7,
+        "width_px": 597.6,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "geotag.py (edge ground-range difference; windowed along-track spacing); as supplied in hazards.json, not cross-checked: no navigation table was available",
+        "height_basis": "not measured: hazards.json carries no height (shadow_check.py did not run, or had no altitude / resolution)"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "path": "theirs",
+        "source": "shadow_check.py (teammate)",
+        "detector_confidence": 0.55,
+        "confidence_pct": 55.0,
+        "heuristic": true,
+        "hard_reasons": [
+          "no_acoustic_shadow"
+        ],
+        "reasons": [
+          "shadow_check.py (teammate) verdict 'no-shadow' (shadow_score 0.305): no acoustic shadow behind the box, vetoed as a likely false positive"
+        ],
+        "notes": [],
+        "status": "checked",
+        "shadow_score": 0.305,
+        "verdict": "no-shadow",
+        "vetoed": null,
+        "suppression_basis": "no vetoed flag in hazards.json, so the brief's rule is applied: verdict 'no-shadow' AND confidence < 0.60",
+        "suppressed": true
+      },
+      "provenance": {
+        "strip": "10cct01_v2_ss_1m_b_waterfall",
+        "representative_tile": "10cct01_v2_ss_1m_b_waterfall_6656_0.jpg",
+        "source_tiles": [
+          "10cct01_v2_ss_1m_b_waterfall_6656_0.jpg"
+        ],
+        "merged_count": 1,
+        "merged_from": [],
+        "merge_spread_px": 0.0,
+        "tile_offset": [
+          6656,
+          0
+        ],
+        "bbox_tile": [
+          17.1,
+          102.5,
+          614.7,
+          638.2
+        ],
+        "detector_model": "geotag:marine",
+        "geotag": {
+          "geotag_id": 3,
+          "classification": "shipwreck",
+          "image": "10cct01_v2_ss_1m_b",
+          "box_xyxy_px": [
+            6673.1,
+            102.5,
+            7270.7,
+            638.2
+          ],
+          "side": "mosaic",
+          "ground_range_m": 0.0,
+          "slant_range_m": 0.0,
+          "ping": null,
+          "ping_time": null,
+          "vehicle_altitude_m": null,
+          "heading_deg": 0.0,
+          "lat_dms": "30°16'52.69\" N",
+          "lon_dms": "89°01'33.19\" W",
+          "man_made": true,
+          "navigation": "10cct01_v2_ss_1m_b.tif",
+          "representative_tile_rule": "manifest tile containing the box centre, the most central when tiles overlap"
+        }
+      }
+    },
+    {
+      "id": "10cct01_v2_ss_1m_b_waterfall_g2",
+      "object_class": "shipwreck",
+      "class_normalized": "shipwreck",
+      "confidence": 0.554,
+      "class_weight": 0.6,
+      "severity": 0.3324,
+      "severity_tier": "critical",
+      "severity_tier_basis": "class-floor:shipwreck",
+      "severity_basis": "exact",
+      "recommended_action": "Flag navigation hazard",
+      "action_basis": "exact",
+      "global_x": 6963.4,
+      "global_y": 831.2,
+      "bbox_global": [
+        6656.0,
+        512.0,
+        7270.8,
+        1150.4
+      ],
+      "width_px": 614.8,
+      "height_px": 638.4,
+      "latitude": 30.277145,
+      "longitude": -89.025888,
+      "confidence_pct": 55.4,
+      "confidence_pct_basis": "sonar_pipeline.py confidence_pct: calibrated detector probability x (0.6 + 0.4 x shadow_score) from shadow_check.py (teammate); copied, not recomputed",
+      "suppressed": true,
+      "dimensions": {
+        "length_m": 638.4,
+        "width_m": 614.8,
+        "height_m": null,
+        "length_px": 638.4,
+        "width_px": 614.8,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "geotag.py (edge ground-range difference; windowed along-track spacing); as supplied in hazards.json, not cross-checked: no navigation table was available",
+        "height_basis": "not measured: hazards.json carries no height (shadow_check.py did not run, or had no altitude / resolution)"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "path": "theirs",
+        "source": "shadow_check.py (teammate)",
+        "detector_confidence": 0.554,
+        "confidence_pct": 55.4,
+        "heuristic": true,
+        "hard_reasons": [
+          "no_acoustic_shadow"
+        ],
+        "reasons": [
+          "shadow_check.py (teammate) verdict 'no-shadow' (shadow_score 0.313): no acoustic shadow behind the box, vetoed as a likely false positive"
+        ],
+        "notes": [],
+        "status": "checked",
+        "shadow_score": 0.313,
+        "verdict": "no-shadow",
+        "vetoed": null,
+        "suppression_basis": "no vetoed flag in hazards.json, so the brief's rule is applied: verdict 'no-shadow' AND confidence < 0.60",
+        "suppressed": true
+      },
+      "provenance": {
+        "strip": "10cct01_v2_ss_1m_b_waterfall",
+        "representative_tile": "10cct01_v2_ss_1m_b_waterfall_6656_512.jpg",
+        "source_tiles": [
+          "10cct01_v2_ss_1m_b_waterfall_6656_512.jpg"
+        ],
+        "merged_count": 1,
+        "merged_from": [],
+        "merge_spread_px": 0.0,
+        "tile_offset": [
+          6656,
+          512
+        ],
+        "bbox_tile": [
+          0.0,
+          0.0,
+          614.8,
+          638.4
+        ],
+        "detector_model": "geotag:marine",
+        "geotag": {
+          "geotag_id": 2,
+          "classification": "shipwreck",
+          "image": "10cct01_v2_ss_1m_b",
+          "box_xyxy_px": [
+            6656.0,
+            512.0,
+            7270.8,
+            1150.4
+          ],
+          "side": "mosaic",
+          "ground_range_m": 0.0,
+          "slant_range_m": 0.0,
+          "ping": null,
+          "ping_time": null,
+          "vehicle_altitude_m": null,
+          "heading_deg": 0.0,
+          "lat_dms": "30°16'37.72\" N",
+          "lon_dms": "89°01'33.20\" W",
+          "man_made": true,
+          "navigation": "10cct01_v2_ss_1m_b.tif",
+          "representative_tile_rule": "manifest tile containing the box centre, the most central when tiles overlap"
+        }
+      }
+    },
+    {
+      "id": "10cct01_v2_ss_1m_b_waterfall_g5",
+      "object_class": "fishing_gear",
+      "class_normalized": "fishing-gear",
+      "confidence": 0.521,
+      "class_weight": 0.5,
+      "severity": 0.2605,
+      "severity_tier": "low",
+      "severity_tier_basis": "score",
+      "severity_basis": "exact",
+      "recommended_action": "Schedule ghost-gear recovery",
+      "action_basis": "exact",
+      "global_x": 6198.05,
+      "global_y": 4632.25,
+      "bbox_global": [
+        6187.1,
+        4621.1,
+        6209.0,
+        4643.4
+      ],
+      "width_px": 21.9,
+      "height_px": 22.3,
+      "latitude": 30.242741,
+      "longitude": -89.033134,
+      "confidence_pct": 52.1,
+      "confidence_pct_basis": "sonar_pipeline.py confidence_pct: calibrated detector probability x (0.6 + 0.4 x shadow_score) from shadow_check.py (teammate); copied, not recomputed",
+      "suppressed": false,
+      "dimensions": {
+        "length_m": 22.3,
+        "width_m": 21.9,
+        "height_m": null,
+        "length_px": 22.3,
+        "width_px": 21.9,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "geotag.py (edge ground-range difference; windowed along-track spacing); as supplied in hazards.json, not cross-checked: no navigation table was available",
+        "height_basis": "not measured: hazards.json carries no height (shadow_check.py did not run, or had no altitude / resolution)"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "path": "theirs",
+        "source": "shadow_check.py (teammate)",
+        "detector_confidence": 0.521,
+        "confidence_pct": 52.1,
+        "heuristic": true,
+        "hard_reasons": [],
+        "reasons": [
+          "shadow_check.py (teammate) verdict 'weak-shadow' (shadow_score 0.391)"
+        ],
+        "notes": [],
+        "status": "checked",
+        "shadow_score": 0.391,
+        "verdict": "weak-shadow",
+        "vetoed": null,
+        "suppression_basis": "no vetoed flag in hazards.json, so the brief's rule is applied: verdict 'no-shadow' AND confidence < 0.60",
+        "suppressed": false
+      },
+      "provenance": {
+        "strip": "10cct01_v2_ss_1m_b_waterfall",
+        "representative_tile": "10cct01_v2_ss_1m_b_waterfall_5632_4096.jpg",
+        "source_tiles": [
+          "10cct01_v2_ss_1m_b_waterfall_5632_4096.jpg"
+        ],
+        "merged_count": 1,
+        "merged_from": [],
+        "merge_spread_px": 0.0,
+        "tile_offset": [
+          5632,
+          4096
+        ],
+        "bbox_tile": [
+          555.1,
+          525.1,
+          577.0,
+          547.4
+        ],
+        "detector_model": "geotag:marine",
+        "geotag": {
+          "geotag_id": 5,
+          "classification": "fishing_gear",
+          "image": "10cct01_v2_ss_1m_b",
+          "box_xyxy_px": [
+            6187.1,
+            4621.1,
+            6209.0,
+            4643.4
+          ],
+          "side": "mosaic",
+          "ground_range_m": 0.0,
+          "slant_range_m": 0.0,
+          "ping": null,
+          "ping_time": null,
+          "vehicle_altitude_m": null,
+          "heading_deg": 0.0,
+          "lat_dms": "30°14'33.87\" N",
+          "lon_dms": "89°01'59.28\" W",
+          "man_made": true,
+          "navigation": "10cct01_v2_ss_1m_b.tif",
+          "representative_tile_rule": "manifest tile containing the box centre, the most central when tiles overlap"
+        }
+      }
+    },
+    {
+      "id": "10cct01_v2_ss_1m_b_waterfall_g1",
+      "object_class": "shipwreck",
+      "class_normalized": "shipwreck",
+      "confidence": 0.599,
+      "class_weight": 0.6,
+      "severity": 0.3594,
+      "severity_tier": "critical",
+      "severity_tier_basis": "class-floor:shipwreck",
+      "severity_basis": "exact",
+      "recommended_action": "Flag navigation hazard",
+      "action_basis": "exact",
+      "global_x": 10332.65,
+      "global_y": 6024.5,
+      "bbox_global": [
+        10240.0,
+        5893.7,
+        10425.3,
+        6155.3
+      ],
+      "width_px": 185.3,
+      "height_px": 261.6,
+      "latitude": 30.230845,
+      "longitude": -88.989934,
+      "confidence_pct": 59.9,
+      "confidence_pct_basis": "sonar_pipeline.py confidence_pct: calibrated detector probability x (0.6 + 0.4 x shadow_score) from shadow_check.py (teammate); copied, not recomputed",
+      "suppressed": true,
+      "dimensions": {
+        "length_m": 261.6,
+        "width_m": 185.3,
+        "height_m": null,
+        "length_px": 261.6,
+        "width_px": 185.3,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "geotag.py (edge ground-range difference; windowed along-track spacing); as supplied in hazards.json, not cross-checked: no navigation table was available",
+        "height_basis": "not measured: hazards.json carries no height (shadow_check.py did not run, or had no altitude / resolution)"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "path": "theirs",
+        "source": "shadow_check.py (teammate)",
+        "detector_confidence": 0.599,
+        "confidence_pct": 59.9,
+        "heuristic": true,
+        "hard_reasons": [
+          "no_acoustic_shadow"
+        ],
+        "reasons": [
+          "shadow_check.py (teammate) verdict 'no-shadow' (shadow_score 0.332): no acoustic shadow behind the box, vetoed as a likely false positive"
+        ],
+        "notes": [],
+        "status": "checked",
+        "shadow_score": 0.332,
+        "verdict": "no-shadow",
+        "vetoed": null,
+        "suppression_basis": "no vetoed flag in hazards.json, so the brief's rule is applied: verdict 'no-shadow' AND confidence < 0.60",
+        "suppressed": true
+      },
+      "provenance": {
+        "strip": "10cct01_v2_ss_1m_b_waterfall",
+        "representative_tile": "10cct01_v2_ss_1m_b_waterfall_10240_5632.jpg",
+        "source_tiles": [
+          "10cct01_v2_ss_1m_b_waterfall_10240_5632.jpg"
+        ],
+        "merged_count": 1,
+        "merged_from": [],
+        "merge_spread_px": 0.0,
+        "tile_offset": [
+          10240,
+          5632
+        ],
+        "bbox_tile": [
+          0.0,
+          261.7,
+          185.3,
+          523.3
+        ],
+        "detector_model": "geotag:marine",
+        "geotag": {
+          "geotag_id": 1,
+          "classification": "shipwreck",
+          "image": "10cct01_v2_ss_1m_b",
+          "box_xyxy_px": [
+            10240.0,
+            5893.7,
+            10425.3,
+            6155.3
+          ],
+          "side": "mosaic",
+          "ground_range_m": 0.0,
+          "slant_range_m": 0.0,
+          "ping": null,
+          "ping_time": null,
+          "vehicle_altitude_m": null,
+          "heading_deg": 0.0,
+          "lat_dms": "30°13'51.04\" N",
+          "lon_dms": "88°59'23.76\" W",
+          "man_made": true,
+          "navigation": "10cct01_v2_ss_1m_b.tif",
+          "representative_tile_rule": "manifest tile containing the box centre, the most central when tiles overlap"
+        }
+      }
+    },
+    {
+      "id": "10cct01_v2_ss_1m_b_waterfall_g4",
+      "object_class": "shipwreck",
+      "class_normalized": "shipwreck",
+      "confidence": 0.422,
+      "class_weight": 0.6,
+      "severity": 0.2532,
+      "severity_tier": "critical",
+      "severity_tier_basis": "class-floor:shipwreck",
+      "severity_basis": "exact",
+      "recommended_action": "Flag navigation hazard",
+      "action_basis": "exact",
+      "global_x": 9650.4,
+      "global_y": 7222.55,
+      "bbox_global": [
+        9599.8,
+        7168.0,
+        9701.0,
+        7277.1
+      ],
+      "width_px": 101.2,
+      "height_px": 109.1,
+      "latitude": 30.219932,
+      "longitude": -88.996801,
+      "confidence_pct": 42.2,
+      "confidence_pct_basis": "sonar_pipeline.py confidence_pct: calibrated detector probability x (0.6 + 0.4 x shadow_score) from shadow_check.py (teammate); copied, not recomputed",
+      "suppressed": true,
+      "dimensions": {
+        "length_m": 109.1,
+        "width_m": 101.2,
+        "height_m": null,
+        "length_px": 109.1,
+        "width_px": 101.2,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "geotag.py (edge ground-range difference; windowed along-track spacing); as supplied in hazards.json, not cross-checked: no navigation table was available",
+        "height_basis": "not measured: hazards.json carries no height (shadow_check.py did not run, or had no altitude / resolution)"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "path": "theirs",
+        "source": "shadow_check.py (teammate)",
+        "detector_confidence": 0.422,
+        "confidence_pct": 42.2,
+        "heuristic": true,
+        "hard_reasons": [
+          "no_acoustic_shadow"
+        ],
+        "reasons": [
+          "shadow_check.py (teammate) verdict 'no-shadow' (shadow_score 0.000): no acoustic shadow behind the box, vetoed as a likely false positive"
+        ],
+        "notes": [],
+        "status": "checked",
+        "shadow_score": 0.0,
+        "verdict": "no-shadow",
+        "vetoed": null,
+        "suppression_basis": "no vetoed flag in hazards.json, so the brief's rule is applied: verdict 'no-shadow' AND confidence < 0.60",
+        "suppressed": true
+      },
+      "provenance": {
+        "strip": "10cct01_v2_ss_1m_b_waterfall",
+        "representative_tile": "10cct01_v2_ss_1m_b_waterfall_9216_6656.jpg",
+        "source_tiles": [
+          "10cct01_v2_ss_1m_b_waterfall_9216_6656.jpg"
+        ],
+        "merged_count": 1,
+        "merged_from": [],
+        "merge_spread_px": 0.0,
+        "tile_offset": [
+          9216,
+          6656
+        ],
+        "bbox_tile": [
+          383.8,
+          512.0,
+          485.0,
+          621.1
+        ],
+        "detector_model": "geotag:marine",
+        "geotag": {
+          "geotag_id": 4,
+          "classification": "shipwreck",
+          "image": "10cct01_v2_ss_1m_b",
+          "box_xyxy_px": [
+            9599.8,
+            7168.0,
+            9701.0,
+            7277.1
+          ],
+          "side": "mosaic",
+          "ground_range_m": 0.0,
+          "slant_range_m": 0.0,
+          "ping": null,
+          "ping_time": null,
+          "vehicle_altitude_m": null,
+          "heading_deg": 0.0,
+          "lat_dms": "30°13'11.75\" N",
+          "lon_dms": "88°59'48.48\" W",
+          "man_made": true,
+          "navigation": "10cct01_v2_ss_1m_b.tif",
+          "representative_tile_rule": "manifest tile containing the box centre, the most central when tiles overlap"
+        }
+      }
+    }
+  ],
+  "hotspots": [
+    {
+      "hotspot_id": "H001",
+      "priority_rank": 1,
+      "strip": "10cct01_v2_ss_1m_b_waterfall",
+      "cell": [
+        12,
+        9
+      ],
+      "cell_size_px": 512,
+      "centroid": {
+        "global_x": 6198.05,
+        "global_y": 4632.25,
+        "latitude": 30.242741,
+        "longitude": -89.033134
+      },
+      "detection_count": 1,
+      "total_severity": 0.2605,
+      "max_severity": 0.2605,
+      "severity_tier": "low",
+      "dominant_class": "fishing_gear",
+      "dominant_class_severity": 0.2605,
+      "recommended_action": "Schedule ghost-gear recovery",
+      "action_basis": "exact",
+      "risk_score": 0.2605,
+      "detection_density": 3.815,
+      "hazard_diversity": 1,
+      "confidence_mean": 0.521,
+      "confidence_max": 0.521,
+      "severity_per_detection": 0.2605,
+      "spatial_extent": {
+        "width_px": 0.0,
+        "height_px": 0.0,
+        "diagonal_px": 0.0
+      },
+      "detection_ids": [
+        "10cct01_v2_ss_1m_b_waterfall_g5"
+      ],
+      "top_detection": {
+        "id": "10cct01_v2_ss_1m_b_waterfall_g5",
+        "class": "fishing_gear",
+        "confidence": 0.521,
+        "class_weight": 0.5,
+        "severity": 0.2605,
+        "tile": "10cct01_v2_ss_1m_b_waterfall_5632_4096.jpg"
+      },
+      "rationale": "Ranked 1 on a total severity of 0.2605 across 1 detection. The worst is 'fishing_gear' at confidence 0.521 and class weight 0.5, giving severity 0.2605 and nothing else in the cell. Dominant class 'fishing_gear' is severity-weighted, so it reflects consequence rather than headcount."
+    }
+  ],
+  "configuration": {
+    "tiling": {
+      "TILE": 640,
+      "STRIDE": 512,
+      "overlap_px": 128,
+      "MIN_CONTENT": 0.02,
+      "DENOISE": false
+    },
+    "detection": {
+      "CONF_THRESH": null,
+      "imgsz": null,
+      "note": "detection ran upstream in models/sonar_pipeline.py (sonar_detector.py); its thresholds are not recorded in hazards.json"
+    },
+    "deduplication": {
+      "MERGE_DIST": 60.0,
+      "cross_model_iou": 0.5,
+      "cross_model_rule": "same tile, different checkpoints, IoU >= cross_model_iou. Merges ACROSS classes, because the checkpoints do not share a vocabulary; the losing call is kept as second_opinion. A separate stage from MERGE_DIST, which never merges classes.",
+      "rule": "same class and same strip, nearest representative within MERGE_DIST survey pixels, highest confidence wins, no chain merging"
+    },
+    "hotspots": {
+      "GRID": 512,
+      "RISK_DENSITY_WEIGHT": 0.25,
+      "TOP_N_HOTSPOTS": 0,
+      "ranked_by": "total_severity descending",
+      "risk_score": "max_severity + RISK_DENSITY_WEIGHT * (total_severity - max_severity)"
+    },
+    "severity_policy": {
+      "version": "1.0.0",
+      "formula": "severity = class_weight * confidence",
+      "class_weights": {
+        "mine": 1.0,
+        "ordnance": 1.0,
+        "uxo": 1.0,
+        "human": 1.0,
+        "victim": 1.0,
+        "unknown": 0.8,
+        "anomaly": 0.8,
+        "aircraft": 0.7,
+        "plane": 0.7,
+        "ship": 0.6,
+        "shipwreck": 0.6,
+        "wreck": 0.6,
+        "chain": 0.5,
+        "cable": 0.5,
+        "net": 0.5,
+        "ghost-gear": 0.5,
+        "fishing-gear": 0.5,
+        "pipe": 0.5,
+        "pipeline": 0.5,
+        "cylinder": 0.9,
+        "tire": 0.3,
+        "drum": 0.3,
+        "fish": 0.2,
+        "marine-life": 0.2,
+        "debris": 0.3,
+        "bottle": 0.3,
+        "can": 0.3,
+        "mine-like-object": 1.0,
+        "unknown-anomaly": 0.8
+      },
+      "unknown_class_severity": 0.8,
+      "tiers": {
+        "critical": 0.75,
+        "medium": 0.4,
+        "low": 0.0
+      },
+      "class_tier_floors": {
+        "mine": "critical",
+        "ordnance": "critical",
+        "uxo": "critical",
+        "mine-like-object": "critical",
+        "human": "critical",
+        "victim": "critical",
+        "shipwreck": "critical",
+        "wreck": "critical",
+        "ship": "critical",
+        "aircraft": "critical",
+        "plane": "critical"
+      },
+      "tier_applies_to": "a detection's own severity, raised to its class's floor tier when one applies (severity_tier_basis records which); a hotspot takes the highest tier among its detections, so a hotspot is never called critical unless it contains a detection that is",
+      "matching": "exact match on the normalised class name, else the longest table key contained in it, else unknown_class_severity",
+      "actions": {
+        "mine": "Deploy EOD team",
+        "ordnance": "Deploy EOD team",
+        "uxo": "Deploy EOD team",
+        "human": "Initiate SAR",
+        "victim": "Initiate SAR",
+        "debris": "Schedule cleanup",
+        "bottle": "Schedule cleanup",
+        "can": "Schedule cleanup",
+        "shipwreck": "Flag navigation hazard",
+        "wreck": "Flag navigation hazard",
+        "ship": "Flag navigation hazard",
+        "aircraft": "Flag navigation hazard",
+        "plane": "Flag navigation hazard",
+        "tyre": "Schedule cleanup",
+        "tire": "Schedule cleanup",
+        "drum": "Schedule cleanup",
+        "net": "Schedule ghost-gear recovery",
+        "ghost-gear": "Schedule ghost-gear recovery",
+        "fishing-gear": "Schedule ghost-gear recovery",
+        "pipe": "Check against charted pipelines; flag if uncharted",
+        "pipeline": "Check against charted pipelines; flag if uncharted",
+        "cable": "Check against charted cables; flag if uncharted",
+        "cylinder": "Keep clear; send for expert identification as possible ordnance",
+        "mine-like-object": "Keep clear; send for expert identification as possible ordnance",
+        "unknown": "Send for expert identification",
+        "anomaly": "Send for expert identification",
+        "unknown-anomaly": "Send for expert identification",
+        "fish": "Log only, no action",
+        "marine-life": "Log only, no action"
+      },
+      "default_action": "Send for expert identification",
+      "disclaimer": "Severity weights, tier boundaries and recommended actions are a configurable heuristic chosen for this project. They are not Navy, Coast Guard, NOAA or IMO procedure and carry no authority. Review them against your own operating rules before acting on them."
+    },
+    "disclaimer": "Severity weights, tier boundaries and recommended actions are a configurable heuristic chosen for this project. They are not Navy, Coast Guard, NOAA or IMO procedure and carry no authority. Review them against your own operating rules before acting on them.",
+    "import": {
+      "importer": "import_geotag.py",
+      "version": "1.0.0",
+      "verify_requested": "auto",
+      "verify_path": "theirs",
+      "cross_check_tolerance": 0.25
+    }
+  },
+  "provenance": {
+    "demo": false,
+    "processing_version": "1.0.0",
+    "severity_policy_version": "1.0.0",
+    "coordinate_mode": "Geo-referenced",
+    "coordinate_note": "global_x and global_y are pixel offsets within the slant-range waterfall and are present for every detection. Latitude and longitude are geotag.py's, copied unchanged, and null wherever hazards.json has none.",
+    "navigation": {
+      "mode": "geotag_positions",
+      "source": "geotag.py latitude/longitude per detection (teammate), copied unchanged",
+      "navigation_input": "hazards.json only",
+      "position_rule": "every detection position is geotag.py's; nothing in this survey re-locates a pixel. The strip is slant range, so no ground-range transform is registered for it.",
+      "across_track_resolved": true,
+      "note": "no navigation table: positions exist only where hazards.json records them; no sidecar, no water column"
+    },
+    "source_strips": [
+      {
+        "strip": "10cct01_v2_ss_1m_b_waterfall",
+        "source_image": "10cct01_v2_ss_1m_b_waterfall.png",
+        "width": 15753,
+        "height": 9179,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "resolution_basis": null
+      }
+    ],
+    "tile_count": 207,
+    "tiles_in_manifest": 207,
+    "tiles_processed": 207,
+    "tiles_failed": [],
+    "manifest": "manifest.json",
+    "tiling": {
+      "tile": 640,
+      "stride": 512,
+      "overlap": 128,
+      "min_content": 0.02,
+      "denoise": false,
+      "denoise_filter": "Lee speckle filter + percentile stretch",
+      "content_score": "standard deviation of the tile's grey levels / 255, measured on the tile as written"
+    },
+    "model": {
+      "model_name": "marine.pt",
+      "model_path": "marine.pt",
+      "model_count": 1
+    },
+    "confidence_threshold": null,
+    "severity_formula": "severity = class_weight * confidence",
+    "confidence_input": "confidence = sonar_pipeline.py confidence_pct / 100 (or anomaly_score for unknown_anomaly)",
+    "class_confidence_floors": {
+      "human": 0.75,
+      "victim": 0.75,
+      "aircraft": 0.6,
+      "plane": 0.6,
+      "fish": 0.6,
+      "ship": 0.25,
+      "shipwreck": 0.25,
+      "wreck": 0.25
+    },
+    "class_floor_rule": "a detection below its class's floor is relabelled 'unknown' and never dropped; the original call is kept in the detection's downgraded_from.",
+    "class_floors_withheld": 0,
+    "ranking_rule": "hotspots sorted by total_severity descending; H001 is the highest priority",
+    "audit_note": "Every hotspot carries a `rationale`; every detection carries its geotag.py record under provenance.geotag.",
+    "verification": {
+      "ran": true,
+      "path": "theirs",
+      "source": "shadow_check.py (teammate) via hazards.json",
+      "checked": 5,
+      "not_checked": 0,
+      "suppressed": 4,
+      "suppression_rule": "suppressed = vetoed when hazards.json carries it, else verdict == 'no-shadow' and confidence < 0.60",
+      "confidence_rule": "confidence_pct copied from sonar_pipeline.py, never recomputed",
+      "choice": "auto: at least one record carries shadow_score or verdict",
+      "choice_rule": "auto = theirs if any record carries shadow_score or verdict, else ours if a waterfall exists, else none; never both"
+    },
+    "suppression_rule": "a detection marked suppressed is kept in `detections` with its reasons and excluded from hotspots and the action list; nothing is deleted",
+    "strip_resolutions_m_per_px": {},
+    "import": {
+      "importer": "import_geotag.py 1.0.0",
+      "hazards_json": "hazards.json",
+      "hazards_meta": {
+        "generated": "2026-09-15T04:22:35.264444+00:00",
+        "source": "10cct01_v2_ss_1m_b.tif",
+        "simulated_navigation": false,
+        "n_pings": 9179,
+        "n_hazards": 5,
+        "datum": "WGS-84",
+        "method": "slant→ground range (flat seabed), perpendicular-to-heading offset, geodesic (pyproj)",
+        "notes": [],
+        "limitations": [
+          "flat-seabed assumption",
+          "heading (yaw) applied; roll/pitch/heave recorded per ping but not compensated",
+          "position accuracy inherits the vehicle navigation (typically 2-10 m)"
+        ]
+      },
+      "records_read": 5,
+      "waterfall": "10cct01_v2_ss_1m_b_waterfall.png",
+      "xtf": null,
+      "nav_csv": null,
+      "sensor_depth_m": null,
+      "id_rule": "detection id = <strip>_g<geotag id>; geotag ids are run-local, so an id is stable for a given hazards.json only",
+      "class_rule": "classification copied; unknown_anomaly becomes 'unknown'",
+      "dimension_rule": "geotag.py (edge ground-range difference; windowed along-track spacing) copied; see dimension_cross_check",
+      "dimension_cross_check": {
+        "method": "width from sqrt(slant^2 - altitude^2) at the box edges on the centre row (ranges added across nadir); length as the geodesic distance between the track positions of rows y1 and y2",
+        "tolerance": 0.25,
+        "ran": false,
+        "disagreements": []
+      },
+      "water_column": "not written: no navigation table (no xtf or nav_csv), so no altitude to separate it"
+    },
+    "geotag_notes": [],
+    "geotag_limitations": [
+      "flat-seabed assumption",
+      "heading (yaw) applied; roll/pitch/heave recorded per ping but not compensated",
+      "position accuracy inherits the vehicle navigation (typically 2-10 m)"
+    ]
+  }
+}

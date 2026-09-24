@@ -1,12 +1,12 @@
-/index.json
-/vectors.npy
-/index.faiss
+/rag_assistant/index.json
+/rag_assistant/vectors.npy
+/rag_assistant/index.faiss
 __pycache__/
 .venv/
 
-/catalog_index.json
-/catalog_vectors.npy
-/catalog.faiss
+/rag_assistant/catalog_index.json
+/rag_assistant/catalog_vectors.npy
+/rag_assistant/catalog.faiss
 
 .env
 # The publications in sources/ ARE committed. Every citation the assistant
@@ -59,3 +59,22 @@ backend/uploads/
 # tile. They are needed only to REBUILD a map, which run_survey.py does.
 data/surveys/*/tiles/
 data/surveys/*/simulated_survey/
+
+# ONNX exports are rebuilt from models/*.pt in seconds (tools/export_onnx.py),
+# and each export stamps its date into the file, so committing them would add
+# a new ~57 MB blob to history on every re-export. See docs/EDGE.md.
+models/*.onnx
+
+# Strip images the importer writes beside a survey: regenerable, and a GeoTIFF mosaic is 100 MB.
+data/surveys/*/strips/
+applications/
+
+# One developer's local state, never the team's.
+data/deepecho.db*
+data/uploads/
+data/survey_uploads/
+data/surveys/mission-*/
+rag_assistant/eval/last-run.json
+# ONNX exports and TensorRT caches are built per machine (tools/export_onnx.py).
+survey_hazard_map/models/**/*.onnx
+survey_hazard_map/models/**/trt_cache/

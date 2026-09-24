@@ -1,0 +1,15 @@
+{
+  "type": "FeatureCollection",
+  "properties": {
+    "survey_id": "s7-submarine",
+    "title": "S-7 submarine wreck",
+    "processed_at": "2026-09-13T14:23:16+00:00",
+    "demo": false,
+    "coordinate_mode": "Relative Survey Coordinates",
+    "detections_total": 1,
+    "detections_located": 0,
+    "detections_unlocated": 1,
+    "disclaimer": "Severity weights, tier boundaries and recommended actions are a configurable heuristic chosen for this project. They are not Navy, Coast Guard, NOAA or IMO procedure and carry no authority. Review them against your own operating rules before acting on them."
+  },
+  "features": []
+}

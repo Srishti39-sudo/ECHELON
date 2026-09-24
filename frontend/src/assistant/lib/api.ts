@@ -8,9 +8,11 @@
 
 import { settings } from '../config/settings'
 import type {
+  AssistantMode,
   ChatResponse,
   DetectResult,
   DetectionRecord,
+  GhostTraceContext,
   Health,
   StreamFrame,
   Turn,
@@ -24,6 +26,12 @@ export interface ChatRequest {
   message: string
   history: Turn[]
   detection_record?: DetectionRecord | null
+  /** A GhostTrace target. Travels as its own field: it is data, not a detection record. */
+  ghosttrace_context?: GhostTraceContext | null
+  /** "auto" lets the backend route survey-data questions to the Mission Copilot. */
+  mode?: AssistantMode
+  /** Answer language code. Retrieval and source extracts stay English. */
+  language?: string
 }
 
 export class ApiError extends Error {

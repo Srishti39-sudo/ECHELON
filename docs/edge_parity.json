@@ -1,0 +1,1146 @@
+{
+  "generated": "2026-09-13T15:59:31+0530",
+  "device": {
+    "platform": "macOS-26.5-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "python": "3.13.3"
+  },
+  "versions": {
+    "onnxruntime": "1.30.0",
+    "ultralytics": "8.4.146"
+  },
+  "method": "both backends run at low_conf, filtered to each threshold; boxes paired per image and model, same class, greedy by IoU >= 0.5; ONNX on CPUExecutionProvider",
+  "low_conf": 0.05,
+  "tol_conf": 0.02,
+  "min_iou": 0.95,
+  "edge": 0.03,
+  "images": 80,
+  "checkpoints": [
+    {
+      "checkpoint": "models/known.pt",
+      "variants": {
+        "fp32": {
+          "file": "models/known.onnx",
+          "dynamic_shape": false,
+          "parity": true,
+          "parity_native_640": true,
+          "parity_other_shapes": false,
+          "other_shapes_gated": false,
+          "seconds": 22.8,
+          "levels_native_640": [
+            {
+              "threshold": 0.1,
+              "images": 53,
+              "reference_boxes": 10,
+              "candidate_boxes": 10,
+              "matched": 10,
+              "max_confidence_delta": 0.0,
+              "min_box_iou": 1.0,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 9,
+              "matched": 9,
+              "max_confidence_delta": 0.0,
+              "min_box_iou": 1.0,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.3,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 9,
+              "matched": 9,
+              "max_confidence_delta": 0.0,
+              "min_box_iou": 1.0,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ],
+          "levels_other_shapes": [
+            {
+              "threshold": 0.1,
+              "images": 27,
+              "reference_boxes": 3,
+              "candidate_boxes": 3,
+              "matched": 3,
+              "max_confidence_delta": 0.0584,
+              "min_box_iou": 0.95789,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.0584,
+              "min_box_iou": 0.95789,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.3,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.0584,
+              "min_box_iou": 0.95789,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ]
+        },
+        "int8": {
+          "file": "models/known.int8.onnx",
+          "dynamic_shape": false,
+          "parity": false,
+          "parity_native_640": false,
+          "parity_other_shapes": false,
+          "other_shapes_gated": false,
+          "seconds": 13.85,
+          "levels_native_640": [
+            {
+              "threshold": 0.1,
+              "images": 53,
+              "reference_boxes": 10,
+              "candidate_boxes": 13,
+              "matched": 10,
+              "max_confidence_delta": 0.1238,
+              "min_box_iou": 0.93543,
+              "missing": [],
+              "extra": [
+                {
+                  "image": "samples/tiles/sidescan-waterfall-strip_2560_1024.jpg",
+                  "class": "aircraft",
+                  "confidence": 0.2545,
+                  "bbox": [
+                    0.65,
+                    433.26,
+                    154.27,
+                    527.69
+                  ],
+                  "model": "known.int8",
+                  "threshold_edge": false
+                },
+                {
+                  "image": "data/surveys/demo-synthetic/tiles/DEMO_SYNTHETIC_strip_512_1024.jpg",
+                  "class": "ship",
+                  "confidence": 0.1086,
+                  "bbox": [
+                    145.76,
+                    347.36,
+                    233.14,
+                    407.87
+                  ],
+                  "model": "known.int8",
+                  "threshold_edge": true
+                },
+                {
+                  "image": "data/surveys/waterfall-strip/tiles/sidescan-waterfall-strip_2560_1024.jpg",
+                  "class": "aircraft",
+                  "confidence": 0.2545,
+                  "bbox": [
+                    0.65,
+                    433.26,
+                    154.27,
+                    527.69
+                  ],
+                  "model": "known.int8",
+                  "threshold_edge": false
+                }
+              ],
+              "real_disagreements": 2
+            },
+            {
+              "threshold": 0.25,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 9,
+              "matched": 7,
+              "max_confidence_delta": 0.0985,
+              "min_box_iou": 0.93543,
+              "missing": [
+                {
+                  "image": "samples/tiles/sidescan-waterfall-strip_2048_1024.jpg",
+                  "class": "human",
+                  "confidence": 0.3004,
+                  "bbox": [
+                    458.69,
+                    418.45,
+                    640.0,
+                    528.42
+                  ],
+                  "model": "known",
+                  "threshold_edge": false
+                },
+                {
+                  "image": "data/surveys/waterfall-strip/tiles/sidescan-waterfall-strip_2048_1024.jpg",
+                  "class": "human",
+                  "confidence": 0.3004,
+                  "bbox": [
+                    458.69,
+                    418.45,
+                    640.0,
+                    528.42
+                  ],
+                  "model": "known",
+                  "threshold_edge": false
+                }
+              ],
+              "extra": [
+                {
+                  "image": "samples/tiles/sidescan-waterfall-strip_2560_1024.jpg",
+                  "class": "aircraft",
+                  "confidence": 0.2545,
+                  "bbox": [
+                    0.65,
+                    433.26,
+                    154.27,
+                    527.69
+                  ],
+                  "model": "known.int8",
+                  "threshold_edge": true
+                },
+                {
+                  "image": "data/surveys/waterfall-strip/tiles/sidescan-waterfall-strip_2560_1024.jpg",
+                  "class": "aircraft",
+                  "confidence": 0.2545,
+                  "bbox": [
+                    0.65,
+                    433.26,
+                    154.27,
+                    527.69
+                  ],
+                  "model": "known.int8",
+                  "threshold_edge": true
+                }
+              ],
+              "real_disagreements": 2
+            },
+            {
+              "threshold": 0.3,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 7,
+              "matched": 7,
+              "max_confidence_delta": 0.0985,
+              "min_box_iou": 0.93543,
+              "missing": [
+                {
+                  "image": "samples/tiles/sidescan-waterfall-strip_2048_1024.jpg",
+                  "class": "human",
+                  "confidence": 0.3004,
+                  "bbox": [
+                    458.69,
+                    418.45,
+                    640.0,
+                    528.42
+                  ],
+                  "model": "known",
+                  "threshold_edge": true
+                },
+                {
+                  "image": "data/surveys/waterfall-strip/tiles/sidescan-waterfall-strip_2048_1024.jpg",
+                  "class": "human",
+                  "confidence": 0.3004,
+                  "bbox": [
+                    458.69,
+                    418.45,
+                    640.0,
+                    528.42
+                  ],
+                  "model": "known",
+                  "threshold_edge": true
+                }
+              ],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ],
+          "levels_other_shapes": [
+            {
+              "threshold": 0.1,
+              "images": 27,
+              "reference_boxes": 3,
+              "candidate_boxes": 3,
+              "matched": 2,
+              "max_confidence_delta": 0.0629,
+              "min_box_iou": 0.91372,
+              "missing": [
+                {
+                  "image": "samples/sidescan-waterfall-strip.jpg",
+                  "class": "human",
+                  "confidence": 0.1098,
+                  "bbox": [
+                    2454.21,
+                    835.0,
+                    2993.37,
+                    1578.94
+                  ],
+                  "model": "known",
+                  "threshold_edge": true
+                }
+              ],
+              "extra": [
+                {
+                  "image": "data/surveys/demo-synthetic/tiles/DEMO_SYNTHETIC_strip_0_2048.jpg",
+                  "class": "aircraft",
+                  "confidence": 0.1155,
+                  "bbox": [
+                    410.34,
+                    199.46,
+                    522.85,
+                    284.73
+                  ],
+                  "model": "known.int8",
+                  "threshold_edge": true
+                }
+              ],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.0629,
+              "min_box_iou": 0.91372,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.3,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.0629,
+              "min_box_iou": 0.91372,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ]
+        },
+        "fp16": {
+          "file": "models/known.fp16.onnx",
+          "dynamic_shape": false,
+          "parity": true,
+          "parity_native_640": true,
+          "parity_other_shapes": false,
+          "other_shapes_gated": false,
+          "seconds": 28.42,
+          "levels_native_640": [
+            {
+              "threshold": 0.1,
+              "images": 53,
+              "reference_boxes": 10,
+              "candidate_boxes": 10,
+              "matched": 10,
+              "max_confidence_delta": 0.0018,
+              "min_box_iou": 0.99463,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 9,
+              "matched": 9,
+              "max_confidence_delta": 0.0018,
+              "min_box_iou": 0.99623,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.3,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 7,
+              "matched": 7,
+              "max_confidence_delta": 0.0018,
+              "min_box_iou": 0.99623,
+              "missing": [
+                {
+                  "image": "samples/tiles/sidescan-waterfall-strip_2048_1024.jpg",
+                  "class": "human",
+                  "confidence": 0.3004,
+                  "bbox": [
+                    458.69,
+                    418.45,
+                    640.0,
+                    528.42
+                  ],
+                  "model": "known",
+                  "threshold_edge": true
+                },
+                {
+                  "image": "data/surveys/waterfall-strip/tiles/sidescan-waterfall-strip_2048_1024.jpg",
+                  "class": "human",
+                  "confidence": 0.3004,
+                  "bbox": [
+                    458.69,
+                    418.45,
+                    640.0,
+                    528.42
+                  ],
+                  "model": "known",
+                  "threshold_edge": true
+                }
+              ],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ],
+          "levels_other_shapes": [
+            {
+              "threshold": 0.1,
+              "images": 27,
+              "reference_boxes": 3,
+              "candidate_boxes": 3,
+              "matched": 3,
+              "max_confidence_delta": 0.058,
+              "min_box_iou": 0.95807,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.058,
+              "min_box_iou": 0.95807,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.3,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.058,
+              "min_box_iou": 0.95807,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ]
+        },
+        "dynamic": {
+          "file": "models/known.dynamic.onnx",
+          "dynamic_shape": true,
+          "parity": true,
+          "parity_native_640": true,
+          "parity_other_shapes": true,
+          "other_shapes_gated": true,
+          "seconds": 30.24,
+          "levels_native_640": [
+            {
+              "threshold": 0.1,
+              "images": 53,
+              "reference_boxes": 10,
+              "candidate_boxes": 10,
+              "matched": 10,
+              "max_confidence_delta": 0.0,
+              "min_box_iou": 1.0,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 9,
+              "matched": 9,
+              "max_confidence_delta": 0.0,
+              "min_box_iou": 1.0,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.3,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 9,
+              "matched": 9,
+              "max_confidence_delta": 0.0,
+              "min_box_iou": 1.0,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ],
+          "levels_other_shapes": [
+            {
+              "threshold": 0.1,
+              "images": 27,
+              "reference_boxes": 3,
+              "candidate_boxes": 3,
+              "matched": 3,
+              "max_confidence_delta": 0.0015,
+              "min_box_iou": 0.99681,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.0005,
+              "min_box_iou": 0.99681,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.3,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.0005,
+              "min_box_iou": 0.99681,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ]
+        }
+      },
+      "native_640_images": 53,
+      "other_shape_images": 27
+    },
+    {
+      "checkpoint": "models/anomaly.pt",
+      "variants": {
+        "fp32": {
+          "file": "models/anomaly.onnx",
+          "dynamic_shape": false,
+          "parity": true,
+          "parity_native_640": true,
+          "parity_other_shapes": false,
+          "other_shapes_gated": false,
+          "seconds": 12.72,
+          "levels_native_640": [
+            {
+              "threshold": 0.1,
+              "images": 53,
+              "reference_boxes": 30,
+              "candidate_boxes": 30,
+              "matched": 30,
+              "max_confidence_delta": 0.0,
+              "min_box_iou": 1.0,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 9,
+              "matched": 9,
+              "max_confidence_delta": 0.0,
+              "min_box_iou": 1.0,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.3,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 9,
+              "matched": 9,
+              "max_confidence_delta": 0.0,
+              "min_box_iou": 1.0,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ],
+          "levels_other_shapes": [
+            {
+              "threshold": 0.1,
+              "images": 27,
+              "reference_boxes": 7,
+              "candidate_boxes": 6,
+              "matched": 6,
+              "max_confidence_delta": 0.1198,
+              "min_box_iou": 0.96437,
+              "missing": [
+                {
+                  "image": "samples/sidescan-s7-submarine.jpg",
+                  "class": "shipwreck",
+                  "confidence": 0.1103,
+                  "bbox": [
+                    12.61,
+                    50.36,
+                    287.74,
+                    731.62
+                  ],
+                  "model": "anomaly",
+                  "threshold_edge": true
+                }
+              ],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.1198,
+              "min_box_iou": 0.96437,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.3,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.1198,
+              "min_box_iou": 0.96437,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ]
+        },
+        "int8": {
+          "file": "models/anomaly.int8.onnx",
+          "dynamic_shape": false,
+          "parity": false,
+          "parity_native_640": false,
+          "parity_other_shapes": false,
+          "other_shapes_gated": false,
+          "seconds": 11.48,
+          "levels_native_640": [
+            {
+              "threshold": 0.1,
+              "images": 53,
+              "reference_boxes": 30,
+              "candidate_boxes": 23,
+              "matched": 22,
+              "max_confidence_delta": 0.1888,
+              "min_box_iou": 0.80964,
+              "missing": [
+                {
+                  "image": "samples/tiles/sidescan-waterfall-strip_2048_0.jpg",
+                  "class": "aircraft",
+                  "confidence": 0.1846,
+                  "bbox": [
+                    164.13,
+                    35.7,
+                    308.6,
+                    636.94
+                  ],
+                  "model": "anomaly",
+                  "threshold_edge": false
+                },
+                {
+                  "image": "samples/tiles/sidescan-waterfall-strip_2048_512.jpg",
+                  "class": "aircraft",
+                  "confidence": 0.1941,
+                  "bbox": [
+                    0.0,
+                    0.34,
+                    257.84,
+                    615.93
+                  ],
+                  "model": "anomaly",
+                  "threshold_edge": false
+                },
+                {
+                  "image": "samples/tiles/sidescan-waterfall-strip_2048_512.jpg",
+                  "class": "aircraft",
+                  "confidence": 0.1139,
+                  "bbox": [
+                    0.0,
+                    0.4,
+                    548.58,
+                    250.44
+                  ],
+                  "model": "anomaly",
+                  "threshold_edge": true
+                },
+                {
+                  "image": "data/surveys/demo-synthetic/tiles/DEMO_SYNTHETIC_strip_512_512.jpg",
+                  "class": "other",
+                  "confidence": 0.1058,
+                  "bbox": [
+                    0.0,
+                    602.07,
+                    86.56,
+                    640.0
+                  ],
+                  "model": "anomaly",
+                  "threshold_edge": true
+                },
+                {
+                  "image": "data/surveys/waterfall-strip/tiles/sidescan-waterfall-strip_1536_1536.jpg",
+                  "class": "aircraft",
+                  "confidence": 0.1124,
+                  "bbox": [
+                    523.37,
+                    263.4,
+                    639.55,
+                    639.61
+                  ],
+                  "model": "anomaly",
+                  "threshold_edge": true
+                },
+                {
+                  "image": "data/surveys/waterfall-strip/tiles/sidescan-waterfall-strip_2048_0.jpg",
+                  "class": "aircraft",
+                  "confidence": 0.1846,
+                  "bbox": [
+                    164.13,
+                    35.7,
+                    308.6,
+                    636.94
+                  ],
+                  "model": "anomaly",
+                  "threshold_edge": false
+                },
+                {
+                  "image": "data/surveys/waterfall-strip/tiles/sidescan-waterfall-strip_2048_512.jpg",
+                  "class": "aircraft",
+                  "confidence": 0.1941,
+                  "bbox": [
+                    0.0,
+                    0.34,
+                    257.84,
+                    615.93
+                  ],
+                  "model": "anomaly",
+                  "threshold_edge": false
+                },
+                {
+                  "image": "data/surveys/waterfall-strip/tiles/sidescan-waterfall-strip_2048_512.jpg",
+                  "class": "aircraft",
+                  "confidence": 0.1139,
+                  "bbox": [
+                    0.0,
+                    0.4,
+                    548.58,
+                    250.44
+                  ],
+                  "model": "anomaly",
+                  "threshold_edge": true
+                }
+              ],
+              "extra": [
+                {
+                  "image": "data/surveys/demo-synthetic/tiles/DEMO_SYNTHETIC_strip_1024_1024.jpg",
+                  "class": "other",
+                  "confidence": 0.1167,
+                  "bbox": [
+                    37.55,
+                    549.99,
+                    99.76,
+                    618.24
+                  ],
+                  "model": "anomaly.int8",
+                  "threshold_edge": true
+                }
+              ],
+              "real_disagreements": 4
+            },
+            {
+              "threshold": 0.25,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 11,
+              "matched": 9,
+              "max_confidence_delta": 0.1888,
+              "min_box_iou": 0.80964,
+              "missing": [],
+              "extra": [
+                {
+                  "image": "data/surveys/demo-synthetic/tiles/DEMO_SYNTHETIC_strip_1024_1536.jpg",
+                  "class": "other",
+                  "confidence": 0.2659,
+                  "bbox": [
+                    349.17,
+                    402.08,
+                    470.39,
+                    485.98
+                  ],
+                  "model": "anomaly.int8",
+                  "threshold_edge": true
+                },
+                {
+                  "image": "data/surveys/waterfall-strip/tiles/sidescan-waterfall-strip_2048_2048.jpg",
+                  "class": "shipwreck",
+                  "confidence": 0.3828,
+                  "bbox": [
+                    0.47,
+                    0.0,
+                    97.38,
+                    619.4
+                  ],
+                  "model": "anomaly.int8",
+                  "threshold_edge": false
+                }
+              ],
+              "real_disagreements": 1
+            },
+            {
+              "threshold": 0.3,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 8,
+              "matched": 8,
+              "max_confidence_delta": 0.1888,
+              "min_box_iou": 0.77862,
+              "missing": [
+                {
+                  "image": "data/surveys/s7-submarine/tiles/sidescan-s7-submarine_0_0.jpg",
+                  "class": "shipwreck",
+                  "confidence": 0.3907,
+                  "bbox": [
+                    21.56,
+                    23.23,
+                    289.59,
+                    597.51
+                  ],
+                  "model": "anomaly",
+                  "threshold_edge": false
+                }
+              ],
+              "extra": [],
+              "real_disagreements": 1
+            }
+          ],
+          "levels_other_shapes": [
+            {
+              "threshold": 0.1,
+              "images": 27,
+              "reference_boxes": 7,
+              "candidate_boxes": 6,
+              "matched": 6,
+              "max_confidence_delta": 0.1316,
+              "min_box_iou": 0.71996,
+              "missing": [
+                {
+                  "image": "samples/sidescan-s7-submarine.jpg",
+                  "class": "shipwreck",
+                  "confidence": 0.1103,
+                  "bbox": [
+                    12.61,
+                    50.36,
+                    287.74,
+                    731.62
+                  ],
+                  "model": "anomaly",
+                  "threshold_edge": true
+                }
+              ],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 4,
+              "matched": 1,
+              "max_confidence_delta": 0.1121,
+              "min_box_iou": 0.95886,
+              "missing": [],
+              "extra": [
+                {
+                  "image": "samples/sidescan-waterfall-strip.jpg",
+                  "class": "other",
+                  "confidence": 0.3541,
+                  "bbox": [
+                    2469.89,
+                    1370.52,
+                    2732.77,
+                    1582.41
+                  ],
+                  "model": "anomaly.int8",
+                  "threshold_edge": false
+                },
+                {
+                  "image": "data/surveys/demo-synthetic/tiles/DEMO_SYNTHETIC_strip_0_2048.jpg",
+                  "class": "other",
+                  "confidence": 0.2805,
+                  "bbox": [
+                    322.49,
+                    186.73,
+                    379.6,
+                    229.98
+                  ],
+                  "model": "anomaly.int8",
+                  "threshold_edge": false
+                },
+                {
+                  "image": "data/surveys/demo-synthetic/tiles/DEMO_SYNTHETIC_strip_0_2048.jpg",
+                  "class": "other",
+                  "confidence": 0.2767,
+                  "bbox": [
+                    409.5,
+                    225.07,
+                    457.15,
+                    268.89
+                  ],
+                  "model": "anomaly.int8",
+                  "threshold_edge": true
+                }
+              ],
+              "real_disagreements": 2
+            },
+            {
+              "threshold": 0.3,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 2,
+              "matched": 1,
+              "max_confidence_delta": 0.1121,
+              "min_box_iou": 0.95886,
+              "missing": [],
+              "extra": [
+                {
+                  "image": "samples/sidescan-waterfall-strip.jpg",
+                  "class": "other",
+                  "confidence": 0.3541,
+                  "bbox": [
+                    2469.89,
+                    1370.52,
+                    2732.77,
+                    1582.41
+                  ],
+                  "model": "anomaly.int8",
+                  "threshold_edge": false
+                }
+              ],
+              "real_disagreements": 1
+            }
+          ]
+        },
+        "fp16": {
+          "file": "models/anomaly.fp16.onnx",
+          "dynamic_shape": false,
+          "parity": true,
+          "parity_native_640": true,
+          "parity_other_shapes": false,
+          "other_shapes_gated": false,
+          "seconds": 12.54,
+          "levels_native_640": [
+            {
+              "threshold": 0.1,
+              "images": 53,
+              "reference_boxes": 30,
+              "candidate_boxes": 30,
+              "matched": 30,
+              "max_confidence_delta": 0.0026,
+              "min_box_iou": 0.99425,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 9,
+              "matched": 9,
+              "max_confidence_delta": 0.0026,
+              "min_box_iou": 0.99425,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.3,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 9,
+              "matched": 9,
+              "max_confidence_delta": 0.0026,
+              "min_box_iou": 0.99425,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ],
+          "levels_other_shapes": [
+            {
+              "threshold": 0.1,
+              "images": 27,
+              "reference_boxes": 7,
+              "candidate_boxes": 6,
+              "matched": 6,
+              "max_confidence_delta": 0.1234,
+              "min_box_iou": 0.96328,
+              "missing": [
+                {
+                  "image": "samples/sidescan-s7-submarine.jpg",
+                  "class": "shipwreck",
+                  "confidence": 0.1103,
+                  "bbox": [
+                    12.61,
+                    50.36,
+                    287.74,
+                    731.62
+                  ],
+                  "model": "anomaly",
+                  "threshold_edge": true
+                }
+              ],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.1234,
+              "min_box_iou": 0.96328,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.3,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.1234,
+              "min_box_iou": 0.96328,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ]
+        },
+        "dynamic": {
+          "file": "models/anomaly.dynamic.onnx",
+          "dynamic_shape": true,
+          "parity": true,
+          "parity_native_640": true,
+          "parity_other_shapes": true,
+          "other_shapes_gated": true,
+          "seconds": 11.42,
+          "levels_native_640": [
+            {
+              "threshold": 0.1,
+              "images": 53,
+              "reference_boxes": 30,
+              "candidate_boxes": 30,
+              "matched": 30,
+              "max_confidence_delta": 0.0,
+              "min_box_iou": 1.0,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 9,
+              "matched": 9,
+              "max_confidence_delta": 0.0,
+              "min_box_iou": 1.0,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.3,
+              "images": 53,
+              "reference_boxes": 9,
+              "candidate_boxes": 9,
+              "matched": 9,
+              "max_confidence_delta": 0.0,
+              "min_box_iou": 1.0,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ],
+          "levels_other_shapes": [
+            {
+              "threshold": 0.1,
+              "images": 27,
+              "reference_boxes": 7,
+              "candidate_boxes": 7,
+              "matched": 7,
+              "max_confidence_delta": 0.019,
+              "min_box_iou": 0.98652,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.25,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.019,
+              "min_box_iou": 0.99663,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            },
+            {
+              "threshold": 0.3,
+              "images": 27,
+              "reference_boxes": 1,
+              "candidate_boxes": 1,
+              "matched": 1,
+              "max_confidence_delta": 0.019,
+              "min_box_iou": 0.99663,
+              "missing": [],
+              "extra": [],
+              "real_disagreements": 0
+            }
+          ]
+        }
+      },
+      "native_640_images": 53,
+      "other_shape_images": 27
+    }
+  ]
+}

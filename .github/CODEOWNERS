@@ -1,0 +1,12 @@
+# Who reviews what. One line per feature folder; add your GitHub handle after
+# the path. A pull request that touches a folder asks its owner for review.
+#
+# Shared code (backend/, frontend/, Docker files) has no single owner: any
+# change there is reviewed by whoever else it affects.
+
+/survey_hazard_map/     @Srishti39-sudo
+/ghosttrace/            @mythri2405
+/rag_assistant/         @Srishti39-sudo
+/frontend/src/survey/   @Srishti39-sudo
+/frontend/src/ghosttrace/ @mythri2405
+/frontend/src/assistant/ @Srishti39-sudo

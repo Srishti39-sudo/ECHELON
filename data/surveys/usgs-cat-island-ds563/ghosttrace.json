@@ -1,0 +1,555 @@
+{
+  "format": "deepecho-ghosttrace/1",
+  "survey_id": "usgs-cat-island-ds563",
+  "generated_at": "2026-09-15T16:12:00+00:00",
+  "demo": false,
+  "synthetic_inputs": false,
+  "data_sources": [
+    {
+      "name": "UNEP-WCMC Global Distribution of Seagrasses",
+      "url": "https://data-gis.unep-wcmc.org/server/rest/services/HabitatsAndBiotopes/Global_Distribution_of_Seagrasses/FeatureServer",
+      "licence": "UNEP-WCMC General Data License (excluding WDPA), https://www.unep-wcmc.org/en/general-data-license : no commercial use without permission (clause 2); no redistribution (clause 3); may be published only in non-downloadable form with citation (clauses 4-5)",
+      "snapshot": "2026-09-13",
+      "used_for": "seagrass layer (habitat context, drift impacts)"
+    },
+    {
+      "name": "Curated olive ridley mass-nesting sites (Odisha)",
+      "url": "see per-feature citation",
+      "licence": "geometry derived from OpenStreetMap (ODbL 1.0); extents from the cited publications",
+      "snapshot": "2026-09-13",
+      "used_for": "turtle_nesting layer"
+    },
+    {
+      "name": "Curated dugong habitat (Palk Bay)",
+      "url": "see per-feature citation",
+      "licence": "geometry derived from OpenStreetMap (ODbL 1.0); description from the cited documents",
+      "snapshot": "2026-09-13",
+      "used_for": "dugong layer"
+    },
+    {
+      "name": "OpenStreetMap harbours, ports, fishing ports and named jetties (Overpass API)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "licence": "ODbL 1.0, (c) OpenStreetMap contributors",
+      "snapshot": "2026-09-13",
+      "used_for": "harbour layer: propeller hazard and fishing exposure proxy"
+    },
+    {
+      "name": "NOAA NCEI ETOPO 2022 Global Relief Model, 15 arc-second, surface elevation",
+      "url": "https://www.ngdc.noaa.gov/thredds/dodsC/global/ETOPO2022/15s/15s_surface_elev_netcdf/",
+      "licence": "Public domain (US Government work, NOAA NCEI)",
+      "snapshot": "2026-09-13",
+      "used_for": "seabed depth for the diver brief and propeller hazard when the survey has no depth"
+    },
+    {
+      "name": "OpenStreetMap protected areas (Overpass API)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "licence": "ODbL 1.0, (c) OpenStreetMap contributors",
+      "snapshot": "2026-09-13",
+      "used_for": "protected_area layer (habitat context, drift impacts)"
+    },
+    {
+      "name": "OpenStreetMap natural=reef (Overpass API)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "licence": "ODbL 1.0, (c) OpenStreetMap contributors",
+      "snapshot": "2026-09-13",
+      "used_for": "supplementary reef layer, present even without the UNEP-WCMC fetch"
+    },
+    {
+      "name": "UNEP-WCMC Global Distribution of Warm-water Coral Reefs v4.1",
+      "url": "https://data-gis.unep-wcmc.org/server/rest/services/HabitatsAndBiotopes/Global_Distribution_of_Coral_Reefs/FeatureServer",
+      "licence": "UNEP-WCMC General Data License (excluding WDPA), https://www.unep-wcmc.org/en/general-data-license : no commercial use without permission (clause 2); no redistribution (clause 3); may be published only in non-downloadable form with citation (clauses 4-5)",
+      "snapshot": "2026-09-13",
+      "used_for": "reef layer (habitat context, drift impacts)"
+    },
+    {
+      "name": "Natural Earth 10m land and minor islands (v5)",
+      "url": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_land.zip ; https://naciscdn.org/naturalearth/10m/physical/ne_10m_minor_islands.zip",
+      "licence": "Public domain (Natural Earth terms of use)",
+      "snapshot": "2026-09-13",
+      "used_for": "deciding which side of the OSM coastline is land; fallback land mask"
+    },
+    {
+      "name": "OpenStreetMap natural=coastline (Overpass API)",
+      "url": "https://overpass-api.de/api/interpreter",
+      "licence": "ODbL 1.0, (c) OpenStreetMap contributors",
+      "snapshot": "2026-09-13",
+      "used_for": "land mask for particle stranding and coastline for curated nesting beaches"
+    },
+    {
+      "name": "HYCOM ESPC-D-V02 Global 1/12 deg ocean analysis/forecast (NRL / FNMOC)",
+      "url": "https://ncss.hycom.org/thredds/ncss/grid/FMRC_ESPC-D-V02_uv3z/FMRC_ESPC-D-V02_uv3z_best.ncd",
+      "licence": "Freely available (HYCOM.org THREDDS catalog: 'rights: Freely available'; distribution statement: Approved for public release; distribution unlimited)",
+      "snapshot": "2026-09-15",
+      "used_for": "surface and near-bottom currents for the drift forecast and the diver brief"
+    },
+    {
+      "name": "DeepEcho corpus: Ghost Nets and Abandoned Fishing Gear in Indian Waters - Which Authority the Sources Name (kb/ghost-gear-reporting-india.md)",
+      "url": "https://oceanlitter.imo.org/site/assets/files/1624/india_nap_19th_feb_2024.pdf",
+      "licence": null,
+      "snapshot": "2026-09-13",
+      "used_for": "alert authorities and report fields (licence not recorded in the corpus)"
+    },
+    {
+      "name": "DeepEcho corpus: Reporting and Authority Handoff (kb/reporting-authorities-india.md)",
+      "url": "https://indiancoastguard.gov.in/report-spill",
+      "licence": null,
+      "snapshot": "2026-09-10",
+      "used_for": "alert authorities and report fields (licence not recorded in the corpus)"
+    }
+  ],
+  "caveats": [
+    "GhostTrace priorities, tiers, activity scores and weights are configurable heuristics chosen for this project, not fitted to real ghost-gear recoveries and not an official procedure. Every detection is automated - verify before action.",
+    "Water-column activity was not measured for any target (no water-column record); a neutral value was used in the priority score.",
+    "Recovery legs are straight lines; routes around land and shoals are not computed.",
+    "Alerts name an authority only where the knowledge base names it for that situation; 'authority not in corpus' marks a gap to fill, and no contact details are invented."
+  ],
+  "targets": [
+    {
+      "detection_id": "10cct01_v2_ss_1m_b_waterfall_g5",
+      "object_class": "fishing_gear",
+      "latitude": 30.242741,
+      "longitude": -89.033134,
+      "confidence_pct": 52.1,
+      "confidence_basis": "verification confidence_pct (fused detector + evidence score)",
+      "dimensions": {
+        "length_m": 22.3,
+        "width_m": 21.9,
+        "height_m": null,
+        "length_px": 22.3,
+        "width_px": 21.9,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "geotag.py (edge ground-range difference; windowed along-track spacing); as supplied in hazards.json, not cross-checked: no navigation table was available",
+        "height_basis": "not measured: hazards.json carries no height (shadow_check.py did not run, or had no altitude / resolution)"
+      },
+      "suppressed": false,
+      "strip": "10cct01_v2_ss_1m_b_waterfall",
+      "seabed_depth_m": null,
+      "seabed_depth_basis": "no navigation row with depth_m and altitude_m for this detection",
+      "activity": {
+        "available": false,
+        "score": null,
+        "level": "unknown",
+        "reason": "no water-column record for this strip (plain image survey, or a raw log ingested without water-column samples)",
+        "evidence": {
+          "echo_clusters_near": null,
+          "echo_area_near_m2": null,
+          "background_clusters_per_window": null,
+          "enrichment_ratio": null,
+          "window_m": 25.0,
+          "side": null
+        },
+        "basis": "echo clusters (robust z-score over per-range-bin median/MAD background, connected components) in the water column beside the detection, compared with the cluster rate over every ping on the same side of the same line that is clear of detections, scaled to the same window length; configurable heuristic chosen for this project; not fitted to real ghost-gear recovery data and not an official procedure",
+        "limitations": "Water-column echoes near the net may be fish, bubbles, suspended sediment or turbulence; the method cannot tell them apart. It has not been validated on real ghost-net data. A high score is evidence of biological aggregation (or other scatterers) near the object, not proof of entanglement or that the net is still catching."
+      },
+      "habitat": {
+        "available": true,
+        "search_radius_m": 50000.0,
+        "formula": "score = 1 - prod_kinds(1 - sensitivity(kind) * exp(-distance_m / 5000)); nearest feature per kind; distance 0 inside a polygon",
+        "heuristic": "configurable heuristic chosen for this project; not fitted to real ghost-gear drift or recovery data and not an official procedure",
+        "sensitivity": {
+          "reef": 1.0,
+          "seagrass": 0.8,
+          "protected_area": 0.8,
+          "turtle_nesting": 0.9,
+          "dugong": 0.9,
+          "harbour": 0.0
+        },
+        "decay_m": 5000.0,
+        "covered": false,
+        "region": null,
+        "reason": "no bundled data for this location: (30.2427, -89.0331) lies outside every bundled region (gulf_of_mannar_palk_bay, odisha_coast)",
+        "inside": [],
+        "nearest": [],
+        "kinds_assessed": [],
+        "kinds_not_assessed": [
+          "reef",
+          "seagrass",
+          "protected_area",
+          "turtle_nesting",
+          "dugong",
+          "harbour"
+        ],
+        "score": null,
+        "terms": {}
+      },
+      "drift": {
+        "available": false,
+        "reason": "no bundled current data for this location (30.2427, -89.0331)",
+        "mode": "seabed",
+        "requested_horizon_hours": 240.0,
+        "n_particles": 500,
+        "requested_mode": "seabed",
+        "mode_basis": "default: side-scan images the seabed and a snagged net is the common case; no floating/midwater indication",
+        "start_time": "2026-09-15T16:11:58+00:00",
+        "start_time_basis": "export metadata.processed_at (no ping times recorded; this is when the survey was PROCESSED, not when it was recorded)"
+      },
+      "drift_scenarios": {
+        "if_refloated": {
+          "available": false,
+          "reason": "no bundled current data for this location (30.2427, -89.0331)",
+          "mode": "floating",
+          "requested_horizon_hours": 240.0,
+          "n_particles": 500,
+          "scenario": "if_refloated",
+          "scenario_note": "what this net would reach if lifted off the seabed (e.g. by a storm or a trawl) at survey time; not a forecast, and not used in the priority score",
+          "start_time": "2026-09-15T16:11:58+00:00",
+          "start_time_basis": "export metadata.processed_at (no ping times recorded; this is when the survey was PROCESSED, not when it was recorded)"
+        }
+      },
+      "people": {
+        "available": true,
+        "propeller_hazard": {
+          "level": "unknown",
+          "points": 1.0,
+          "reasons": [
+            "net size 22.3 m >= 20 m",
+            "depth unknown, so a low rating cannot be supported"
+          ],
+          "terms": {
+            "shallow": {
+              "assessed": false,
+              "applied": false,
+              "points": 0.0,
+              "basis": "seabed depth unknown (no bundled data for this location)"
+            },
+            "floating": {
+              "assessed": true,
+              "applied": false,
+              "points": 0.0,
+              "basis": "object treated as on the seabed"
+            },
+            "harbour_near": {
+              "assessed": false,
+              "applied": false,
+              "points": 0.0,
+              "basis": "habitat context not available or position not covered by bundled layers"
+            },
+            "harbour_drift": {
+              "assessed": false,
+              "applied": false,
+              "points": 0.0,
+              "basis": "no drift forecast available"
+            },
+            "large_net": {
+              "assessed": true,
+              "applied": true,
+              "points": 1.0,
+              "basis": "net size 22.3 m >= 20 m"
+            }
+          },
+          "tiers": [
+            [
+              "high",
+              3.0
+            ],
+            [
+              "moderate",
+              1.5
+            ],
+            [
+              "low",
+              0.0
+            ]
+          ],
+          "heuristic": "configurable heuristic chosen for this project; not fitted to real ghost-gear drift or recovery data and not an official procedure"
+        },
+        "diver_brief": {
+          "seabed_depth_m": null,
+          "depth_source": null,
+          "depth_basis": "no bundled data for this location",
+          "net_size_m": 22.3,
+          "net_size_basis": "largest of dimensions.length_m and width_m (from the sonar image)",
+          "current_mps_at_depth": null,
+          "current_mps_surface": null,
+          "current_window": {
+            "start": "2026-09-15T16:11:58+00:00",
+            "start_basis": "target start time",
+            "hours": 12.0,
+            "bottom": {
+              "max_mps": null,
+              "reason": "no bundled current data for this location"
+            },
+            "surface": {
+              "max_mps": null,
+              "reason": "no bundled current data for this location"
+            }
+          },
+          "within_recreational_limit": null,
+          "within_open_water_limit": null,
+          "recreational_limit_m": {
+            "open_water": 18.0,
+            "advanced": 30.0
+          },
+          "current_ok_for_divers": null,
+          "diver_current_limit_mps": 0.514,
+          "entanglement_risk": "high: large net; entanglement of divers and ROV tethers is likely without a cutting plan",
+          "recommended_method": "ROV / grapnel from the surface until depth and current are known",
+          "method_reasons": [
+            "seabed depth unknown",
+            "near-bottom current unknown (no bundled current data for this location)"
+          ],
+          "notes": [
+            "planning context for trained recovery teams; not a dive plan or an operational procedure",
+            "depth limits: PADI Open Water 18 m, Advanced Open Water 30 m (training-agency limits, not law)",
+            "current limit 0.514 m/s (1 knot): US OSHA 29 CFR 1910.424(b)(3), no SCUBA against currents over one knot unless line-tended; a US regulation used as a planning analogue, not Indian law",
+            "near-bottom current is a ~9 km model-cell value at the deepest model level, not a measurement at the net",
+            "if the object may not be a net (ordnance, drum of unknown contents), do not recover: follow the unidentified-object protocol"
+          ],
+          "thresholds": {
+            "recreational_depth_m": 18.0,
+            "advanced_depth_m": 30.0,
+            "max_current_mps": 0.514,
+            "max_current_knots": 1.0,
+            "depth_check_uses": "advanced_depth_m",
+            "depth_label": "cited",
+            "depth_basis": "PADI course limits (training-agency limits, not law): Open Water Diver 18 m (https://www.padi.com/courses/open-water-diver), Advanced Open Water Diver 30 m (https://www.padi.com/courses/advanced-open-water-diver).",
+            "current_label": "cited",
+            "current_basis": "US OSHA 29 CFR 1910.424(b)(3) (Commercial Diving Operations, SCUBA diving limits): SCUBA diving shall not be conducted against currents exceeding one (1) knot unless line-tended. https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-T/section-1910.424 (retrieved 2026-09-13). US workplace regulation used as a planning analogue; not Indian law.",
+            "current_window_hours": 12.0,
+            "basis": "within_recreational_limit is seabed depth <= advanced_depth_m and within_open_water_limit is <= recreational_depth_m; current_ok_for_divers is the modelled near-bottom current (maximum over 12 h) <= max_current_mps. Training-agency depth limits and a US workplace current rule, used as planning analogues: not Indian law, not a dive plan, not an operational procedure."
+          },
+          "summary": "depth unknown; near-bottom current unknown; method: ROV / grapnel from the surface until depth and current are known"
+        }
+      },
+      "errors": [],
+      "change": {
+        "status": "first_survey",
+        "previous_survey_id": null,
+        "previous_detection_id": null,
+        "previous_latitude": null,
+        "previous_longitude": null,
+        "moved_m": null,
+        "basis": "no earlier processed survey with georeferenced targets overlaps this survey's extent"
+      },
+      "priority": {
+        "score": 0.2136,
+        "rank": 1,
+        "tier": "routine",
+        "terms": {
+          "activity": {
+            "value": 0.4,
+            "weight": 0.25,
+            "contribution": 0.1,
+            "measured": false,
+            "basis": "water-column echo enrichment score; unavailable, neutral value 0.4 used"
+          },
+          "habitat": {
+            "value": 0.3,
+            "weight": 0.2,
+            "contribution": 0.06,
+            "measured": false,
+            "basis": "habitat_context score; unavailable, neutral value 0.3 used"
+          },
+          "drift_impact": {
+            "value": 0.2,
+            "weight": 0.15,
+            "contribution": 0.03,
+            "measured": false,
+            "basis": "max drift impact probability on a sensitive layer; unavailable, neutral value 0.2 used"
+          },
+          "people_risk": {
+            "value": 0.3,
+            "weight": 0.15,
+            "contribution": 0.045,
+            "measured": false,
+            "basis": "propeller hazard level 'unknown' mapped {'high': 1.0, 'severe': 1.0, 'moderate': 0.6, 'medium': 0.6, 'low': 0.2, 'none': 0.0, 'negligible': 0.0}; unavailable, neutral value 0.3 used"
+          },
+          "size": {
+            "value": 0.9999,
+            "weight": 0.1,
+            "contribution": 0.09999,
+            "measured": true,
+            "basis": "1 - exp(-488.4 m2 / 50)"
+          },
+          "change": {
+            "value": 0.5,
+            "weight": 0.1,
+            "contribution": 0.05,
+            "measured": false,
+            "basis": "change status 'first_survey' mapped {'moved': 1.0, 'new': 0.7, 'persistent': 0.4}; unavailable, neutral value 0.5 used"
+          },
+          "recoverability": {
+            "value": 0.5,
+            "weight": 0.05,
+            "contribution": 0.025,
+            "measured": false,
+            "basis": "mean of depth ease (1 at <= 10 m, 0 at >= 40 m) and current ease (1 at <= 0.25 m/s, 0 at >= 1 m/s); unavailable, neutral value 0.5 used"
+          },
+          "confidence": {
+            "value": 0.521,
+            "weight": null,
+            "contribution": null,
+            "role": "multiplier",
+            "basis": "verification confidence_pct (fused detector + evidence score)"
+          }
+        },
+        "formula": "score = confidence.value * sum(weight * value for every other term) (= confidence.value * sum(contribution))",
+        "weighted_sum": 0.40999,
+        "tiers": {
+          "urgent": 0.55,
+          "high": 0.35,
+          "routine": 0.0
+        },
+        "basis": "configurable heuristic chosen for this project; not fitted to real ghost-gear recovery data and not an official procedure"
+      },
+      "alert": {
+        "authorities": [
+          {
+            "name": "State Fisheries Departments",
+            "role": "fisheries is a state subject; the sources establish no lost-gear reporting channel yet (the National Action Plan lists one as 'In preparation')",
+            "situation": "fisheries",
+            "contact_basis": "named in kb/ghost-gear-reporting-india.md (section 'Lost or found fishing gear: the fisheries authorities'); the corpus gives no phone number, email or address for it, so none is given here"
+          },
+          {
+            "name": "Fishery Survey of India",
+            "role": "its survey vessels are stated to be retrieving abandoned, lost or discarded fishing gear; a candidate for recovery, not a designated reporting desk",
+            "situation": "fisheries",
+            "contact_basis": "named in kb/ghost-gear-reporting-india.md (section 'Retrieval already under way'); the corpus gives no phone number, email or address for it, so none is given here"
+          }
+        ],
+        "subject": "GhostTrace routine: suspected fishing_gear at 30.24274, -89.03313 (survey usgs-cat-island-ds563)",
+        "draft_text": "AUTOMATED DETECTION - VERIFY BEFORE ACTION.\nWhat: side-scan sonar contact classified 'fishing_gear', confidence 52% (verification confidence_pct (fused detector + evidence score)).\nWhere: 30.24274, -89.03313 (decimal degrees, WGS84 as recorded by the survey navigation; accuracy not estimated).\nSize: 22.3 m x 21.9 m (length x width x height as measured).\nWater-column activity: not measured (no water-column record for this strip (plain image survey, or a raw log ingested without water-column samples)).\nHabitat: no mapped habitat layer near the target.\nDrift forecast: unavailable (no bundled current data for this location (30.2427, -89.0331)).\nPropeller hazard: unknown - net size 22.3 m >= 20 m; depth unknown, so a low rating cannot be supported.\nDiver notes: depth unknown; near-bottom current unknown; method: ROV / grapnel from the surface until depth and current are known.\nChange since previous survey: first_survey.\nGhostTrace priority: routine (score 0.2136, rank 1; heuristic).\nSurvey: usgs-cat-island-ds563. Detection: 10cct01_v2_ss_1m_b_waterfall_g5.\nStill to be completed by the operator before sending (per kb/reporting-authorities-india.md, 'What a report carries'): time of detection in UTC, position datum and accuracy estimate, water and object depth, sensor settings, vessel identity, operator, and the vessel's intentions.\nReport to:\n  - State Fisheries Departments: fisheries is a state subject; the sources establish no lost-gear reporting channel yet (the National Action Plan lists one as 'In preparation').\n  - Fishery Survey of India: its survey vessels are stated to be retrieving abandoned, lost or discarded fishing gear; a candidate for recovery, not a designated reporting desk.\nAutomated detection - verify before action. Positions, sizes and scores come from an unvalidated sonar pipeline and heuristic models.",
+        "generated_by": "template",
+        "citations": [
+          {
+            "doc": "kb/ghost-gear-reporting-india.md",
+            "section": "Lost or found fishing gear: the fisheries authorities",
+            "title": "Ghost Nets and Abandoned Fishing Gear in Indian Waters - Which Authority the Sources Name",
+            "source_url": "https://oceanlitter.imo.org/site/assets/files/1624/india_nap_19th_feb_2024.pdf",
+            "status": "verified"
+          },
+          {
+            "doc": "kb/ghost-gear-reporting-india.md",
+            "section": "Retrieval already under way",
+            "title": "Ghost Nets and Abandoned Fishing Gear in Indian Waters - Which Authority the Sources Name",
+            "source_url": "https://oceanlitter.imo.org/site/assets/files/1624/india_nap_19th_feb_2024.pdf",
+            "status": "verified"
+          },
+          {
+            "doc": "kb/reporting-authorities-india.md",
+            "section": "What a report carries",
+            "title": "Reporting and Authority Handoff",
+            "source_url": "https://indiancoastguard.gov.in/report-spill",
+            "status": "verified"
+          }
+        ],
+        "basis": "deterministic template from this target's GhostTrace fields; authorities only where kb/ names them for the situation"
+      }
+    }
+  ],
+  "removed_since_previous": [],
+  "change_summary": {
+    "compared_with": [],
+    "new": 0,
+    "moved": 0,
+    "persistent": 0,
+    "removed": 0,
+    "confirmed_recovered": 0
+  },
+  "recovery_plan": {
+    "start": {
+      "name": "Fishing Port",
+      "latitude": 20.2893471,
+      "longitude": 86.7054495,
+      "source": "OpenStreetMap"
+    },
+    "order": [
+      "10cct01_v2_ss_1m_b_waterfall_g5"
+    ],
+    "legs": [
+      {
+        "from": "Fishing Port",
+        "to": "10cct01_v2_ss_1m_b_waterfall_g5",
+        "distance_km": 14377.729
+      }
+    ],
+    "total_km": 14377.729,
+    "method": "tiers in order (urgent, high, routine); within a tier nearest-neighbour from the current position then 2-opt on the open path; geodesic straight-line legs",
+    "notes": [
+      "Legs are straight geodesic lines; sea routes around land, shoals and exclusion zones are not computed.",
+      "The route ends at the last target and does not return to the start."
+    ]
+  },
+  "summary": {
+    "targets": 1,
+    "urgent": 0,
+    "high": 0,
+    "actively_fishing": 0,
+    "near_sensitive_habitat": 0,
+    "propeller_hazards": 0,
+    "suppressed_excluded": 0,
+    "stage_failures": 0
+  },
+  "run": {
+    "core_version": "1.0.0",
+    "horizon_hours": 240,
+    "n_particles": 500,
+    "seed": 0,
+    "drift_dt_minutes": 30.0,
+    "survey_time": "2026-09-15T16:11:58+00:00",
+    "survey_time_basis": "export metadata.processed_at (no ping times recorded; this is when the survey was PROCESSED, not when it was recorded)",
+    "stages": {
+      "habitat": {
+        "available": true,
+        "source": "ghosttrace.habitat",
+        "reason": null
+      },
+      "drift": {
+        "available": true,
+        "source": "ghosttrace.drift",
+        "reason": null
+      },
+      "people": {
+        "available": true,
+        "source": "ghosttrace.safety",
+        "reason": null
+      },
+      "field": {
+        "available": true,
+        "source": "ghosttrace.currents",
+        "reason": null
+      },
+      "layers": {
+        "available": true,
+        "source": "ghosttrace.layers",
+        "reason": null
+      },
+      "bathymetry": {
+        "available": true,
+        "source": "ghosttrace.layers",
+        "reason": null
+      },
+      "harbours": {
+        "available": true,
+        "source": "layers",
+        "reason": null
+      }
+    },
+    "failures": [],
+    "priority_weights": {
+      "activity": 0.25,
+      "habitat": 0.2,
+      "drift_impact": 0.15,
+      "people_risk": 0.15,
+      "size": 0.1,
+      "change": 0.1,
+      "recoverability": 0.05
+    },
+    "priority_neutral": {
+      "activity": 0.4,
+      "habitat": 0.3,
+      "drift_impact": 0.2,
+      "people_risk": 0.3,
+      "size": 0.3,
+      "change": 0.5,
+      "recoverability": 0.5
+    },
+    "priority_tiers": {
+      "urgent": 0.55,
+      "high": 0.35,
+      "routine": 0.0
+    },
+    "heuristic": "configurable heuristic chosen for this project; not fitted to real ghost-gear recovery data and not an official procedure"
+  }
+}

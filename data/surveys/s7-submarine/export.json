@@ -2,8 +2,8 @@
   "metadata": {
     "engine": "deepecho-survey-hazard",
     "processing_version": "1.0.0",
-    "processed_at": "2026-09-11T07:38:43+00:00",
-    "processing_seconds": 3.829,
+    "processed_at": "2026-09-13T14:23:16+00:00",
+    "processing_seconds": 4.922,
     "survey_id": "s7-submarine",
     "title": "S-7 submarine wreck",
     "coordinate_mode": "Relative Survey Coordinates",
@@ -26,6 +26,7 @@
     "total_raw_detections": 2,
     "total_deduplicated_detections": 1,
     "duplicates_removed": 1,
+    "suppressed_detections": 0,
     "total_hotspots": 1,
     "total_severity": 0.4937,
     "highest_priority_hotspot": {
@@ -89,6 +90,238 @@
       "height_px": 520.59,
       "latitude": null,
       "longitude": null,
+      "confidence_pct": 82.4,
+      "suppressed": false,
+      "dimensions": {
+        "length_m": null,
+        "width_m": null,
+        "length_px": 520.59,
+        "width_px": 247.85,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "basis": "strip resolution unknown (no navigation sidecar and no m_per_px supplied); dimensions are not inferred",
+        "height_m": null,
+        "height_basis": "not computed: altitude_m, m_per_px_across unknown"
+      },
+      "verification": {
+        "version": "1.0.0",
+        "status": "checked",
+        "detector_confidence": 0.8228,
+        "detector_model": "known",
+        "class_evaluated": "ship",
+        "class_basis": "class",
+        "calibrated_probability": 0.8228,
+        "calibration": {
+          "method": "identity",
+          "basis": "uncalibrated: no calibration file"
+        },
+        "expectation": {
+          "shadow": 1.0,
+          "water_column": false,
+          "match": "exact"
+        },
+        "heuristic": true,
+        "mesh_relief": 0.0,
+        "evidence": {
+          "nadir_zone": {
+            "score": 0.0,
+            "measurements": {
+              "nadir_col": 802.5,
+              "nadir_source": "estimated",
+              "water_column_fraction": 0.0223,
+              "wc_score": 0.0,
+              "water_column_class_exempt": false,
+              "first_return_distance_px": 114.5,
+              "edge_score": 0.0,
+              "nadir_distance_px": 634.0,
+              "line_score": 0.0,
+              "range_fraction": 0.79
+            },
+            "basis": "geometry: max(water-column fraction, first-return edge, nadir line)"
+          },
+          "dropout": {
+            "score": 0.0,
+            "measurements": {
+              "degraded_row_fraction": 0.0,
+              "degraded_reasons": [],
+              "source": "estimated from image: fully blank rows only"
+            },
+            "basis": "fraction of the box's rows flagged degraded"
+          },
+          "acoustic_shadow": {
+            "score": 0.5139,
+            "measurements": {
+              "shadow_direction": "away from nadir",
+              "background_median": 114.01,
+              "background_p10": 68.24,
+              "background_p95": 126.84,
+              "background_pixels": 78610,
+              "shadow_window_px": 249,
+              "shadow_level": 68.41,
+              "background_shadow_fraction": 0.1025,
+              "far_shadow_fraction": 0.2352,
+              "far_excess": 0.1327,
+              "far_shadow_score": 0.5309,
+              "near_outside_shadow_fraction": null,
+              "near_outside_excess": null,
+              "near_outside_score": 0.0,
+              "box_p95": 127.23,
+              "highlight_contrast": 0.1159,
+              "highlight_null": 0.1125,
+              "highlight_score": 0.0068,
+              "edge_sharpness_score": 0.936,
+              "object_support": 0.936,
+              "shadow_length_px": 0.0,
+              "shadow_rows": 43
+            },
+            "basis": "heuristic: far_shadow * (0.5 + 0.5*max(highlight, edge_sharpness)) * (1 - 0.5*near_side_shadow); shadow scores are shadow-pixel fractions in excess of the background ring's"
+          },
+          "natural_shadow": {
+            "score": 0.0571,
+            "measurements": {
+              "box_median": 82.73,
+              "darkness": 0.2744,
+              "dark_score": 0.8976,
+              "highlight_score": 0.0068,
+              "edge": {
+                "sharpness": 0.0686,
+                "speckle_floor": 0.0112,
+                "dark_fraction": 0.3246,
+                "score": 0.936
+              }
+            },
+            "basis": "heuristic: dark_score * (1 - highlight_score) * (1 - edge_sharpness_score)"
+          },
+          "man_made_regularity": {
+            "score": 0.2536,
+            "measurements": {
+              "long_segments": 0,
+              "long_segment_length_px": 0.0,
+              "box_perimeter_px": 1540.0,
+              "line_ratio": 0.0,
+              "line_score": 0.0,
+              "hough_min_line_px": 156,
+              "coherence": 0.4624,
+              "coherence_score": 0.7247,
+              "highlight_solidity": null,
+              "highlight_elongation": null,
+              "shape_score": 0.0,
+              "regular": 0.2536,
+              "mesh": {
+                "texture": 0.2146,
+                "prominence_first": -0.0439,
+                "prominence_second": -0.0735,
+                "lag_first": [
+                  -20,
+                  55
+                ],
+                "lag_second": [
+                  3,
+                  3
+                ],
+                "score": 0.0
+              }
+            },
+            "basis": "heuristic: 0.45*lines + 0.35*coherence + 0.20*solidity, or mesh if higher"
+          },
+          "rock_clutter": {
+            "measurements": {
+              "pixels": 117252,
+              "local_median": 115.27,
+              "bright_blobs": 0,
+              "dark_blobs": 0,
+              "highlight_shadow_pairs": 0,
+              "similar_blob_count": 0.0,
+              "blob_area_range_px": [
+                12972.9,
+                648645.0
+              ],
+              "density": 0.0,
+              "coherence": 0.2258,
+              "incoherence": 0.7742,
+              "cv_local": 0.0725,
+              "cv_reference": 0.0465,
+              "roughness": 0.3717
+            },
+            "score": 0.0,
+            "basis": "heuristic: density * (0.4 + 0.6*incoherence) * (0.6 + 0.4*roughness)"
+          }
+        },
+        "terms": [
+          {
+            "name": "prior",
+            "value": 0.8228,
+            "contribution": 1.5354,
+            "formula": "logit(calibrated_probability)"
+          },
+          {
+            "name": "acoustic_shadow",
+            "score": 0.5139,
+            "neutral": 0.35,
+            "weight": 1.2,
+            "applicability": 1.0,
+            "contribution": 0.1967
+          },
+          {
+            "name": "man_made_regularity",
+            "score": 0.2536,
+            "neutral": 0.3,
+            "weight": 1.0,
+            "applicability": 1.0,
+            "contribution": -0.0464
+          },
+          {
+            "name": "natural_shadow",
+            "score": 0.0571,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.1426
+          },
+          {
+            "name": "rock_clutter",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.5,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "nadir_zone",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -4.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          },
+          {
+            "name": "dropout",
+            "score": 0.0,
+            "neutral": 0.0,
+            "weight": -2.0,
+            "applicability": 1.0,
+            "contribution": -0.0
+          }
+        ],
+        "logit": 1.5431,
+        "confidence_pct": 82.4,
+        "formula": "confidence_pct = 100 * sigmoid(sum of terms[].contribution); contribution = weight * applicability * (score - neutral)",
+        "hard_reasons": [],
+        "reasons": [],
+        "notes": [],
+        "suppressed": false,
+        "suppress_rule": "suppressed when confidence_pct < 35.0 AND at least one hard reason (nadir_zone, natural_shadow, rock_clutter, dropout); never deleted",
+        "height": {
+          "height_m": null,
+          "basis": "not computed: altitude_m, m_per_px_across unknown"
+        },
+        "box_px": [
+          44,
+          31,
+          293,
+          552
+        ]
+      },
       "provenance": {
         "strip": "sidescan-s7-submarine",
         "representative_tile": "sidescan-s7-submarine_0_0.jpg",
@@ -215,6 +448,10 @@
         "cable": 0.5,
         "net": 0.5,
         "ghost-gear": 0.5,
+        "fishing-gear": 0.5,
+        "pipe": 0.5,
+        "pipeline": 0.5,
+        "cylinder": 0.9,
         "tire": 0.3,
         "drum": 0.3,
         "fish": 0.2,
@@ -248,6 +485,13 @@
         "tyre": "Schedule cleanup",
         "tire": "Schedule cleanup",
         "drum": "Schedule cleanup",
+        "net": "Schedule ghost-gear recovery",
+        "ghost-gear": "Schedule ghost-gear recovery",
+        "fishing-gear": "Schedule ghost-gear recovery",
+        "pipe": "Check against charted pipelines; flag if uncharted",
+        "pipeline": "Check against charted pipelines; flag if uncharted",
+        "cable": "Check against charted cables; flag if uncharted",
+        "cylinder": "Keep clear; send for expert identification as possible ordnance",
         "unknown": "Send for expert identification",
         "anomaly": "Send for expert identification",
         "fish": "Log only, no action",
@@ -274,7 +518,10 @@
         "strip": "sidescan-s7-submarine",
         "source_image": "sidescan-s7-submarine.jpg",
         "width": 1676,
-        "height": 871
+        "height": 871,
+        "m_per_px_across": null,
+        "m_per_px_along": null,
+        "resolution_basis": null
       }
     ],
     "tile_count": 8,
@@ -288,6 +535,7 @@
       "overlap": 128,
       "min_content": 0.02,
       "denoise": false,
+      "denoise_filter": "Lee speckle filter + percentile stretch",
       "content_score": "standard deviation of the tile's grey levels / 255, measured on the tile as written"
     },
     "model": {
@@ -310,6 +558,20 @@
     "class_floor_rule": "a detection below its class's floor is relabelled 'unknown' and never dropped; the original call is kept in the detection's downgraded_from. This changes the claim, not the direction of the score: it lowers severity only for classes weighted above UNKNOWN_CLASS_SEVERITY.",
     "class_floors_withheld": 0,
     "ranking_rule": "hotspots sorted by total_severity descending; H001 is the highest priority",
-    "audit_note": "Every hotspot carries a `rationale` naming the detection that set its severity, and every detection carries the tiles it was seen in and how many views were merged into it."
+    "audit_note": "Every hotspot carries a `rationale` naming the detection that set its severity, and every detection carries the tiles it was seen in and how many views were merged into it.",
+    "verification": {
+      "ran": true,
+      "checked": 1,
+      "not_checked": 0,
+      "suppressed": 0,
+      "by_reason": {},
+      "suppress_below_pct": 35.0,
+      "calibrated": false,
+      "version": "1.0.0",
+      "note": "by_reason counts hard reasons on every checked detection, suppressed or not; every cue is a heuristic, see verification.terms on each detection",
+      "calibration": "none found; confidence_pct starts from the raw detector confidence"
+    },
+    "suppression_rule": "a detection marked suppressed is kept in `detections` with its reasons and excluded from hotspots and the action list; nothing is deleted",
+    "strip_resolutions_m_per_px": {}
   }
 }

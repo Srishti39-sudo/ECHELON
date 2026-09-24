@@ -1,0 +1,53 @@
+{
+  "type": "FeatureCollection",
+  "format": "deepecho-ghosttrace/1+geojson",
+  "survey_id": "usgs-cat-island-ds563",
+  "synthetic": false,
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.033134,
+          30.242741
+        ]
+      },
+      "properties": {
+        "kind": "target",
+        "detection_id": "10cct01_v2_ss_1m_b_waterfall_g5",
+        "object_class": "fishing_gear",
+        "rank": 1,
+        "tier": "routine",
+        "score": 0.2136,
+        "confidence_pct": 52.1,
+        "activity_level": "unknown",
+        "change_status": "first_survey",
+        "propeller_hazard": "unknown",
+        "synthetic": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.7054495,
+            20.2893471
+          ],
+          [
+            -89.033134,
+            30.242741
+          ]
+        ]
+      },
+      "properties": {
+        "kind": "recovery_route",
+        "total_km": 14377.729,
+        "start": "Fishing Port",
+        "note": "straight-line legs; not a navigable sea route"
+      }
+    }
+  ]
+}

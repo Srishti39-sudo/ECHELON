@@ -1,19 +1,39 @@
 # DeepEcho RAG assistant
 
 The detection model answers *what's there*. This answers *what does it mean, and
-what do I do*, grounded only in the curated corpus under `kb/`.
+what do I do*, grounded only in the curated corpus under `rag_assistant/kb/`.
 
 Two ways in. `rag.py` is the command-line engine and answers one question at a
 time. The chat application in `backend/` and `frontend/` wraps the same engine
 in a conversation, with follow-ups that keep context and citations an operator
 can open. See [The chat application](#the-chat-application).
 
+## Layout
+
+One folder per feature. Each is a Python package with its own engine, routes and tests, so a teammate can work inside one without touching the others.
+
+```
+survey_hazard_map/   raw log → tiles → detector → verification → geotag → hazard map
+                     engine modules, routes/, models/, samples/, training/, tools/, tests/
+ghosttrace/          which net to recover first: activity, habitat, drift, people, change
+                     engine package, routes/ (api + telemetry), tools/, tests/
+rag_assistant/       Beacon: grounded answers with citations
+                     rag.py, chat.py, routes/, kb/, sources/, catalog/, eval/, tests/
+backend/             what all three share: config.py, schemas.py, procs.py, app/main.py
+frontend/            the dashboard (src/survey, src/ghosttrace, src/assistant)
+data/                surveys and layers, shared by all three at run time
+```
+
+`backend/app/main.py` only wires the three routers together; the feature switch `DEEPECHO_FEATURES` (see docs/DOCKER.md) decides which of them one process serves. Run anything as a module from the repo root: `python -m survey_hazard_map.run_survey`, `python -m rag_assistant.rag index`, `python -m ghosttrace.run_ghosttrace`. Tests: `python <feature>/tests/<file>.py`.
+
+Ownership is in `.github/CODEOWNERS`; work on a feature branch named after the folder.
+
 ## Setup
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp .env.example .env               # then paste your keys into .env
-.venv/bin/python rag.py index
+.venv/bin/python -m rag_assistant.rag index
 ```
 
 Keys live in `.env`, which is gitignored. Only the provider you actually use
@@ -30,7 +50,7 @@ dependency. A variable already exported in your shell wins over the file, which
 makes a one-off override easy:
 
 ```bash
-DEEPECHO_PROVIDER=groq python3 rag.py ask "..."
+DEEPECHO_PROVIDER=groq python -m rag_assistant.rag ask "..."
 ```
 
 The whole pipeline runs on free tiers. Retrieval is local by default and costs
@@ -50,10 +70,11 @@ allowed to say.
 |---|---|---|
 | `gemini` (default) | `gemini-3.8-flash` | `GEMINI_API_KEY` |
 | `groq` | `openai/gpt-oss-120b` | `GROQ_API_KEY` |
+| `nvidia` | `nvidia/llama-3.1-nemotron-70b-instruct` (`DEEPECHO_NVIDIA_MODEL`) | `NVIDIA_API_KEY` |
 
 ```bash
-python3 rag.py ask "..." --provider groq
-python3 rag.py ask "..." --model gemini-3.5-flash
+python -m rag_assistant.rag ask "..." --provider groq
+python -m rag_assistant.rag ask "..." --model gemini-3.5-flash
 export DEEPECHO_PROVIDER=groq      # or set the default for the session
 ```
 
@@ -68,7 +89,13 @@ answers in about a second and is the fastest fallback.
 Groq is the one to reach for if a Gemini safety filter trips on ordnance
 content, and it is also the honest route to the sovereign and on-premises pitch,
 since the same open weights can run on your own hardware later with no change
-above this seam. List what your account can actually reach with
+above this seam.
+
+`nvidia` talks to NVIDIA's hosted NIM endpoints over the OpenAI protocol. The
+same NIM container runs on an NVIDIA GPU on-premises, so pointing
+`NVIDIA_BASE_URL` at it is the whole change for an at-sea assistant with no
+internet. The catalogue at build.nvidia.com moves; set `DEEPECHO_NVIDIA_MODEL`
+to whatever it currently lists. List what your account can actually reach with
 `client.models.list()`; the model literals baked into the SDK are not a
 guarantee of access.
 
@@ -92,24 +119,24 @@ default for a demo you need to run on stage.
 ## The four functions
 
 ```bash
-python3 rag.py explain --detection detection.json
-python3 rag.py ask "what is the disposal procedure for unexploded ordnance?"
-python3 rag.py anomaly --describe "cylindrical, 2 m, partially buried, hard shadow"
-python3 rag.py report --detection detection.json
+python -m rag_assistant.rag explain --detection detection.json
+python -m rag_assistant.rag ask "what is the disposal procedure for unexploded ordnance?"
+python -m rag_assistant.rag anomaly --describe "cylindrical, 2 m, partially buried, hard shadow"
+python -m rag_assistant.rag report --detection detection.json
 ```
 
 `search` and `match` expose the two retrieval halves on their own, and `bench`
 measures the index:
 
 ```bash
-python3 rag.py search "who do I report a mine to" -k 5
-python3 rag.py match --describe "large structure, debris scatter" --top 3
-python3 rag.py bench --ef 8 16 32 64 128
+python -m rag_assistant.rag search "who do I report a mine to" -k 5
+python -m rag_assistant.rag match --describe "large structure, debris scatter" --top 3
+python -m rag_assistant.rag bench --ef 8 16 32 64 128
 ```
 
 ## Retrieval
 
-`kb/*.md` are split on `##` headings and packed into ~900 character chunks with
+`rag_assistant/kb/*.md` are split on `##` headings and packed into ~900 character chunks with
 overlap. Each chunk becomes a TF-IDF vector over unigrams and bigrams, L2
 normalised, and is stored in a **FAISS HNSW index** under inner product, which on
 unit vectors is cosine. HNSW is a navigable small-world graph: a query descends
@@ -186,12 +213,12 @@ An unclassified detection has no label, so there is no protocol to look up by
 name. The anomaly path makes three separate moves and keeps them separate.
 
 **Retrieve the generic protocol.** The unknown-object procedure comes out of
-`kb/` like any other answer: treat as potentially hazardous, hold separation, do
+`rag_assistant/kb/` like any other answer: treat as potentially hazardous, hold separation, do
 not disturb, report, log for expert review.
 
-**Rank the nearest known objects.** `catalog/objects.json` holds known object
+**Rank the nearest known objects.** `rag_assistant/catalog/objects.json` holds known object
 classes. Each carries a descriptor, the hazard class, what would confirm it,
-what would rule it out, and the `kb/` document that governs it, so a match keeps
+what would rule it out, and the `rag_assistant/kb/` document that governs it, so a match keeps
 the citation chain intact. Matching runs in one of two spaces:
 
 - **embedding** when the detection record carries an `embedding` array and every
@@ -243,8 +270,8 @@ For an unclassified object, four more:
 - Escalate to a qualified human expert, and say the object stays unidentified
   until that expert rules.
 
-No document in `kb/` is a placeholder any more. All seven are written from real
-publications, carry `status: verified`, and name the file in `sources/` they came
+No document in `rag_assistant/kb/` is a placeholder any more. All seven are written from real
+publications, carry `status: verified`, and name the file in `rag_assistant/sources/` they came
 from. The rule stays in the prompt because the index still warns on a
 `PLACEHOLDER` document and the assistant must flag one if it ever appears.
 
@@ -255,7 +282,7 @@ rather than inventing one. That is the system working, not a gap to paper over.
 
 ## Adding real sources
 
-Drop a `.md` or `.txt` file in `kb/` with front matter, then re-index.
+Drop a `.md` or `.txt` file in `rag_assistant/kb/` with front matter, then re-index.
 
 ```yaml
 ---
@@ -269,16 +296,16 @@ retrieved: 2026-09-10
 ---
 ```
 
-Put the publication itself in `sources/` and add a row to `sources/PROVENANCE.md`.
-Nothing in `sources/` is indexed; it is evidence, and it is what lets any quote
+Put the publication itself in `rag_assistant/sources/` and add a row to `rag_assistant/sources/PROVENANCE.md`.
+Nothing in `rag_assistant/sources/` is indexed; it is evidence, and it is what lets any quote
 in an answer be traced back to a real document. The chat interface links it: a
 citation whose document names a `source_file` opens the original PDF.
 
-`python3 rag.py index` prints a warning listing every document still marked
+`python -m rag_assistant.rag index` prints a warning listing every document still marked
 `PLACEHOLDER`.
 
-Catalog entries in `catalog/objects.json` follow the same discipline. Every
-entry cites the `kb/` document that governs it and carries its own `status`, and
+Catalog entries in `rag_assistant/catalog/objects.json` follow the same discipline. Every
+entry cites the `rag_assistant/kb/` document that governs it and carries its own `status`, and
 `length_m` is deliberately `null` throughout: a fabricated size range would be
 read as evidence by an operator.
 
@@ -303,11 +330,11 @@ same contact cannot show one urgency on the map and another beside the answer.
 pip install -r requirements-survey.txt
 
 # process a survey
-python3 run_survey.py --strips samples/sidescan-s7-submarine.jpg \
-    --model models/known.pt models/anomaly.pt --out data/surveys/s7-submarine
+python -m survey_hazard_map.run_survey --strips samples/sidescan-s7-submarine.jpg \
+    --model survey_hazard_map/models/known.pt models/anomaly.pt --out data/surveys/s7-submarine
 
 # or see the whole pipeline with no survey and no checkpoint
-python3 demo_survey.py --out data/surveys/demo-synthetic
+python -m survey_hazard_map.demo_survey --out data/surveys/demo-synthetic
 ```
 
 Then open the dashboard at `/map`. The page reads `export.json` through
@@ -322,15 +349,15 @@ numbers mean:
 * Severity is a configurable heuristic chosen for this project. It is **not**
   Navy, Coast Guard, NOAA or IMO procedure and carries no authority.
 * A YOLO detection is a prediction, not a fact. Ten tiles of the real waterfall
-  record in `samples/` produce four detections and all four look like false
+  record in `survey_hazard_map/samples/` produce four detections and all four look like false
   positives on nadir boundaries.
 
 Full documentation, including the JSON contract, the severity policy, the
 coordinate assumptions and the handoff shape: [docs/SURVEY_HAZARD_MAP.md](docs/SURVEY_HAZARD_MAP.md).
 
 ```bash
-python3 unit_tests.py                      # 40 unit tests
-python3 smoke_test.py                      # 187 end-to-end checks
+python survey_hazard_map/tests/unit_tests.py                      # 40 unit tests
+python survey_hazard_map/tests/smoke_test.py                      # 191 end-to-end checks
 python3 validate_output.py data/surveys/s7-submarine
 python3 real_model_test.py                 # real checkpoint, or skips with a reason
 ```
@@ -392,6 +419,21 @@ Set `DEEPECHO_PROVIDER=groq` in `.env` for the demo. Gemini's free tier returns
 503 under load often enough to hit one mid-answer, and Groq answers in about a
 second.
 
+### Running the whole thing in Docker
+
+Nothing to install but Docker. One container per feature, a gateway in front,
+and the dashboard:
+
+```bash
+cp .env.example .env          # optional: add a Gemini or Groq key
+docker compose up --build     # then open http://localhost:5173
+```
+
+The assistant, the hazard map and GhostTrace are separate containers, so each
+can be rebuilt or restarted alone (`docker compose up -d --build ghosttrace`).
+Live reload for editing, the routing table, and deploying a feature on its own
+are in [docs/DOCKER.md](docs/DOCKER.md).
+
 ### Deploying
 
 Two services. The API runs in a container because torch is 583 MB on disk and
@@ -439,7 +481,7 @@ python3 -m venv .venv
 .venv/bin/pip install -r requirements-detector.txt   # only for tile upload
 
 cp .env.example .env        # then put a key in it, see below
-.venv/bin/python rag.py index
+.venv/bin/python -m rag_assistant.rag index
 
 cd frontend && npm install && cd ..
 ```
@@ -454,7 +496,7 @@ cd frontend && npm run dev
 Open `http://localhost:5173` and pick Assistant in the sidebar.
 
 **The index is not in the repo.** `index.faiss`, `index.json` and `vectors.npy`
-are built from `kb/` and are gitignored, because a stale committed index that
+are built from `rag_assistant/kb/` and are gitignored, because a stale committed index that
 disagrees with the corpus is worse than no index. `rag.py index` rebuilds them
 in about a second and prints what it indexed.
 
@@ -464,11 +506,11 @@ one to use: it answers in about a second where Gemini's free tier returns 503
 under load. Put `GROQ_API_KEY=...` and `DEEPECHO_PROVIDER=groq` in `.env`.
 
 **The models and the sources are in the repo.** `models/known.pt` and
-`models/anomaly.pt` are committed, and so are the publications in `sources/`, so
+`models/anomaly.pt` are committed, and so are the publications in `rag_assistant/sources/`, so
 citations resolve to real files on a fresh clone.
 
 **Without a key**, retrieval still works and can be demonstrated:
-`python3 rag.py search "who do I report a mine to" -k 5` needs no network at all.
+`python -m rag_assistant.rag search "who do I report a mine to" -k 5` needs no network at all.
 
 ### Endpoints
 
@@ -511,10 +553,10 @@ differently from one.
 Forty cases in `eval/cases.jsonl`, run by `eval/run.py`, checked mechanically.
 
 ```bash
-python3 eval/run.py                      # in-process, no server needed
-python3 eval/run.py --url http://127.0.0.1:8000
-python3 eval/run.py --category refusal --verbose
-python3 eval/run.py --repeat 3           # generation is not deterministic
+python rag_assistant/eval/run.py                      # in-process, no server needed
+python rag_assistant/eval/run.py --url http://127.0.0.1:8000
+python rag_assistant/eval/run.py --category refusal --verbose
+python rag_assistant/eval/run.py --repeat 3           # generation is not deterministic
 ```
 
 Nothing in the suite asks a model to grade another model. A suite whose purpose
@@ -551,19 +593,24 @@ silently treated as anomalies. `_prepare_turn` now normalises the field itself.
 
 ### The detector
 
-Two YOLOv8 checkpoints, both run over every tile.
+One checkpoint, run over every tile.
 
-| Checkpoint | Base | Dataset | Classes |
+| Checkpoint | Base | Classes | Held-out mAP50 |
 |---|---|---|---|
-| `models/known.pt` | yolov8s | SCTD | aircraft, human, ship |
-| `models/anomaly.pt` | yolov8n | sonar_detect | aircraft, fish, other, shipwreck |
+| `survey_hazard_map/models/marine/marine.pt` | YOLO11s | shipwreck, aircraft, human, pipeline, fishing_gear, mine_like_object | 0.61 (pipeline 0.99, aircraft 0.90, mine-like 0.60, shipwreck 0.52, fishing gear 0.34) |
 
-Both, because they disagree usefully. The anomaly model has an explicit `other`
-class, which is the detector saying it saw something and could not name it, and
-that is the signal the unidentified-object path exists for. Where both find the
-same box, the more confident call leads and the other is recorded beside it as a
-second opinion, because a disagreement between two models is information an
-operator should see rather than a tie for the software to settle quietly.
+The kit beside it in `survey_hazard_map/models/marine/` is what the survey pipeline runs:
+`sonar_detector.py` (tiled inference, NMS, calibrated confidence),
+`geotag.py` (ping headers from an `.xtf`, or a NavTable CSV, to WGS-84
+positions and sizes in metres), `shadow_check.py` (acoustic-shadow physics,
+no model) and `sonar_pipeline.py`, which chains them. `calibration.json` is
+the identity: raw confidence on the test split had an ECE of 0.041, and Platt
+scaling made it worse, so none is applied.
+
+Two earlier stand-in checkpoints, `known.pt` and `anomaly.pt`, are retired.
+Their class names remain in `DETECTOR_CLASS_MAP` so stored detections from
+that era still resolve, and the merge in `backend/detect.py` still handles
+several models if one is added again.
 
 Inference runs in a subprocess. faiss and torch each bundle their own libomp,
 and on macOS the second to initialise aborts the process. The documented

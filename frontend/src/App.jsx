@@ -10,6 +10,10 @@ import MapPage from "./pages/MapPage";
 import Alerts from "./pages/Alerts";
 import History from "./pages/History";
 import Assistant from "./pages/Assistant";
+import SurveyMission from "./pages/SurveyMission";
+import GhostTracePage from "./pages/GhostTracePage";
+import SurveyReport from "./pages/SurveyReport";
+import GhostTraceFixturePreview from "./ghosttrace/GhostTraceFixturePreview";
 
 function App() {
   return (
@@ -25,9 +29,17 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/mission" element={<SurveyMission />} />
+            <Route path="/ghosttrace" element={<GhostTracePage />} />
+            <Route path="/ghosttrace/:surveyId" element={<GhostTracePage />} />
+            {/* Renders the panel from a synthetic fixture with no backend. Dev only. */}
+            {import.meta.env.DEV && (
+              <Route path="/dev/ghosttrace" element={<GhostTraceFixturePreview />} />
+            )}
             <Route path="/live" element={<LiveFeed />} />
             <Route path="/detections" element={<Detections />} />
             <Route path="/map" element={<MapPage />} />
+            <Route path="/report/:surveyId" element={<SurveyReport />} />
             <Route path="/alerts" element={<Alerts />} />
             <Route path="/history" element={<History />} />
             <Route path="/assistant" element={<Assistant />} />

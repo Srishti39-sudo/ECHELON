@@ -1,0 +1,80 @@
+{
+  "type": "FeatureCollection",
+  "format": "deepecho-ghosttrace/1+geojson",
+  "survey_id": "demo-ghosttrace-mannar",
+  "synthetic": true,
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.05214306,
+          9.11936621
+        ]
+      },
+      "properties": {
+        "kind": "target",
+        "detection_id": "SYNTHETIC_mannar_line01_512_2048_d0",
+        "object_class": "net",
+        "rank": 1,
+        "tier": "high",
+        "score": 0.3509,
+        "confidence_pct": 76.5,
+        "activity_level": "moderate",
+        "change_status": "first_survey",
+        "propeller_hazard": "low",
+        "synthetic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.05059429,
+          9.11979402
+        ]
+      },
+      "properties": {
+        "kind": "target",
+        "detection_id": "SYNTHETIC_mannar_line01_512_512_d0",
+        "object_class": "net",
+        "rank": 2,
+        "tier": "routine",
+        "score": 0.2852,
+        "confidence_pct": 77.3,
+        "activity_level": "low",
+        "change_status": "first_survey",
+        "propeller_hazard": "low",
+        "synthetic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            78.7858616,
+            9.2275892
+          ],
+          [
+            79.05214306,
+            9.11936621
+          ],
+          [
+            79.05059429,
+            9.11979402
+          ]
+        ]
+      },
+      "properties": {
+        "kind": "recovery_route",
+        "total_km": 31.788,
+        "start": "unnamed harbour (9.2276, 78.7859)",
+        "note": "straight-line legs; not a navigable sea route"
+      }
+    }
+  ]
+}

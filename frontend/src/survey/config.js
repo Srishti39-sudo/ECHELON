@@ -17,8 +17,42 @@ export const surveyConfig = {
     export: (id) => `/survey/${encodeURIComponent(id)}/export`,
     map: (id) => `/survey/${encodeURIComponent(id)}/map`,
     actions: (id) => `/survey/${encodeURIComponent(id)}/actions.csv`,
+    replay: (id) => `/survey/${encodeURIComponent(id)}/replay`,
+    coverage: (id) => `/survey/${encodeURIComponent(id)}/coverage`,
+    relook: (id, format) => `/survey/${encodeURIComponent(id)}/relook.${format}`,
+    ghosttrace: (id) => `/ghosttrace/${encodeURIComponent(id)}`,
+  },
+
+  /** Optional background map. Everything drawn on top of it works without it. */
+  basemap: {
+    url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    attribution: "&copy; OpenStreetMap contributors",
+    maxNativeZoom: 19,
   },
 }
+
+/**
+ * Colours drawn by Leaflet. SVG presentation attributes cannot read CSS custom
+ * properties, so these are the dashboard palette's values written out.
+ */
+export const mapColors = {
+  track: "#087f9c",
+  trackFuture: "#94a3b8",
+  degraded: "#dc2626",
+  swath: "#087f9c",
+  swathDegraded: "#dc2626",
+  sweep: "#0ea5c6",
+  imaged: "#0d9488",
+  nadir: "#64748b",
+  hull: "#64748b",
+  gap: "#dc2626",
+  relook: "#7c3aed",
+  tier: { critical: "#dc2626", medium: "#d97706", low: "#16a34a" },
+  tierFallback: "#64748b",
+  filtered: "#64748b",
+}
+
+export const replaySpeeds = [1, 10, 60]
 
 /**
  * Severity tiers, mapped onto the dashboard's existing palette variables.
@@ -72,6 +106,43 @@ export const copy = {
     "survey. It ran; there is simply nothing to rank.",
   noMatch: "No hotspot matches these filters.",
   askAssistant: "Ask the assistant about this hazard",
+  filteredChip: "filtered",
+  withheldChip: "withheld",
+  filteredTitle: "Filtered false positives",
+  filteredNote:
+    "Verification marked these detections as likely false positives: acoustic " +
+    "artefacts, shadows, clutter or degraded rows rather than objects. They are not " +
+    "deleted. They stay in export.json and report.csv with their reasons, and are " +
+    "left out of every hotspot, which is why they are listed here on their own.",
+  filteredNone: "Verification ran on this survey and filtered nothing.",
+  filteredShow: (count) => `Show ${count} filtered detection${count === 1 ? "" : "s"}`,
+  filteredHide: "Hide filtered detections",
+  notVerified: "not in this export",
+  notVerifiedNote: "export predates verification",
+  hardReasons: {
+    nadir_zone: "nadir / water-column artefact",
+    natural_shadow: "natural shadow or depression",
+    rock_clutter: "rock field or natural clutter",
+    dropout: "degraded sonar rows (dropout or motion)",
+  },
+  replayTitle: "Mission replay",
+  replayNote:
+    "The survey as it was flown, in ping-time order, from the navigation sidecar: the " +
+    "towfish track, the swath it swept, and each contact as the sonar passed it. Red is " +
+    "degraded sonar (dropout, attitude or interpolated rows).",
+  replayUnavailable:
+    "No mission replay for this survey. It has no per-ping navigation, so there is no " +
+    "track, no ping time and no swath to replay; nothing is reconstructed in their place.",
+  coverageTitle: "Coverage and blind spots",
+  coverageNote:
+    "Which seabed the sonar actually imaged. Degraded rows and the nadir strip under the " +
+    "towfish are not counted as imaged. Re-look lines are a planning heuristic, not a " +
+    "navigation procedure: check depth, traffic and turning circle before running one.",
+  coverageUnavailable:
+    "No coverage analysis for this survey. Without a towfish track, heading and altitude " +
+    "there is no seabed footprint to compute, so none is shown.",
+  reportButton: "Survey report",
+  synthetic: "Synthetic",
   disclaimer:
     "Severity weights and recommended actions are a configurable heuristic " +
     "chosen for this project. They are not Navy, Coast Guard, NOAA or IMO " +

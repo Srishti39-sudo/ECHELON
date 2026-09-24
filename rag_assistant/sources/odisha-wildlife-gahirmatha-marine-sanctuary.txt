@@ -1,0 +1,59 @@
+# Gahirmatha Marine Sanctuary, Wildlife Odisha (Forest, Environment & Climate Change Department, Government of Odisha)
+
+source_url: https://wildlife.odisha.gov.in/wildlife-unit-details?unitId=68740ffaadf3cfe6dae13fd6
+retrieved: 2026-09-13
+capture: the page is rendered client-side; this is the record the page itself loads, fetched via the site's own endpoint (POST https://wildlife.odisha.gov.in/api/proxy, url wildlife/wildlifeUnits/protectedArea/getUnitById, id 68740ffaadf3cfe6dae13fd6). Structured fields first, then the English page text, verbatim. The Odia text is omitted.
+
+## Structured record fields
+title_en: Gahirmatha Marine Sanctuary
+description_en: World’s largest nesting beach for Olive Ridley turtles; 1,435 sq km of protected coastal waters.
+category: wildlife-sanctuary
+forestDivision: Mangrove Forest Division (Wildlife), Rajnagar
+district: Kendrapara & Bhadrak
+notifiedArea: 1435.00 sq.km
+notificationDate: 1997-09-27T00:00:00.000Z
+updatedAt: 2026-08-07T07:23:49.884Z
+
+## English page text
+{
+  "howToReach": {
+    "road": "Accessible via National Highway 16, with well-maintained roads connecting major towns.",
+    "rail": "The nearest railway station is in Puri, which is approximately 50 km away from the sanctuary.",
+    "air": "The nearest airport is Biju Patnaik International Airport in Bhubaneswar, about 130 km from Gahirmatha."
+  },
+  "seo": {
+    "metaTitle": "Gahirmatha Marine Sanctuary - Wildlife Odisha",
+    "metaDescription": "Explore Gahirmatha Marine Sanctuary, a vital ecological area known for its rich marine biodiversity and conservation of Olive Ridley turtles.",
+    "metaKeywords": "Gahirmatha, Marine Sanctuary, Odisha, Olive Ridley turtles, marine biodiversity, conservation"
+  },
+  "quickFacts": [
+    "Established in 1997",
+    "Covers an area of approximately 1435 square kilometers",
+    "Home to Olive Ridley turtles, dolphins, and numerous aquatic species",
+    "It is the largest nesting ground for Olive Ridley turtles in the world",
+    "Part of the UNESCO-recognized Chilika Lagoon ecosystem"
+  ],
+  "facilitiesAvailable": [
+    "Visitor center with information about marine life",
+    "Guided tours available for educational purposes",
+    "Research facilities for scientists and ecologists",
+    "Boat rentals for observing marine wildlife",
+    "Photography and birdwatching opportunities"
+  ],
+  "tag": "Gahirmatha Marine Sanctuary",
+  "title": "Gahirmatha Marine Sanctuary",
+  "desc": "A haven for marine wildlife and biodiversity",
+  "description": "Gahirmatha Marine Sanctuary, located along the eastern coast of India in Odisha, is a significant marine protected area renowned for its rich biodiversity and ecological importance. This sanctuary serves as a pivotal habitat for various marine species, including nesting sea turtles, and plays an essential role in the conservation of marine life.",
+  "details": {
+    "Location": "Odisha, India",
+    "Area": "1435 square kilometers",
+    "Established": "1997",
+    "Best Time to Visit": "November to March"
+  },
+  "salientDetails": {
+    "Biodiversity": "Supports a wide range of marine life, including endangered species.",
+    "Conservation": "Critical area for the protection of the Olive Ridley sea turtles.",
+    "Research Opportunities": "Offers numerous opportunities for scientific research and ecological studies.",
+    "Tourism": "Promotes eco-tourism while drawing attention to marine conservation efforts."
+  }
+}

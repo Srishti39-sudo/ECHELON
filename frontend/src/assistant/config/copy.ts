@@ -108,6 +108,90 @@ export const copy = {
     evidence: 'Evidence tile',
   },
 
+  ghosttrace: {
+    from: 'From the GhostTrace rescue queue',
+    attachedLabel: 'GhostTrace target',
+    // Shown on every GhostTrace card and chip when the survey is synthetic. It
+    // is not decoration: nothing in a synthetic run is evidence of a real net.
+    synthetic: 'Synthetic',
+    syntheticBody: 'Synthetic survey data. Nothing here is evidence of a real net.',
+    target: 'Target',
+    survey: 'Survey',
+    objectClass: 'Class',
+    confidence: 'Confidence',
+    position: 'Position',
+    notGeoreferenced: 'Not georeferenced',
+    priority: 'Priority',
+    priorityValue: (tier: string, rank: string, score: string) =>
+      `${tier} · rank ${rank} · score ${score}`,
+    // The rescue queue's priority, shown as the queue's. Labelled so nobody
+    // reads it as something the assistant worked out.
+    priorityChip: 'GhostTrace priority',
+    activity: 'Water-column activity',
+    habitat: 'Nearest habitat',
+    habitatValue: (name: string, distance: string) => `${name}, ${distance} m`,
+    propeller: 'Propeller hazard',
+    change: 'Change',
+    authorities: 'Authorities GhostTrace lists',
+    caveats: 'Caveats',
+    notAvailable: 'not available',
+    dataNotSource:
+      'GhostTrace numbers are survey data and heuristics, not reference sources. The assistant attributes them to GhostTrace; authorities and procedures still come from the cited documents.',
+    defaultQuestion:
+      'Why is this net ranked where it is, and who do the sources say should be told?',
+  },
+
+  copilot: {
+    modeLabel: 'Answer from',
+    modes: {
+      auto: 'Auto',
+      copilot: 'Mission Copilot',
+      reference: 'References only',
+    },
+    modeHint: {
+      auto: 'Questions about the processed surveys go to the Mission Copilot; everything else is answered from the references.',
+      copilot: 'Looks up the processed surveys with read-only data tools, then answers with survey records [D] and references [S].',
+      reference: 'Answers from the reference documents only, never from survey data.',
+    },
+    examplesLabel: 'Ask the Mission Copilot',
+    examples: [
+      'Which net should we recover first across all surveys, and who do we notify?',
+      'What changed between the two Mannar surveys?',
+      'Which contacts were filtered as false positives and why?',
+      'Summarise survey waterfall-strip for the Coast Guard',
+    ],
+    referenceExamplesLabel: 'Ask the references',
+    autoRouted: 'auto-routed',
+    consulted: 'Data consulted',
+    plannedBy: {
+      model: 'planned by the model',
+      json_plan: 'planned by the model (JSON)',
+      keywords: 'planned from keywords',
+    } as Record<string, string>,
+    lookingUp: 'Looking up survey data',
+    dataOnlyBody:
+      'No language model could be reached. What follows is the survey records the copilot looked up, tabled, and short extracts of the references. Nothing in it was generated.',
+    dataCount: (n: number) => (n === 1 ? '1 data record' : `${n} data records`),
+  },
+
+  language: {
+    label: 'Answer language',
+    note: 'Source extracts stay in English.',
+  },
+
+  offline: {
+    badge: 'Offline — sources only, no generated answer',
+    body:
+      'No language model could be reached. What follows is the retrieved passages, quoted, and the facts handed over with the question. Nothing in it was generated.',
+    why: 'Why',
+  },
+
+  numbers: {
+    title: 'Figures not found in the sources',
+    body: (figures: string[]) =>
+      `These figures appear in no retrieved passage, in your message or in the handed-over context: ${figures.join(', ')}. Treat them as unverified.`,
+  },
+
   matches: {
     title: 'Nearest known objects',
     caveat:
@@ -116,6 +200,23 @@ export const copy = {
     confirms: 'Would confirm',
     rulesOut: 'Would rule out',
     hazard: 'Hazard class',
+  },
+
+  data: {
+    panelTitle: 'Survey data record',
+    tabSources: 'Sources',
+    tabData: 'Data',
+    listTitle: 'Data records',
+    survey: 'Survey',
+    file: 'From',
+    record: 'Record',
+    kind: 'Kind',
+    synthetic: 'Synthetic survey data, not evidence of a real object',
+    fields: 'Record as the answer saw it',
+    openGhosttrace: 'Open in GhostTrace',
+    openMap: 'Open on the hazard map',
+    markerTitle: (n: number) => `Open data record ${n}`,
+    note: 'Survey data from the processed files, not a reference source.',
   },
 
   citations: {
@@ -138,7 +239,12 @@ export const copy = {
     disabled: 'Tile upload is switched off',
     rejected: 'That file type is not accepted',
     detectionsFound: (n: number) => (n === 1 ? '1 contact found' : `${n} contacts found`),
-    noDetections: 'No contacts were found in that tile',
+    // Not a failure, and it should not read as one. A whole survey strip finds
+    // nothing here because the detector works at 640 pixels: scale a 3600-pixel
+    // strip down to that and every contact is a few pixels across. Strips go
+    // through the survey pipeline; this path is for a tile.
+    noDetections:
+      'Nothing detected in that image. If it is a whole survey strip, use the Survey Hazard Map instead: the detector reads one tile at a time and a full strip scales down past the point where anything is visible.',
     attached: 'Attached to this conversation',
     // Sent automatically after an upload, so a tile produces a briefing without
     // the operator having to think of a question first.

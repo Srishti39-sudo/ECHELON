@@ -1,6 +1,8 @@
 import { ExternalLink, MessageSquareText } from "lucide-react"
 
 import { copy, styleForTier } from "../config"
+import { confidencePct, formatPct } from "../detections"
+import DetectionTable from "./DetectionTable"
 
 /**
  * Everything known about one hotspot, and the one place a hazard leaves this
@@ -22,6 +24,9 @@ function HotspotDetail({ hotspot, detections, survey, onAsk }) {
   const style = styleForTier(hotspot.severity_tier)
   const centroid = hotspot.centroid || {}
   const georeferenced = centroid.latitude !== null && centroid.latitude !== undefined
+  const topId = hotspot.top_detection?.id
+  const top = detections.find((d) => d.id === topId) || null
+  const topPct = confidencePct(top)
   const tiles = [
     ...new Set(detections.flatMap((d) => d.provenance?.source_tiles || [])),
   ].sort()
@@ -66,10 +71,22 @@ function HotspotDetail({ hotspot, detections, survey, onAsk }) {
         </div>
         <div>
           <dt>Confidence</dt>
-          <dd>
-            {hotspot.confidence_max.toFixed(2)} max
-            <span className="sv-sub">{hotspot.confidence_mean.toFixed(2)} mean</span>
-          </dd>
+          {/* The verified figure of the detection that sets the hotspot's
+              severity, where the export has one. The detector's own scores
+              stay beside it; an older export shows only those. */}
+          {topPct !== null ? (
+            <dd>
+              {formatPct(topPct)}
+              <span className="sv-sub">
+                top detection &middot; detector {hotspot.confidence_max.toFixed(2)} max
+              </span>
+            </dd>
+          ) : (
+            <dd>
+              {hotspot.confidence_max.toFixed(2)} max
+              <span className="sv-sub">{hotspot.confidence_mean.toFixed(2)} mean</span>
+            </dd>
+          )}
         </div>
         <div>
           <dt>Detections</dt>
@@ -95,56 +112,7 @@ function HotspotDetail({ hotspot, detections, survey, onAsk }) {
       </dl>
 
       <h4 className="sv-detail-sub">Detections in this hotspot</h4>
-      <table className="sv-inner-table">
-        <thead>
-          <tr>
-            <th>Class</th>
-            <th className="sv-col-num">Conf</th>
-            <th className="sv-col-num">Weight</th>
-            <th className="sv-col-num">Severity</th>
-            <th>Evidence</th>
-          </tr>
-        </thead>
-        <tbody>
-          {detections.map((detection) => {
-            const rowStyle = styleForTier(detection.severity_tier)
-            return (
-              <tr key={detection.id}>
-                <td>
-                  {detection.object_class}
-                  {/* The detector's own call, where this system judged it too
-                      uncertain to assert. Kept visible: the operator should be
-                      able to see what was withheld and why. */}
-                  {detection.class_withheld && (
-                    <span className="sv-withheld">
-                      {detection.class_withheld} withheld below {detection.class_floor}
-                    </span>
-                  )}
-                </td>
-                <td className="sv-col-num">{detection.confidence.toFixed(2)}</td>
-                <td className="sv-col-num">{detection.class_weight}</td>
-                <td className="sv-col-num" style={{ color: rowStyle.color }}>
-                  {detection.severity.toFixed(3)}
-                </td>
-                <td className="sv-evidence">
-                  {detection.provenance?.representative_tile}
-                  {detection.provenance?.merged_count > 1 && (
-                    <span className="sv-sub">
-                      {detection.provenance.merged_count} views merged
-                    </span>
-                  )}
-                  {detection.provenance?.second_opinion?.map((opinion, index) => (
-                    <span className="sv-sub" key={index}>
-                      {opinion.model} called it {opinion.object_class} at{" "}
-                      {opinion.confidence.toFixed(2)}
-                    </span>
-                  ))}
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <DetectionTable detections={detections} />
 
       {tiles.length > 0 && (
         <p className="sv-tiles">

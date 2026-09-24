@@ -1,0 +1,7 @@
+{
+  "type": "FeatureCollection",
+  "format": "deepecho-ghosttrace/1+geojson",
+  "survey_id": "waterfall-strip",
+  "synthetic": false,
+  "features": []
+}

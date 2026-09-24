@@ -1,0 +1,15 @@
+{
+  "type": "FeatureCollection",
+  "properties": {
+    "survey_id": "waterfall-strip",
+    "title": "Waterfall record, false-positive study",
+    "processed_at": "2026-09-13T14:23:30+00:00",
+    "demo": false,
+    "coordinate_mode": "Relative Survey Coordinates",
+    "detections_total": 3,
+    "detections_located": 0,
+    "detections_unlocated": 3,
+    "disclaimer": "Severity weights, tier boundaries and recommended actions are a configurable heuristic chosen for this project. They are not Navy, Coast Guard, NOAA or IMO procedure and carry no authority. Review them against your own operating rules before acting on them."
+  },
+  "features": []
+}
