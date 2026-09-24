@@ -129,6 +129,16 @@ PER_DOC = int(os.environ.get("DEEPECHO_PER_DOC", "3"))
 EF_SEARCH = int(os.environ.get("DEEPECHO_EF_SEARCH", "64"))
 CATALOG_TOP = int(os.environ.get("DEEPECHO_CATALOG_TOP", "3"))
 
+# Second-stage reranking (rag_assistant/rerank.py). Retrieval fetches
+# RERANK_FETCH candidates, the reranker keeps TOP_K. "auto" turns it on when an
+# NVIDIA key is present and off otherwise, so a laptop with no key behaves as
+# before. Measured on eval/retrieval_bench.py before it was switched on.
+_rerank_flag = os.environ.get("DEEPECHO_RERANK", "auto").strip().lower()
+RERANK = (True if _rerank_flag in {"1", "true", "yes", "on"} else
+          False if _rerank_flag in {"0", "false", "no", "off"} else
+          bool(os.environ.get("NVIDIA_API_KEY")))
+RERANK_FETCH = int(os.environ.get("DEEPECHO_RERANK_FETCH", "20"))
+
 # How much of a chunk the citation panel receives. Chunks are ~900 characters,
 # so the default sends the whole thing and the panel shows real source text
 # rather than a teaser.

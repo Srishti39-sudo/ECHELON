@@ -406,8 +406,78 @@ class GeminiEmbedder:
                 "center": self.center}
 
 
+class NvidiaEmbedder:
+    """NVIDIA NeMo Retriever embeddings over NIM (build.nvidia.com).
+
+    llama-3.2-nv-embedqa-1b-v2 is trained for retrieval in 26 languages, so a
+    question typed in Hindi or Tamil lands next to the English passage that
+    answers it without a translation step first. Passages and queries are
+    embedded with different input types, as the model expects. Every query is
+    a network call; the TF-IDF embedder stays the offline fallback.
+
+    The same model runs on-premises as a NIM container: NVIDIA_BASE_URL is the
+    only change, which is the at-sea story for retrieval as well as generation.
+    """
+
+    kind = "nvidia"
+    BATCH = 32
+
+    def __init__(self, model: str = "nvidia/llama-3.2-nv-embedqa-1b-v2", dim: int = 2048,
+                 center: bool = False):
+        import numpy as np
+        self.np = np
+        self.model = model
+        self.dim = dim
+        self.center = center
+        self._client = None
+
+    def _get_client(self):
+        if self._client is None:
+            import openai
+            key = os.environ.get("NVIDIA_API_KEY")
+            if not key:
+                raise SystemExit("NVIDIA embeddings need NVIDIA_API_KEY. Free key: https://build.nvidia.com")
+            self._client = openai.OpenAI(
+                api_key=key, base_url=os.environ.get("NVIDIA_BASE_URL", "https://integrate.api.nvidia.com/v1"),
+                max_retries=3, timeout=60.0)
+        return self._client
+
+    def _embed(self, texts: list[str], input_type: str):
+        import numpy as np
+        client = self._get_client()
+        out: list[list[float]] = []
+        for start in range(0, len(texts), self.BATCH):
+            batch = texts[start:start + self.BATCH]
+            try:
+                response = client.embeddings.create(
+                    model=self.model, input=batch, encoding_format="float",
+                    extra_body={"input_type": input_type, "truncate": "END"})
+            except Exception as exc:
+                raise SystemExit(f"NVIDIA embedding request failed: {exc}")
+            out.extend(e.embedding for e in sorted(response.data, key=lambda e: e.index))
+        vecs = np.asarray(out, dtype="float32")
+        if vecs.shape[1] != self.dim:
+            self.dim = int(vecs.shape[1])
+        if self.center:
+            vecs -= vecs.mean(axis=1, keepdims=True)
+        norms = np.linalg.norm(vecs, axis=1, keepdims=True)
+        norms[norms == 0] = 1.0
+        return vecs / norms
+
+    def encode_many(self, texts: list[str]):
+        return self._embed(texts, "passage")
+
+    def encode(self, text: str):
+        return self._embed([text], "query")[0]
+
+    def state(self) -> dict:
+        return {"kind": self.kind, "model": self.model, "dim": self.dim, "center": self.center}
+
+
 def make_embedder(state: dict):
     kind = state["kind"]
+    if kind == NvidiaEmbedder.kind:
+        return NvidiaEmbedder(state["model"], state["dim"], state.get("center", False))
     if kind == GeminiEmbedder.kind:
         return GeminiEmbedder(state["model"], state["dim"], state.get("center", False))
     if kind == SentenceTransformerEmbedder.kind:
@@ -533,6 +603,8 @@ class Retriever:
             embedder = SentenceTransformerEmbedder(center=center)
         elif embedder_kind == "gemini":
             embedder = GeminiEmbedder(dim=dim if dim != DEFAULT_DIM else 768, center=center)
+        elif embedder_kind == "nvidia":
+            embedder = NvidiaEmbedder(center=center)
         elif embedder_kind == "random-projection":
             embedder = RandomProjectionEmbedder(idf, dim=dim, center=center)
         else:
@@ -1492,7 +1564,7 @@ def main() -> None:
                          help="pearson centres vectors before normalising")
     p_index.add_argument(
         "--embedder",
-        choices=["auto", "tfidf-dense", "gemini", "random-projection", "sentence-transformers"],
+        choices=["auto", "tfidf-dense", "gemini", "nvidia", "random-projection", "sentence-transformers"],
         default="auto",
         help="auto prefers sentence-transformers, else tfidf-dense; gemini calls the API")
     p_index.add_argument("--ann", choices=["auto", "hnsw", "exact"], default="auto")
