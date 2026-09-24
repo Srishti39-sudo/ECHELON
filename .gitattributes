@@ -1,0 +1,5 @@
+# Generated artefacts: keep them out of the language statistics and diffs.
+data/surveys/** linguist-generated=true
+data/ghosttrace/** linguist-generated=true
+survey_hazard_map/samples/** linguist-generated=true
+rag_assistant/sources/** linguist-documentation=true
