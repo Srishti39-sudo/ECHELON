@@ -102,7 +102,6 @@ export function ActivitySection({ activity }) {
     return (
       <div className="gt-section">
         <Unavailable title="No activity estimate" reason={reasonOf(activity)} />
-        {activity?.limitations && <p className="gt-limit">{activity.limitations}</p>}
       </div>
     )
   }
@@ -131,18 +130,7 @@ export function ActivitySection({ activity }) {
           ...(isNum(e.control_windows) ? [["Control windows", num(e.control_windows, 0), "same side, same line"]] : []),
         ]}
       />
-      {e.area_note && <p className="gt-limit">{e.area_note}</p>}
       {activity.formula && <code className="gt-formula">{activity.formula}</code>}
-      {activity.basis && (
-        <div className="gt-subsection">
-          <h4>Basis</h4>
-          <p>{activity.basis}</p>
-        </div>
-      )}
-      <div className="gt-subsection">
-        <h4>What this cannot tell you</h4>
-        <TextList items={activity.limitations} empty="The engine recorded no limitations for this estimate." />
-      </div>
     </div>
   )
 }
@@ -298,16 +286,6 @@ export function DriftSection({ drift }) {
             )}
           </tbody>
         </table>
-      </div>
-      <div className="gt-two-col">
-        <div className="gt-subsection">
-          <h4>Assumptions</h4>
-          <TextList items={drift.assumptions} />
-        </div>
-        <div className="gt-subsection">
-          <h4>Limitations</h4>
-          <TextList items={drift.limitations} />
-        </div>
       </div>
     </div>
   )
@@ -491,16 +469,6 @@ export function ChangeSection({ change }) {
             : []),
         ]}
       />
-      {change.basis && (
-        <div className="gt-subsection">
-          <h4>Basis</h4>
-          <p>{change.basis}</p>
-        </div>
-      )}
-      <p className="gt-limit">
-        Matching across surveys is by position and class. Navigation error between surveys can make one object look
-        moved, or two nearby objects look like one.
-      </p>
     </div>
   )
 }

@@ -141,11 +141,6 @@ function AlertDraft({ surveyId, target, downloadUrl }) {
               </ul>
             </>
           )}
-          {alert.basis && (
-            <p className="gt-muted">
-              <strong>Basis:</strong> {alert.basis}
-            </p>
-          )}
         </div>
       )}
     </div>
