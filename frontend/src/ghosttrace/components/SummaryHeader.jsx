@@ -2,7 +2,6 @@ import { AlertOctagon, Download, FlaskConical, Fish, Leaf, Loader2, RefreshCw, S
 
 import { copy } from "../config"
 import { dateTime, isNum } from "../format"
-import MethodNotes from "./MethodNotes"
 
 function Stat({ icon: Icon, value, label, note, tone }) {
   return (
@@ -79,13 +78,6 @@ function SummaryHeader({ doc, title, onRerun, running, canRun, geojsonHref, isEx
         </div>
       </div>
 
-      {(synthetic || demo) && (
-        <p className="gt-synthetic-note" role="note">
-          <FlaskConical size={15} aria-hidden="true" />
-          {copy.syntheticNote}
-        </p>
-      )}
-
       {isNum(s.stage_failures) && s.stage_failures > 0 && (
         <p className="gt-callout gt-callout--warn" role="note">
           {s.stage_failures} analysis stage{s.stage_failures === 1 ? "" : "s"} failed on individual targets. Those sections show the error instead of a result.
@@ -96,12 +88,11 @@ function SummaryHeader({ doc, title, onRerun, running, canRun, geojsonHref, isEx
 
       <div className="gt-stats">
         <Stat icon={AlertOctagon} value={s.urgent} label="Urgent targets" note={isNum(s.high) ? `+${s.high} high priority` : null} tone={s.urgent ? "urgent" : null} />
-        <Stat icon={Fish} value={s.actively_fishing} label="Actively fishing" note="heuristic: water-column echoes at the net" tone={s.actively_fishing ? "fishing" : null} />
+        <Stat icon={Fish} value={s.actively_fishing} label="Actively fishing" note="water-column echoes at the net" tone={s.actively_fishing ? "fishing" : null} />
         <Stat icon={Leaf} value={s.near_sensitive_habitat} label="Near sensitive habitat" note="reefs, MPAs, turtles, dugongs" tone={s.near_sensitive_habitat ? "habitat" : null} />
         <Stat icon={Ship} value={s.propeller_hazards} label="Propeller hazards" note="to fishing boats" tone={s.propeller_hazards ? "hazard" : null} />
       </div>
 
-      <MethodNotes sources={doc.data_sources} caveats={doc.caveats} run={doc.run} />
     </header>
   )
 }

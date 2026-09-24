@@ -6,7 +6,7 @@ import {
   XCircle,
 } from "lucide-react"
 
-import { copy, labelForKind, singularLabel, styleForActivity, styleForChange, styleForHazard } from "../config"
+import { labelForKind, singularLabel, styleForActivity, styleForChange, styleForHazard } from "../config"
 import {
   DASH,
   arrival,
@@ -24,7 +24,7 @@ import {
   sourceUrl,
   titleCase,
 } from "../format"
-import { ActivityChip, ChangeChip, HazardChip, Tag, Unavailable } from "./Chips"
+import { ActivityChip, ChangeChip, HazardChip, Unavailable } from "./Chips"
 
 /* ---------------------------------------------------------------- shared */
 
@@ -115,9 +115,7 @@ export function ActivitySection({ activity }) {
         <span className="gt-muted">
           score <strong className="gt-strong">{num(activity.score, 2)}</strong> · {style.label}
         </span>
-        <Tag tone="info">Heuristic</Tag>
       </div>
-      <p className="gt-callout">{copy.activityHeuristic}</p>
       {activity.available === false && <Unavailable title="Marked unavailable" reason={reasonOf(activity)} />}
       <Facts
         rows={[
@@ -253,7 +251,6 @@ export function DriftSection({ drift }) {
   const impacts = (drift.impacts || []).slice().sort((a, b) => (b.probability ?? 0) - (a.probability ?? 0))
   return (
     <div className="gt-section">
-      <p className="gt-callout">{copy.driftModel}</p>
       <Facts
         rows={[
           ["Mode", titleCase(drift.mode || drift.requested_mode) || DASH, drift.mode_basis],
