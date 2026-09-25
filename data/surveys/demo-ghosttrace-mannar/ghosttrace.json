@@ -1,7 +1,7 @@
 {
   "format": "deepecho-ghosttrace/1",
   "survey_id": "demo-ghosttrace-mannar",
-  "generated_at": "2026-09-25T06:27:05+00:00",
+  "generated_at": "2026-09-25T07:05:44+00:00",
   "demo": true,
   "synthetic_inputs": true,
   "data_sources": [
@@ -288,7 +288,9 @@
             "geometry_quality": "point"
           }
         },
-        "notes": []
+        "notes": [
+          "reef outlines come from UNEP-WCMC and OpenStreetMap; the Allen Coral Atlas satellite map is not imported for this region (tools/import_allen_coral_atlas.py)"
+        ]
       },
       "drift": {
         "available": true,
@@ -13332,7 +13334,7 @@
           "no turtle nesting layer in this region"
         ],
         "heuristic": "configurable heuristic chosen for this project; not fitted to real ghost-gear drift or recovery data and not an official procedure",
-        "generated_at": "2026-09-25T06:27:02+00:00",
+        "generated_at": "2026-09-25T07:05:42+00:00",
         "requested_mode": "seabed",
         "mode_basis": "default: side-scan images the seabed and a snagged net is the common case; no floating/midwater indication",
         "start_time": "2026-09-06T04:31:58.403000+00:00",
@@ -41210,7 +41212,7 @@
             "no turtle nesting layer in this region"
           ],
           "heuristic": "configurable heuristic chosen for this project; not fitted to real ghost-gear drift or recovery data and not an official procedure",
-          "generated_at": "2026-09-25T06:27:05+00:00",
+          "generated_at": "2026-09-25T07:05:44+00:00",
           "scenario": "if_refloated",
           "scenario_note": "what this net would reach if lifted off the seabed (e.g. by a storm or a trawl) at survey time; not a forecast, and not used in the priority score",
           "start_time": "2026-09-06T04:31:58.403000+00:00",
@@ -41645,7 +41647,9 @@
             "geometry_quality": "point"
           }
         },
-        "notes": []
+        "notes": [
+          "reef outlines come from UNEP-WCMC and OpenStreetMap; the Allen Coral Atlas satellite map is not imported for this region (tools/import_allen_coral_atlas.py)"
+        ]
       },
       "drift": {
         "available": true,
@@ -54689,7 +54693,7 @@
           "no turtle nesting layer in this region"
         ],
         "heuristic": "configurable heuristic chosen for this project; not fitted to real ghost-gear drift or recovery data and not an official procedure",
-        "generated_at": "2026-09-25T06:26:59+00:00",
+        "generated_at": "2026-09-25T07:05:38+00:00",
         "requested_mode": "seabed",
         "mode_basis": "default: side-scan images the seabed and a snagged net is the common case; no floating/midwater indication",
         "start_time": "2026-09-06T04:30:28.799000+00:00",
@@ -81883,7 +81887,7 @@
             "no turtle nesting layer in this region"
           ],
           "heuristic": "configurable heuristic chosen for this project; not fitted to real ghost-gear drift or recovery data and not an official procedure",
-          "generated_at": "2026-09-25T06:27:01+00:00",
+          "generated_at": "2026-09-25T07:05:41+00:00",
           "scenario": "if_refloated",
           "scenario_note": "what this net would reach if lifted off the seabed (e.g. by a storm or a trawl) at survey time; not a forecast, and not used in the priority score",
           "start_time": "2026-09-06T04:30:28.799000+00:00",

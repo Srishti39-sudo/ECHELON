@@ -156,9 +156,18 @@ def habitat_context(lat: float, lon: float, *, layers: LayerSet | None = None,
     notes = []
     if any((r.get("geometry_quality") or "").startswith("approximate") for r in nearest + inside):
         notes.append("one or more reported features have approximate geometry; see geometry_quality and construction")
-    if "reef" in assessed and not any(l.meta.get("restricted") for l in layers.by_kind("reef")):
-        notes.append("the UNEP-WCMC coral reef layer is not present on this machine (non-redistributable; "
-                     "run tools/fetch_ghosttrace_data.py); reef results use the sparse OpenStreetMap layer only")
+    if "reef" in assessed:
+        reef_sources = {l.meta.get("source_id") for l in layers.by_kind("reef") if region in l.regions()}
+        detailed = {"wcmc_reefs", "allen_coral_atlas"} & reef_sources
+        if not detailed:
+            notes.append("neither the UNEP-WCMC nor the Allen Coral Atlas reef layer is present for this "
+                         "region (run tools/fetch_ghosttrace_data.py, or import an Atlas download with "
+                         "tools/import_allen_coral_atlas.py); reef results use the sparse OpenStreetMap "
+                         "layer only")
+        elif "allen_coral_atlas" not in reef_sources:
+            notes.append("reef outlines come from UNEP-WCMC and OpenStreetMap; the Allen Coral Atlas "
+                         "satellite map is not imported for this region "
+                         "(tools/import_allen_coral_atlas.py)")
     return {**base, "covered": True, "region": region, "reason": None, "inside": inside, "nearest": nearest,
             "kinds_assessed": assessed, "kinds_not_assessed": not_assessed, "score": score, "terms": terms,
             "notes": notes}

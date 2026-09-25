@@ -329,7 +329,8 @@ def write_layer(name: str, kind: str, features: list[dict[str, Any]], *, source_
                               "written": datetime.now(timezone.utc).isoformat(timespec="seconds")},
                "features": out_feats}
     path.write_text(json.dumps(payload, separators=(",", ":"), ensure_ascii=False), encoding="utf-8")
-    log(f"  wrote {path.relative_to(REPO)}: {len(out_feats)} features, {path.stat().st_size / 1e3:.0f} kB")
+    shown = path.relative_to(REPO) if path.is_relative_to(REPO) else path
+    log(f"  wrote {shown}: {len(out_feats)} features, {path.stat().st_size / 1e3:.0f} kB")
     return path
 
 
