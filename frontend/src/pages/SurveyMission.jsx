@@ -501,7 +501,9 @@ function UploadPanel({ onStarted }) {
           </h1>
           <p>
             Upload a raw side-scan log or strip images. The backend tiles them,
-            runs the marine.pt detector over every tile, checks each contact
+            runs the seven-class YOLO11s detector (marine.pt: shipwreck, aircraft,
+            human, pipeline, fishing gear, mine-like object, ghost net) over every
+            tile, checks each contact
             against acoustic-shadow physics and geotags it from the log's
             navigation, and this page follows that run as it happens: stages,
             tile progress, and detections appearing on the map. When it
@@ -512,7 +514,7 @@ function UploadPanel({ onStarted }) {
           <div className="head-meta">
             <span className="scan-badge">
               {health.detector === "loaded"
-                ? `${health.detector_models.join(" + ")} loaded`
+                ? `${health.detector_models.join(" + ")} loaded · YOLO11s · 7 classes`
                 : `detector ${health.detector}`}
             </span>
           </div>
