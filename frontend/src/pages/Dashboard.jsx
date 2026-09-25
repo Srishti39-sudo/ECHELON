@@ -6,6 +6,12 @@ import {
   AlertTriangle,
   Ship,
   CheckCircle2,
+  Crosshair,
+  FileInput,
+  Fish,
+  Waves,
+  ListOrdered,
+  Cpu,
 } from "lucide-react";
 
 import StatCard from "../components/StatCard";
@@ -23,6 +29,53 @@ import { settings } from "../assistant/config/settings";
  * So everything here now comes from the API, and where a survey has no
  * navigation it says so instead of printing a number.
  */
+/**
+ * What sets this system apart, in the order the pipeline runs. Every line is
+ * something the code does today; nothing here is a roadmap item. Keep the
+ * class list in step with the detector's data.yaml when the model changes.
+ */
+const CLASSES = ["shipwreck", "aircraft", "human", "pipeline", "fishing gear", "mine-like object", "ghost net"];
+
+const STANDOUT = [
+  {
+    Icon: Crosshair,
+    title: "Two detectors, seven classes",
+    lead: "YOLO11 and YOLO26 trained across 7 sonar classes",
+    body: CLASSES.join(" · "),
+    note: "ghost-net class trained on synthetic sonar targets; confidence calibrated and every box verified against shadow geometry",
+  },
+  {
+    Icon: FileInput,
+    title: "Raw sonar in, not screenshots",
+    lead: "Reads .xtf and .jsf logs directly",
+    body: "Slant-range correction, gain normalisation, per-ping navigation and dropout flags. The water column is kept, not discarded.",
+  },
+  {
+    Icon: Fish,
+    title: "Is the net still fishing?",
+    lead: "Water-column echo enrichment beside every net",
+    body: "Echo clusters near the object against the rest of the same line. No other published ghost-net system automates this step; elsewhere a diver checks by hand.",
+  },
+  {
+    Icon: Waves,
+    title: "Where it will go",
+    lead: "Monte Carlo drift on HYCOM ocean currents",
+    body: "500-particle forecast with 50 / 90 % probability cones, first arrival at reefs, seagrass, turtle beaches, dugong habitat and harbours.",
+  },
+  {
+    Icon: ListOrdered,
+    title: "A rescue queue, not a list of boxes",
+    lead: "Per-net priority score, recomputable by hand",
+    body: "Activity, habitat, drift impact, propeller and diver risk, size, change since the last survey and recoverability, each weighted and shown. Alerts are drafted to named authorities from a cited corpus.",
+  },
+  {
+    Icon: Cpu,
+    title: "Runs offline, on the boat",
+    lead: "ONNX detectors on CPU with no torch",
+    body: "Exported once, measured for parity against the PyTorch checkpoints, and benchmarked for a survey workload. The assistant answers only from its indexed corpus.",
+  },
+];
+
 function Dashboard() {
   const navigate = useNavigate();
   const [surveys, setSurveys] = useState([]);
@@ -93,6 +146,32 @@ function Dashboard() {
 
       </section>
 
+      <section className="standout-panel" aria-labelledby="standout-heading">
+
+        <div className="panel-header">
+          <div>
+            <h2 id="standout-heading">What sets DeepEcho apart</h2>
+            <p>From a raw side-scan log to a ranked ghost-net rescue queue, every step explained</p>
+          </div>
+          <span className="scan-badge">YOLO11 + YOLO26 · 7 classes</span>
+        </div>
+
+        <div className="standout-grid">
+          {STANDOUT.map(({ Icon, title, lead, body, note }) => (
+            <article className="standout-card" key={title}>
+              <div className="standout-icon">
+                <Icon size={18} aria-hidden="true" />
+              </div>
+              <h3>{title}</h3>
+              <p className="standout-lead">{lead}</p>
+              <p className="standout-body">{body}</p>
+              {note && <small className="standout-note">{note}</small>}
+            </article>
+          ))}
+        </div>
+
+      </section>
+
       <section className="dashboard-content">
 
         <div className="sonar-panel">
@@ -116,7 +195,7 @@ function Dashboard() {
 
             <p>
               {error ??
-                "Upload a side-scan sonar image and both detection models run over it, then the assistant explains what was found."}
+                "Upload a side-scan sonar image or a raw .xtf log. Both detectors run over every tile, then the assistant explains what was found."}
             </p>
 
           </div>
