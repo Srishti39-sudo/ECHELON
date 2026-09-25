@@ -160,32 +160,6 @@ function Dashboard() {
 
       </section>
 
-      <section className="standout-panel" aria-labelledby="standout-heading">
-
-        <div className="panel-header">
-          <div>
-            <h2 id="standout-heading">What sets DeepEcho apart</h2>
-            <p>From a raw side-scan log to a ranked ghost-net rescue queue, every step explained</p>
-          </div>
-          <span className="scan-badge">YOLO11 + YOLO26 · 7 classes</span>
-        </div>
-
-        <div className="standout-grid">
-          {STANDOUT.map(({ Icon, title, lead, body, note }) => (
-            <article className="standout-card" key={title}>
-              <div className="standout-icon">
-                <Icon size={18} aria-hidden="true" />
-              </div>
-              <h3>{title}</h3>
-              <p className="standout-lead">{lead}</p>
-              <p className="standout-body">{body}</p>
-              {note && <small className="standout-note">{note}</small>}
-            </article>
-          ))}
-        </div>
-
-      </section>
-
       <section className="dashboard-content">
 
         <div className="sonar-panel">
@@ -287,6 +261,33 @@ function Dashboard() {
             Open the hazard map
           </button>
 
+        </div>
+
+      </section>
+
+
+      <section className="standout-panel" aria-labelledby="standout-heading">
+
+        <div className="panel-header">
+          <div>
+            <h2 id="standout-heading">What sets DeepEcho apart</h2>
+            <p>From a raw side-scan log to a ranked ghost-net rescue queue, every step explained</p>
+          </div>
+          <span className="scan-badge">YOLO11 + YOLO26 · 7 classes</span>
+        </div>
+
+        <div className="standout-grid">
+          {STANDOUT.map(({ Icon, title, lead, body, note }) => (
+            <article className="standout-card" key={title}>
+              <div className="standout-icon">
+                <Icon size={18} aria-hidden="true" />
+              </div>
+              <h3>{title}</h3>
+              <p className="standout-lead">{lead}</p>
+              <p className="standout-body">{body}</p>
+              {note && <small className="standout-note">{note}</small>}
+            </article>
+          ))}
         </div>
 
       </section>
