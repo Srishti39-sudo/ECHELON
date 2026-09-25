@@ -527,6 +527,21 @@ are built from `rag_assistant/kb/` and are gitignored, because a stale committed
 disagrees with the corpus is worse than no index. `rag.py index` rebuilds them
 in about a second and prints what it indexed.
 
+**To get the same assistant as the demo machine**, not just a working one, match its
+three choices. The demo machine embeds with NVIDIA Nemotron, reranks with NVIDIA, and
+answers with Groq. A bare `rag index` with no keys falls back to a local embedder and
+retrieves differently, and a bare `.env` answers with Gemini, whose free tier returns
+503 under load. So, with the team's keys in `.env` (shared privately, never through git):
+
+```
+DEEPECHO_PROVIDER=groq          # in .env
+.venv/bin/python -m rag_assistant.rag index --embedder nvidia
+```
+
+`/health` then reports `embedder: nvidia`, `index: faiss-hnsw`, `provider: groq`, which
+is what the demo machine reports. A shell variable overrides `.env`, so if `/health`
+disagrees with the file, check the terminal that started the server.
+
 **Keys are not in the repo either.** `.env` is gitignored and always should be.
 A free Groq key from https://console.groq.com/keys is enough, and Groq is the
 one to use: it answers in about a second where Gemini's free tier returns 503
