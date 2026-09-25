@@ -358,7 +358,7 @@ pip install -r requirements-survey.txt
 
 # process a survey
 python -m survey_hazard_map.run_survey --strips samples/sidescan-s7-submarine.jpg \
-    --model survey_hazard_map/models/known.pt models/anomaly.pt --out data/surveys/s7-submarine
+    --model survey_hazard_map/models/marine/marine.pt --out data/surveys/s7-submarine
 
 # or see the whole pipeline with no survey and no checkpoint
 python -m survey_hazard_map.demo_survey --out data/surveys/demo-synthetic
@@ -499,9 +499,9 @@ A fresh clone is missing three things by design: the vector index, the API keys,
 and the detector dependencies. All three are one command each.
 
 ```bash
-git clone https://github.com/mythri2405/Echelons.git
-cd Echelons
-git checkout dashboard
+git clone https://github.com/Srishti39-sudo/ECHELON.git
+cd ECHELON
+git checkout dashboard        # the default branch; what the demo and the deploy run
 
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt -r requirements-server.txt
@@ -532,9 +532,22 @@ A free Groq key from https://console.groq.com/keys is enough, and Groq is the
 one to use: it answers in about a second where Gemini's free tier returns 503
 under load. Put `GROQ_API_KEY=...` and `DEEPECHO_PROVIDER=groq` in `.env`.
 
-**The models and the sources are in the repo.** `models/known.pt` and
-`models/anomaly.pt` are committed, and so are the publications in `rag_assistant/sources/`, so
-citations resolve to real files on a fresh clone.
+**The model and the sources are in the repo.** `survey_hazard_map/models/marine/marine.pt`
+is committed with its calibration, and so are the publications in `rag_assistant/sources/`, so
+citations resolve to real files on a fresh clone. Every demo survey under `data/surveys/`
+ships with its `export.json` and `ghosttrace.json`, so the dashboard, the hazard map and the
+GhostTrace page show the same results on a clone as on the machine that produced them.
+
+**Four habitat layers are not in the repo.** The UNEP-WCMC coral reef and seagrass layers
+under `data/ghosttrace/layers/` are fetched, not committed, because their licence forbids
+redistribution. The committed GhostTrace results were computed with them. A clone that
+presses "Run GhostTrace" without them falls back to the sparse OpenStreetMap reef layer and
+scores habitat lower; the output says so in `habitat.notes`. To re-run with the same inputs:
+
+```bash
+.venv/bin/pip install -r requirements-ghosttrace.txt
+.venv/bin/python -m ghosttrace.tools.fetch_ghosttrace_data --only reefs,seagrass
+```
 
 **Without a key**, retrieval still works and can be demonstrated:
 `python -m rag_assistant.rag search "who do I report a mine to" -k 5` needs no network at all.

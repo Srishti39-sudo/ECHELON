@@ -4,7 +4,7 @@ For another application, or another agent, that needs to call this system. It
 describes the HTTP surface and the rules that surface is under. Nothing here
 requires reading the Python.
 
-Repository: `mythri2405/Echelons`, branch `dashboard`.
+Repository: `Srishti39-sudo/ECHELON`, branch `dashboard` (the default).
 
 ## What this is
 
