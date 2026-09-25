@@ -21,7 +21,9 @@ services:
         sync: false
       - key: GEMINI_API_KEY
         sync: false
-      # Off on the serve profile: there is no torch in the image to run it.
+      # Live upload is off on the free 512 MB instance. The serve image can
+      # run the detector on marine.onnx with no torch; set this to "1" on an
+      # instance with at least 2 GB to let judges upload a sonar log live.
       - key: DEEPECHO_ENABLE_UPLOAD
         value: "0"
       # Supabase is optional. Without these the API still serves the assistant

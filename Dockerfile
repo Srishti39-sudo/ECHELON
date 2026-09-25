@@ -32,13 +32,15 @@
 
 
 # --- Checkpoints for serve/full ----------------------------------------------
-# models/ can also hold ONNX exports (tens of MB each, several variants). The
-# serve and full images cannot run them (neither installs onnxruntime), so they
-# are filtered out here rather than being copied into a layer where deleting
-# them later would not shrink the image. Anything else in models/ still goes.
+# models/ can also hold ONNX exports (tens of MB each, several variants). All
+# but one are filtered out here rather than being copied into a layer where
+# deleting them later would not shrink the image. The one kept is marine.onnx:
+# requirements-server.txt installs onnxruntime, so the serve image runs the
+# detector on it with no torch when DEEPECHO_ENABLE_UPLOAD=1 (needs about 2 GB
+# of memory for a survey job; off in render.yaml's free-tier blueprint).
 FROM python:3.13-slim AS checkpoints
 COPY survey_hazard_map/models/ /models/
-RUN find /models -name "*.onnx" -delete && rm -rf /models/trt_cache
+RUN find /models -name "*.onnx" ! -name "marine.onnx" -delete && rm -rf /models/trt_cache
 
 
 # --- Edge: survey engine + ONNX detector, no torch ----------------------------
@@ -115,8 +117,8 @@ COPY ghosttrace/ ./ghosttrace/
 COPY data/ ./data/
 COPY vendor/ ./vendor/
 
-# The checkpoints are 27 MB and only the full profile can use them. Taken from
-# the filtering stage above so ONNX exports never reach this image.
+# The checkpoints and marine.onnx, from the filtering stage above, so no other
+# ONNX export reaches this image.
 COPY --from=checkpoints /models/ ./survey_hazard_map/models/
 
 EXPOSE 8000
