@@ -1,0 +1,37 @@
+DeepEcho — Copyright (c) 2026 Team Echelon. All rights reserved.
+
+This repository (the "Software") — its source code, trained model weights
+(including survey_hazard_map/models/final/final.pt and marine.pt), the ONNX
+exports, the knowledge-base corpus under rag_assistant/kb/, the synthetic
+survey data, documentation and presentation material — is the original work
+of Team Echelon and is made available publicly ONLY so that it can be viewed
+and evaluated as our submission to Smart India Hackathon 2026, problem
+statement 26057 (Ministry of Earth Sciences / NIOT).
+
+Permission is granted, free of charge, to any person to VIEW the Software and
+to RUN it locally for the sole purpose of evaluating this submission.
+
+NO OTHER PERMISSION IS GRANTED. Without prior written consent from Team
+Echelon you may not:
+
+  * copy, reproduce or redistribute the Software or any part of it;
+  * modify, adapt, translate or create derivative works from it;
+  * use it, or the trained weights, in any product, service, research
+    publication, competition entry or commercial activity;
+  * remove or alter this notice or any attribution in the repository.
+
+The Software is provided "AS IS", without warranty of any kind, express or
+implied, including but not limited to the warranties of merchantability,
+fitness for a particular purpose and non-infringement. In no event shall the
+authors be liable for any claim, damages or other liability arising from the
+Software or its use. Every detection, score and answer it produces is
+automated and unvalidated; verify before acting on any of it.
+
+THIRD-PARTY COMPONENTS are not covered by this notice and keep their own
+licences; see NOTICE. In particular, the detector is built with Ultralytics
+YOLO, which is licensed under AGPL-3.0, and the training data carries the
+licences listed in survey_hazard_map/models/final/DATA_ATTRIBUTION.md.
+Nothing in this file grants rights over those components, and their terms
+apply to any use of the Software that they cover.
+
+Contact: open an issue on this repository to request permission.

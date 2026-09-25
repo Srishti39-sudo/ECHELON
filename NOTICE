@@ -1,0 +1,49 @@
+DeepEcho — third-party components and their licences
+
+The Software's own code and weights are covered by LICENSE (all rights
+reserved, evaluation only). The components below are not ours and keep their
+own terms, which apply to any use of the parts of the Software that
+incorporate them.
+
+Detection
+  Ultralytics YOLO11 / YOLO26 (ultralytics)         AGPL-3.0
+      The detector architecture, training and export tooling. The trained
+      weights (marine.pt, final.pt, marine.onnx) were produced with it. A
+      closed commercial deployment would need an Ultralytics Enterprise
+      licence; see https://www.ultralytics.com/license
+  Segment Anything 2 (Meta, SAM 2.1)                 Apache-2.0
+  PyTorch                                           BSD-3-Clause
+  ONNX Runtime (Microsoft)                          MIT
+  OpenCV (opencv-python-headless)                   Apache-2.0
+  pyxtf                                             MIT
+
+Training and evaluation data
+  See survey_hazard_map/models/final/DATA_ATTRIBUTION.md: SCTD (research
+  use), Teledyne Gavia mine survey (CC-BY-SA-4.0), PING / GhostVision
+  derelict crab-pot set (CC-BY-SA-4.0), DRISHTI-SSS mirror (CC-BY-SA-4.0),
+  SubPipe (CC-BY-4.0), AI4Shipwrecks (CC-BY-4.0), Roboflow Universe sonar
+  sets (CC-BY-4.0). No images from these sets are redistributed here; only
+  weights and code.
+
+Geospatial and ocean data (fetched, not redistributed, unless stated)
+  HYCOM ESPC-D-V02 ocean currents                    public (US Navy / NOAA)
+  NOAA NCEI ETOPO 2022 bathymetry                    public domain
+  OpenStreetMap (harbours, reefs, protected areas)   ODbL 1.0
+  Natural Earth land                                 public domain
+  UNEP-WCMC coral reef and seagrass layers           UNEP-WCMC General Data
+      Licence: no redistribution, so these are fetched locally and gitignored
+  Allen Coral Atlas (optional importer)              CC BY 4.0
+
+Assistant
+  FAISS (Meta)                                      MIT
+  sentence-transformers (optional)                  Apache-2.0
+  Google Gemini, Groq, NVIDIA NIM APIs              their respective terms of service
+  Publications under rag_assistant/sources/         each file's own licence,
+      recorded in its front matter under rag_assistant/kb/
+
+Application
+  FastAPI, uvicorn, Pydantic                        MIT
+  React, Vite, React Router, Leaflet                MIT / BSD-2-Clause
+  NumPy, SciPy, Shapely, pyproj, netCDF4            BSD / MIT
+  Supabase client                                   MIT
+  Docker, Render blueprint                          their respective terms

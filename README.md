@@ -726,3 +726,50 @@ document about something else.
 Filling that gap is a corpus job, not a code job. The most valuable additions
 are a document on wrecks containing human remains and the reporting obligation
 that attaches to them, and an Indian procedure for reporting suspected ordnance.
+
+## The final model: seven classes
+
+`survey_hazard_map/models/final/` holds the model this submission is built on:
+
+| File | What it is |
+|---|---|
+| `final.pt` | YOLO11s, 9.4 M parameters, 19 MB. `marine.pt` (six classes) fine-tuned 30 epochs with a seventh class, `ghost_net`, on procedurally rendered nets with acoustic shadows composited onto real seabed tiles. Loads with all seven class names. |
+| `calibration.json` | Identity calibration: raw confidence already had a lower calibration error (0.038) than Platt scaling (0.043). The pipeline reads it beside the weights. |
+| `RESULTS.md` | The full scorecard: final vs marine, marine vs the two original checkpoints, a YOLO26 vs YOLO11 architecture benchmark, calibration and speed, and what to say honestly. |
+| `DATA_ATTRIBUTION.md` | Every dataset the model saw, with its licence. No images are redistributed here. |
+
+Per class, on 1,533 held-out test tiles never used in training, confidence 0.25, IoU 0.5 (AP50, precision / recall):
+
+| Class | final.pt | marine.pt (6 classes) |
+|---|---|---|
+| pipeline | **0.99** (0.98 / 0.99) | 0.99 |
+| ghost_net | **0.93** (0.89 / 0.90), synthetic held-out regime, 648 boxes | no class |
+| aircraft | 0.88 (0.82 / 0.90) | 0.90 |
+| mine_like_object | **0.66** (0.69 / 0.62) | 0.60 |
+| shipwreck | **0.58** (0.69 / 0.54) | 0.53 |
+| human (3 test objects) | 0.33 | 0.33 |
+| fishing_gear | 0.25 (0.37 / 0.27) | 0.33 |
+| **all classes, Ultralytics validator** | **mAP50 0.655 · mAP50-95 0.466** | mAP50 0.605 · mAP50-95 0.408 |
+| false alarms per empty seafloor tile | **0.26** | 0.30 |
+
+Speed: 11.3 ms per tile on a Tesla T4, about 0.5 s per tile on an Apple-silicon CPU.
+
+Two things `RESULTS.md` says that the table cannot: the `ghost_net` number is measured on synthetic
+nets rendered under a different parameter regime and on different surveys than the training nets, because
+no public real ghost-net side-scan dataset exists; and `fishing_gear` fell from 0.33 to 0.25 when the net
+class was added, because tangled nets and crab-pot strings overlap visually. Both are stated on the slide
+and in the speaker notes rather than hidden.
+
+**Which model runs in the app.** The pipeline is wired to `survey_hazard_map/models/marine/marine.pt`
+with its ONNX export, because that is the checkpoint the parity, verification and end-to-end tests were
+measured against. To run the seven-class model live: copy `final.pt` and `calibration.json` over
+`marine.pt` and its calibration file, re-run `survey_hazard_map/tools/export_onnx.py`, and re-run the
+survey test suites. That swap is a one-minute change kept out of the demo build on purpose.
+
+## Licence
+
+All rights reserved, Team Echelon, 2026. The repository is public so it can be viewed and run for the
+evaluation of this Smart India Hackathon 2026 submission and for no other purpose; see `LICENSE`.
+Third-party components keep their own licences, listed in `NOTICE`. The detector is built with
+Ultralytics YOLO, which is AGPL-3.0, and its terms apply to the parts of this software that use it.
+
