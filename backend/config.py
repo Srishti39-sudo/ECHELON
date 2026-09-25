@@ -1182,7 +1182,7 @@ STREAM_FRAMES = ("meta", "sources", "delta", "done", "error")
 # (sonar_detector.py, geotag.py, sonar_pipeline.py, shadow_check.py).
 MARINE_KIT_DIR = ROOT / os.environ.get("DEEPECHO_MARINE_KIT", "survey_hazard_map/models/marine")
 DETECTOR_MODELS: dict[str, Path] = {
-    "marine": ROOT / os.environ.get("DEEPECHO_MODEL_MARINE", "survey_hazard_map/models/marine/marine.pt"),
+    "marine": ROOT / os.environ.get("DEEPECHO_MODEL_MARINE", "survey_hazard_map/models/marine/final.pt"),
 }
 def _upload_default() -> bool:
     """On when the detector can actually run, off when it cannot.

@@ -88,7 +88,7 @@ import "./survey-mission.css";
  * available under the toggle for whoever needs it.
  */
 function pipelineSentence(pipeline) {
-  const weights = /\(([^)]+)\)/.exec(pipeline.label || "")?.[1] || "marine.pt";
+  const weights = /\(([^)]+)\)/.exec(pipeline.label || "")?.[1] || "final.pt";
   if (pipeline.pipeline === "teammate") {
     return `Ran ${weights} with geotag navigation, so every contact carries a position.`;
   }
@@ -101,7 +101,7 @@ function pipelineSentence(pipeline) {
 const STEPS = [
   { key: "ingest", label: "Ingest", note: "Decode logs and navigation" },
   { key: "tile", label: "Tile", note: "Overlapping 640 px tiles" },
-  { key: "detect", label: "Detect", note: "marine.pt on every tile" },
+  { key: "detect", label: "Detect", note: "final.pt (YOLO11s, 7 classes) on every tile" },
   { key: "verify", label: "Verify", note: "Merge duplicates, shadow check" },
   { key: "geotag", label: "Geotag", note: "Latitude and longitude" },
   { key: "report", label: "Report", note: "Reports and offline map" },
@@ -501,7 +501,7 @@ function UploadPanel({ onStarted }) {
           </h1>
           <p>
             Upload a raw side-scan log or strip images. The backend tiles them,
-            runs the seven-class YOLO11s detector (marine.pt: shipwreck, aircraft,
+            runs the seven-class YOLO11s detector (final.pt: shipwreck, aircraft,
             human, pipeline, fishing gear, mine-like object, ghost net) over every
             tile, checks each contact
             against acoustic-shadow physics and geotags it from the log's

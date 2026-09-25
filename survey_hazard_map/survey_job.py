@@ -404,7 +404,7 @@ def teammate_locations() -> dict[str, Path]:
     modules   DEEPECHO_TEAMMATE_MODULES, else the kit committed in
               models/marine/ (config.MARINE_KIT_DIR) when it exists, else
               <repo>/../models when that folder exists, else <repo>/models
-    weights   DEEPECHO_TEAMMATE_WEIGHTS, else the first of marine.pt, best.pt
+    weights   DEEPECHO_TEAMMATE_WEIGHTS, else the first of final.pt, marine.pt, best.pt
               in <modules>, else the same names under <repo>/models
     calib     DEEPECHO_TEAMMATE_CALIB, else calibration.json beside the weights
     """
@@ -415,8 +415,8 @@ def teammate_locations() -> dict[str, Path]:
     weights = _env_path("DEEPECHO_TEAMMATE_WEIGHTS")
     if weights is None:
         candidates = [folder / name for folder in (modules, ROOT / "survey_hazard_map" / "models")
-                      for name in ("marine.pt", "best.pt")]
-        weights = next((p for p in candidates if p.is_file()), modules / "marine.pt")
+                      for name in ("final.pt", "marine.pt", "best.pt")]
+        weights = next((p for p in candidates if p.is_file()), modules / "final.pt")
     calib = _env_path("DEEPECHO_TEAMMATE_CALIB") or weights.parent / "calibration.json"
     return {"modules": modules, "weights": weights, "calib": calib}
 

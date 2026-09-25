@@ -77,7 +77,7 @@ A single tile uploaded on the Live Feed page runs steps 3, 4 and 6 only, and sto
 | | |
 |---|---|
 | Architecture | Ultralytics YOLO11s, 9.4 M parameters, 19 MB |
-| Task | Object detection, seven classes (since 2026-09-25: `marine.pt` is `final.pt`, the six-class checkpoint fine-tuned with `ghost_net`; scorecard in `survey_hazard_map/models/final/RESULTS.md`) |
+| Task | Object detection, seven classes (since 2026-09-25: the live checkpoint is `final.pt`, the six-class `marine.pt` fine-tuned with `ghost_net`; scorecard in `survey_hazard_map/models/final/RESULTS.md`) |
 | Classes | `shipwreck`, `aircraft`, `human`, `pipeline`, `fishing_gear`, `mine_like_object`, `ghost_net` |
 | Input | 640 × 640 px tiles; large strips are tiled with 128 px overlap and merged with class-wise NMS |
 | Training | Google Colab, T4 GPU, early-stopped at epoch 76, best epoch 51 |
