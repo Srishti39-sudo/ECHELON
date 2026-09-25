@@ -1,7 +1,7 @@
 {
   "format": "deepecho-ghosttrace/1",
   "survey_id": "demo-ghosttrace-mannar-repeat",
-  "generated_at": "2026-09-15T04:29:29+00:00",
+  "generated_at": "2026-09-25T06:27:16+00:00",
   "demo": true,
   "synthetic_inputs": true,
   "data_sources": [
@@ -164,7 +164,9 @@
           "z_threshold": 3.0,
           "min_cluster_cells": 4,
           "cell_area_m2": 0.01,
-          "area_note": "echo area is measured in the echogram plane (range x along-track), not a physical cross-section of the scatterers"
+          "area_note": "echo area is measured in the echogram plane (range x along-track), not a physical cross-section of the scatterers",
+          "high_requires_clusters": 3,
+          "level_capped": null
         },
         "formula": "enrichment = echo_clusters_near / (background_clusters_per_window + 0.5); score = 1/(1+exp(-1.5*(ln(max(enrichment,0.001)) - ln(2.0))))",
         "basis": "echo clusters (robust z-score over per-range-bin median/MAD background, connected components) in the water column beside the detection, compared with the cluster rate over every ping on the same side of the same line that is clear of detections, scaled to the same window length; configurable heuristic chosen for this project; not fitted to real ghost-gear recovery data and not an official procedure",
@@ -13330,7 +13332,7 @@
           "no turtle nesting layer in this region"
         ],
         "heuristic": "configurable heuristic chosen for this project; not fitted to real ghost-gear drift or recovery data and not an official procedure",
-        "generated_at": "2026-09-15T04:29:23+00:00",
+        "generated_at": "2026-09-25T06:27:14+00:00",
         "requested_mode": "seabed",
         "mode_basis": "default: side-scan images the seabed and a snagged net is the common case; no floating/midwater indication",
         "start_time": "2026-09-09T04:31:42.408000+00:00",
@@ -43002,7 +43004,7 @@
             "no turtle nesting layer in this region"
           ],
           "heuristic": "configurable heuristic chosen for this project; not fitted to real ghost-gear drift or recovery data and not an official procedure",
-          "generated_at": "2026-09-15T04:29:28+00:00",
+          "generated_at": "2026-09-25T06:27:16+00:00",
           "scenario": "if_refloated",
           "scenario_note": "what this net would reach if lifted off the seabed (e.g. by a storm or a trawl) at survey time; not a forecast, and not used in the priority score",
           "start_time": "2026-09-09T04:31:42.408000+00:00",
@@ -43142,6 +43144,7 @@
         "score": 0.3162,
         "rank": 1,
         "tier": "routine",
+        "confidence_missing": false,
         "terms": {
           "activity": {
             "value": 0.1876,
@@ -43197,6 +43200,7 @@
             "weight": null,
             "contribution": null,
             "role": "multiplier",
+            "measured": true,
             "basis": "verification confidence_pct (fused detector + evidence score)"
           }
         },
@@ -43311,7 +43315,9 @@
           "z_threshold": 3.0,
           "min_cluster_cells": 4,
           "cell_area_m2": 0.01,
-          "area_note": "echo area is measured in the echogram plane (range x along-track), not a physical cross-section of the scatterers"
+          "area_note": "echo area is measured in the echogram plane (range x along-track), not a physical cross-section of the scatterers",
+          "high_requires_clusters": 3,
+          "level_capped": null
         },
         "formula": "enrichment = echo_clusters_near / (background_clusters_per_window + 0.5); score = 1/(1+exp(-1.5*(ln(max(enrichment,0.001)) - ln(2.0))))",
         "basis": "echo clusters (robust z-score over per-range-bin median/MAD background, connected components) in the water column beside the detection, compared with the cluster rate over every ping on the same side of the same line that is clear of detections, scaled to the same window length; configurable heuristic chosen for this project; not fitted to real ghost-gear recovery data and not an official procedure",
@@ -56477,7 +56483,7 @@
           "no turtle nesting layer in this region"
         ],
         "heuristic": "configurable heuristic chosen for this project; not fitted to real ghost-gear drift or recovery data and not an official procedure",
-        "generated_at": "2026-09-15T04:29:14+00:00",
+        "generated_at": "2026-09-25T06:27:10+00:00",
         "requested_mode": "seabed",
         "mode_basis": "default: side-scan images the seabed and a snagged net is the common case; no floating/midwater indication",
         "start_time": "2026-09-09T04:31:10.386000+00:00",
@@ -86979,7 +86985,7 @@
             "no turtle nesting layer in this region"
           ],
           "heuristic": "configurable heuristic chosen for this project; not fitted to real ghost-gear drift or recovery data and not an official procedure",
-          "generated_at": "2026-09-15T04:29:19+00:00",
+          "generated_at": "2026-09-25T06:27:12+00:00",
           "scenario": "if_refloated",
           "scenario_note": "what this net would reach if lifted off the seabed (e.g. by a storm or a trawl) at survey time; not a forecast, and not used in the priority score",
           "start_time": "2026-09-09T04:31:10.386000+00:00",
@@ -87121,6 +87127,7 @@
         "score": 0.3032,
         "rank": 2,
         "tier": "routine",
+        "confidence_missing": false,
         "terms": {
           "activity": {
             "value": 0.0657,
@@ -87176,6 +87183,7 @@
             "weight": null,
             "contribution": null,
             "role": "multiplier",
+            "measured": true,
             "basis": "verification confidence_pct (fused detector + evidence score)"
           }
         },
@@ -87322,7 +87330,7 @@
   },
   "run": {
     "core_version": "1.0.0",
-    "horizon_hours": 240.0,
+    "horizon_hours": 240,
     "n_particles": 500,
     "seed": 0,
     "drift_dt_minutes": 30.0,

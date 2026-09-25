@@ -504,6 +504,104 @@ def test_priority_weak_detection_never_urgent_and_neutral():
             assert term["value"] == cfg.PRIORITY_NEUTRAL[name] and "neutral" in term["basis"], name
 
 
+def test_priority_confidence_missing_is_flagged_not_zero():
+    """A missing confidence is a data fault: neutral factor, loud flag, still in the queue."""
+    for absent in ({}, {"confidence_pct": None}, {"confidence_pct": float("nan")}):
+        t = _target_for_priority(**absent)
+        if not absent:
+            del t["confidence_pct"]
+        p = priority.score_target(t)
+        assert p["confidence_missing"] is True
+        assert p["terms"]["confidence"]["value"] == cfg.PRIORITY_NEUTRAL_CONFIDENCE
+        assert p["terms"]["confidence"]["measured"] is False
+        assert p["terms"]["confidence"]["basis"].startswith("CONFIDENCE MISSING")
+        assert p["score"] > 0 and abs(priority.recompute(p) - p["score"]) < 1e-3
+    ok = priority.score_target(_target_for_priority())
+    assert ok["confidence_missing"] is False and ok["terms"]["confidence"]["measured"] is True
+    # neutral confidence alone can never make a target urgent
+    maxed = _target_for_priority(activity={"available": True, "score": 1.0}, habitat={"score": 1.0},
+                                 drift={"impacts": [{"kind": "reef", "probability": 1}]},
+                                 people={"propeller_hazard": {"level": "high"}},
+                                 dimensions={"length_m": 100, "width_m": 100},
+                                 change={"status": "moved"}, seabed_depth_m=1.0)
+    del maxed["confidence_pct"]
+    assert priority.score_target(maxed)["tier"] != "urgent"
+
+
+def test_priority_obvious_targets_land_in_expected_tiers():
+    """Known-answer targets: the tier cutoffs must put an obviously urgent net in 'urgent'."""
+    urgent = _target_for_priority(
+        confidence_pct=85.0, activity={"available": True, "score": 0.9},
+        habitat={"covered": True, "score": 0.9, "inside": [{"kind": "reef", "name": "R"}], "nearest": []},
+        drift={"impacts": [{"kind": "reef", "name": "R", "probability": 0.6}]},
+        people={"propeller_hazard": {"level": "high"}},
+        dimensions={"length_m": 20, "width_m": 5}, change={"status": "moved"}, seabed_depth_m=8.0)
+    p = priority.score_target(urgent)
+    assert p["tier"] == "urgent", p["score"]
+    # the same net on a first survey (no change history) at a typical detector confidence
+    first = dict(urgent, confidence_pct=77.0, change={"status": "unmatched_no_prior"})
+    p1 = priority.score_target(first)
+    assert p1["tier"] == "urgent", p1["score"]
+    # the demo survey's actual best net: moderate activity, a reef 4-5 km off, no drift impact,
+    # low propeller risk, no history -> high, not urgent, and that is the intended reading
+    demo = _target_for_priority(
+        confidence_pct=76.5, activity={"available": True, "score": 0.68},
+        habitat={"covered": True, "score": 0.41, "nearest": [], "inside": []},
+        drift={"impacts": []}, people={"propeller_hazard": {"level": "low"}},
+        dimensions={"length_m": 12, "width_m": 8}, change={"status": "unmatched_no_prior"},
+        seabed_depth_m=14.0)
+    assert priority.score_target(demo)["tier"] == "high"
+    # an inert, deep, small piece of debris far from anything stays routine
+    routine = _target_for_priority(
+        confidence_pct=70.0, activity={"available": True, "score": 0.05},
+        habitat={"covered": True, "score": 0.05, "nearest": [], "inside": []},
+        drift={"impacts": []}, people={"propeller_hazard": {"level": "low"}},
+        dimensions={"length_m": 1, "width_m": 1}, change={"status": "persistent"}, seabed_depth_m=45.0)
+    assert priority.score_target(routine)["tier"] == "routine"
+
+
+def test_watercolumn_high_needs_several_clusters():
+    """One or two blobs on a quiet line reach a high ratio; they are not a school."""
+    one = watercolumn.logistic_score(1 / (0.0 + cfg.WC_EPSILON))
+    two = watercolumn.logistic_score(2 / (0.0 + cfg.WC_EPSILON))
+    assert watercolumn.level_for(two) == "high", two          # the ratio alone would say high
+    level, why = watercolumn.gated_level(two, 2)
+    assert level == "moderate" and "capped" in why
+    level, why = watercolumn.gated_level(one, 1)
+    assert level != "high" and (why is None or "capped" in why)
+    many = watercolumn.logistic_score(cfg.WC_MIN_CLUSTERS_HIGH / (0.0 + cfg.WC_EPSILON))
+    assert watercolumn.gated_level(many, cfg.WC_MIN_CLUSTERS_HIGH) == ("high", None)
+    assert watercolumn.gated_level(0.2, 0) == ("low", None)
+    assert watercolumn.gated_level(None, 0) == ("unknown", None)
+
+
+def test_safety_low_supported_without_depth():
+    """Unknown depth alone must not turn a fully assessed, all-negative net into 'unknown'."""
+    from ghosttrace import safety
+    no_bathy = type("NoBathy", (), {"depth_at": lambda self, a, b: {"depth_m": None, "note": "none"}})()
+    habitat = {"available": True, "covered": True, "nearest": [
+        {"kind": "harbour", "name": "Far Jetty", "distance_m": 30_000.0}], "inside": []}
+    drift = {"available": True, "mode": "seabed", "impacts": [], "time_mapping": {}}
+    small = {"latitude": 9.12, "longitude": 79.05, "dimensions": {"length_m": 4.0, "width_m": 2.0}}
+    p = safety.people_safety(small, habitat, drift, None, no_bathy)["propeller_hazard"]
+    assert p["level"] == "low", p
+    assert p["terms"]["shallow"]["assessed"] is False
+    assert all(p["terms"][k]["assessed"] and not p["terms"][k]["applied"]
+               for k in ("floating", "harbour_near", "harbour_drift", "large_net"))
+    assert any("depth unknown" in r for r in p["reasons"])
+    # the same net with no size recorded: one check short of support -> unknown, and it says which
+    nosize = {"latitude": 9.12, "longitude": 79.05}
+    q = safety.people_safety(nosize, habitat, drift, None, no_bathy)["propeller_hazard"]
+    assert q["level"] == "unknown" and any("large_net" in r for r in q["reasons"]), q
+    # a harbour drift check that could not run: also unknown
+    r = safety.people_safety(small, habitat, {"available": False}, None, no_bathy)["propeller_hazard"]
+    assert r["level"] == "unknown", r
+    # measured depth keeps low supported on its own
+    with_depth = dict(small, seabed_depth_m=25.0)
+    s = safety.people_safety(with_depth, {"available": False}, {"available": False}, None, no_bathy)
+    assert s["propeller_hazard"]["level"] == "low", s["propeller_hazard"]
+
+
 def test_recovery_route():
     tiers = ["routine", "urgent", "high", "urgent", "routine", "high", "urgent"]
     rng = np.random.default_rng(3)
@@ -742,6 +840,10 @@ TESTS = [
     ("safety: diver brief thresholds exposed", test_safety_thresholds_exposed, False),
     ("priority: recompute + monotonic", test_priority_recompute_and_monotonic, False),
     ("priority: weak never urgent, neutral values", test_priority_weak_detection_never_urgent_and_neutral, False),
+    ("priority: missing confidence flagged, not zero", test_priority_confidence_missing_is_flagged_not_zero, False),
+    ("priority: obvious targets land in expected tiers", test_priority_obvious_targets_land_in_expected_tiers, False),
+    ("watercolumn: high needs several clusters", test_watercolumn_high_needs_several_clusters, False),
+    ("safety: low supported without depth", test_safety_low_supported_without_depth, False),
     ("recovery: route validity", test_recovery_route, False),
     ("alerts: never invent contacts", test_alerts_never_invent_contacts, False),
     ("alerts: assistant fallbacks", test_alert_assistant_fallbacks, False),

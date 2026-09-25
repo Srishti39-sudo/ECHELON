@@ -1,7 +1,7 @@
 {
   "format": "deepecho-ghosttrace/1",
   "survey_id": "usgs-cat-island-ds563",
-  "generated_at": "2026-09-15T16:12:00+00:00",
+  "generated_at": "2026-09-25T06:27:17+00:00",
   "demo": false,
   "synthetic_inputs": false,
   "data_sources": [
@@ -204,7 +204,7 @@
           "points": 1.0,
           "reasons": [
             "net size 22.3 m >= 20 m",
-            "depth unknown, so a low rating cannot be supported"
+            "a low rating is not supported: depth unknown and shallow, harbour_near, harbour_drift not assessed"
           ],
           "terms": {
             "shallow": {
@@ -326,6 +326,7 @@
         "score": 0.2136,
         "rank": 1,
         "tier": "routine",
+        "confidence_missing": false,
         "terms": {
           "activity": {
             "value": 0.4,
@@ -381,6 +382,7 @@
             "weight": null,
             "contribution": null,
             "role": "multiplier",
+            "measured": true,
             "basis": "verification confidence_pct (fused detector + evidence score)"
           }
         },
@@ -409,7 +411,7 @@
           }
         ],
         "subject": "GhostTrace routine: suspected fishing_gear at 30.24274, -89.03313 (survey usgs-cat-island-ds563)",
-        "draft_text": "AUTOMATED DETECTION - VERIFY BEFORE ACTION.\nWhat: side-scan sonar contact classified 'fishing_gear', confidence 52% (verification confidence_pct (fused detector + evidence score)).\nWhere: 30.24274, -89.03313 (decimal degrees, WGS84 as recorded by the survey navigation; accuracy not estimated).\nSize: 22.3 m x 21.9 m (length x width x height as measured).\nWater-column activity: not measured (no water-column record for this strip (plain image survey, or a raw log ingested without water-column samples)).\nHabitat: no mapped habitat layer near the target.\nDrift forecast: unavailable (no bundled current data for this location (30.2427, -89.0331)).\nPropeller hazard: unknown - net size 22.3 m >= 20 m; depth unknown, so a low rating cannot be supported.\nDiver notes: depth unknown; near-bottom current unknown; method: ROV / grapnel from the surface until depth and current are known.\nChange since previous survey: first_survey.\nGhostTrace priority: routine (score 0.2136, rank 1; heuristic).\nSurvey: usgs-cat-island-ds563. Detection: 10cct01_v2_ss_1m_b_waterfall_g5.\nStill to be completed by the operator before sending (per kb/reporting-authorities-india.md, 'What a report carries'): time of detection in UTC, position datum and accuracy estimate, water and object depth, sensor settings, vessel identity, operator, and the vessel's intentions.\nReport to:\n  - State Fisheries Departments: fisheries is a state subject; the sources establish no lost-gear reporting channel yet (the National Action Plan lists one as 'In preparation').\n  - Fishery Survey of India: its survey vessels are stated to be retrieving abandoned, lost or discarded fishing gear; a candidate for recovery, not a designated reporting desk.\nAutomated detection - verify before action. Positions, sizes and scores come from an unvalidated sonar pipeline and heuristic models.",
+        "draft_text": "AUTOMATED DETECTION - VERIFY BEFORE ACTION.\nWhat: side-scan sonar contact classified 'fishing_gear', confidence 52% (verification confidence_pct (fused detector + evidence score)).\nWhere: 30.24274, -89.03313 (decimal degrees, WGS84 as recorded by the survey navigation; accuracy not estimated).\nSize: 22.3 m x 21.9 m (length x width x height as measured).\nWater-column activity: not measured (no water-column record for this strip (plain image survey, or a raw log ingested without water-column samples)).\nHabitat: no mapped habitat layer near the target.\nDrift forecast: unavailable (no bundled current data for this location (30.2427, -89.0331)).\nPropeller hazard: unknown - net size 22.3 m >= 20 m; a low rating is not supported: depth unknown and shallow, harbour_near, harbour_drift not assessed.\nDiver notes: depth unknown; near-bottom current unknown; method: ROV / grapnel from the surface until depth and current are known.\nChange since previous survey: first_survey.\nGhostTrace priority: routine (score 0.2136, rank 1; heuristic).\nSurvey: usgs-cat-island-ds563. Detection: 10cct01_v2_ss_1m_b_waterfall_g5.\nStill to be completed by the operator before sending (per kb/reporting-authorities-india.md, 'What a report carries'): time of detection in UTC, position datum and accuracy estimate, water and object depth, sensor settings, vessel identity, operator, and the vessel's intentions.\nReport to:\n  - State Fisheries Departments: fisheries is a state subject; the sources establish no lost-gear reporting channel yet (the National Action Plan lists one as 'In preparation').\n  - Fishery Survey of India: its survey vessels are stated to be retrieving abandoned, lost or discarded fishing gear; a candidate for recovery, not a designated reporting desk.\nAutomated detection - verify before action. Positions, sizes and scores come from an unvalidated sonar pipeline and heuristic models.",
         "generated_by": "template",
         "citations": [
           {

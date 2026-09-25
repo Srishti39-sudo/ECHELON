@@ -91,7 +91,7 @@ counted in `summary.suppressed_excluded`.
 ### `activity`
 
 ```json
-{"available": true, "score": 0.8889, "level": "high",
+{"available": true, "score": 0.8889, "level": "high",   // "high" also needs evidence.echo_clusters_near >= evidence.high_requires_clusters (3); otherwise capped at "moderate" and evidence.level_capped says so
  "evidence": {"echo_clusters_near": 8, "echo_area_near_m2": 5.0,
               "background_clusters_per_window": 0.5, "enrichment_ratio": 8.0,
               "window_m": 25.0, "side": "port",
@@ -195,6 +195,7 @@ buried, moved beyond the gate, or missed — sonar alone cannot tell which.
 
 - Recompute: `terms.confidence.value * Σ terms[k].contribution` (k ≠ confidence) equals `score` to ±0.001.
 - `measured: false` means the input was unavailable and the stated neutral value was used.
+- `confidence_missing: true` (and `terms.confidence.measured: false`) means no `confidence_pct` reached the scorer. The multiplier is then `PRIORITY_NEUTRAL_CONFIDENCE` (0.5), not 0, so the target stays in the queue; the basis text starts with `CONFIDENCE MISSING`. It is a data fault, never a low-risk result.
 - `rank` is 1..n by score descending, ties by `detection_id`.
 - `tier`: `urgent` >= 0.55, `high` >= 0.35, else `routine`.
 

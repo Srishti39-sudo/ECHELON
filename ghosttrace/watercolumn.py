@@ -46,7 +46,11 @@ METHOD
        clear.
     6. enrichment_ratio = near_clusters / (background_per_window + WC_EPSILON)
        score = 1 / (1 + exp(-K * (ln(max(enrichment, floor)) - ln(MID))))
-       level from WC_LEVELS.
+       level from WC_LEVELS, except that "high" needs at least
+       WC_MIN_CLUSTERS_HIGH clusters in the near window: on a quiet line one
+       or two blobs can reach a high ratio, and that is not a school. Below
+       the gate the level is capped at "moderate" and evidence.level_capped
+       says why; the score is left as computed.
 
 Every constant is in config_core with its rationale. The whole method is a
 heuristic that has not been validated on real ghost-net data, and the output
@@ -218,6 +222,16 @@ def level_for(score: float | None) -> str:
     return cfg.WC_LEVELS[-1][0]
 
 
+def gated_level(score: float | None, near_clusters: int) -> tuple[str, str | None]:
+    """(level, why it was capped or None). "high" needs WC_MIN_CLUSTERS_HIGH clusters."""
+    level = level_for(score)
+    if level == "high" and int(near_clusters) < cfg.WC_MIN_CLUSTERS_HIGH:
+        return "moderate", (f"score {score:.3f} would be high, but only {int(near_clusters)} echo "
+                            f"cluster(s) sit near the object and 'high' needs at least "
+                            f"{cfg.WC_MIN_CLUSTERS_HIGH}; capped at moderate")
+    return level, None
+
+
 def _row_window(detection: dict[str, Any], half_rows: int, n_rows: int) -> tuple[int, int] | None:
     box = detection.get("bbox_global")
     if box and len(box) == 4:
@@ -379,14 +393,17 @@ def activity_evidence(detection: dict[str, Any], survey_dir: Any, *,
     background = background_clusters / n_free * length
     enrichment = near_clusters / (background + cfg.WC_EPSILON)
     score = logistic_score(enrichment)
+    level, capped = gated_level(score, near_clusters)
     evidence.update({
         "background_clusters_per_window": round(background, 4),
         "enrichment_ratio": round(enrichment, 4),
+        "high_requires_clusters": cfg.WC_MIN_CLUSTERS_HIGH,
+        "level_capped": capped,
     })
     return {
         "available": True,
         "score": round(score, 4),
-        "level": level_for(score),
+        "level": level,
         "evidence": evidence,
         "formula": (f"enrichment = echo_clusters_near / (background_clusters_per_window + "
                     f"{cfg.WC_EPSILON}); score = 1/(1+exp(-{cfg.WC_LOGISTIC_K}*(ln(max("
