@@ -12,6 +12,8 @@ import {
   Waves,
   ListOrdered,
   Cpu,
+  Map,
+  MessageSquareText,
 } from "lucide-react";
 
 import StatCard from "../components/StatCard";
@@ -63,16 +65,28 @@ const STANDOUT = [
     body: "500-particle forecast with 50 / 90 % probability cones, first arrival at reefs, seagrass, turtle beaches, dugong habitat and harbours.",
   },
   {
+    Icon: Map,
+    title: "A survey hazard map, not a list of boxes",
+    lead: "Ranked hotspots on the earth, with the blind spots",
+    body: "Contacts geotagged from the survey's own navigation, grouped into hotspots with a recommended action, swath coverage and blind spots, mission replay, re-look lines as GPX.",
+  },
+  {
     Icon: ListOrdered,
-    title: "A rescue queue, not a list of boxes",
+    title: "A ghost-net rescue queue",
     lead: "Per-net priority score, recomputable by hand",
     body: "Activity, habitat, drift impact, propeller and diver risk, size, change since the last survey and recoverability, each weighted and shown. Alerts are drafted to named authorities from a cited corpus.",
   },
   {
+    Icon: MessageSquareText,
+    title: "Beacon and Mission Copilot",
+    lead: "Cited answers, and tool-grounded answers about your surveys",
+    body: "Retrieval over curated Indian marine-hazard rules with citations that open the page, plus seven data tools over the surveys themselves. Answers in English, Hindi, Tamil, Malayalam, Odia, Telugu, Bengali or Kannada.",
+  },
+  {
     Icon: Cpu,
     title: "Runs offline, on the boat",
-    lead: "ONNX detectors on CPU with no torch",
-    body: "Exported once, measured for parity against the PyTorch checkpoints, and benchmarked for a survey workload. The assistant answers only from its indexed corpus.",
+    lead: "ONNX detector on CPU with no torch",
+    body: "The committed export matched the PyTorch checkpoint box for box, so a fresh clone runs live detection with no torch installed. The assistant answers only from its indexed corpus.",
   },
 ];
 
