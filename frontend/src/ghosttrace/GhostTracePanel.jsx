@@ -243,10 +243,6 @@ function GhostTraceView({ doc, surveyId, offline, layers, canRun, running, onRun
         </div>
       </div>
 
-      <p className="gt-disclaimer">
-        GhostTrace output is decision support from automated detections and configurable heuristics. It is not an official
-        assessment, forecast or notice. Verify on site before any action.
-      </p>
     </div>
   )
 }

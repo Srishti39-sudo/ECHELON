@@ -126,8 +126,7 @@ export const termLabels = {
 
 export const copy = {
   title: "GhostTrace",
-  subtitle:
-    "For every ghost net: is it catching now, what it threatens, where it will drift, who is at risk, and what to do first.",
+  subtitle: "Which net to recover first, and why.",
   explainerToggle: "How this is computed & what it can't tell you",
   runButton: "Run GhostTrace",
   rerunButton: "Re-run",

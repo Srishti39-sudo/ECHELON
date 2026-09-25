@@ -71,7 +71,16 @@ function TargetCard({ target, selected, onSelect, onOpenDetail, onAsk, buttonRef
         <span className="gt-card-head">
           <span className="gt-card-title">
             {titleCase(target.object_class)}
-            <span className="gt-card-conf">{confidence(target.confidence_pct)} conf.</span>
+            {priority.confidence_missing ? (
+              <span
+                className="gt-card-conf gt-card-conf--missing"
+                title="No confidence reached the scorer; a neutral 0.5 multiplier was used. A data fault, not a low-risk result."
+              >
+                confidence missing
+              </span>
+            ) : (
+              <span className="gt-card-conf">{confidence(target.confidence_pct)} conf.</span>
+            )}
           </span>
           <span className="gt-card-sub">
             {size(target.dimensions)} · {target.detection_id}

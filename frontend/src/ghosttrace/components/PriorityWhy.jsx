@@ -73,6 +73,11 @@ function PriorityWhy({ priority, id }) {
                   <tr key={name} title={term?.basis || undefined}>
                     <th scope="row">
                       × {termLabels[name] || titleCase(name)} <span className="gt-why-neutral">multiplier</span>
+                      {term?.measured === false && (
+                        <span className="gt-why-neutral gt-why-neutral--missing" title="No confidence reached the scorer; the neutral factor was used. A data fault, not a low-risk result.">
+                          missing
+                        </span>
+                      )}
                       {term?.basis && <small className="gt-why-basis">{term.basis}</small>}
                     </th>
                     <td colSpan={4} />

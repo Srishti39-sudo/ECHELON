@@ -13,26 +13,6 @@ export function SystemStatus({ health, error }: { health: Health | null; error: 
         <div className="app-status">
           <span className={`status-dot status-${state}`} aria-hidden="true" />
           <span className="status-label">{copy.status[state]}</span>
-          {health && health.corpus_loaded && (
-            <>
-              <span className="status-sep" aria-hidden="true" />
-              <span className="status-detail">
-                {copy.status.corpusSummary(health.documents, health.chunks)}
-              </span>
-              <span className="status-sep" aria-hidden="true" />
-              <span className="status-detail mono">
-                {copy.status.providerSummary(health.provider, health.model)}
-              </span>
-              {health.detector === 'loaded' && health.detector_models.length > 0 && (
-                <>
-                  <span className="status-sep" aria-hidden="true" />
-                  <span className="status-detail mono">
-                    {copy.status.detectorModels(health.detector_models)}
-                  </span>
-                </>
-              )}
-            </>
-          )}
         </div>
       </div>
       {health?.detector === 'stub' && (

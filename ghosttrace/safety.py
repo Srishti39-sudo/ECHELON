@@ -38,7 +38,13 @@ PROPELLER HAZARD (a heuristic)
     The level is the first tier in PROP_TIERS whose floor the total reaches.
     It is "unknown" when none of the inputs could be assessed (no depth, no
     mode, no harbour information, no size), because "low" would then be a
-    claim nothing supports. Every term reports whether it was assessed.
+    claim nothing supports. A "low" total is kept as "low" only when it is
+    supported: depth was assessed, OR the object is known to be on the seabed
+    and the harbour proximity, harbour drift and net size checks were all
+    assessed (and, since the total is low, all negative). A small sunken net
+    with no harbour in reach has been looked at from every side that could
+    have raised it, and unknown depth alone does not turn that into "unknown".
+    Every term reports whether it was assessed.
 
 DIVER BRIEF
     Depth: the survey's own seabed depth when the engine has one (towfish depth
@@ -255,9 +261,20 @@ def people_safety(target: dict[str, Any], habitat: Any = None, drift: Any = None
         level = "unknown"
     else:
         level = next(name for name, floor in cfg.PROP_TIERS if points >= floor)
-        if level == "low" and not terms["shallow"]["assessed"] and not terms["floating"]["applied"]:
-            level = "unknown"
-            reasons.append("depth unknown, so a low rating cannot be supported")
+        if level == "low":
+            supported = terms["shallow"]["assessed"] or (
+                terms["floating"]["assessed"]
+                and terms["harbour_near"]["assessed"]
+                and terms["harbour_drift"]["assessed"]
+                and terms["large_net"]["assessed"])
+            if not supported:
+                level = "unknown"
+                missing = [name for name, t in terms.items() if not t["assessed"]]
+                reasons.append("a low rating is not supported: depth unknown and "
+                               f"{', '.join(missing)} not assessed")
+            elif not terms["shallow"]["assessed"]:
+                reasons.append("depth unknown; low rests on seabed mode, no harbour within reach, "
+                               "no harbour in the drift forecast and a small net, all assessed")
 
     propeller = {"level": level, "points": points, "reasons": reasons, "terms": terms,
                  "tiers": [list(t) for t in cfg.PROP_TIERS], "heuristic": cfg.HEURISTIC_LABEL}

@@ -70,7 +70,7 @@ allowed to say.
 |---|---|---|
 | `gemini` (default) | `gemini-3.8-flash` | `GEMINI_API_KEY` |
 | `groq` | `openai/gpt-oss-120b` | `GROQ_API_KEY` |
-| `nvidia` | `nvidia/llama-3.1-nemotron-70b-instruct` (`DEEPECHO_NVIDIA_MODEL`) | `NVIDIA_API_KEY` |
+| `nvidia` | `nvidia/nemotron-3-super-120b-a12b` (`DEEPECHO_NVIDIA_MODEL`) | `NVIDIA_API_KEY` |
 
 ```bash
 python -m rag_assistant.rag ask "..." --provider groq
@@ -101,13 +101,14 @@ guarantee of access.
 
 ## Embeddings
 
-Four embedders, and the index layer does not care which you use.
+Five embedders, and the index layer does not care which you use.
 
 | `--embedder` | Cost | Notes |
 |---|---|---|
 | `tfidf-dense` (default) | free, local, offline | no fidelity loss, dimension is the vocabulary size |
 | `sentence-transformers` | free, local, offline | 384-d semantic vectors, used automatically when installed |
 | `gemini` | free tier, network | `gemini-embedding-001` at 768-d, a call per query |
+| `nvidia` | free credits, network; on-prem NIM | `nemotron-3-embed-1b`, 2048-d, multilingual retrieval (`DEEPECHO_NVIDIA_EMBED_MODEL`) |
 | `random-projection` | free, local, offline | fixed dimensions, lossy, measured below |
 
 `--embedder gemini` uses the retrieval task types the model expects, embedding
@@ -115,6 +116,32 @@ documents and queries differently, and renormalises because truncated Gemini
 embeddings are not unit length. It is opt-in rather than automatic: making every
 index build and every query hit a rate-limited network service is not a good
 default for a demo you need to run on stage.
+
+`--embedder nvidia` is the one to reach for when questions arrive in Hindi or
+Tamil: the model places a Tamil question next to the English passage that
+answers it, so retrieval no longer depends on the translation step. It needs
+`NVIDIA_API_KEY`; the same model runs on-premises as a NIM container with only
+`NVIDIA_BASE_URL` changed.
+
+### Reranking
+
+Retrieval answers "which chunks are near this query". A reranker reads query and
+passage together and answers "does this passage answer it", for a handful of
+candidates. `rag_assistant/rerank.py` fetches 20, reranks with
+`llama-nemotron-rerank-vl-1b-v2` (`DEEPECHO_RERANK_MODEL`, `NVIDIA_RERANK_URL`), keeps `TOP_K`. It is on automatically when
+`NVIDIA_API_KEY` is set (`DEEPECHO_RERANK=on|off|auto`), and advisory: any
+failure returns retrieval's order untouched, so an answer never depends on a
+second network call.
+
+Measure before trusting either switch:
+
+```bash
+python rag_assistant/eval/retrieval_bench.py             # the index as built
+python rag_assistant/eval/retrieval_bench.py --rerank    # plus the reranker
+```
+
+24 operator-phrased questions, two in Hindi and Tamil, each with the document
+that answers it. `hit@1`, `hit@k` and MRR, no model grading anything.
 
 ## The four functions
 

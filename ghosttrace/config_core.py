@@ -122,6 +122,12 @@ WC_LOGISTIC_K = 1.5
 # scores ~0 instead of raising.
 WC_ENRICHMENT_FLOOR = 1e-3
 WC_LEVELS: tuple[tuple[str, float], ...] = (("high", 0.70), ("moderate", 0.40), ("low", 0.0))
+# "high" also needs at least this many echo clusters in the near window. On a
+# quiet line (background 0) the epsilon alone lets two clusters reach 4x
+# enrichment and a high score; a school is more than two blobs. Below the
+# gate the level is capped at "moderate" and the evidence says so. The score
+# itself is not changed, so it still recomputes from the evidence.
+WC_MIN_CLUSTERS_HIGH = int(os.environ.get("GHOSTTRACE_WC_MIN_CLUSTERS_HIGH", "3"))
 WC_LIMITATIONS = (
     "Water-column echoes near the net may be fish, bubbles, suspended sediment "
     "or turbulence; the method cannot tell them apart. It has not been validated "
@@ -182,6 +188,12 @@ PRIORITY_NEUTRAL: dict[str, float] = {
     "change": 0.50,
     "recoverability": 0.50,
 }
+# Confidence multiplier when no confidence reached the scorer at all. Not 0: a
+# missing number is a data fault, not evidence that the net is harmless, and 0
+# would erase every other term and drop the net off the list. 0.5 (a coin-flip
+# detection) keeps it in the queue, flagged confidence_missing, and can never
+# make it urgent on its own (0.5 * 1.0 < the urgent floor).
+PRIORITY_NEUTRAL_CONFIDENCE = float(os.environ.get("GHOSTTRACE_NEUTRAL_CONFIDENCE", "0.5"))
 # Impact kinds counted as sensitive for drift_impact (substring match).
 SENSITIVE_IMPACT_KINDS: tuple[str, ...] = ("reef", "coral", "turtle", "dugong", "protected",
                                            "mpa", "marine-park", "marine_park", "seagrass",

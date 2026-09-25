@@ -1,6 +1,6 @@
 import { Anchor, Route } from "lucide-react"
 
-import { copy, styleForTier } from "../config"
+import { styleForTier } from "../config"
 import { DASH, isNum, num, stopId, titleCase } from "../format"
 import { TierChip } from "./Chips"
 
@@ -86,7 +86,6 @@ function RecoveryPlan({ plan, targetsById, selectedId, onSelect }) {
         {notes.map((note, i) => (
           <li key={i}>{String(note)}</li>
         ))}
-        {!notes.length && <li>{copy.routeNote}</li>}
       </ul>
     </section>
   )

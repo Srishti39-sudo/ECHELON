@@ -6,7 +6,7 @@ import {
   XCircle,
 } from "lucide-react"
 
-import { copy, labelForKind, singularLabel, styleForActivity, styleForChange, styleForHazard } from "../config"
+import { labelForKind, singularLabel, styleForActivity, styleForChange, styleForHazard } from "../config"
 import {
   DASH,
   arrival,
@@ -24,7 +24,7 @@ import {
   sourceUrl,
   titleCase,
 } from "../format"
-import { ActivityChip, ChangeChip, HazardChip, Tag, Unavailable } from "./Chips"
+import { ActivityChip, ChangeChip, HazardChip, Unavailable } from "./Chips"
 
 /* ---------------------------------------------------------------- shared */
 
@@ -102,7 +102,6 @@ export function ActivitySection({ activity }) {
     return (
       <div className="gt-section">
         <Unavailable title="No activity estimate" reason={reasonOf(activity)} />
-        {activity?.limitations && <p className="gt-limit">{activity.limitations}</p>}
       </div>
     )
   }
@@ -115,9 +114,7 @@ export function ActivitySection({ activity }) {
         <span className="gt-muted">
           score <strong className="gt-strong">{num(activity.score, 2)}</strong> · {style.label}
         </span>
-        <Tag tone="info">Heuristic</Tag>
       </div>
-      <p className="gt-callout">{copy.activityHeuristic}</p>
       {activity.available === false && <Unavailable title="Marked unavailable" reason={reasonOf(activity)} />}
       <Facts
         rows={[
@@ -133,18 +130,7 @@ export function ActivitySection({ activity }) {
           ...(isNum(e.control_windows) ? [["Control windows", num(e.control_windows, 0), "same side, same line"]] : []),
         ]}
       />
-      {e.area_note && <p className="gt-limit">{e.area_note}</p>}
       {activity.formula && <code className="gt-formula">{activity.formula}</code>}
-      {activity.basis && (
-        <div className="gt-subsection">
-          <h4>Basis</h4>
-          <p>{activity.basis}</p>
-        </div>
-      )}
-      <div className="gt-subsection">
-        <h4>What this cannot tell you</h4>
-        <TextList items={activity.limitations} empty="The engine recorded no limitations for this estimate." />
-      </div>
     </div>
   )
 }
@@ -253,7 +239,6 @@ export function DriftSection({ drift }) {
   const impacts = (drift.impacts || []).slice().sort((a, b) => (b.probability ?? 0) - (a.probability ?? 0))
   return (
     <div className="gt-section">
-      <p className="gt-callout">{copy.driftModel}</p>
       <Facts
         rows={[
           ["Mode", titleCase(drift.mode || drift.requested_mode) || DASH, drift.mode_basis],
@@ -301,16 +286,6 @@ export function DriftSection({ drift }) {
             )}
           </tbody>
         </table>
-      </div>
-      <div className="gt-two-col">
-        <div className="gt-subsection">
-          <h4>Assumptions</h4>
-          <TextList items={drift.assumptions} />
-        </div>
-        <div className="gt-subsection">
-          <h4>Limitations</h4>
-          <TextList items={drift.limitations} />
-        </div>
       </div>
     </div>
   )
@@ -494,16 +469,6 @@ export function ChangeSection({ change }) {
             : []),
         ]}
       />
-      {change.basis && (
-        <div className="gt-subsection">
-          <h4>Basis</h4>
-          <p>{change.basis}</p>
-        </div>
-      )}
-      <p className="gt-limit">
-        Matching across surveys is by position and class. Navigation error between surveys can make one object look
-        moved, or two nearby objects look like one.
-      </p>
     </div>
   )
 }

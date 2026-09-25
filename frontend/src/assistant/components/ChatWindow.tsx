@@ -17,7 +17,7 @@ import type {
   SurveyContext,
   Turn,
 } from '../lib/types'
-import { CitationPanel } from './CitationPanel'
+import { EvidencePanel } from './EvidencePanel'
 import { Composer } from './Composer'
 import { MessageBubble } from './MessageBubble'
 import { SystemStatus } from './SystemStatus'
@@ -92,15 +92,16 @@ export function ChatWindow({
   const [health, setHealth] = useState<Health | null>(null)
   const [healthError, setHealthError] = useState<string | null>(null)
   const [messages, setMessages] = useState<Message[]>([])
-  const [draft, setDraft] = useState('')
+  // An empty page opens with a question already typed, ready to send.
+  const [draft, setDraft] = useState(() =>
+    surveyContext || detectionContext || ghosttraceContext ? '' : copy.empty.prefill,
+  )
   const [busy, setBusy] = useState(false)
   const [detection, setDetection] = useState<DetectionRecord | null>(null)
   const [contacts, setContacts] = useState<DetectionRecord[]>([])
   const [detectionIsStub, setDetectionIsStub] = useState(false)
   const [ghosttrace, setGhosttrace] = useState<GhostTraceContext | null>(null)
   const [uploadError, setUploadError] = useState<string | null>(null)
-  const [panelSources, setPanelSources] = useState<Source[]>([])
-  const [panelData, setPanelData] = useState<DataCitation[]>([])
   const [panelSelected, setPanelSelected] = useState<CitationTarget | null>(null)
   const [mode, setMode] = useState<AssistantMode>('auto')
   const [language, setLanguage] = useState<string>(storedLanguage)
@@ -194,11 +195,9 @@ export function ChatWindow({
       current.map((message) => (message.id === id ? { ...message, ...change } : message)),
     )
   }, [])
+  // A citation marker in an answer highlights its card in the evidence column.
   const openCitation = useCallback(
     (target: CitationTarget, sources: Source[], data: DataCitation[]) => {
-      if (sources.length === 0 && data.length === 0) return
-      setPanelSources(sources)
-      setPanelData(data)
       if (target.kind === 'data') {
         if (data.length === 0) return
         setPanelSelected({ kind: 'data', n: data.some((d) => d.n === target.n) ? target.n : data[0].n })
@@ -375,6 +374,8 @@ export function ChatWindow({
           to inject these in the root layout; here the page carries them. */}
       <style dangerouslySetInnerHTML={{ __html: themeCss(theme) }} />
       <SystemStatus health={health} error={healthError} />
+      <div className="workspace">
+      <div className="conversation">
       <div className="thread" ref={scroller}>
         <div className="thread-inner">
           {messages.length === 0 ? (
@@ -526,13 +527,13 @@ export function ChatWindow({
           </Composer>
         </div>
       </div>
-      <CitationPanel
-        sources={panelSources}
-        data={panelData}
+      </div>
+      <EvidencePanel
+        message={[...messages].reverse().find((m) => m.role === 'assistant') ?? null}
         selected={panelSelected}
         onSelect={setPanelSelected}
-        onClose={() => setPanelSelected(null)}
       />
+      </div>
     </div>
   )
 }
@@ -546,7 +547,7 @@ function EmptyState({
   return (
     <section className="empty">
       <h1 className="empty-title">{copy.empty.title}</h1>
-      <p className="empty-body">{copy.empty.body}</p>
+      {copy.empty.body && <p className="empty-body">{copy.empty.body}</p>}
       <p className="empty-label">{copy.copilot.examplesLabel}</p>
       <ul className="empty-examples">
         {copy.copilot.examples.map((example) => (

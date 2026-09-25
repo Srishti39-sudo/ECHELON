@@ -1,0 +1,24 @@
+{"id": "T1", "query": "who do I notify in India if I find a ghost net", "doc": "ghost-gear-reporting-india", "note": "'notify' is not a word the document uses"}
+{"id": "T2", "query": "a fisherman lost his nets near Mannar, which office handles that", "doc": "ghost-gear-reporting-india"}
+{"id": "T3", "query": "we picked up a round metal shape with horns on the sonar, could it be dangerous", "doc": "naval-mine-identification", "note": "layman description, no keyword"}
+{"id": "T4", "query": "how far should the boat stay away from a suspected mine", "doc": "naval-mine-identification"}
+{"id": "T5", "query": "there might be a body inside the wreck, what are we obliged to do", "doc": "human-remains-underwater"}
+{"id": "T6", "query": "found an old plane on the seabed off Goa, who takes custody", "doc": "aircraft-wreck-underwater"}
+{"id": "T7", "query": "the detector cannot tell what this thing is, what is the procedure", "doc": "unidentified-object-protocol"}
+{"id": "T8", "query": "why does a rock look like an object on the sonar screen", "doc": "sonar-interpretation"}
+{"id": "T9", "query": "what does the dark stripe behind a contact mean in a side scan image", "doc": "sonar-interpretation", "note": "'dark stripe' for shadow"}
+{"id": "T10", "query": "is a sunken ship a hazard to navigation and who charts it", "doc": "wreck-sites"}
+{"id": "T11", "query": "can a developer build a jetty over a known wreck", "doc": "wreck-sites"}
+{"id": "T12", "query": "what counts as marine debris versus natural material", "doc": "marine-debris"}
+{"id": "T13", "query": "we found a rusty shell casing, do we touch it", "doc": "uxo-safety"}
+{"id": "T14", "query": "which authority do I call for a danger to navigation in Indian waters", "doc": "reporting-authorities-india"}
+{"id": "T15", "query": "hydrographic note, who receives it", "doc": "reporting-authorities-india"}
+{"id": "T16", "query": "समुद्र में खोया हुआ जाल किसे बताना है", "doc": "ghost-gear-reporting-india", "note": "Hindi: lost net in the sea, whom to tell"}
+{"id": "T17", "query": "கடலில் தொலைந்த மீன்பிடி வலையை யாரிடம் தெரிவிப்பது", "doc": "ghost-gear-reporting-india", "note": "Tamil: lost fishing net, whom to report"}
+{"id": "T18", "query": "abandoned fishing equipment on a coral reef, how urgent", "doc": "ghost-gear-reporting-india"}
+{"id": "T19", "query": "torpedo shaped object half buried in sand", "doc": "uxo-safety"}
+{"id": "T20", "query": "our sonar picked up something we cannot classify, should we treat it as a mine", "doc": "unidentified-object-protocol"}
+{"id": "T21", "query": "the wreck is more than a hundred years old, does that change who owns it", "doc": "aircraft-wreck-underwater"}
+{"id": "T22", "query": "what to do with drums or cylinders whose contents are unknown", "doc": "marine-debris"}
+{"id": "T23", "query": "dugong reserve nearby, does that change the reporting", "doc": "ghost-gear-reporting-india"}
+{"id": "T24", "query": "is it safe to send a diver down to an unexploded bomb", "doc": "uxo-safety"}

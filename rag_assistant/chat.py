@@ -70,6 +70,30 @@ def get_retriever() -> "rag.Retriever":
     return _guard(rag.Retriever.load, ef_search=config.EF_SEARCH)
 
 
+_reranker = None
+
+
+def retrieve(query: str, k: int, per_doc: int) -> list:
+    """Search, then rerank when a reranker is configured (config.RERANK).
+
+    Retrieval over-fetches RERANK_FETCH candidates so the reranker has a wider
+    field to choose from, then keeps k. With reranking off, or unavailable,
+    this is exactly the plain search it replaces. Every caller that builds a
+    prompt goes through here, so the two stages cannot drift apart.
+    """
+    global _reranker
+    if not config.RERANK:
+        return _guard(get_retriever().search, query, k=k, per_doc=per_doc)
+    if _reranker is None:
+        from rag_assistant.rerank import NvidiaReranker
+        _reranker = NvidiaReranker()
+    fetch = max(k, config.RERANK_FETCH)
+    # Per-document cap applies to the wide fetch too, scaled so one document
+    # cannot fill the candidate set before the reranker sees the others.
+    hits = _guard(get_retriever().search, query, k=fetch, per_doc=max(per_doc, fetch // 4))
+    return _reranker.rerank(query, hits, k)
+
+
 @lru_cache(maxsize=1)
 def get_catalog() -> "rag.Catalog | None":
     return _guard(rag.Catalog.load)
@@ -844,8 +868,7 @@ def _prepare_turn(message: str, history: list[dict], detection: dict | None,
     else:
         query = condense(search, history, record, mode)
         default_k, default_per_doc = config.TOP_K, config.PER_DOC
-    hits = _guard(get_retriever().search, query,
-                  k=k or default_k, per_doc=per_doc or default_per_doc)
+    hits = retrieve(query, k=k or default_k, per_doc=per_doc or default_per_doc)
 
     matches: list[dict] = []
     matches_block = ""
@@ -1461,7 +1484,7 @@ def _run_copilot(work: dict) -> dict:
         parts.append(config.COPILOT_TOOL_QUERY_TERMS.get(output.name, ""))
     query = " ".join(p for p in parts if p and p.strip())
     meta["query"] = query
-    hits = _guard(get_retriever().search, query, k=config.COPILOT_TOP_K, per_doc=config.COPILOT_PER_DOC)
+    hits = retrieve(query, k=config.COPILOT_TOP_K, per_doc=config.COPILOT_PER_DOC)
     work["hits"] = hits
     work["sources"] = sources_from(hits)
 

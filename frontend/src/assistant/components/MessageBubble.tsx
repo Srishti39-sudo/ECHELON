@@ -146,39 +146,6 @@ export function MessageBubble({ message, onCitation }: Props) {
             </ol>
           </section>
         )}
-        {sources.length > 0 && (
-          <footer className="sources-strip">
-            <span className="sources-count">{copy.citations.count(sources.length)}</span>
-            {sources.map((source) => (
-              <button
-                key={source.id}
-                type="button"
-                className="source-pill"
-                onClick={() => onCitation({ kind: 'source', n: source.n }, sources, data)}
-              >
-                <span className="source-pill-index">{source.n}</span>
-                {source.title}
-              </button>
-            ))}
-          </footer>
-        )}
-        {data.length > 0 && (
-          <footer className="sources-strip data-strip">
-            <span className="sources-count">{copy.copilot.dataCount(data.length)}</span>
-            {data.map((record) => (
-              <button
-                key={record.n}
-                type="button"
-                className="source-pill data-pill"
-                title={record.label}
-                onClick={() => onCitation({ kind: 'data', n: record.n }, sources, data)}
-              >
-                <span className="source-pill-index">D{record.n}</span>
-                {record.record_id ?? record.label}
-              </button>
-            ))}
-          </footer>
-        )}
       </div>
       {message.failed && (
         <div className="notice tone-alert">

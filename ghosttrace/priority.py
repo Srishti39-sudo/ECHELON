@@ -11,7 +11,11 @@ by one line of arithmetic.
     weight_i           PRIORITY_WEIGHTS, summing to 1.0
     contribution_i     weight_i * value_i, rounded, as written in the output
     confidence_factor  confidence_pct / 100 (verification's fused score when
-                       present, else the detector's confidence)
+                       present, else the detector's confidence). When no
+                       confidence reached the scorer at all the factor is
+                       PRIORITY_NEUTRAL_CONFIDENCE and the output carries
+                       confidence_missing: true, so a data fault reads as a
+                       data fault and never as "zero risk".
 
 The multiplier is deliberate. Context terms describe what the object WOULD do
 if it is what the detector says; the confidence says how likely that is. A
@@ -81,11 +85,15 @@ def _find_number(obj: Any, keys: tuple[str, ...]) -> float | None:
     return None
 
 
-def confidence_factor(target: dict[str, Any]) -> tuple[float, str]:
+def confidence_factor(target: dict[str, Any]) -> tuple[float, str, bool]:
+    """(factor, basis, missing). Missing means no usable confidence_pct reached the scorer."""
     pct = target.get("confidence_pct")
-    if isinstance(pct, (int, float)):
-        return _clip(pct / 100.0), target.get("confidence_basis") or "confidence_pct / 100"
-    return 0.0, "no confidence recorded; factor 0"
+    if isinstance(pct, (int, float)) and math.isfinite(pct):
+        return _clip(pct / 100.0), target.get("confidence_basis") or "confidence_pct / 100", False
+    return (cfg.PRIORITY_NEUTRAL_CONFIDENCE,
+            f"CONFIDENCE MISSING: no confidence_pct reached the scorer; neutral factor "
+            f"{cfg.PRIORITY_NEUTRAL_CONFIDENCE:g} used so the target stays in the queue. This is a "
+            "data fault, not a low-risk result", True)
 
 
 def terms_for(target: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -186,16 +194,17 @@ def tier_for(score: float) -> str:
 def score_target(target: dict[str, Any]) -> dict[str, Any]:
     """Priority block (rank filled later by rank_targets)."""
     terms = terms_for(target)
-    factor, fbasis = confidence_factor(target)
+    factor, fbasis, missing = confidence_factor(target)
     factor = round(factor, 4)
     weighted = sum(t["contribution"] for t in terms.values())
     score = round(factor * weighted, 4)
     terms["confidence"] = {"value": round(factor, 4), "weight": None, "contribution": None,
-                           "role": "multiplier", "basis": fbasis}
+                           "role": "multiplier", "measured": not missing, "basis": fbasis}
     return {
         "score": score,
         "rank": None,
         "tier": tier_for(score),
+        "confidence_missing": missing,
         "terms": terms,
         "formula": "score = confidence.value * sum(weight * value for every other term) "
                    "(= confidence.value * sum(contribution))",

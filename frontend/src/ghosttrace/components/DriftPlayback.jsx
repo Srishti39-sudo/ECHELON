@@ -1,6 +1,6 @@
 import { Pause, Play, RotateCcw, Waves } from "lucide-react"
 
-import { colorForKind, copy, labelForKind } from "../config"
+import { colorForKind, labelForKind } from "../config"
 import { arrival, hoursLabel, isNum, isUnavailable, pct, sourceName, titleCase } from "../format"
 import { InfoTip, Tag } from "./Chips"
 
@@ -19,7 +19,6 @@ function DriftPlayback({
   onScenario,
   snapshots,
   playback,
-  reducedMotion,
 }) {
   const drift = driftProp ?? target?.drift
 
@@ -50,9 +49,7 @@ function DriftPlayback({
   )
   const scenarioNote = scenario === "if_refloated" && (
     <p className="gt-callout gt-scenario-note">
-      <Tag tone="warn">Scenario, not a forecast</Tag>{" "}
-      {drift?.scenario_note ||
-        "What this net would reach if lifted off the seabed. Not used in the priority score."}
+      <Tag tone="warn">If refloated</Tag>
     </p>
   )
 
@@ -141,10 +138,6 @@ function DriftPlayback({
           Current: {sourceName(drift.current_source) || "source not stated"}
           {isNum(drift.mean_current_ms) ? ` · mean ${drift.mean_current_ms} m/s` : ""}
           {/synthetic|fake|test/i.test(sourceName(drift.current_source) || "") && <Tag tone="warn">Synthetic current</Tag>}
-        </span>
-        <span className="gt-muted gt-playback-note">
-          {copy.driftModel}
-          {reducedMotion ? " Reduced motion is on: playback starts only when you press play." : ""}
         </span>
       </div>
 

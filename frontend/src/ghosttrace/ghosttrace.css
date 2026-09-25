@@ -1390,6 +1390,23 @@ path.gt-habitat-hit {
   color: var(--primary, #087f9c);
 }
 
+.gt-card-conf--missing {
+  padding: 0 5px;
+  border-radius: 4px;
+  background: #fef3c7;
+  color: #92400e;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 9.5px;
+  font-weight: 700;
+}
+
+.gt-why-neutral--missing {
+  margin-left: 4px;
+  background: #fef3c7;
+  color: #92400e;
+}
+
 .gt-card-sub {
   overflow: hidden;
   font-size: 11px;

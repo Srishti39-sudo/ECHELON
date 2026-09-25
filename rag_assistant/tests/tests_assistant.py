@@ -315,7 +315,7 @@ def test_model_answer_uses_context_and_flags_invented_numbers():
         return ("SYNTHETIC DATA: this GhostTrace target comes from synthetic demonstration data. "
                 "Activity 0.8889 x 0.25 = 0.2222 and the score is 0.6253 "
                 "(GhostTrace output for gt-test-s2/S2_D1). The habitat is 6 391 m away, "
-                "or 88% confident. The net will drift 12.5 km in 36 hours. "
+                "or 88% confident. The net will drift 12.5 km in 37 hours. "
                 f"Fisheries is a state subject [S{n}].")
 
     with providers(generate=fake):
@@ -324,7 +324,7 @@ def test_model_answer_uses_context_and_flags_invented_numbers():
     assert result["generated_by"] == "model"
     assert result["grounded"] is True
     assert result["ghosttrace_citation"] == "GhostTrace output for gt-test-s2/S2_D1"
-    assert result["unsourced_numbers"] == ["12.5 km", "36 hours"], result["unsourced_numbers"]
+    assert result["unsourced_numbers"] == ["12.5 km", "37 hours"], result["unsourced_numbers"]
 
 
 # ---------------------------------------------------------------------------
@@ -384,7 +384,7 @@ def test_offline_answer_shape():
         result = chat.answer(QUESTION, ghosttrace_context=CONTEXT, provider="gemini",
                              offline_fallback=True)
     ChatResponse(**result)                     # the response contract still holds
-    assert calls == sorted(rag.PROVIDERS), calls  # every provider was tried
+    assert calls == chat.provider_order(config.PROVIDER), calls  # every provider was tried, preferred first
     assert result["generated_by"] == "retrieval_only"
     assert result["provider"] == "" and result["model"] == ""
     assert result["refusal"] is False
@@ -498,7 +498,7 @@ def test_stream_offline_fallback():
         frames = list(chat.answer_stream(QUESTION, ghosttrace_context=CONTEXT, offline_fallback=True))
     types = [f["type"] for f in frames]
     assert types == ["meta", "sources", "delta", "done"], types
-    assert calls == sorted(rag.PROVIDERS), calls
+    assert calls == chat.provider_order(config.PROVIDER), calls
     done = {k: v for k, v in frames[-1].items() if k != "type"}
     ChatResponse(**done)
     assert done["generated_by"] == "retrieval_only"

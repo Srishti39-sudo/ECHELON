@@ -8,8 +8,8 @@
 
 export const copy = {
   app: {
-    name: 'DeepEcho',
-    subtitle: 'Side-scan sonar decision support',
+    name: 'Beacon',
+    subtitle: 'Grounded answers from marine regulations. Every claim cited.',
   },
 
   status: {
@@ -26,10 +26,10 @@ export const copy = {
   },
 
   empty: {
-    title: 'Ask about a sonar contact',
-    body:
-      'Every answer is drawn from a fixed set of published marine references and cites them. ' +
-      'Where those references do not cover something, the assistant says so rather than filling the gap.',
+    title: 'Ask Beacon',
+    body: '',
+    // Typed into the composer on an empty page, ready to send.
+    prefill: 'We found a lost fishing net near the Gulf of Mannar. Who do we notify, and how urgent is it?',
     examplesLabel: 'Try',
     examples: [
       'Who do I report a suspected mine to?',
@@ -40,7 +40,7 @@ export const copy = {
   },
 
   composer: {
-    placeholder: 'Ask about this contact',
+    placeholder: 'Ask about a contact, a survey, or a regulation',
     placeholderStreaming: 'Answering',
     send: 'Send',
     stop: 'Stop',
@@ -49,7 +49,7 @@ export const copy = {
 
   roles: {
     user: 'You',
-    assistant: 'Assistant',
+    assistant: 'Beacon',
   },
 
   badge: {
@@ -73,24 +73,15 @@ export const copy = {
 
   notice: {
     ungroundedTitle: 'Unverified',
-    ungroundedBody:
-      'No matching reference was found for this answer. Confirm it manually before acting on it.',
+    ungroundedBody: 'No matching reference was found. Confirm before acting.',
     refusalTitle: 'Partly outside the references',
-    refusalBody:
-      'Part of this answer is the assistant declining to fill a gap the references do not cover. ' +
-      'The missing detail is not an omission, it is unavailable.',
+    refusalBody: 'The references do not cover part of this question, and the answer says so.',
     anomalyTitle: 'Object is unidentified',
-    anomalyBody:
-      'Nothing below identifies this object. Similar known objects are listed as possibilities only, ' +
-      'and it stays unidentified until a qualified expert rules.',
+    anomalyBody: 'Similar known objects are possibilities only. It stays unidentified until an expert rules.',
     coverageGapTitle: 'No reference covers this class',
-    coverageGapBody:
-      'The detector named a class the reference documents do not describe. The assistant will say so ' +
-      'rather than answering from a document about a different kind of object. Treat what follows as ' +
-      'the generic unidentified-object handling, not as guidance for this class.',
+    coverageGapBody: 'The references have no document for this class. What follows is the unidentified-object handling.',
     stubDetectionTitle: 'Placeholder detection',
-    stubDetectionBody:
-      'This record came from the stub detector, not a trained model. It is synthetic and is not evidence.',
+    stubDetectionBody: 'From the stub detector. Synthetic, not evidence.',
   },
 
   survey: {
@@ -135,8 +126,7 @@ export const copy = {
     authorities: 'Authorities GhostTrace lists',
     caveats: 'Caveats',
     notAvailable: 'not available',
-    dataNotSource:
-      'GhostTrace numbers are survey data and heuristics, not reference sources. The assistant attributes them to GhostTrace; authorities and procedures still come from the cited documents.',
+    dataNotSource: 'Survey data, attributed to GhostTrace. Authorities and procedures come from the cited documents.',
     defaultQuestion:
       'Why is this net ranked where it is, and who do the sources say should be told?',
   },
@@ -149,18 +139,18 @@ export const copy = {
       reference: 'References only',
     },
     modeHint: {
-      auto: 'Questions about the processed surveys go to the Mission Copilot; everything else is answered from the references.',
-      copilot: 'Looks up the processed surveys with read-only data tools, then answers with survey records [D] and references [S].',
-      reference: 'Answers from the reference documents only, never from survey data.',
+      auto: 'Survey questions go to the copilot, everything else to the references.',
+      copilot: 'Answers from survey records [D] and references [S].',
+      reference: 'Answers from the reference documents only.',
     },
-    examplesLabel: 'Ask the Mission Copilot',
+    examplesLabel: 'About the surveys',
     examples: [
       'Which net should we recover first across all surveys, and who do we notify?',
       'What changed between the two Mannar surveys?',
       'Which contacts were filtered as false positives and why?',
       'Summarise survey waterfall-strip for the Coast Guard',
     ],
-    referenceExamplesLabel: 'Ask the references',
+    referenceExamplesLabel: 'About the regulations',
     autoRouted: 'auto-routed',
     consulted: 'Data consulted',
     plannedBy: {
@@ -169,8 +159,7 @@ export const copy = {
       keywords: 'planned from keywords',
     } as Record<string, string>,
     lookingUp: 'Looking up survey data',
-    dataOnlyBody:
-      'No language model could be reached. What follows is the survey records the copilot looked up, tabled, and short extracts of the references. Nothing in it was generated.',
+    dataOnlyBody: 'No model reachable. Survey records and reference extracts only; nothing generated.',
     dataCount: (n: number) => (n === 1 ? '1 data record' : `${n} data records`),
   },
 
@@ -181,21 +170,18 @@ export const copy = {
 
   offline: {
     badge: 'Offline — sources only, no generated answer',
-    body:
-      'No language model could be reached. What follows is the retrieved passages, quoted, and the facts handed over with the question. Nothing in it was generated.',
+    body: 'No model reachable. Retrieved passages, quoted; nothing generated.',
     why: 'Why',
   },
 
   numbers: {
     title: 'Figures not found in the sources',
-    body: (figures: string[]) =>
-      `These figures appear in no retrieved passage, in your message or in the handed-over context: ${figures.join(', ')}. Treat them as unverified.`,
+    body: (figures: string[]) => `Unverified: ${figures.join(', ')}`,
   },
 
   matches: {
     title: 'Nearest known objects',
-    caveat:
-      'A similarity ranking, not a probability and not an identification. A higher score does not make an identity more likely to be true.',
+    caveat: 'A similarity ranking, not an identification.',
     similarity: 'Similarity',
     confirms: 'Would confirm',
     rulesOut: 'Would rule out',
@@ -216,7 +202,7 @@ export const copy = {
     openGhosttrace: 'Open in GhostTrace',
     openMap: 'Open on the hazard map',
     markerTitle: (n: number) => `Open data record ${n}`,
-    note: 'Survey data from the processed files, not a reference source.',
+    note: 'Survey data, not a reference source.',
   },
 
   citations: {
@@ -227,6 +213,7 @@ export const copy = {
     section: 'Section',
     status: 'Status',
     similarity: 'Retrieval score',
+    rerankScore: 'Reranker score',
     openPdf: 'Open the original publication',
     noPdf: 'No original file is attached to this document',
     markerTitle: (n: number) => `Open source ${n}`,
@@ -243,8 +230,7 @@ export const copy = {
     // nothing here because the detector works at 640 pixels: scale a 3600-pixel
     // strip down to that and every contact is a few pixels across. Strips go
     // through the survey pipeline; this path is for a tile.
-    noDetections:
-      'Nothing detected in that image. If it is a whole survey strip, use the Survey Hazard Map instead: the detector reads one tile at a time and a full strip scales down past the point where anything is visible.',
+    noDetections: 'Nothing detected. For a whole survey strip, use the Survey Hazard Map.',
     attached: 'Attached to this conversation',
     // Sent automatically after an upload, so a tile produces a briefing without
     // the operator having to think of a question first.
@@ -276,6 +262,26 @@ export const copy = {
       second_opinion: 'Second opinion',
       downgraded_from: 'Class withheld',
     } as Record<string, string>,
+  },
+
+  evidence: {
+    title: 'Evidence',
+    empty: 'Sources and answer details appear here.',
+    details: 'Answer details',
+    model: 'Model',
+    mode: 'Answered from',
+    intent: 'Question type',
+    grounded: 'Grounded',
+    yes: 'Yes, every claim cited',
+    no: 'No',
+    generatedBy: 'Written by',
+    generated: {
+      model: 'the model',
+      retrieval_only: 'nobody: retrieved passages only',
+      data_only: 'nobody: survey records only',
+      none: 'nobody: nothing retrieved',
+    } as Record<string, string>,
+    unsourced: 'Unverified figures',
   },
 
   error: {

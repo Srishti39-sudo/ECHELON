@@ -14,7 +14,7 @@ const TITLES = {
   "/map": ["Survey hazard map", "Ranked hotspots for a processed survey"],
   "/alerts": ["Alerts", "Contacts that need attention"],
   "/history": ["History", "Stored scans"],
-  "/assistant": ["Assistant", "Grounded answers with citations"],
+  "/assistant": ["Beacon", "Grounded answers, every claim cited"],
   "/report": ["Survey report", "A printable A4 report of one processed survey"],
 };
 
