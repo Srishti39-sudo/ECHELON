@@ -429,6 +429,9 @@ CLASS_CONFIDENCE_FLOOR: dict[str, float] = {
     "pipeline": 0.25,
     "fishing_gear": 0.25,
     "mine_like_object": 0.25,
+    # Added 2026-09-25 with marine_v2 (final.pt): trained on synthetic nets,
+    # so the floor stays at the calibrated global level, not lower.
+    "ghost_net": 0.25,
 }
 
 # A class below its floor is downgraded to this, never deleted. Dropping the box
@@ -1168,9 +1171,9 @@ STREAM_FRAMES = ("meta", "sources", "delta", "done", "error")
 # --- Detector (wired in a later step) --------------------------------------
 
 
-# One checkpoint: marine.pt, the team's trained YOLO11s. It emits the six
-# classes the corpus is about (shipwreck, aircraft, human, pipeline,
-# fishing_gear, mine_like_object), so the earlier pair of stand-in models
+# One checkpoint: marine.pt, the team's trained YOLO11s (marine_v2 / final.pt
+# since 2026-09-25). It emits the seven classes the corpus is about (shipwreck,
+# aircraft, human, pipeline, fishing_gear, mine_like_object, ghost_net), so the earlier pair of stand-in models
 # (known.pt + anomaly.pt) is retired. The dict shape stays so a second model
 # can be added again without touching the worker or the merge.
 #

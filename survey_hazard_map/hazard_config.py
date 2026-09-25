@@ -170,6 +170,9 @@ SEVERITY: dict[str, float] = {
     # life-safety set because it is handled as ordnance until identified.
     "mine-like-object": 1.0,
     "unknown-anomaly": 0.8,
+    # final.pt's seventh class. Same weight as the other gear: what it hits is
+    # scored by GhostTrace, not by this table.
+    "ghost-net": 0.5,
 }
 
 # A class the table has never heard of. Not 0.0: a model trained on classes
@@ -305,6 +308,7 @@ ACTIONS: dict[str, str] = {
     "net": "Schedule ghost-gear recovery",
     "ghost-gear": "Schedule ghost-gear recovery",
     "fishing-gear": "Schedule ghost-gear recovery",
+    "ghost-net": "Schedule ghost-gear recovery",
     "pipe": "Check against charted pipelines; flag if uncharted",
     "pipeline": "Check against charted pipelines; flag if uncharted",
     "cable": "Check against charted cables; flag if uncharted",
@@ -489,6 +493,10 @@ VERIFY_CLASS_EXPECTATIONS: dict[str, dict] = {
     # this key it matched nothing and took the 0.5 default. A mine-like object
     # is judged like a mine (it already reached "mine" by substring).
     "fishing-gear": {"shadow": 0.2, "water_column": False},
+    # final.pt's ghost_net: every training net was rendered with an acoustic
+    # shadow on the far side of nadir, so the same draped-object expectation
+    # applies as to a net or fishing gear.
+    "ghost-net": {"shadow": 0.2, "water_column": False},
     "mine-like-object": {"shadow": 1.0, "water_column": False},
     "fish": {"shadow": 0.0, "water_column": True},
     "marine-life": {"shadow": 0.0, "water_column": True},

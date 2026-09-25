@@ -1,13 +1,15 @@
 {
-  "A": 1.0277031298768662,
-  "B": 0.946194534448784,
+  "A": 1.0,
+  "B": 0.0,
+  "note": "identity calibration (raw ECE 0.038 < Platt 0.043 on the test split)",
   "classes": [
     "shipwreck",
     "aircraft",
     "human",
     "pipeline",
     "fishing_gear",
-    "mine_like_object"
+    "mine_like_object",
+    "ghost_net"
   ],
   "imgsz": 640,
   "tile": 640,

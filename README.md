@@ -760,11 +760,13 @@ no public real ghost-net side-scan dataset exists; and `fishing_gear` fell from 
 class was added, because tangled nets and crab-pot strings overlap visually. Both are stated on the slide
 and in the speaker notes rather than hidden.
 
-**Which model runs in the app.** The pipeline is wired to `survey_hazard_map/models/marine/marine.pt`
-with its ONNX export, because that is the checkpoint the parity, verification and end-to-end tests were
-measured against. To run the seven-class model live: copy `final.pt` and `calibration.json` over
-`marine.pt` and its calibration file, re-run `survey_hazard_map/tools/export_onnx.py`, and re-run the
-survey test suites. That swap is a one-minute change kept out of the demo build on purpose.
+**Which model runs in the app.** As of 2026-09-25 16:40 the pipeline runs the seven-class model:
+`final.pt` and its calibration were copied over `survey_hazard_map/models/marine/marine.pt` and
+`calibration.json`, `marine.onnx` was re-exported from it (seven names in the ONNX metadata), the
+ONNX parity check was re-run (`docs/edge_parity.json`: 578/578 boxes matched at conf 0.10 on 273 native
+tiles, max confidence difference 0.0001) and the smoke test passed 191/191. The six-class checkpoint
+remains in git history (commit `b4b3093` and earlier); `models/final/` is the archival copy of the
+seven-class weights with the scorecard and data attribution.
 
 ## Licence
 
