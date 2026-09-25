@@ -21,6 +21,40 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+
+def _load_env_file(path: Path) -> None:
+    """Read KEY=value lines from .env into the environment before any knob below is read.
+
+    Same rules as rag_assistant.rag.load_env (which also runs, later, when the
+    assistant imports): a variable already set in the real environment wins,
+    comments and blanks are skipped, a leading `export ` is allowed. It has to
+    happen HERE, because this module reads DEEPECHO_PROVIDER and friends at
+    import time; before this, `uvicorn backend.app.main:app` silently ignored
+    every DEEPECHO_* line in .env and answered with the Gemini default.
+    """
+    # Once per process. importlib.reload(config) must not re-read the file: a
+    # test that pops a key from the environment to simulate "no key" has to
+    # see it stay gone, exactly as it would for an exported shell variable.
+    if os.environ.get("_DEEPECHO_ENV_LOADED") == "1" or not path.exists():
+        return
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[len("export "):]
+        key, sep, value = line.partition("=")
+        if not sep:
+            continue
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and value and key not in os.environ:
+            os.environ[key] = value
+    os.environ["_DEEPECHO_ENV_LOADED"] = "1"
+
+
+_load_env_file(ROOT / ".env")
+
 KB_DIR = ROOT / "rag_assistant" / "kb"
 SOURCES_DIR = ROOT / "rag_assistant" / "sources"
 

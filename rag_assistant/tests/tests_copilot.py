@@ -125,8 +125,10 @@ def test_top_hotspots():
 
 def test_ghosttrace_cross_survey_ranking():
     out = numbered(ct.run_tool("ghosttrace_targets"))
-    rows = [r["data"] for r in out.records[1:]]
-    assert len(rows) == 4
+    # Every survey with a GhostTrace output is listed; this test reasons about
+    # the synthetic pair only, so other surveys (the USGS mosaic) are set aside.
+    rows = [r["data"] for r in out.records[1:] if r["data"]["survey_id"] in (MANNAR, REPEAT)]
+    assert len(rows) == 4, [r["survey_id"] for r in rows]
     current = [r for r in rows if r["latest_observation"]]
     # The moved net was matched by the repeat survey, and the other first-survey
     # net was not seen again, so only the repeat survey's two nets are current.

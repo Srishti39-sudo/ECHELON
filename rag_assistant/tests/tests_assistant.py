@@ -381,7 +381,7 @@ def test_guard_does_not_launder_assistant_history():
 def test_offline_answer_shape():
     patch, calls = offline()
     with patch:
-        result = chat.answer(QUESTION, ghosttrace_context=CONTEXT, provider="gemini",
+        result = chat.answer(QUESTION, ghosttrace_context=CONTEXT, provider=config.PROVIDER,
                              offline_fallback=True)
     ChatResponse(**result)                     # the response contract still holds
     assert calls == chat.provider_order(config.PROVIDER), calls  # every provider was tried, preferred first
@@ -406,7 +406,7 @@ def test_offline_answer_shape():
     assert result["unsourced_numbers"] == []
     assert len(result["provider_errors"]) == len(rag.PROVIDERS)
     assert "gsk_" not in json.dumps(result)
-    assert result["provider_errors"][0].startswith("gemini: ")
+    assert result["provider_errors"][0].startswith(f"{config.PROVIDER}: ")
 
 
 def test_offline_extracts_are_verbatim():
@@ -432,7 +432,10 @@ def test_offline_detection_facts():
                              offline_fallback=True)
     assert result["generated_by"] == "retrieval_only"
     assert "**Detection on screen:** shipwreck, classifier confidence 0.76" in result["answer"]
-    assert result["severity"] == "medium"      # looked up, fallback or not
+    # Looked up, fallback or not: the catalog's hazard field when a catalog index
+    # exists on this machine, else the class table. Never read out of the text.
+    assert result["severity"] == chat.severity_for({"label": "shipwreck"}, False)
+    assert result["severity"] in ("high", "medium"), result["severity"]
 
 
 def test_offline_raw_network_error():
