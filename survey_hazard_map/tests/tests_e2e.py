@@ -192,7 +192,7 @@ def survey_routes(client):
     body = export.json()
     assert body["metadata"]["survey_id"] == SURVEY_ID
     assert body["metadata"]["coordinate_mode"] == "Geo-referenced", body["metadata"]
-    from validate_output import Report, validate
+    from survey_hazard_map.validate_output import Report, validate
 
     report = Report()
     validate(WORK / "surveys" / SURVEY_ID, report)
@@ -233,7 +233,7 @@ def detect(client):
 
 def _ghosttrace_context(doc: dict) -> tuple[dict, str]:
     """This survey's GhostTrace context: its first target, or the survey itself."""
-    from eval.ghosttrace_context import context_from_target
+    from rag_assistant.eval.ghosttrace_context import context_from_target
 
     targets = doc.get("targets") or []
     if targets:

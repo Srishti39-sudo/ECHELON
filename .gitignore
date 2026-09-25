@@ -76,5 +76,9 @@ data/survey_uploads/
 data/surveys/mission-*/
 rag_assistant/eval/last-run.json
 # ONNX exports and TensorRT caches are built per machine (tools/export_onnx.py).
+# One exception: marine.onnx is committed so a fresh clone runs the detector
+# live under onnxruntime with no PyTorch (see requirements-server.txt). Re-export
+# only when marine.pt changes; every re-export is a new 38 MB blob in history.
 survey_hazard_map/models/**/*.onnx
+!survey_hazard_map/models/marine/marine.onnx
 survey_hazard_map/models/**/trt_cache/

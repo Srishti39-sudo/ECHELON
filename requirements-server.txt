@@ -9,3 +9,17 @@ python-multipart>=0.0.9     # image upload on /detect, wired in a later step
 # app still serves the assistant and the detector, and says so on /health.
 supabase>=2.31
 python-dotenv>=1.0
+
+# --- Live detection and survey processing without PyTorch ---------------------
+# The committed survey_hazard_map/models/marine/marine.onnx runs under
+# onnxruntime (detector_worker picks the .onnx beside the .pt automatically),
+# so a fresh clone can upload a sonar image or a raw .xtf log and watch the
+# model detect with none of requirements-detector.txt installed. Parity with
+# the PyTorch checkpoint is measured in docs/edge_parity.json.
+onnxruntime>=1.20
+pillow>=10.0
+scipy>=1.11                 # sonar_ingest filters, hazard_verify shadow checks
+opencv-python-headless>=4.8 # hazard_verify texture and blur; headless: no GUI libs
+pyxtf>=1.5                  # raw .xtf side-scan logs (sonar_ingest)
+folium>=0.16                # map.html for a processed survey
+

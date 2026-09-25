@@ -504,8 +504,9 @@ cd ECHELON
 git checkout dashboard        # the default branch; what the demo and the deploy run
 
 python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt -r requirements-server.txt
-.venv/bin/pip install -r requirements-detector.txt   # only for tile upload
+.venv/bin/pip install -r requirements.txt -r requirements-server.txt -r requirements-ghosttrace.txt
+# requirements-detector.txt (PyTorch, ~2 GB) is NOT needed: the committed
+# marine.onnx runs the detector under onnxruntime. Install it only to train.
 
 cp .env.example .env        # then put a key in it, see below
 .venv/bin/python -m rag_assistant.rag index
@@ -548,8 +549,11 @@ one to use: it answers in about a second where Gemini's free tier returns 503
 under load. Put `GROQ_API_KEY=...` and `DEEPECHO_PROVIDER=groq` in `.env`.
 
 **The model and the sources are in the repo.** `survey_hazard_map/models/marine/marine.pt`
-is committed with its calibration, and so are the publications in `rag_assistant/sources/`, so
-citations resolve to real files on a fresh clone. Every demo survey under `data/surveys/`
+is committed with its calibration and with `marine.onnx`, its ONNX export (parity with the
+checkpoint measured in `docs/edge_parity.json`). The detector worker picks the `.onnx` when
+onnxruntime imports, so a fresh clone uploads a sonar image or a raw `.xtf` log and watches
+the model detect with no PyTorch installed. The publications in `rag_assistant/sources/` are
+committed too, so citations resolve to real files. Every demo survey under `data/surveys/`
 ships with its `export.json` and `ghosttrace.json`, so the dashboard, the hazard map and the
 GhostTrace page show the same results on a clone as on the machine that produced them.
 

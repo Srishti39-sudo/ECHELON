@@ -352,32 +352,23 @@ def _make_detector(conf: float | None, events: EventLog):
                         for p in config.DETECTOR_MODELS.values())
             + "). A survey is not run without a real model.")
 
-    backend = os.environ.get("DEEPECHO_DETECTOR_BACKEND", "").strip().lower()
-    if backend == "onnx":
-        try:
-            from survey_hazard_map import hazard_detect_onnx  # type: ignore
-            make = getattr(hazard_detect_onnx, "make_detector", None)
-        except ImportError:
-            make = None
-        if make is not None:
-            # make_detector picks the runtime by extension, so the exported
-            # sibling of each checkpoint is named where one exists. A model
-            # with no export keeps its .pt and still runs.
-            exported = [path.with_suffix(".onnx") if path.with_suffix(".onnx").is_file()
-                        else path for path in models]
-            events.emit({"type": "log", "level": "info",
-                         "message": "DEEPECHO_DETECTOR_BACKEND=onnx: "
-                                    + ", ".join(p.name for p in exported)})
-            return make(exported, conf=conf), exported
-        events.emit({"type": "log", "level": "warning",
-                     "message": "DEEPECHO_DETECTOR_BACKEND=onnx was requested but "
-                                "hazard_detect_onnx.make_detector is not available; "
-                                "using the Ultralytics checkpoints"})
-
+    # The same rule as /detect (detector_worker) and build_hazard_map: with the
+    # default backend "auto", a checkpoint whose .onnx export sits beside it
+    # runs under onnxruntime, so a machine without torch still runs the survey
+    # on the committed export. DEEPECHO_DETECTOR_BACKEND=onnx|torch forces one.
+    try:
+        from survey_hazard_map import hazard_detect_onnx
+        chosen = hazard_detect_onnx.resolve_paths(models)
+        backend = hazard_detect_onnx.requested_backend()
+    except ImportError:
+        chosen, backend = list(models), "torch"
     events.emit({"type": "log", "level": "info",
-                 "message": "loading detector weights: " + ", ".join(p.name for p in models)})
-    return hazard_detect.UltralyticsDetector(models if len(models) > 1 else models[0],
-                                             conf=conf), models
+                 "message": f"loading detector weights (backend {backend}): "
+                            + ", ".join(p.name for p in chosen)})
+    if all(p.suffix.lower() != ".onnx" for p in chosen):
+        return hazard_detect.UltralyticsDetector(chosen if len(chosen) > 1 else chosen[0],
+                                                 conf=conf), chosen
+    return hazard_detect_onnx.make_detector(chosen, conf=conf), chosen
 
 
 def _downloads(out_dir: Path) -> list[str]:

@@ -592,15 +592,74 @@ class _ChainedDetector:
         return [box for part in self.parts for box in part(image_path)]
 
 
-def make_detector(paths: Any, conf: float | None = None, imgsz: int | None = None) -> Any:
-    """The right detector for the files given, chosen by extension.
+BACKENDS = ("auto", "onnx", "torch")
 
-    .onnx -> OnnxDetector, anything else (.pt) -> UltralyticsDetector. A mix is
-    allowed, for a deployment where one model has been exported and the other
-    has not yet; the models still run in the order given, so detection ids stay
-    deterministic. The torch import only happens if a .pt is actually present.
+
+def requested_backend() -> str:
+    """DEEPECHO_DETECTOR_BACKEND: auto (default), onnx or torch."""
+    value = os.environ.get("DEEPECHO_DETECTOR_BACKEND", "auto").strip().lower() or "auto"
+    if value not in BACKENDS:
+        raise DetectorError(f"DEEPECHO_DETECTOR_BACKEND={value!r}; expected one of {', '.join(BACKENDS)}")
+    return value
+
+
+def _onnxruntime_available() -> bool:
+    try:
+        import onnxruntime  # noqa: F401
+    except ImportError:
+        return False
+    return True
+
+
+def resolve_paths(paths: Any, backend: str | None = None) -> list[Path]:
+    """Which file actually runs for each configured checkpoint.
+
+    The same rule the detector worker applies to /detect, so a survey and a
+    single-tile upload never disagree about which runtime produced a box:
+
+        auto   the .onnx beside a .pt when it exists and onnxruntime imports,
+               else the .pt itself (the default, so a machine without torch
+               runs the committed export and a training box runs the checkpoint)
+        onnx   the .onnx beside each .pt; a missing export is an error
+        torch  the .pt, always
+
+    A path that already ends in .onnx is used as given.
     """
+    backend = backend or requested_backend()
     given = [Path(paths)] if isinstance(paths, (str, Path)) else [Path(p) for p in paths]
+    out: list[Path] = []
+    for path in given:
+        if path.suffix.lower() == ".onnx":
+            if backend == "torch":
+                raise DetectorError(f"{path.name} is an ONNX file but DEEPECHO_DETECTOR_BACKEND=torch")
+            out.append(path)
+            continue
+        sibling = path.with_suffix(".onnx")
+        if backend == "onnx":
+            if not sibling.is_file():
+                raise DetectorError(f"DEEPECHO_DETECTOR_BACKEND=onnx but {sibling.name} does not exist; "
+                                    "run tools/export_onnx.py")
+            out.append(sibling)
+        elif backend == "auto" and sibling.is_file() and _onnxruntime_available():
+            out.append(sibling)
+        else:
+            out.append(path)
+    return out
+
+
+def make_detector(paths: Any, conf: float | None = None, imgsz: int | None = None,
+                  backend: str | None = None) -> Any:
+    """The right detector for the files given.
+
+    Paths go through resolve_paths first, so a .pt whose .onnx export sits
+    beside it runs under onnxruntime by default (DEEPECHO_DETECTOR_BACKEND
+    chooses otherwise). Then by extension: .onnx -> OnnxDetector, .pt ->
+    UltralyticsDetector. A mix is allowed, for a deployment where one model
+    has been exported and the other has not yet; the models still run in the
+    order given, so detection ids stay deterministic. The torch import only
+    happens if a .pt is actually going to run.
+    """
+    given = resolve_paths(paths, backend)
     if not given:
         raise DetectorError("no model given")
 
