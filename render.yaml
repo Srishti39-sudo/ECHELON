@@ -5,12 +5,12 @@ services:
   - type: web
     name: deepecho-api
     runtime: docker
+    plan: free
     dockerfilePath: ./Dockerfile
     dockerContext: .
-    # `serve` fits a 512 MB instance. Switch to `full` for tile upload and
-    # survey processing, and move to an instance with at least 2 GB.
-    dockerBuildArgs:
-      PROFILE: serve
+    # The Dockerfile's PROFILE build arg defaults to `serve` (no torch), which
+    # fits the free 512 MB instance. Render blueprints cannot pass build args;
+    # for the `full` profile build the image elsewhere and move to >= 2 GB.
     healthCheckPath: /health
     envVars:
       # Groq answers in about a second; Gemini's free tier returns 503 under
@@ -38,6 +38,7 @@ services:
   - type: web
     name: deepecho-dashboard
     runtime: static
+    plan: free
     buildCommand: cd frontend && npm ci && npm run build
     staticPublishPath: ./frontend/dist
     envVars:
