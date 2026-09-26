@@ -38,7 +38,6 @@ services:
   - type: web
     name: deepecho-dashboard
     runtime: static
-    plan: free
     buildCommand: cd frontend && npm ci && npm run build
     staticPublishPath: ./frontend/dist
     envVars:
