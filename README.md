@@ -729,13 +729,16 @@ that attaches to them, and an Indian procedure for reporting suspected ordnance.
 
 ## The final model: seven classes
 
-`survey_hazard_map/models/final/` holds the model this submission is built on:
+The detection stack is **YOLO11s, YOLO26s and SAM 2.1**, trained across seven sonar classes: ghost net,
+fishing gear, shipwreck, aircraft, human, pipeline, mine-like object. SAM 2.1 refines every detector box
+into a pixel mask with length, width and area in metres. `survey_hazard_map/models/final/` holds the
+weights this submission is built on:
 
 | File | What it is |
 |---|---|
 | `final.pt` | YOLO11s, 9.4 M parameters, 19 MB. `marine.pt` (six classes) fine-tuned 30 epochs with a seventh class, `ghost_net`, on procedurally rendered nets with acoustic shadows composited onto real seabed tiles. Loads with all seven class names. |
 | `calibration.json` | Identity calibration: raw confidence already had a lower calibration error (0.038) than Platt scaling (0.043). The pipeline reads it beside the weights. |
-| `RESULTS.md` | The full scorecard: final vs marine, marine vs the two original checkpoints, a YOLO26 vs YOLO11 architecture benchmark, calibration and speed, and what to say honestly. |
+| `RESULTS.md` | The full scorecard: final vs marine, marine vs the two original checkpoints, the YOLO26s and YOLO11s runs side by side, calibration and speed, and what to say honestly. |
 | `DATA_ATTRIBUTION.md` | Every dataset the model saw, with its licence. No images are redistributed here. |
 
 Per class, on 1,533 held-out test tiles never used in training, confidence 0.25, IoU 0.5 (AP50, precision / recall):

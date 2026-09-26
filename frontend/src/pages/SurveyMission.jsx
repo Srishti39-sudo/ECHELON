@@ -101,7 +101,7 @@ function pipelineSentence(pipeline) {
 const STEPS = [
   { key: "ingest", label: "Ingest", note: "Decode logs and navigation" },
   { key: "tile", label: "Tile", note: "Overlapping 640 px tiles" },
-  { key: "detect", label: "Detect", note: "final.pt (YOLO11s, 7 classes) on every tile" },
+  { key: "detect", label: "Detect", note: "YOLO11s · YOLO26s · SAM 2.1, 7 classes, on every tile" },
   { key: "verify", label: "Verify", note: "Merge duplicates, shadow check" },
   { key: "geotag", label: "Geotag", note: "Latitude and longitude" },
   { key: "report", label: "Report", note: "Reports and offline map" },
@@ -501,7 +501,7 @@ function UploadPanel({ onStarted }) {
           </h1>
           <p>
             Upload a raw side-scan log or strip images. The backend tiles them,
-            runs the seven-class YOLO11s detector (final.pt: shipwreck, aircraft,
+            runs the seven-class detection stack, YOLO11s, YOLO26s and SAM 2.1 (final.pt: shipwreck, aircraft,
             human, pipeline, fishing gear, mine-like object, ghost net) over every
             tile, checks each contact
             against acoustic-shadow physics and geotags it from the log's
@@ -514,7 +514,7 @@ function UploadPanel({ onStarted }) {
           <div className="head-meta">
             <span className="scan-badge">
               {health.detector === "loaded"
-                ? `${health.detector_models.join(" + ")} loaded · YOLO11s · 7 classes`
+                ? `${health.detector_models.join(" + ")} loaded · YOLO11s · YOLO26s · SAM 2.1 · 7 classes`
                 : `detector ${health.detector}`}
             </span>
           </div>

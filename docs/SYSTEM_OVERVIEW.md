@@ -135,7 +135,7 @@ Two earlier stand-in checkpoints, `known.pt` (YOLOv8s on SCTD: aircraft, human, 
 
 | Component | What it is | Where it runs | What it does |
 |---|---|---|---|
-| **marine.pt** | YOLO11s detector, trained by the team | Detector subprocess and survey job subprocess | Every box on every page comes from it |
+| **final.pt** | The team's detection stack: YOLO11s, YOLO26s and SAM 2.1, seven classes | Detector subprocess and survey job subprocess | Every box on every page comes from it |
 | **Shadow check** | Physics heuristic, no model | Verify stage | Acoustic-shadow score, height estimate, false-positive veto |
 | **Groq (default)** running `openai/gpt-oss-120b` | Hosted LLM, free tier | Assistant answers, query translation, copilot tool planning | Answers in 2–3 s. Set by `DEEPECHO_PROVIDER=groq` |
 | **Gemini** `gemini-3.8-flash` | Hosted LLM, free tier | Same roles, as the failover | Free tier was taking 20–160 s on the night before the demo, so it is the fallback, not the default |

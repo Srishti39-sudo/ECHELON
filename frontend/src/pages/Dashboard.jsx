@@ -41,10 +41,10 @@ const CLASSES = ["shipwreck", "aircraft", "human", "pipeline", "fishing gear", "
 const STANDOUT = [
   {
     Icon: Crosshair,
-    title: "Two detectors, seven classes",
-    lead: "YOLO11 and YOLO26 trained across 7 sonar classes",
+    title: "YOLO11s · YOLO26s · SAM 2.1",
+    lead: "One detection stack, trained across 7 sonar classes",
     body: CLASSES.join(" · "),
-    note: "ghost-net class trained on synthetic sonar targets; confidence calibrated and every box verified against shadow geometry",
+    note: "SAM 2.1 refines every box into a measured mask; ghost-net class trained on synthetic sonar targets; confidence calibrated and every box verified against shadow geometry",
   },
   {
     Icon: FileInput,
@@ -273,7 +273,7 @@ function Dashboard() {
             <h2 id="standout-heading">What sets DeepEcho apart</h2>
             <p>From a raw side-scan log to a ranked ghost-net rescue queue, every step explained</p>
           </div>
-          <span className="scan-badge">YOLO11 + YOLO26 · 7 classes</span>
+          <span className="scan-badge">YOLO11s · YOLO26s · SAM 2.1 · 7 classes</span>
         </div>
 
         <div className="standout-grid">
